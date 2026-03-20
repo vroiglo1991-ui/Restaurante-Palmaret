@@ -104,4 +104,72 @@
   /* EXPERIENCIA */
   .eg  { grid-template-columns: 1fr; gap: 2.5rem; }
   .lc-track { aspect-ratio: 4/3; }
-  .eb  { width: 80px; height: 80px; top: -1rem; right: -1rem
+  .eb  { width: 80px; height: 80px; top: -1rem; right: -1rem; }
+  .eb span:nth-child(2) { font-size: 1.3rem; }
+
+  /* QUOTE */
+  .pq-inner { padding: 3.5rem 1.2rem; flex-direction: column; gap: 1.5rem; }
+  .pq-line  { width: 2rem; height: 2px; }
+  .pq-text  { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+
+  /* SERVICIOS */
+  .srv-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+  .sg  { grid-template-columns: 1fr; }
+
+  /* CARTA */
+  .carta-hero { padding: 3.5rem 1.2rem 2.5rem; }
+  .carta-hero-inner { grid-template-columns: 1fr; gap: 1.2rem; }
+  .cf-inner { padding: 0 1.2rem; }
+  .cf-btn   { padding: .75rem .9rem; font-size: .62rem; }
+  .carta-body { padding: 2.5rem 1.2rem; }
+  .destaque-grid { grid-template-columns: 1fr !important; }
+  .sharing-block { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
+  .sharing-block::before { font-size: 5rem; }
+  .price-row { flex-wrap: wrap; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .mi { column-gap: 1.5rem; padding: 1.1rem 0; }
+  .mi:hover { padding-left: .5rem; }
+  .mi-name  { font-size: .88rem; }
+  .mi-desc  { font-size: .74rem; }
+  .mi-price { font-size: 1.1rem; }
+  .cat-header { gap: 1rem; flex-wrap: wrap; }
+  .cat-badge  { margin-left: 0; }
+  .cat-title  { font-size: 1.6rem; }
+
+  /* EQUIPO */
+  .eq-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cc { grid-template-columns: auto 1fr; gap: 1.2rem; padding: 1.5rem; }
+
+  /* RESERVA */
+  .rg  { grid-template-columns: 1fr; gap: 2.5rem; }
+  .frw { grid-template-columns: 1fr; }
+
+  /* VISIÓN */
+  .vis-inner { padding: 5rem 1.2rem; }
+  .vis-q { font-size: clamp(1.5rem, 6vw, 2.2rem); }
+
+  /* FOOTER */
+  footer { padding: 3rem 1.2rem 2rem; }
+  .fg2   { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .fb2   { flex-direction: column; gap: .5rem; text-align: center; }
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MÓVIL PEQUEÑO (≤ 480px)
+══════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  .hh1 { font-size: clamp(2.6rem, 14vw, 3.5rem); }
+  .hstats { grid-template-columns: 1fr 1fr 1fr; }
+  .sn  { font-size: 1.4rem; }
+
+  .fg2 { grid-template-columns: 1fr; gap: 2rem; }
+
+  .cc  { grid-template-columns: 1fr; }
+  .cph { display: none; }
+
+  .hero-carousel-track { height: 260px; }
+
+  .cf-btn   { padding: .65rem .6rem; font-size: .58rem; letter-spacing: .08em; }
+  .cf-count { display: none; }
+}
