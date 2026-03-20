@@ -1,0 +1,209 @@
+/* ══════════════════════════════════════
+   BASE — Variables, reset, tipografía,
+   utilidades y animaciones globales
+══════════════════════════════════════ */
+
+:root {
+  --navy:       #1B3A5C;
+  --navy-dark:  #0f2540;
+  --navy-mid:   #16304e;
+  --cream:      #EDE8D5;
+  --cream-light:#F5F2E8;
+  --gold:       #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim:   rgba(201,168,76,0.15);
+  --fd: 'Cormorant Garamond', serif;
+  --fb: 'Barlow', sans-serif;
+  --fc: 'Barlow Condensed', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy-dark);
+  color: var(--cream);
+  font-family: var(--fb);
+  overflow-x: hidden;
+}
+
+/* ── Secciones wrapper ── */
+.sw-n { background: var(--navy); }
+.sw-d { background: var(--navy-dark); }
+.sw-c { background: var(--cream-light); }
+
+section {
+  padding: 7rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Eyebrow label ── */
+.ey {
+  font-family: var(--fc);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ey::before {
+  content: '';
+  width: 1.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+.ey.dk { color: var(--navy); }
+.ey.dk::before { background: var(--navy); }
+
+/* ── Section title ── */
+.st {
+  font-family: var(--fd);
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.st em  { font-style: italic; color: var(--gold); }
+.st.dk  { color: var(--navy-dark); }
+
+/* ── Botones globales ── */
+.bp {
+  font-family: var(--fc);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--navy-dark);
+  padding: 1rem 2.4rem;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+  display: inline-block;
+}
+.bp:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.bg {
+  font-family: var(--fc);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(237,232,213,.3);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.bg:hover { color: var(--gold); border-color: var(--gold); }
+
+/* ── Ticker ── */
+.tkw {
+  background: var(--gold);
+  overflow: hidden;
+  padding: .7rem 0;
+  white-space: nowrap;
+  cursor: default;
+}
+.tkt {
+  display: inline-flex;
+  animation: tick 28s linear infinite;
+}
+.tki {
+  font-family: var(--fc);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--navy-dark);
+  padding: 0 2.5rem;
+  display: inline-block;
+}
+.tkd { color: rgba(15,37,64,.35); }
+
+/* ── Parallax quote ── */
+.pq-wrap { background: var(--navy); overflow: hidden; position: relative; }
+.pq-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+.pq-line { width: 3px; height: 80px; background: var(--gold); flex-shrink: 0; }
+.pq-text {
+  font-family: var(--fd);
+  font-size: clamp(1.5rem, 2.5vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.45;
+}
+.pq-text em  { color: var(--gold); font-style: normal; }
+.pq-attr {
+  font-family: var(--fc);
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(237,232,213,.4);
+  margin-top: .75rem;
+}
+
+/* ── Scroll reveal ── */
+.rv {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity .85s ease, transform .85s ease;
+}
+.rv.vis { opacity: 1; transform: translateY(0); }
+
+.rl-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.rl-left.vis { opacity: 1; transform: translateX(0); }
+
+.rl-right {
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity .9s ease, transform .9s ease;
+}
+.rl-right.vis { opacity: 1; transform: translateX(0); }
+
+.rs {
+  opacity: 0;
+  transform: scale(.95);
+  transition: opacity .8s ease, transform .8s ease;
+}
+.rs.vis { opacity: 1; transform: scale(1); }
+
+.d1 { transition-delay: .12s; }
+.d2 { transition-delay: .24s; }
+.d3 { transition-delay: .36s; }
+
+/* ── Animaciones ── */
+@keyframes fu {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fi {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes tick {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
