@@ -1,0 +1,1576 @@
+index.html <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Palmaret — Sabor Mediterráneo con Alma Deportiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B3A5C;
+    --navy-dark: #0f2540;
+    --navy-mid: #1e4370;
+    --cream: #EDE8D5;
+    --cream-light: #F5F2E8;
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --white: #FDFAF4;
+    --text-muted: #8a9bb0;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Barlow', sans-serif;
+    --font-condensed: 'Barlow Condensed', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy-dark);
+    color: var(--cream);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: transparent;
+    transition: background 0.4s ease, padding 0.4s ease;
+  }
+  nav.scrolled {
+    background: rgba(15, 37, 64, 0.97);
+    padding: 1rem 4rem;
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.15em;
+  }
+  .nav-logo span {
+    font-size: 0.65em;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(237,232,213,0.7);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy-dark) !important;
+    background: var(--gold);
+    padding: 0.6rem 1.4rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s !important;
+    display: inline-block;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-rows: 1fr;
+    align-items: center;
+    overflow: hidden;
+    background: var(--navy-dark);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 70% at 70% 60%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 20% 30%, rgba(30,67,112,0.6) 0%, transparent 60%),
+      linear-gradient(160deg, #0f2540 0%, #1B3A5C 50%, #0f2540 100%);
+  }
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='rgba(201,168,76,0.04)' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+    opacity: 0.6;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 4rem;
+    padding-top: 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: 100vh;
+  }
+  .hero-left { display: flex; flex-direction: column; }
+  .hero-eyebrow {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3.5rem, 6vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 0.2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 300;
+  }
+  .hero-h1-sub {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(237,232,213,0.5);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+  .hero-desc {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(237,232,213,0.7);
+    max-width: 480px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s ease forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.1s ease forwards;
+  }
+  .btn-primary {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 1rem 2.4rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(237,232,213,0.3);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+  .hero-right {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1.2s 0.8s ease forwards;
+  }
+  .hero-img-main {
+    width: 100%;
+    height: 420px;
+    background: linear-gradient(135deg, #2a4a6e 0%, #1a3350 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .hero-img-main::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(15,37,64,0.6));
+  }
+  /* Fake plate visual */
+  .plate-visual {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #1e4370 0%, #152e50 60%, #0f2540 100%);
+    position: relative;
+  }
+  .plate-visual::before {
+    content: '';
+    position: absolute;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.2);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .plate-visual::after {
+    content: '';
+    position: absolute;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.05);
+    border: 0.5px solid rgba(201,168,76,0.15);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .plate-label {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(201,168,76,0.6);
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 2;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .stat {
+    background: rgba(15,37,64,0.8);
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-family: var(--font-condensed);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(237,232,213,0.5);
+    display: block;
+    margin-top: 0.3rem;
+  }
+
+  /* ─── DIVIDER ─── */
+  .gold-line {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    padding: 7rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .section-eyebrow {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background: var(--gold);
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ─── EXPERIENCIA ─── */
+  .experiencia-wrap {
+    background: var(--navy);
+  }
+  .experiencia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .exp-text p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: rgba(237,232,213,0.75);
+    margin-bottom: 1.5rem;
+  }
+  .exp-highlight {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+    margin: 2.5rem 0;
+  }
+  .exp-highlight p {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream) !important;
+    line-height: 1.5;
+  }
+  .exp-visual {
+    position: relative;
+  }
+  .exp-img-box {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: linear-gradient(145deg, #1e4370 0%, #0f2540 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .exp-img-box::before {
+    content: 'El Palmaret';
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-style: italic;
+    color: rgba(201,168,76,0.4);
+    z-index: 2;
+  }
+  .exp-img-box-inner {
+    width: 100%;
+    height: 100%;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.12) 0%, transparent 60%),
+      linear-gradient(145deg, #2a4a6e 0%, #152e50 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .exp-img-box-inner svg {
+    opacity: 0.15;
+    width: 60%;
+  }
+  .exp-badge {
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    width: 110px;
+    height: 110px;
+    background: var(--gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .exp-badge span:first-child {
+    font-family: var(--font-condensed);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy-dark);
+  }
+  .exp-badge span:last-child {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--navy-dark);
+    line-height: 1;
+  }
+
+  /* ─── SERVICIO 360 ─── */
+  .servicio-wrap {
+    background: var(--navy-dark);
+    padding: 7rem 0;
+  }
+  .servicio-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem;
+  }
+  .servicio-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+  .servicio-header p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(237,232,213,0.7);
+    align-self: end;
+  }
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.15);
+  }
+  .servicio-card {
+    background: var(--navy);
+    padding: 2.5rem 2rem;
+    position: relative;
+    transition: background 0.3s;
+    cursor: default;
+    overflow: hidden;
+  }
+  .servicio-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .servicio-card:hover { background: rgba(27,58,92,0.9); }
+  .servicio-card:hover::before { transform: scaleX(1); }
+  .servicio-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .servicio-card h3 {
+    font-family: var(--font-condensed);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+  .servicio-card p {
+    font-size: 0.875rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(237,232,213,0.55);
+  }
+
+  /* ─── CARTA SECTION ─── */
+  .carta-wrap {
+    background: var(--cream-light);
+  }
+  .carta-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 7rem 4rem;
+  }
+  .carta-inner .section-eyebrow { color: var(--navy); }
+  .carta-inner .section-eyebrow::before { background: var(--navy); }
+  .carta-inner .section-title { color: var(--navy-dark); }
+  .carta-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(27,58,92,0.15);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(27,58,92,0.45);
+    background: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0; right: 0;
+    height: 2px;
+    background: var(--navy);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+  .tab-btn.active { color: var(--navy-dark); }
+  .tab-btn.active::after { transform: scaleX(1); }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .menu-item {
+    padding: 1.2rem 0;
+    border-bottom: 1px solid rgba(27,58,92,0.1);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: padding-left 0.2s;
+  }
+  .menu-item:hover { padding-left: 0.5rem; }
+  .menu-item-name {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--navy-dark);
+  }
+  .menu-item-desc {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: rgba(27,58,92,0.5);
+    font-style: italic;
+  }
+  .menu-section-title {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 2.5rem 0 1rem;
+    grid-column: 1 / -1;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+  }
+  .sharing-menu-card {
+    background: var(--navy-dark);
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  .sharing-left h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .sharing-left p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: rgba(237,232,213,0.6);
+    margin-bottom: 1.5rem;
+  }
+  .sharing-price {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+  }
+  .price-tag {
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+  }
+  .price-tag strong {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  .sharing-right ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .sharing-right li {
+    font-size: 0.875rem;
+    color: rgba(237,232,213,0.7);
+    font-weight: 300;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .sharing-right li::before {
+    content: '—';
+    color: var(--gold);
+    font-size: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  /* ─── EQUIPO ─── */
+  .equipo-wrap { background: var(--navy); }
+  .equipo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 4rem;
+  }
+  .chef-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    padding: 2.5rem;
+    border: 1px solid rgba(201,168,76,0.15);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .chef-card:hover { border-color: rgba(201,168,76,0.4); }
+  .chef-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--gold);
+    transition: height 0.4s ease;
+  }
+  .chef-card:hover::before { height: 100%; }
+  .chef-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2a4a6e, #0f2540);
+    border: 2px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.5);
+  }
+  .chef-role {
+    font-family: var(--font-condensed);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .chef-name {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+  .chef-bio {
+    font-size: 0.82rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(237,232,213,0.55);
+  }
+
+  /* ─── VISION ─── */
+  .vision-wrap {
+    background: var(--navy-dark);
+    position: relative;
+    overflow: hidden;
+  }
+  .vision-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .vision-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 9rem 4rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .vision-quote {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .vision-quote em { color: var(--gold); font-style: normal; }
+  .vision-sub {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: rgba(237,232,213,0.5);
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
+  }
+  .vision-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+  .vision-divider span {
+    width: 4rem; height: 1px; background: rgba(201,168,76,0.3);
+  }
+  .vision-divider i {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-style: normal;
+    color: var(--gold);
+    opacity: 0.4;
+  }
+
+  /* ─── RESERVA ─── */
+  .reserva-wrap {
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .reserva-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 6rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .reserva-left h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .reserva-left h2 em { color: var(--gold); font-style: italic; }
+  .reserva-left p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(237,232,213,0.65);
+    margin-bottom: 2.5rem;
+  }
+  .reserva-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.875rem;
+    color: rgba(237,232,213,0.6);
+  }
+  .info-item strong {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    min-width: 80px;
+  }
+  .reserva-form {
+    background: rgba(15,37,64,0.6);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 3rem;
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .form-subtitle {
+    font-size: 0.8rem;
+    color: rgba(237,232,213,0.4);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    font-family: var(--font-condensed);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(237,232,213,0.5);
+  }
+  .form-group input,
+  .form-group select {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 0.75rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .form-group input::placeholder { color: rgba(237,232,213,0.25); }
+  .form-group input:focus,
+  .form-group select:focus { border-color: rgba(201,168,76,0.5); }
+  .form-group select option { background: var(--navy-dark); color: var(--cream); }
+  .btn-form {
+    width: 100%;
+    background: var(--gold);
+    color: var(--navy-dark);
+    border: none;
+    padding: 1rem;
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-form:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy-dark);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 4rem;
+  }
+  .footer-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+  }
+  .footer-brand-logo {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.15em;
+  }
+  .footer-brand-logo span {
+    font-size: 0.6em;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .footer-tagline {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(237,232,213,0.45);
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .footer-address {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(237,232,213,0.4);
+    line-height: 1.8;
+  }
+  .footer-col-title {
+    font-family: var(--font-condensed);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .footer-links a {
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(237,232,213,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 3rem auto 0;
+    padding: 1.5rem 0 0;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: rgba(237,232,213,0.3);
+    padding-left: 0;
+    padding-right: 0;
+    font-weight: 300;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ─── TICKER ─── */
+  .ticker-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    padding: 0.75rem 0;
+    white-space: nowrap;
+  }
+  .ticker-track {
+    display: inline-block;
+    animation: ticker 20s linear infinite;
+  }
+  .ticker-item {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--navy-dark);
+    padding: 0 2rem;
+    display: inline-block;
+  }
+  .ticker-dot {
+    color: var(--navy);
+    opacity: 0.4;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><span>el</span>PALMARET</a>
+  <ul class="nav-links">
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#servicio">Servicio</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#reserva" class="nav-cta">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-texture"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Restaurante del Club · Valencia</div>
+      <h1 class="hero-h1">Sabor<br><em>mediterráneo</em></h1>
+      <div class="hero-h1-sub">con alma deportiva</div>
+      <p class="hero-desc">Un espacio donde la tradición valenciana y la técnica de vanguardia se encuentran. Desde el primer café hasta la cena de celebración, somos el centro social de tu club.</p>
+      <div class="hero-actions">
+        <a href="#reserva" class="btn-primary">Reservar mesa</a>
+        <a href="#carta" class="btn-secondary">Ver carta →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-main">
+        <div class="plate-visual">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="90" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="70" stroke="rgba(201,168,76,0.2)" stroke-width="0.5"/>
+            <circle cx="100" cy="100" r="50" fill="rgba(201,168,76,0.08)" stroke="rgba(201,168,76,0.2)" stroke-width="0.5"/>
+          </svg>
+          <div class="plate-label">Tapeo de autor</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">360°</span>
+          <span class="stat-label">Servicio</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Chefs expertos</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">+20</span>
+          <span class="stat-label">Arroces y brasas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item">Desayunos <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Tapeo de autor <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Arroces a leña <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">La brasa del tercer tiempo <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Menú deportistas <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Cenas de equipo <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Postres caseros <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Healthy performance <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Desayunos <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Tapeo de autor <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Arroces a leña <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">La brasa del tercer tiempo <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Menú deportistas <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Cenas de equipo <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Postres caseros <span class="ticker-dot">◆</span></span>
+    <span class="ticker-item">Healthy performance <span class="ticker-dot">◆</span></span>
+  </div>
+</div>
+
+<!-- EXPERIENCIA -->
+<div class="experiencia-wrap" id="experiencia">
+  <section>
+    <div class="experiencia-grid">
+      <div class="exp-text reveal">
+        <div class="section-eyebrow">Nuestra experiencia</div>
+        <h2 class="section-title">Más que un<br>restaurante,<br><em>un punto de encuentro</em></h2>
+        <p>En El Palmaret, la tradición valenciana se encuentra con la técnica de vanguardia. Nuestra cocina se basa en el respeto al producto de proximidad y el compromiso con el sabor auténtico.</p>
+        <div class="exp-highlight">
+          <p>"Somos el sabor de la victoria y el confort del tercer tiempo."</p>
+        </div>
+        <p>Desde el crujiente de un buen arroz a leña hasta la delicadeza de nuestras tapas de autor, cada plato está diseñado para ser compartido. Combinamos la agilidad que requiere el entorno deportivo con la pausa y el mimo de un restaurante gourmet.</p>
+      </div>
+      <div class="exp-visual reveal reveal-delay-2">
+        <div class="exp-img-box">
+          <div class="exp-img-box-inner">
+            <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="100" cy="120" rx="75" ry="95" stroke="rgba(201,168,76,0.4)" stroke-width="0.8"/>
+              <ellipse cx="100" cy="120" rx="55" ry="70" stroke="rgba(201,168,76,0.25)" stroke-width="0.6"/>
+              <ellipse cx="100" cy="120" rx="35" ry="45" fill="rgba(201,168,76,0.1)" stroke="rgba(201,168,76,0.3)" stroke-width="0.6"/>
+              <path d="M60 80 Q100 50 140 80" stroke="rgba(201,168,76,0.2)" stroke-width="0.8" fill="none"/>
+              <path d="M55 120 Q100 90 145 120" stroke="rgba(201,168,76,0.15)" stroke-width="0.8" fill="none"/>
+            </svg>
+          </div>
+        </div>
+        <div class="exp-badge">
+          <span>Club</span>
+          <span>Nº 1</span>
+          <span style="font-family:var(--font-condensed);font-size:0.55rem;font-weight:700;letter-spacing:0.05em">GASTRO</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICIO 360 -->
+<div class="servicio-wrap" id="servicio">
+  <div class="servicio-inner">
+    <div class="servicio-header reveal">
+      <div>
+        <div class="section-eyebrow">Servicio 360°</div>
+        <h2 class="section-title">Del café del amanecer<br>a la <em>cena de celebración</em></h2>
+      </div>
+      <p>Ofrecemos un servicio versátil que acompaña al socio en cada momento del día. En El Palmaret, el servicio excelente es nuestro mejor entrenamiento.</p>
+    </div>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal">
+        <div class="servicio-num">01</div>
+        <h3>Desayunos & L'Esmorzaret</h3>
+        <p>Pan de payés con todos los acompañamientos. El ritual matutino valenciano, como debe ser.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-1">
+        <div class="servicio-num">02</div>
+        <h3>Menú Ejecutivo Diario</h3>
+        <p>Cocina de mercado, producto fresco y rotación diaria para el socio que vive en el club.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-2">
+        <div class="servicio-num">03</div>
+        <h3>Arroces & Brasas de fin de semana</h3>
+        <p>Paellas, arroces a leña, carnes y pescados a la brasa. El ritual del sábado y domingo.</p>
+      </div>
+      <div class="servicio-card reveal">
+        <div class="servicio-num">04</div>
+        <h3>Healthy Performance</h3>
+        <p>Menú especial para deportistas. Platos nutritivos pero gourmet para los que entrenan a diario.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-1">
+        <div class="servicio-num">05</div>
+        <h3>Cenas de Equipo & Eventos</h3>
+        <p>Menús grupales, celebraciones y eventos a medida. Organizamos la victoria contigo.</p>
+      </div>
+      <div class="servicio-card reveal reveal-delay-2">
+        <div class="servicio-num">06</div>
+        <h3>Take-away Deportivo</h3>
+        <p>Cocina de calidad para llevar. Tecnología y agilidad al servicio del deportista en movimiento.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARTA -->
+<div class="carta-wrap" id="carta">
+  <div class="carta-inner">
+    <div class="reveal">
+      <div class="section-eyebrow" style="color:var(--navy)">
+        <span style="background:var(--navy);width:1.5rem;height:1px;display:inline-block;flex-shrink:0"></span>
+        Nuestra carta
+      </div>
+      <h2 class="section-title" style="color:var(--navy-dark)">Tradición valenciana<br><em style="color:var(--gold)">con técnica de vanguardia</em></h2>
+    </div>
+
+    <!-- Sharing menu card -->
+    <div class="sharing-menu-card reveal">
+      <div class="sharing-left">
+        <h3>Menú para compartir</h3>
+        <p>La experiencia completa de El Palmaret: platos diseñados para disfrutar entre todos en la mesa.</p>
+        <div class="sharing-price">
+          <div class="price-tag">
+            <strong>40€</strong>
+            <span>sin bebida</span>
+          </div>
+          <div class="price-tag" style="background:rgba(201,168,76,0.15);color:var(--cream)">
+            <strong style="color:var(--gold)">45€</strong>
+            <span style="color:rgba(237,232,213,0.5)">con bebida</span>
+          </div>
+        </div>
+      </div>
+      <div class="sharing-right">
+        <ul>
+          <li>Tartar de atún rojo y aguacate</li>
+          <li>Ensaladilla rusa de autor</li>
+          <li>Croquetas de jamón ibérico</li>
+          <li>Flor de alcachofa, trufa y sal de jamón</li>
+          <li>Arrocito del Palmaret</li>
+          <li>Postre casero de temporada</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="carta-tabs reveal" id="cartaTabs">
+      <button class="tab-btn active" data-tab="tapas">Tapeo de autor</button>
+      <button class="tab-btn" data-tab="arroces">Arroces & Brasas</button>
+      <button class="tab-btn" data-tab="carnes">Carnes</button>
+      <button class="tab-btn" data-tab="postres">Postres</button>
+      <button class="tab-btn" data-tab="healthy">Healthy</button>
+    </div>
+
+    <!-- Tapeo -->
+    <div class="tab-content active" id="tab-tapas">
+      <div class="menu-grid">
+        <div class="menu-section-title">Ensaladas</div>
+        <div class="menu-item"><div><div class="menu-item-name">Ensalada Valenciana</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tomate rosa con ventresca y encurtidos</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Ensalada César</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Poké bowl de pollo o salmón</div></div></div>
+
+        <div class="menu-section-title">Tapas frías</div>
+        <div class="menu-item"><div><div class="menu-item-name">Ensaladilla rusa</div><div class="menu-item-desc">receta de la casa</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tabla de jamón ibérico y queso manchego</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Anchoas del cantábrico</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tartar de atún rojo y aguacate</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Esgarraet</div><div class="menu-item-desc">receta valenciana</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Coca de titaina</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tartar de vaca</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Hummus con crudités</div></div></div>
+
+        <div class="menu-section-title">Tapas calientes</div>
+        <div class="menu-item"><div><div class="menu-item-name">Croqueta de jamón</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Flor de alcachofa, sal de jamón y aceite de trufa</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Pulpo sobre parmentier de patata</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Sepionet a la plancha</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Huevos rotos</div><div class="menu-item-desc">jamón, chistorra o morcilla de Burgos</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Chipirones a la plancha</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Torrezno de Soria</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Pincho de tortilla</div></div></div>
+      </div>
+    </div>
+
+    <!-- Arroces -->
+    <div class="tab-content" id="tab-arroces">
+      <div class="menu-grid">
+        <div class="menu-section-title">Arroces — fines de semana</div>
+        <div class="menu-item"><div><div class="menu-item-name">Paella de pollo y conejo</div><div class="menu-item-desc">a leña, receta tradicional</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Arroz a banda</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Arroz negro</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Arroz de secreto, ajos tiernos y boletus</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Arroz de verduras</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Gazpacho manchego</div></div></div>
+        <div class="menu-section-title">Fideuàs</div>
+        <div class="menu-item"><div><div class="menu-item-name">Fideuà de marisco</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Fideuà de secreto, ajos tiernos y boletus</div></div></div>
+      </div>
+    </div>
+
+    <!-- Carnes -->
+    <div class="tab-content" id="tab-carnes">
+      <div class="menu-grid">
+        <div class="menu-section-title">La brasa del tercer tiempo</div>
+        <div class="menu-item"><div><div class="menu-item-name">Contramuslo de pollo a la brasa</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Entrecot de vaca vieja</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Secreto ibérico</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Solomillo de ternera</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Chuletas de cordero</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Milanesa con puré de patata</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Parrillada de carne</div><div class="menu-item-desc">selección del chef</div></div></div>
+      </div>
+    </div>
+
+    <!-- Postres -->
+    <div class="tab-content" id="tab-postres">
+      <div class="menu-grid">
+        <div class="menu-section-title">Postres caseros</div>
+        <div class="menu-item"><div><div class="menu-item-name">Corona de Alboraia</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Coca de llanda</div><div class="menu-item-desc">reducción de naranja y helado</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Torrija con helado de horchata</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tiramisú de horchata y fartons</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Brownie con helado</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Tarta de queso</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Crema de naranja</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Copa de yogur griego con frutas del bosque</div></div></div>
+      </div>
+    </div>
+
+    <!-- Healthy -->
+    <div class="tab-content" id="tab-healthy">
+      <div class="menu-grid">
+        <div class="menu-section-title">Healthy Performance — para el deportista diario</div>
+        <div class="menu-item"><div><div class="menu-item-name">Poké bowl de salmón</div><div class="menu-item-desc">arroz integral, edamame, aguacate</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Ensalada César con pollo a la plancha</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Verduras a la plancha con proteína</div><div class="menu-item-desc">pollo, atún o tofu</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Copa de yogur griego con frutas del bosque</div></div></div>
+        <div class="menu-item"><div><div class="menu-item-name">Menú deportistas</div><div class="menu-item-desc">primer plato + segundo + postre + agua</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="vision-wrap">
+  <div class="vision-bg"></div>
+  <div class="vision-inner reveal">
+    <div class="vision-divider"><span></span><i>◆</i><span></span></div>
+    <div class="vision-quote">"Más que un espacio,<br><em>un futuro.</em>"</div>
+    <p class="vision-sub">Una historia que se cocina a fuego lento</p>
+    <a href="#reserva" class="btn-primary">Sé parte de la historia</a>
+  </div>
+</div>
+
+<!-- EQUIPO -->
+<div class="equipo-wrap" id="equipo">
+  <section>
+    <div class="reveal">
+      <div class="section-eyebrow">Nuestro equipo</div>
+      <h2 class="section-title">La apuesta que<br>lo <em>hace posible</em></h2>
+    </div>
+    <div class="equipo-grid">
+      <div class="chef-card reveal">
+        <div class="chef-avatar">R</div>
+        <div>
+          <div class="chef-role">Supervisor Gerente · Creative Chef</div>
+          <div class="chef-name">Rakan Elmasri</div>
+          <div class="chef-bio">Formado en Canalla Bistro (Ricard Camarena), Restaurante Vertical y cocinas de Noruega. Lidera la visión creativa de El Palmaret con una filosofía sin fronteras y con todo el alma.</div>
+        </div>
+      </div>
+      <div class="chef-card reveal reveal-delay-1">
+        <div class="chef-avatar">E</div>
+        <div>
+          <div class="chef-role">Jefe de Cocina</div>
+          <div class="chef-name">Esteve Benlloch</div>
+          <div class="chef-bio">Especialista en arroces valencianos con paso por La Favorita, Sagardi y Miss Sushi. El dominio del fuego y el producto local son su sello. La paella en sus manos es una declaración de amor.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- RESERVA -->
+<div class="reserva-wrap" id="reserva">
+  <div class="reserva-inner">
+    <div class="reserva-left reveal">
+      <h2>Reserva tu<br><em>experiencia</em></h2>
+      <p>Acompáñanos a la mesa. Tanto si vienes a comer con el equipo como a celebrar la victoria, en El Palmaret siempre hay un lugar para ti.</p>
+      <div class="reserva-info">
+        <div class="info-item">
+          <strong>Horario</strong>
+          <span>Lunes a domingo · Desayunos desde 8:00h</span>
+        </div>
+        <div class="info-item">
+          <strong>Arroces</strong>
+          <span>Sábados y domingos · Previa reserva</span>
+        </div>
+        <div class="info-item">
+          <strong>Grupos</strong>
+          <span>Cenas de equipo y eventos a medida</span>
+        </div>
+        <div class="info-item">
+          <strong>Contacto</strong>
+          <span>restaurante@elpalmaret.com</span>
+        </div>
+      </div>
+    </div>
+    <div class="reserva-form reveal reveal-delay-2">
+      <div class="form-title">Hacer una reserva</div>
+      <div class="form-subtitle">Confirmamos en menos de 24 horas</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+34 000 000 000">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Fecha</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Hora</label>
+          <input type="time" value="13:30">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Personas</label>
+          <select>
+            <option>2 personas</option>
+            <option>3-4 personas</option>
+            <option>5-6 personas</option>
+            <option>Grupo (+7)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Servicio</label>
+          <select>
+            <option>Almuerzo</option>
+            <option>Cena</option>
+            <option>Arroz fin de semana</option>
+            <option>Evento especial</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-form" onclick="alert('¡Reserva recibida! Os confirmamos en breve.')">Solicitar reserva</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-logo"><span>el</span>PALMARET</div>
+      <div class="footer-tagline">Sabor mediterráneo<br>con alma deportiva.</div>
+      <div class="footer-address">
+        Complejo Deportivo · Valencia<br>
+        restaurante@elpalmaret.com
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Carta</div>
+      <ul class="footer-links">
+        <li><a href="#carta">Tapeo de autor</a></li>
+        <li><a href="#carta">Arroces y brasas</a></li>
+        <li><a href="#carta">Carnes</a></li>
+        <li><a href="#carta">Healthy performance</a></li>
+        <li><a href="#carta">Postres caseros</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Servicios</div>
+      <ul class="footer-links">
+        <li><a href="#servicio">Desayunos</a></li>
+        <li><a href="#servicio">Menú ejecutivo</a></li>
+        <li><a href="#servicio">Menú deportistas</a></li>
+        <li><a href="#servicio">Cenas de equipo</a></li>
+        <li><a href="#servicio">Eventos a medida</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Reservas</div>
+      <ul class="footer-links">
+        <li><a href="#reserva">Reservar mesa</a></li>
+        <li><a href="#reserva">Grupos</a></li>
+        <li><a href="#equipo">Nuestro equipo</a></li>
+        <li><a href="#experiencia">Nuestra historia</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:1400px;margin:3rem auto 0;padding:1.5rem 0 0;border-top:1px solid rgba(201,168,76,0.1);display:flex;align-items:center;justify-content:space-between">
+    <span>© 2025 El Palmaret — Todos los derechos reservados</span>
+    <span style="font-family:var(--font-display);font-style:italic;font-size:0.8rem;color:rgba(237,232,213,0.25)">Una historia que se cocina a fuego lento</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Smooth anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
