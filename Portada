@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Palmaret — Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root {
+  --navy:       #1B3A5C;
+  --navy-dark:  #0f2540;
+  --cream:      #EDE8D5;
+  --gold:       #C9A84C;
+  --gold-light: #E8C97A;
+  --fd: 'Cormorant Garamond', serif;
+  --fb: 'Barlow', sans-serif;
+  --fc: 'Barlow Condensed', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--navy-dark); color: var(--cream); font-family: var(--fb); overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 4rem;
+  transition: background .5s, padding .4s, box-shadow .5s;
+}
+nav.sc {
+  background: rgba(10,24,40,0.97);
+  padding: 0.85rem 4rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(201,168,76,0.18);
+}
+.nl {
+  font-family: var(--fd); font-size: 1.6rem; font-weight: 500;
+  color: var(--cream); letter-spacing: .05em; text-decoration: none;
+  display: flex; align-items: baseline; gap: .12em;
+}
+.nl span { font-size: .62em; font-style: italic; color: var(--gold); font-weight: 300; }
+nav ul { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+nav ul a {
+  font-family: var(--fc); font-size: .72rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(237,232,213,.65); text-decoration: none;
+  transition: color .2s; position: relative;
+}
+nav ul a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+  height: 1px; background: var(--gold); transform: scaleX(0); transition: transform .25s;
+}
+nav ul a:hover { color: var(--gold); }
+nav ul a:hover::after { transform: scaleX(1); }
+.ncta { color: var(--navy-dark)!important; background: var(--gold); padding: .6rem 1.4rem; transition: background .2s, transform .2s!important; }
+.ncta::after { display: none!important; }
+.ncta:hover { background: var(--gold-light)!important; transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+/* Foto de fondo — sustituye la URL por tu imagen local */
+.hphoto {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: url('https://images.unsplash.com/photo-1515443961218-a51367888e4b?w=1920&q=85&auto=format&fit=crop&crop=center');
+  background-size: cover;
+  background-position: center 60%;
+  will-change: transform;
+  animation: heroZoom 14s ease-out forwards;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.00); }
+}
+
+/* Overlay degradado oscuro */
+.hov1 {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to bottom,
+    rgba(4,12,24,0.68) 0%,
+    rgba(4,12,24,0.30) 35%,
+    rgba(4,12,24,0.30) 55%,
+    rgba(4,12,24,0.82) 100%);
+}
+/* Vignette lateral */
+.hov2 {
+  position: absolute; inset: 0; z-index: 1;
+  background: radial-gradient(ellipse 80% 70% at 50% 45%, transparent 40%, rgba(4,12,24,0.5) 100%);
+}
+/* Grano cinematográfico */
+.hgrain {
+  position: absolute; inset: 0; z-index: 2; opacity: .12; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+/* Patrón diamante de marca */
+.htex {
+  position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0L60 30L30 60L0 30Z' fill='none' stroke='rgba(201,168,76,0.025)' stroke-width='0.5'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+}
+/* Resplandor dorado base */
+.hglow {
+  position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%);
+  width: 1000px; height: 500px; z-index: 2; pointer-events: none;
+  background: radial-gradient(ellipse at center bottom, rgba(201,168,76,0.10) 0%, transparent 65%);
+}
+
+/* Contenido centrado */
+.hcont {
+  position: relative; z-index: 3;
+  width: 100%; max-width: 860px; margin: 0 auto;
+  padding: 0 2rem 130px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  min-height: 100vh; justify-content: center;
+}
+
+/* Pill de categoría */
+.hey {
+  font-family: var(--fc); font-size: .65rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--navy-dark); background: var(--gold);
+  padding: .45rem 1.1rem; border-radius: 100px;
+  margin-bottom: 1.6rem;
+  display: inline-flex; align-items: center;
+  opacity: 0; animation: fu .7s .3s ease forwards;
+  white-space: nowrap;
+}
+
+/* H1 — Cormorant Garamond */
+.hh1 {
+  font-family: var(--fd);
+  font-size: clamp(3.8rem, 7vw, 8rem);
+  font-weight: 300; line-height: .95;
+  color: var(--cream); letter-spacing: -.01em;
+  margin-bottom: .1em;
+  opacity: 0; animation: fu .9s .5s ease forwards;
+  text-shadow: 0 4px 40px rgba(0,0,0,0.55);
+}
+.hh1 em { font-style: italic; color: var(--gold); display: block; }
+
+/* Descripción */
+.hdes {
+  font-size: .97rem; font-weight: 300; line-height: 1.8;
+  color: rgba(237,232,213,.72);
+  max-width: 520px; margin: 1.4rem auto 2.8rem;
+  opacity: 0; animation: fu .8s .75s ease forwards;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+}
+
+/* Botones */
+.hact {
+  display: flex; gap: 1rem; align-items: center;
+  justify-content: center; flex-wrap: wrap;
+  opacity: 0; animation: fu .8s 1.0s ease forwards;
+}
+.bp {
+  font-family: var(--fc); font-size: .75rem; font-weight: 700;
+  letter-spacing: .15em; text-transform: uppercase;
+  background: var(--gold); color: var(--navy-dark);
+  border: 2px solid var(--gold); padding: .95rem 2.2rem;
+  text-decoration: none; transition: background .2s, transform .2s;
+  display: inline-block;
+}
+.bp:hover { background: var(--gold-light); border-color: var(--gold-light); transform: translateY(-2px); }
+.bg {
+  font-family: var(--fc); font-size: .75rem; font-weight: 600;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(237,232,213,.9); text-decoration: none;
+  border: 2px solid rgba(237,232,213,.55); padding: .93rem 2.2rem;
+  transition: color .2s, border-color .2s, background .2s;
+  display: inline-block;
+}
+.bg:hover { color: var(--navy-dark); background: rgba(237,232,213,.9); border-color: rgba(237,232,213,.9); }
+
+/* Flecha scroll */
+.hscroll {
+  position: absolute; bottom: 88px; left: 50%; transform: translateX(-50%);
+  z-index: 4; display: flex; flex-direction: column;
+  align-items: center; gap: .35rem;
+  opacity: 0; animation: fu .8s 1.5s ease forwards;
+  pointer-events: none;
+}
+.hscroll span {
+  font-family: var(--fc); font-size: .55rem; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase; color: rgba(237,232,213,.3);
+}
+.hscroll-arrow {
+  width: 1px; height: 28px;
+  background: linear-gradient(to bottom, rgba(201,168,76,.7), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%,100% { opacity:.35; transform:scaleY(1); }
+  50%     { opacity:1;   transform:scaleY(1.25); }
+}
+
+/* Barra de stats */
+.hstats-bar {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: rgba(4,12,24,0.88);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(201,168,76,0.22);
+}
+.hstat-item {
+  padding: 1.35rem 1.5rem; text-align: center;
+  border-right: 1px solid rgba(201,168,76,0.1);
+  transition: background .3s;
+}
+.hstat-item:last-child { border-right: none; }
+.hstat-item:hover { background: rgba(201,168,76,0.07); }
+.sn { font-family: var(--fd); font-size: 2rem; font-weight: 300; color: var(--gold); line-height: 1; display: block; }
+.sl { font-family: var(--fc); font-size: .58rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(237,232,213,.38); display: block; margin-top: .3rem; }
+
+/* Animaciones */
+@keyframes fu {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nl"><span>el</span>PALMARET</a>
+  <ul>
+    <li><a href="#experiencia">Experiencia</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#carta">Carta</a></li>
+    <li><a href="#equipo">Equipo</a></li>
+    <li><a href="#reserva" class="ncta">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+
+  <div class="hphoto"></div>
+  <div class="hov1"></div>
+  <div class="hov2"></div>
+  <div class="hgrain"></div>
+  <div class="htex"></div>
+  <div class="hglow"></div>
+
+  <div class="hcont">
+    <div class="hey">Gastronomía &amp; Rendimiento</div>
+    <h1 class="hh1">Sabor Mediterráneo con<br><em>Alma Deportiva</em></h1>
+    <p class="hdes">Donde la tradición de la leña se une con la técnica gourmet para nutrir a la comunidad y celebrar el éxito.</p>
+    <div class="hact">
+      <a href="#reserva" class="bp">Reserva tu mesa</a>
+      <a href="#carta" class="bg">Ver la carta</a>
+    </div>
+  </div>
+
+  <div class="hscroll">
+    <span>Descubrir</span>
+    <div class="hscroll-arrow"></div>
+  </div>
+
+  <div class="hstats-bar">
+    <div class="hstat-item">
+      <span class="sn">360°</span>
+      <span class="sl">Servicio completo</span>
+    </div>
+    <div class="hstat-item">
+      <span class="sn">2</span>
+      <span class="sl">Chefs expertos</span>
+    </div>
+    <div class="hstat-item">
+      <span class="sn">+20</span>
+      <span class="sl">Arroces y brasas</span>
+    </div>
+    <div class="hstat-item">
+      <span class="sn">7</span>
+      <span class="sl">Días a la semana</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('sc', window.scrollY > 60);
+  });
+
+  // Parallax suave
+  window.addEventListener('scroll', () => {
+    const p = document.querySelector('.hphoto');
+    if (p) p.style.transform = `translateY(${window.scrollY * 0.22}px)`;
+  }, { passive: true });
+</script>
+
+</body>
+</html>
