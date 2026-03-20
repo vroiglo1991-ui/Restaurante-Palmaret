@@ -1,0 +1,195 @@
+/* ══════════════════════════════════════
+   EXPERIENCIA
+══════════════════════════════════════ */
+
+/* Grid dos columnas */
+.eg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* Columna texto */
+.et p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(237,232,213,.72);
+  margin-bottom: 1.5rem;
+}
+
+/* Cita */
+.eq {
+  border-left: 2px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 2.5rem 0;
+}
+.eq p {
+  font-family: var(--fd);
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream) !important;
+  line-height: 1.5;
+}
+
+/* ── Carrusel local ── */
+.local-carousel { position: relative; }
+
+.lc-track {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+}
+
+.lc-slide {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.lc-slide.active { opacity: 1; }
+
+.lc-slide-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.lc-slide-inner svg {
+  width: 100%; height: 100%;
+  position: absolute; inset: 0;
+}
+.lc-slide-inner::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(10,30,56,.6));
+}
+
+/* Label slide */
+.lc-label {
+  position: absolute;
+  bottom: 2rem; left: 2rem; right: 2rem;
+  z-index: 3;
+}
+.lc-label p {
+  font-family: var(--fd);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: rgba(237,232,213,.85);
+  line-height: 1.4;
+}
+
+/* Dots */
+.lc-controls { display: flex; gap: .5rem; margin-top: .75rem; }
+.lc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.3);
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+.lc-dot.active { background: var(--gold); transform: scale(1.3); }
+
+/* Flechas */
+.lc-arrows {
+  position: absolute;
+  bottom: 2rem; right: 2rem;
+  z-index: 5;
+  display: flex;
+  gap: .4rem;
+}
+.lc-arr {
+  width: 32px; height: 32px;
+  background: rgba(10,30,56,.7);
+  border: 1px solid rgba(201,168,76,.2);
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: .8rem;
+  transition: background .2s;
+}
+.lc-arr:hover { background: rgba(201,168,76,.15); }
+
+/* Badge dorado */
+.eb {
+  position: absolute;
+  top: -1.5rem; right: -1.5rem;
+  z-index: 3;
+  width: 110px; height: 110px;
+  background: var(--gold);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.eb span:nth-child(1) {
+  font-family: var(--fc);
+  font-size: .58rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: var(--navy-dark);
+}
+.eb span:nth-child(2) {
+  font-family: var(--fd);
+  font-size: 1.8rem; font-weight: 600;
+  color: var(--navy-dark); line-height: 1;
+}
+.eb span:nth-child(3) {
+  font-family: var(--fc);
+  font-size: .55rem; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--navy-dark); opacity: .7;
+}
+
+/* ── Visión ── */
+.vis-wrap {
+  background: var(--navy-dark);
+  position: relative;
+  overflow: hidden;
+}
+.vis-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,168,76,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.vis-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 9rem 4rem;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.vis-q {
+  font-family: var(--fd);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--cream);
+  margin-bottom: 1.5rem;
+}
+.vis-q em { color: var(--gold); font-style: normal; }
+.vis-sub {
+  font-size: .88rem;
+  font-weight: 300;
+  color: rgba(237,232,213,.45);
+  letter-spacing: .05em;
+  margin-bottom: 3rem;
+}
+.vis-div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+.vis-div span { width: 4rem; height: 1px; background: rgba(201,168,76,.25); }
+.vis-div i {
+  font-family: var(--fd);
+  font-size: 1.2rem;
+  font-style: normal;
+  color: var(--gold);
+  opacity: .35;
+}
