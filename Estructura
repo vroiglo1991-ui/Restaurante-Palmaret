@@ -1,0 +1,18 @@
+elpalmaret/
+├── index.html
+├── css/
+│   ├── base.css
+│   ├── nav.css
+│   ├── hero.css
+│   ├── galeria.css
+│   ├── experiencia.css
+│   ├── servicios.css
+│   ├── carta.css
+│   ├── equipo.css
+│   ├── reserva.css
+│   ├── footer.css
+│   └── responsive.css
+└── js/
+    ├── nav.js
+    ├── carruseles.js
+    └── carta.js
