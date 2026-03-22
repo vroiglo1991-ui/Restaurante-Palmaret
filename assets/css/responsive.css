@@ -1,175 +1,124 @@
 /* ══════════════════════════════════════
-   RESPONSIVE — TABLET (≤ 1024px)
+   RESPONSIVE (TABLETS Y MÓVILES)
 ══════════════════════════════════════ */
-@media (max-width: 1024px) {
+.hamburger { display: none; background: transparent; border: none; color: var(--gold); cursor: pointer; padding: 0.2rem; width: 34px; height: 34px; }
 
-  nav { padding: 1.2rem 2rem; }
-  nav.sc { padding: .8rem 2rem; }
-
-  .hcont {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    padding: 0 2rem;
-    padding-top: 7rem;
-    padding-bottom: 3rem;
-    min-height: auto;
-  }
-  .hh1 { font-size: clamp(3rem, 8vw, 5rem); }
-
+/* ─── TABLET (Max 992px) ─── */
+@media (max-width: 992px) {
   section { padding: 5rem 2rem; }
-
-  .eg  { grid-template-columns: 1fr; gap: 3rem; }
-  .eg-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .rg  { grid-template-columns: 1fr; gap: 3rem; }
-
-  .srv-header { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
-  .sg  { grid-template-columns: repeat(2, 1fr); }
-
-  .fg2 { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
-  footer { padding: 3rem 2rem; }
-
-  .carta-hero { padding: 4rem 2rem 3rem; }
-  .carta-hero-inner { grid-template-columns: 1fr; gap: 1.5rem; }
-  .cf-inner { padding: 0 2rem; }
-  .carta-body { padding: 3rem 2rem; }
-  .destaque-grid { grid-template-columns: 1fr; }
-  .sharing-block { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
-  .menu-grid { grid-template-columns: 1fr; }
-
-  .gi { padding: 0 2rem; }
-  .pq-inner { padding: 4rem 2rem; }
-  .vis-inner { padding: 6rem 2rem; }
-}
-
-/* ══════════════════════════════════════
-   RESPONSIVE — MÓVIL (≤ 768px)
-══════════════════════════════════════ */
-@media (max-width: 768px) {
-
-  /* NAV — hamburguesa */
-  nav { padding: 1rem 1.2rem; }
-  nav.sc { padding: .7rem 1.2rem; }
-  nav ul { display: none; }
-  .nav-burger { display: flex; }
-
-  nav ul.open {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    inset: 0;
-    background: rgba(8,20,38,0.98);
-    backdrop-filter: blur(16px);
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-    z-index: 199;
+  
+  /* NAV */
+  nav { padding: 1.2rem 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  nav.sc { padding: 1rem 2rem; }
+  .lang-switch { margin: 0; order: 2; margin-left: auto; margin-right: 1.5rem; }
+  .hamburger { display: block; order: 3; }
+  
+  nav ul { 
+    display: none; 
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    width: 100%; margin: 0;
+    flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; 
+    padding: 2.5rem 0; background: rgba(10,24,40,0.98); backdrop-filter: blur(10px); 
+    border-top: 1px solid rgba(201,168,76,.15);
+    border-bottom: 1px solid rgba(201,168,76,.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
-  nav ul.open a {
-    font-size: 1rem;
-    letter-spacing: .2em;
-    color: var(--cream);
-  }
-  nav ul.open .ncta { padding: .9rem 2rem; }
+  nav ul.active { display: flex; animation: fu 0.3s ease forwards; }
+  .ncta { background: transparent!important; padding: 0; color: var(--gold)!important; }
+  .ncta:hover { transform: none!important; }
 
   /* HERO */
-  .hcont {
-    grid-template-columns: 1fr;
-    padding: 0 1.2rem;
-    padding-top: 6rem;
-    padding-bottom: 2.5rem;
-    gap: 2.5rem;
-  }
-  .hh1 { font-size: clamp(3rem, 12vw, 4.5rem); line-height: .92; }
-  .hh1s { font-size: 1.1rem; }
-  .hdes { font-size: .88rem; max-width: 100%; }
-  .hact { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .bp  { width: 100%; text-align: center; padding: 1rem; }
-  .hero-carousel-track { height: 300px; }
-  .hstats { margin-top: .6rem; }
-  .stat  { padding: 1rem .6rem; }
-  .sn    { font-size: 1.7rem; }
-  .sl    { font-size: .52rem; }
-
-  /* SECCIONES */
-  section { padding: 4rem 1.2rem; }
-
-  /* GALERÍA */
-  .gw { padding: 4rem 0; }
-  .gi { padding: 0 1.2rem; }
-  .g-header { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
-  .g-item:nth-child(odd),
-  .g-item:nth-child(even),
-  .g-item:nth-child(3n) { width: 240px; height: 360px; }
-
-  /* EXPERIENCIA */
-  .eg  { grid-template-columns: 1fr; gap: 2.5rem; }
-  .lc-track { aspect-ratio: 4/3; }
-  .eb  { width: 80px; height: 80px; top: -1rem; right: -1rem; }
-  .eb span:nth-child(2) { font-size: 1.3rem; }
-
-  /* QUOTE */
-  .pq-inner { padding: 3.5rem 1.2rem; flex-direction: column; gap: 1.5rem; }
-  .pq-line  { width: 2rem; height: 2px; }
-  .pq-text  { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-
-  /* SERVICIOS */
-  .srv-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
-  .sg  { grid-template-columns: 1fr; }
-
-  /* CARTA */
-  .carta-hero { padding: 3.5rem 1.2rem 2.5rem; }
-  .carta-hero-inner { grid-template-columns: 1fr; gap: 1.2rem; }
-  .cf-inner { padding: 0 1.2rem; }
-  .cf-btn   { padding: .75rem .9rem; font-size: .62rem; }
-  .carta-body { padding: 2.5rem 1.2rem; }
-  .destaque-grid { grid-template-columns: 1fr !important; }
-  .sharing-block { grid-template-columns: 1fr; gap: 2rem; padding: 1.5rem; }
-  .sharing-block::before { font-size: 5rem; }
-  .price-row { flex-wrap: wrap; }
-  .menu-grid { grid-template-columns: 1fr; }
-  .mi { column-gap: 1.5rem; padding: 1.1rem 0; }
-  .mi:hover { padding-left: .5rem; }
-  .mi-name  { font-size: .88rem; }
-  .mi-desc  { font-size: .74rem; }
-  .mi-price { font-size: 1.1rem; }
-  .cat-header { gap: 1rem; flex-wrap: wrap; }
-  .cat-badge  { margin-left: 0; }
-  .cat-title  { font-size: 1.6rem; }
-
-  /* EQUIPO */
-  .eq-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .cc { grid-template-columns: auto 1fr; gap: 1.2rem; padding: 1.5rem; }
-
-  /* RESERVA */
-  .rg  { grid-template-columns: 1fr; gap: 2.5rem; }
-  .frw { grid-template-columns: 1fr; }
-
-  /* VISIÓN */
-  .vis-inner { padding: 5rem 1.2rem; }
-  .vis-q { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-
-  /* FOOTER */
-  footer { padding: 3rem 1.2rem 2rem; }
-  .fg2   { grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .fb2   { flex-direction: column; gap: .5rem; text-align: center; }
+  .hcont { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; text-align: center; gap: 3rem; min-height: auto; }
+  .hey { justify-content: center; }
+  .hey::before { display: none; }
+  .hdes { margin: 0 auto 2.5rem; }
+  .hact { justify-content: center; }
+  .hright { margin-top: 0; }
+  
+  /* OTHER SECTIONS */
+  .eg, .srv-header, .carta-hero-inner, .sharing-block, .rg { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+  .eq { border-left: none; border-top: 2px solid var(--gold); padding-left: 0; padding-top: 1.5rem; }
+  .cf-inner { padding: 0 2rem; }
+  .carta-body, .vis-inner { padding: 4rem 2rem; }
+  .price-row { justify-content: center; }
+  .sb-right ul { align-items: center; }
+  .il { align-items: center; }
+  .ir { justify-content: center; }
 }
 
-/* ══════════════════════════════════════
-   RESPONSIVE — MÓVIL PEQUEÑO (≤ 480px)
-══════════════════════════════════════ */
+/* ─── MOBILE (Max 768px) ─── */
+@media (max-width: 768px) {
+  section { padding: 4rem 1.5rem; }
+  
+  /* NAV */
+  nav, nav.sc { padding: 1rem 1.5rem; }
+  .nl { font-size: 1.4rem; }
+  .lang-switch { margin-right: 1rem; }
+  .lang-btn { padding: .3rem .4rem; }
+
+  /* HERO */
+  .hcont { padding: 6.5rem 1.5rem 3rem; gap: 2.5rem; }
+  .hh1 { font-size: 3.5rem; line-height: 1; margin-bottom: 1rem; }
+  .hh1s { font-size: 1.3rem; margin-bottom: 2rem; }
+  .hact { flex-direction: column; gap: 1.2rem; align-items: stretch; }
+  .bp { text-align: center; padding: 1.1rem 2rem; }
+  
+  .hstats { grid-template-columns: 1fr; gap: 1px; }
+  .hero-carousel-track { height: 350px; } /* Ajuste altura carrusel movil */
+
+  /* GALERIA */
+  .gw { padding: 4rem 0; }
+  .gi { padding: 0 1.5rem; }
+  .g-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .g-title { font-size: 2.8rem; }
+  
+  /* CARTA */
+  .carta-hero { padding: 4rem 1.5rem 3rem; }
+  .carta-hero h2 { font-size: 3rem; }
+  .cf-inner { padding: 0 1.5rem; }
+  .carta-body { padding: 3rem 1.5rem; }
+  
+  /* CARTA GRID */
+  .menu-grid, .destaque-grid, .sg, .eq-grid, .frw { grid-template-columns: 1fr; }
+  
+  .mi { grid-template-columns: 1fr; text-align: center; gap: .8rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(27,58,92,.08); }
+  .mi-tags { justify-content: center; }
+  .mi-price { margin-top: .5rem; font-size: 1.5rem; }
+  .cat-header { flex-direction: column; text-align: center; gap: 1rem; border-bottom: none; margin-bottom: 1.5rem; }
+  .cat-badge { margin: 0 auto; }
+  .cat-title { font-size: 1.8rem; line-height: 1.2; }
+
+  /* EQUIPO Y RESERVA */
+  .cc { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 2rem 1.5rem; }
+  .rf { padding: 2.5rem 1.5rem; }
+  .pq-inner { padding: 4rem 1.5rem; flex-direction: column; text-align: center; gap: 1.5rem; }
+  .pq-line { width: 60px; height: 3px; }
+  .pq-text { font-size: min(1.8rem, 7vw); }
+  .st { font-size: min(2.8rem, 10vw); }
+  
+  /* TICKER */
+  .tki { font-size: 0.6rem; padding: 0 1.5rem; }
+
+  /* FOOTER */
+  footer { padding: 4rem 1.5rem 3rem; }
+  .fg2 { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+  .fb2 { flex-direction: column; gap: 1.5rem; text-align: center; }
+  .flogo { justify-content: center; }
+  .fli { align-items: center; justify-content: center; }
+}
+
+/* ─── SMALL MOBILE (Max 480px) ─── */
 @media (max-width: 480px) {
-
-  .hh1 { font-size: clamp(2.6rem, 14vw, 3.5rem); }
-  .hstats { grid-template-columns: 1fr 1fr 1fr; }
-  .sn  { font-size: 1.4rem; }
-
-  .fg2 { grid-template-columns: 1fr; gap: 2rem; }
-
-  .cc  { grid-template-columns: 1fr; }
-  .cph { display: none; }
-
-  .hero-carousel-track { height: 260px; }
-
-  .cf-btn   { padding: .65rem .6rem; font-size: .58rem; letter-spacing: .08em; }
-  .cf-count { display: none; }
+  .hh1 { font-size: 3rem; }
+  .hdes { font-size: 0.95rem; }
+  .hero-carousel-track { height: 300px; }
+  .st { font-size: 2.4rem; }
+  .pq-text { font-size: 1.6rem; }
+  .sb-left h3 { font-size: 1.8rem; }
+  .destaque-item { padding: 1.5rem; }
+  .di-price { font-size: 1.4rem; }
+  .rl h2 { font-size: 2.5rem; }
+  .g-title { font-size: 2.4rem; }
+  .carta-hero h2 { font-size: 2.4rem; }
 }

@@ -3,11 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>El Palmaret — Sabor Mediterráneo con Alma Deportiva</title>
+<title>El Palmaret | Restaurante Deportivo y de Arroces en Valencia</title>
+<meta name="description" content="El Palmaret es el restaurante de tu club deportivo en Valencia. Especialistas en paellas, arroces a leña, tapeo de autor y menús saludables para deportistas.">
+<meta name="keywords" content="restaurante deportivo, arroces a leña, Valencia, paella valenciana, tapas de autor, comer en Valencia, restaurante con terraza">
+<meta name="author" content="El Palmaret">
+<link rel="canonical" href="https://www.elpalmaret.com/" />
+<meta property="og:title" content="El Palmaret | Restaurante Deportivo en Valencia">
+<meta property="og:description" content="Especialistas en arroces a leña, tapeo de autor y menús para deportistas. El fuego y la tradición reunidos.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.elpalmaret.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "El Palmaret",
+  "image": "https://www.elpalmaret.com/assets/img/hero.jpg",
+  "description": "Restaurante de tradición valenciana especializado en arroces a leña y comidas para grupos y deportistas.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Complejo Deportivo",
+    "addressLocality": "Valencia",
+    "addressRegion": "Comunidad Valenciana",
+    "addressCountry": "ES"
+  },
+  "servesCuisine": "Mediterránea, Arroces, Tapas",
+  "priceRange": "€€",
+  "telephone": "+34000000000"
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/footer.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
 <style>
 :root {
   --navy: #1B3A5C;
@@ -133,7 +161,6 @@ nav ul a:hover::after { transform: scaleX(1); }
 .gw { background:var(--navy-dark); padding:6rem 0; overflow:hidden; }
 .gi { max-width:1400px; margin:0 auto; padding:0 4rem; }
 .g-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:2.5rem; }
-.g-header-left {}
 .g-eyebrow { font-family:var(--fc); font-size:.7rem; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; display:flex; align-items:center; gap:1rem; }
 .g-eyebrow::before { content:''; width:1.5rem; height:1px; background:var(--gold); }
 .g-title { font-family:var(--fd); font-size:clamp(2.2rem,3.5vw,3.5rem); font-weight:300; line-height:1.1; color:var(--cream); }
@@ -228,7 +255,7 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
 .sc2::before { content:''; position:absolute; bottom:0;left:0;right:0; height:2px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .4s ease; }
 .sc2:hover { background:rgba(27,58,92,.9); }
 .sc2:hover::before { transform:scaleX(1); }
-.sc2-num { font-family:var(--fd); font-size:3.5rem; font-weight:300; color:rgba(201,168,76,.12); line-height:1; margin-bottom:.5rem; }
+.sc2-num { font-family:var(--fd); font-size:3.5rem; font-weight:300; color:var(--gold); line-height:1; margin-bottom:.5rem; }
 .sc2 h3 { font-family:var(--fc); font-size:.82rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--cream); margin-bottom:.7rem; }
 .sc2 p { font-size:.85rem; font-weight:300; line-height:1.7; color:rgba(237,232,213,.52); }
 
@@ -276,7 +303,6 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
 .menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
 .mi { padding:1.1rem 0; border-bottom:1px solid rgba(27,58,92,.1); display:grid; grid-template-columns:1fr auto; align-items:baseline; gap:2rem; transition:background .2s, padding .2s; cursor:default; }
 .mi:hover { background:rgba(27,58,92,.04); padding-left:.8rem; padding-right:.8rem; }
-.mi-left {}
 .mi-name { font-family:var(--fb); font-size:.93rem; font-weight:500; color:var(--navy-dark); margin-bottom:.15rem; }
 .mi-desc { font-size:.78rem; font-weight:300; color:rgba(27,58,92,.5); font-style:italic; line-height:1.5; }
 .mi-tags { display:flex; gap:.3rem; margin-top:.3rem; flex-wrap:wrap; }
@@ -408,7 +434,10 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="nav">
   <a href="#" class="nl"><span>el</span>PALMARET</a>
-  <ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+  </button>
+  <ul id="navMenu">
     <li><a href="#experiencia">Experiencia</a></li>
     <li><a href="#galeria">Galería</a></li>
     <li><a href="#carta">Carta</a></li>
@@ -431,7 +460,7 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
   <div class="hcont">
     <div>
       <div class="hey">Restaurante del Club · Valencia</div>
-      <h1 class="hh1">Sabor<br><em>mediterráneo</em></h1>
+      <h1 class="hh1">Sabor<br><em>mediterráneo</em><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
       <div class="hh1s">con alma deportiva</div>
       <p class="hdes">Un espacio donde la tradición valenciana y la técnica de vanguardia se encuentran. Desde el primer café hasta la cena de celebración, somos el centro social de tu club.</p>
       <div class="hact">
@@ -1579,33 +1608,59 @@ setInterval(() => lcGo(lcIdx + 1), 5500);
 // ── GALERÍA EDITORIAL CAROUSEL
 const ITEM_WIDTHS = [308, 248, 288, 268, 268, 308, 258, 288];
 const GAP = 8;
-let gPage = 0;
+let gIndex = 0;
 const gTrack = document.getElementById('gTrack');
 const gDots = document.querySelectorAll('#gIndicator .g-dot');
-const gPages = 4;
-function gGetOffset(page) {
+
+function gGetPerPage() { return window.innerWidth <= 768 ? 1 : 2; }
+
+function gGetOffset(index) {
   let total = 0;
-  const perPage = 2;
-  const start = page * perPage;
-  for (let i = 0; i < start; i++) total += ITEM_WIDTHS[i % ITEM_WIDTHS.length] + GAP;
+  for (let i = 0; i < index; i++) total += ITEM_WIDTHS[i % ITEM_WIDTHS.length] + GAP;
   return total;
 }
-function gGo(page) {
-  gDots[gPage].classList.remove('active');
-  gPage = (page + gPages) % gPages;
-  gDots[gPage].classList.add('active');
-  gTrack.style.transform = `translateX(-${gGetOffset(gPage)}px)`;
+
+function gUpdate(newIndex) {
+  const perPage = gGetPerPage();
+  const maxIndex = ITEM_WIDTHS.length - perPage;
+  
+  if (gDots.length > 0) {
+    let oldPage = Math.floor(gIndex / (ITEM_WIDTHS.length / gDots.length));
+    if (oldPage >= gDots.length) oldPage = gDots.length - 1;
+    if (gDots[oldPage]) gDots[oldPage].classList.remove('active');
+  }
+
+  gIndex = newIndex;
+  if (gIndex > maxIndex) gIndex = 0;
+  if (gIndex < 0) gIndex = maxIndex - (maxIndex % perPage);
+
+  if (gDots.length > 0) {
+    let newPage = Math.floor(gIndex / (ITEM_WIDTHS.length / gDots.length));
+    if (newPage >= gDots.length) newPage = gDots.length - 1;
+    if (gDots[newPage]) gDots[newPage].classList.add('active');
+  }
+
+  if (gTrack) gTrack.style.transform = `translateX(-${gGetOffset(gIndex)}px)`;
 }
-document.getElementById('gNext').addEventListener('click', () => gGo(gPage + 1));
-document.getElementById('gPrev').addEventListener('click', () => gGo(gPage - 1));
-gDots.forEach((d, i) => d.addEventListener('click', () => gGo(i)));
+
+if (document.getElementById('gNext')) {
+  document.getElementById('gNext').addEventListener('click', () => gUpdate(gIndex + gGetPerPage()));
+  document.getElementById('gPrev').addEventListener('click', () => gUpdate(gIndex - gGetPerPage()));
+}
+
+gDots.forEach((d, i) => d.addEventListener('click', () => {
+    gUpdate(Math.round(i * (ITEM_WIDTHS.length / gDots.length)));
+}));
+
 // Touch/swipe support for gallery
 let gTouchStart = 0;
-gTrack.addEventListener('touchstart', e => { gTouchStart = e.touches[0].clientX; });
-gTrack.addEventListener('touchend', e => {
-  const diff = gTouchStart - e.changedTouches[0].clientX;
-  if (Math.abs(diff) > 50) gGo(gPage + (diff > 0 ? 1 : -1));
-});
+if (gTrack) {
+  gTrack.addEventListener('touchstart', e => { gTouchStart = e.touches[0].clientX; }, {passive: true});
+  gTrack.addEventListener('touchend', e => {
+    const diff = gTouchStart - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) gUpdate(gIndex + (diff > 0 ? gGetPerPage() : -gGetPerPage()));
+  });
+}
 
 // ── CARTA FILTERS
 const cfBtns = document.querySelectorAll('.cf-btn');
@@ -2132,6 +2187,17 @@ function applyLanguage(lang) {
   setText('.fb2 span', t().copy);
   setText('.fb2 em', t().slogan);
   applyMenuTranslations(lang);
+}
+
+const hamburgerBtn = document.getElementById('hamburger');
+const navMenuEl = document.getElementById('navMenu');
+if(hamburgerBtn && navMenuEl) {
+  hamburgerBtn.addEventListener('click', () => {
+    navMenuEl.classList.toggle('active');
+  });
+  navMenuEl.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navMenuEl.classList.remove('active'));
+  });
 }
 
 langButtons.forEach(btn => {
