@@ -2600,25 +2600,33 @@
       #navMenu.active { display: flex; flex-direction: column; align-items: center; justify-content: center; }
       
       /* Marcos finos en vez de barras grises */
-      .sw-v, .sw-n, .sw-d, .sw-g, body { background: #f1f1f1 !important; }
+      .sw-v, .sw-n, .sw-d, .sw-g, body { background: transparent !important; }
       section { padding: 30px 15px !important; }
-      .cc, .rv, .vis-inner, .carta-item { 
-        background: #fbfaf5 !important; 
+      
+      .cc, .rv, .vis-inner { 
+        background: transparent !important; 
+        border: 1px solid rgba(237,232,213,0.15) !important; 
+        padding: 40px 25px !important;
+        margin-bottom: 20px !important;
+        border-radius: 4px;
+        box-shadow: none;
+      }
+
+      /* La carta nativamente es clara, usar borde oscuro tenue */
+      .carta-item {
         border: 1px solid rgba(15,35,55,0.08) !important; 
         padding: 40px 25px !important;
         margin-bottom: 20px !important;
         border-radius: 4px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.02);
       }
       
-      /* CORRECCIÓN DE COLORES BLANCOS A OSCUROS EN MÓVIL FRONT-END */
-      .sw-n .st, .sw-v .st, .sw-d .st, .sw-n .crl, .sw-n .cnm, .sw-d .rl h2, .sc2 h3, .vis-q {
-        color: var(--navy-dark) !important;
+      /* Asegurar que los inputs mantengan soporte visual óptimo en reserva */
+      .frw { flex-direction: column; gap: 15px; }
+      input, textarea { 
+        border: 1px solid rgba(237,232,213,0.2) !important;
+        background: rgba(237,232,213,0.02) !important;
+        color: var(--cream) !important;
       }
-      .sw-n .cbi, .sw-v p, .sw-d p, .sw-n p, .sc2 p, .ir span, .vis-sub {
-        color: rgba(27, 58, 92, 0.7) !important;
-      }
-      .ir strong { color: var(--navy-dark) !important; }
       .ey { margin-bottom: 10px; }
       .st { font-size: 2.2rem !important; margin-bottom: 30px !important; }
     }
@@ -4059,9 +4067,7 @@
       </div>
       <div class="eq-grid" style="justify-content:center">
         <div class="cc rv" style="max-width:520px">
-          <div class="cph">
-            <img loading="lazy" src="assets/img/team-steve.png" alt="Esteve Benlloch - Jefe de Cocina El Palmaret">
-          </div>
+          <div class="cph"><div class="cph-inner">E</div></div>
           <div>
             <div class="crl">Jefe de Cocina</div>
             <div class="cnm">Esteve Benlloch</div>
