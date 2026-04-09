@@ -4724,7 +4724,16 @@
       .ctg { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; }
 
       /* CARTA PRICES & DESTAQUE */
-      .mi, .destaque-item { 
+      .mi { 
+        display: block !important; 
+        padding: 1.5rem 0 !important; 
+        text-align: left !important; 
+        border: none !important;
+        border-bottom: 1px solid rgba(27, 58, 92, 0.1) !important;
+        background: transparent !important;
+        margin-bottom: 0 !important;
+      }
+      .destaque-item { 
         display: block !important; 
         padding: 1.5rem !important; 
         text-align: left !important; 
@@ -4735,7 +4744,7 @@
         box-sizing: border-box !important;
       }
       .destaque-grid { background: transparent !important; gap: 0 !important; }
-      .destaque-item::before { display: none !important; } /* Remove the side line */
+      .destaque-item::before { display: none !important; }
       .mi-price, .di-price { position: static !important; margin-top: 1rem !important; display: block !important; font-size: 1.25rem !important; }
       .di-label { margin-bottom: 0.5rem !important; }
     }
