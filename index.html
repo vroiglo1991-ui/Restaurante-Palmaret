@@ -4579,7 +4579,6 @@
         link.addEventListener('click', () => navMenuEl.classList.remove('active'));
       });
     }
-
     langButtons.forEach(btn => {
       btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
     });
@@ -4679,14 +4678,28 @@
       }
       
       /* GRIDS */
-      .eg, .eq-grid, .sg, .srv-grid, .carta-grid, .destaque-grid, .frw, .menu-grid, .rg {
-        display: block !important;
+      .eg, .srv-header, .sg, .eq-grid, .srv-grid, .carta-grid, .destaque-grid, .frw, .menu-grid, .rg {
+        display: flex !important;
+        flex-direction: column !important;
       }
       
-      .eg { gap: 3rem !important; text-align: center !important; }
+      .eg, .srv-header { gap: 1.5rem !important; text-align: center !important; align-items: center !important; }
       .eb { position: relative !important; top: 0 !important; right: 0 !important; margin: 2rem auto !important; width: 90px !important; height: 90px !important; font-size: 0.85rem !important; }
       .lc-track { aspect-ratio: 1/1 !important; width: 100% !important; }
       .eq { border-left: none !important; border-top: 2px solid var(--gold) !important; padding: 1.5rem 0 0 !important; margin: 2rem 0 !important; }
+
+      /* Services / Carta */
+      .sg { background: transparent !important; gap: 1rem !important; }
+      .sc2 { 
+        width: 100% !important; 
+        max-width: 100% !important; 
+        margin: 0 !important; 
+        box-sizing: border-box !important; 
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 6px !important;
+        background: rgba(15, 37, 64, 0.6) !important;
+      }
+      .sc2 > div:first-child { margin-left: auto !important; margin-right: auto !important; } /* Center icons */
 
       /* TEAM / CHEF */
       .cc {
