@@ -2610,6 +2610,15 @@
         border-radius: 4px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.02);
       }
+      
+      /* CORRECCIÓN DE COLORES BLANCOS A OSCUROS EN MÓVIL FRONT-END */
+      .sw-n .st, .sw-v .st, .sw-d .st, .sw-n .crl, .sw-n .cnm, .sw-d .rl h2, .sc2 h3, .vis-q {
+        color: var(--navy-dark) !important;
+      }
+      .sw-n .cbi, .sw-v p, .sw-d p, .sw-n p, .sc2 p, .ir span, .vis-sub {
+        color: rgba(27, 58, 92, 0.7) !important;
+      }
+      .ir strong { color: var(--navy-dark) !important; }
       .ey { margin-bottom: 10px; }
       .st { font-size: 2.2rem !important; margin-bottom: 30px !important; }
     }
@@ -2666,93 +2675,15 @@
     <div class="hgrain"></div>
     <div class="htex"></div>
     <div class="hglow"></div>
-    <div class="hcont">
-      <div>
+    <div class="hcont" style="justify-content:center;text-align:center;">
+      <div style="max-width:900px; margin:0 auto;">
         <div class="hey">Restaurante del Club · Valencia</div>
-        <h1 class="hh1">El mejor <em>tercer tiempo</em><br>de Valencia.
-          <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
+        <h1 class="hh1">El mejor <em>tercer tiempo</em><br>de Valencia.<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
         <div class="hh1s">con alma deportiva</div>
-        <p class="hdes">Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.</p>
-        <div class="hact">
+        <p class="hdes" style="margin-left:auto; margin-right:auto;">Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.</p>
+        <div class="hact" style="justify-content:center;">
           <a href="#reserva" class="bp">Reservar mesa</a>
           <a href="#carta" class="bg">Ver carta →</a>
-        </div>
-      </div>
-      <div class="hright">
-        <!-- CARRUSEL HERO -->
-        <div class="hero-carousel">
-          <div class="hero-carousel-track" id="heroTrack">
-
-            <!-- Slide 1: Paella -->
-            <div class="slide active">
-              <div class="slide-plate p-bg-2">
-                <img src="assets/img/hero/paella.jpg" alt="Paella valenciana a leña">
-                <div class="slide-info">
-                  <span class="slide-cat">Especialidad</span>
-                  <span class="slide-name">Paella valenciana a leña</span>
-                  <span class="slide-price">desde 18€/p — fin de semana</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 2: Tartar de atún -->
-            <div class="slide">
-              <div class="slide-plate p-bg-1">
-                <img src="assets/img/hero/tartar.jpg" alt="Tartar de atún con aguacate">
-                <div class="slide-info">
-                  <span class="slide-cat">Tapeo de autor</span>
-                  <span class="slide-name">Tartar de atún rojo y aguacate</span>
-                  <span class="slide-price">16,50€</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 3: Entrecot -->
-            <div class="slide">
-              <div class="slide-plate p-bg-4">
-                <img src="assets/img/hero/entrecot.jpg" alt="Entrecot de vaca vieja a la brasa">
-                <div class="slide-info">
-                  <span class="slide-cat">La brasa</span>
-                  <span class="slide-name">Entrecot de vaca vieja a la brasa</span>
-                  <span class="slide-price">26€</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slide 4: Torrija -->
-            <div class="slide">
-              <div class="slide-plate p-bg-5">
-                <img src="assets/img/hero/torrija.jpg" alt="Torrija con helado de horchata">
-                <div class="slide-info">
-                  <span class="slide-cat">Postres caseros</span>
-                  <span class="slide-name">Torrija con helado de horchata</span>
-                  <span class="slide-price">8,50€</span>
-                </div>
-              </div>
-            </div>
-          </div><!-- end track -->
-
-          <!-- dots -->
-          <div
-            style="display:flex;gap:.5rem;margin-top:.75rem;padding:0 .5rem;justify-content:space-between;align-items:center">
-            <div class="hero-carousel-dots" id="heroDots">
-              <div class="hcd active" data-i="0"></div>
-              <div class="hcd" data-i="1"></div>
-              <div class="hcd" data-i="2"></div>
-              <div class="hcd" data-i="3"></div>
-            </div>
-            <div style="display:flex;gap:.4rem">
-              <button class="hcn-btn" id="heroPrev">&larr;</button>
-              <button class="hcn-btn" id="heroNext">&rarr;</button>
-            </div>
-          </div>
-        </div><!-- end hero-carousel -->
-
-        <!-- stats -->
-        <div class="hstats">
-          <div class="stat"><span class="sn">360°</span><span class="sl">Servicio</span></div>
-          <div class="stat"><span class="sn">2</span><span class="sl">Chefs expertos</span></div>
-          <div class="stat"><span class="sn">+20</span><span class="sl">Arroces & brasas</span></div>
         </div>
       </div>
     </div>
@@ -4260,21 +4191,7 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.rv, .rl-left, .rl-right, .rs, .cat-block').forEach(el => obs.observe(el));
 
-    // ──── HERO CAROUSEL
-    let hIdx = 0;
-    const hSlides = document.querySelectorAll('#heroTrack .slide');
-    const hDots = document.querySelectorAll('#heroDots .hcd');
-    function heroGo(i) {
-      hSlides[hIdx].classList.remove('active');
-      hDots[hIdx].classList.remove('active');
-      hIdx = (i + hSlides.length) % hSlides.length;
-      hSlides[hIdx].classList.add('active');
-      hDots[hIdx].classList.add('active');
-    }
-    document.getElementById('heroNext').addEventListener('click', () => heroGo(hIdx + 1));
-    document.getElementById('heroPrev').addEventListener('click', () => heroGo(hIdx - 1));
-    hDots.forEach((d, i) => d.addEventListener('click', () => heroGo(i)));
-    setInterval(() => heroGo(hIdx + 1), 4500);
+    // Hero Carousel Eliminado
 
     // ──── LOCAL CAROUSEL (experiencia)
     let lcIdx = 0;
