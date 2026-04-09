@@ -97,7 +97,7 @@ nav ul a:hover::after { transform: scaleX(1); }
    HERO
 ══════════════════════════════════════ */
 .hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; }
-.hbg { position:absolute; inset:0; background: linear-gradient(160deg,#060f1c 0%,#0f2540 45%,#1B3A5C 100%); }
+.hbg { position:absolute; inset:0; background: linear-gradient(rgba(10,20,40,0.55), rgba(10,20,40,0.75)), url('assets/img/gallery/paella.jpg') center/cover no-repeat; }
 .hgrain {
   position:absolute; inset:0; opacity:.35;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
@@ -457,13 +457,13 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
   <div class="hgrain"></div>
   <div class="htex"></div>
   <div class="hglow"></div>
-  <div class="hcont">
-    <div>
+  <div class="hcont" style="justify-content:center;text-align:center;">
+    <div style="max-width:900px;">
       <div class="hey">Restaurante del Club · Valencia</div>
-      <h1 class="hh1">Sabor<br><em>mediterráneo</em><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
+      <h1 class="hh1">El mejor <em>tercer tiempo</em><br>de Valencia.<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
       <div class="hh1s">con alma deportiva</div>
-      <p class="hdes">Un espacio donde la tradición valenciana y la técnica de vanguardia se encuentran. Desde el primer café hasta la cena de celebración, somos el centro social de tu club.</p>
-      <div class="hact">
+      <p class="hdes">Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.</p>
+      <div class="hact" style="justify-content:center;">
         <a href="#reserva" class="bp">Reservar mesa</a>
         <a href="#carta" class="bg">Ver carta →</a>
       </div>
@@ -1488,22 +1488,13 @@ section { padding:7rem 4rem; max-width:1400px; margin:0 auto; }
       <div class="ey">Nuestro equipo</div>
       <h2 class="st">La apuesta que<br><em>lo hace posible</em></h2>
     </div>
-    <div class="eq-grid">
+    <div class="eq-grid" style="grid-template-columns:1fr;max-width:600px;margin-left:auto;margin-right:auto;">
       <div class="cc rv">
-        <div class="cph"><div class="cph-inner">R</div></div>
-        <div>
-          <div class="crl">Supervisor Gerente · Creative Chef</div>
-          <div class="cnm">Rakan Elmasri</div>
-          <div class="cbi">Formado en Canalla Bistro (Ricard Camarena), Restaurante Vertical y cocinas de Noruega. Lidera la visión creativa de El Palmaret con una filosofía sin fronteras y con todo el alma.</div>
-          <div class="ctg"><span class="ctag">Canalla Bistro</span><span class="ctag">R. Vertical</span><span class="ctag">Gastroadictos</span><span class="ctag">Norway</span></div>
-        </div>
-      </div>
-      <div class="cc rv d1">
         <div class="cph"><div class="cph-inner">E</div></div>
         <div>
-          <div class="crl">Jefe de Cocina</div>
+          <div class="crl">Jefe de Cocina · Executive Chef</div>
           <div class="cnm">Esteve Benlloch</div>
-          <div class="cbi">Especialista en arroces valencianos. Con paso por La Favorita, Sagardi y Miss Sushi. El dominio del fuego y el producto local son su sello. La paella en sus manos es una declaración de amor.</div>
+          <div class="cbi">Especialista en arroces valencianos. Con paso por La Favorita, Sagardi y Miss Sushi. El dominio del fuego y el producto local son su sello. La paella en sus manos es una declaración de amor a nuestra tierra.</div>
           <div class="ctg"><span class="ctag">La Favorita</span><span class="ctag">Sagardi</span><span class="ctag">Miss Sushi</span><span class="ctag">Mas Blayet</span></div>
         </div>
       </div>
@@ -1705,9 +1696,9 @@ const I18N = {
   es: {
     navExp: 'Experiencia', navGal: 'Galería', navCarta: 'Carta', navEquipo: 'Equipo', navReservar: 'Reservar',
     heroEyebrow: 'Restaurante del Club · Valencia',
-    heroTitle: 'Sabor<br><em>mediterráneo</em>',
+    heroTitle: 'El mejor <em>tercer tiempo</em><br>de Valencia.',
     heroSub: 'con alma deportiva',
-    heroDesc: 'Un espacio donde la tradición valenciana y la técnica de vanguardia se encuentran. Desde el primer café hasta la cena de celebración, somos el centro social de tu club.',
+    heroDesc: 'Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.',
     heroBtnReserve: 'Reservar mesa', heroBtnMenu: 'Ver carta →',
     teamTitle: 'Nuestro equipo',
     reserveTitle: 'Reserva tu<br><em>experiencia</em>',
