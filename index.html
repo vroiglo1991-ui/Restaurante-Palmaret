@@ -2629,8 +2629,7 @@
     <div class="pq-inner">
       <div class="pq-line"></div>
       <div>
-        <div class="pq-text">"El servicio excelente es <em>nuestro mejor entrenamiento</em>. Desde el café del amanecer
-          hasta la cena de celebración."</div>
+        <div class="pq-text">Descubre el entorno. Saborea la huerta.<br><em>Vive la experiencia.</em></div>
         <div class="pq-attr">El Palmaret · Restaurante del Club</div>
       </div>
     </div>
@@ -4089,6 +4088,7 @@
         expP1: 'En El Palmaret, la tradición valenciana se encuentra con la técnica de vanguardia. Nuestra cocina se basa en el respeto al producto de proximidad y el compromiso con el sabor auténtico.',
         expQuote: '"Somos el sabor de la victoria y el confort del tercer tiempo."',
         expP2: 'Desde el crujiente de un buen arroz a leña hasta la delicadeza de nuestras tapas de autor, cada plato está diseñado para ser compartido. Combinamos la agilidad que requiere el entorno deportivo con la pausa y el mimo de un restaurante gourmet.',
+        parallaxQuote: 'Descubre el entorno. Saborea la huerta.<br><em>Vive la experiencia.</em>',
         serviceEyebrow: 'Servicio 360°',
         serviceTitle: 'Del café del amanecer<br>a la <em>cena de celebración</em>',
         serviceDesc: 'Tu energía, nuestro compromiso. Desde el primer café que enciende la mañana hasta el brindis relajado tras un gran esfuerzo, mimamos cada instante para que te sientas como en casa.',
@@ -4159,6 +4159,7 @@
         expP1: 'At El Palmaret, Valencian tradition meets cutting-edge technique. Our cuisine is based on respect for local produce and a commitment to authentic flavor.',
         expQuote: '"We are the taste of victory and the comfort of the third half."',
         expP2: 'From the crunch of a proper wood-fired rice to the delicacy of our signature tapas, every dish is designed to be shared. We combine the agility required by the sports environment with the calm and care of a gourmet restaurant.',
+        parallaxQuote: 'Discover the surroundings. Taste the garden.<br><em>Live the experience.</em>',
         serviceEyebrow: '360° Service',
         serviceTitle: 'From early coffee<br>to a <em>celebration dinner</em>',
         serviceDesc: 'Your energy, our commitment. From the first coffee that kickstarts the morning to the relaxed toast after a great effort, we craft every moment to make you feel right at home.',
@@ -4229,6 +4230,7 @@
         expP1: 'En El Palmaret, la tradició valenciana es troba amb la tècnica d\'avantguarda. La nostra cuina es basa en el respecte al producte de proximitat i el compromís amb el sabor autèntic.',
         expQuote: '"Som el sabor de la victòria i el confort del tercer temps."',
         expP2: 'Des del cruixent d\'un bon arròs a llenya fins a la delicadesa de les nostres tapes d\'autor, cada plat està pensat per a compartir. Combinem l\'agilitat de l\'entorn esportiu amb la pausa i la cura d\'un restaurant gourmet.',
+        parallaxQuote: 'Descobreix l\'entorn. Assaboreix l\'horta.<br><em>Viu l\'experiència.</em>',
         serviceEyebrow: 'Servei 360°',
         serviceTitle: 'Del café de l\'alba<br>al <em>sopar de celebració</em>',
         serviceDesc: 'La teua energia, el nostre compromís. Des del primer café que desperta el matí fins al brindis relaxat després d\'un gran esforç, mimem cada instant perquè et sentes com a casa.',
@@ -4477,6 +4479,7 @@
       setText('#experiencia .et p:nth-of-type(1)', t().expP1);
       setText('#experiencia .eq p', t().expQuote);
       setText('#experiencia .et p:nth-of-type(2)', t().expP2);
+      setText('.pq-text', t().parallaxQuote, true);
       setText('#servicio .ey', t().serviceEyebrow);
       setText('#servicio .st', t().serviceTitle, true);
       setText('#servicio .srv-header p', t().serviceDesc);
