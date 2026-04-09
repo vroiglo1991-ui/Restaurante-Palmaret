@@ -4725,14 +4725,27 @@
 
       /* CARTA PRICES & DESTAQUE */
       .mi { 
-        display: block !important; 
+        display: grid !important; 
+        grid-template-columns: 1fr auto !important;
+        align-items: baseline !important;
         padding: 1.5rem 0 !important; 
         text-align: left !important; 
         border: none !important;
         border-bottom: 1px solid rgba(27, 58, 92, 0.1) !important;
         background: transparent !important;
         margin-bottom: 0 !important;
+        gap: 1.5rem !important;
+        transition: transform 0.2s ease, background 0.2s !important;
       }
+      .mi:active, .destaque-item:active { transform: scale(0.97) !important; background: rgba(27, 58, 92, 0.03) !important; }
+
+      .mi-tags { 
+        display: flex !important; 
+        flex-direction: column !important; 
+        align-items: flex-end !important; 
+        margin-top: 0.5rem !important;
+      }
+
       .destaque-item { 
         display: block !important; 
         padding: 1.5rem !important; 
@@ -4742,10 +4755,12 @@
         background: transparent !important;
         margin-bottom: 1.25rem !important;
         box-sizing: border-box !important;
+        transition: transform 0.2s ease !important;
       }
+
       .destaque-grid { background: transparent !important; gap: 0 !important; }
       .destaque-item::before { display: none !important; }
-      .mi-price, .di-price { position: static !important; margin-top: 1rem !important; display: block !important; font-size: 1.25rem !important; }
+      .mi-price, .di-price { text-align: right !important; margin-top: 0 !important; display: block !important; font-size: 1.2rem !important; white-space: nowrap !important; }
       .di-label { margin-bottom: 0.5rem !important; }
     }
   </style>
