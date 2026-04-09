@@ -18,23 +18,44 @@
     position: absolute;
     top: 100%; left: 0; right: 0;
     width: 100%; margin: 0;
-    flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; 
-    padding: 2.5rem 0; background: rgba(10,24,40,0.98); backdrop-filter: blur(10px); 
+    flex-direction: column; align-items: flex-end; justify-content: center; gap: 1.5rem; 
+    padding: 2.5rem 2rem; background: rgba(10,24,40,0.98); backdrop-filter: blur(10px); 
     border-top: 1px solid rgba(201,168,76,.15);
     border-bottom: 1px solid rgba(201,168,76,.15);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
   nav ul.active { display: flex; animation: fu 0.3s ease forwards; }
-  .ncta { background: transparent!important; padding: 0; color: var(--gold)!important; }
-  .ncta:hover { transform: none!important; }
+  .ncta { 
+    background: #FFFFFF !important; 
+    color: var(--navy-dark) !important; 
+    border: 1px solid #FFFFFF !important;
+    padding: .8rem 2.2rem !important; 
+    border-radius: 4px;
+    font-weight: 700 !important;
+  }
+  .ncta:hover { transform: translateY(-1px) !important; background: #F5F5F5 !important; }
 
   /* HERO */
-  .hcont { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; text-align: center; gap: 3rem; min-height: auto; }
-  .hey { justify-content: center; }
-  .hey::before { display: none; }
-  .hdes { margin: 0 auto 2.5rem; }
-  .hact { justify-content: center; }
-  .hright { margin-top: 0; }
+  .hero {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+  .hcont { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    padding: 2rem 1.5rem !important; 
+    text-align: center; 
+    gap: 2.5rem !important; /* Looser gap */
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+  .hey { justify-content: center; gap: 1.2rem !important; margin-bottom: 1.2rem !important; }
+  .hey::before, .hey::after { display: block !important; width: 1.8rem !important; }
+  .hdes { margin: 0 auto 2.5rem !important; line-height: 1.7 !important; font-size: 0.95rem !important; }
+  .hact { justify-content: center; gap: 1.5rem !important; margin-top: 1rem; }
+  .hright { display: none; }
   
   /* OTHER SECTIONS */
   .eg, .srv-header, .carta-hero-inner, .sharing-block, .rg { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
@@ -52,17 +73,25 @@
   section { padding: 4rem 1.5rem; }
   
   /* NAV */
-  nav, nav.sc { padding: 1rem 1.5rem; }
+  nav, nav.sc { padding: 1.2rem 1.5rem; }
   .nl { font-size: 1.4rem; }
   .lang-switch { margin-right: 1rem; }
   .lang-btn { padding: .3rem .4rem; }
 
-  /* HERO */
-  .hcont { padding: 6.5rem 1.5rem 3rem; gap: 2.5rem; }
-  .hh1 { font-size: 3.5rem; line-height: 1; margin-bottom: 1rem; }
-  .hh1s { font-size: 1.3rem; margin-bottom: 2rem; }
-  .hact { flex-direction: column; gap: 1.2rem; align-items: stretch; }
-  .bp { text-align: center; padding: 1.1rem 2rem; }
+  /* HERO MOBILE */
+  .hero {
+    min-height: 100dvh !important;
+  }
+  .hcont { 
+    padding: 3rem 1.5rem !important; 
+    gap: 1.8rem !important; /* Airy but fitting */
+  }
+  .hh1 { font-size: clamp(2.8rem, 10vw, 3.8rem) !important; line-height: 1.1 !important; margin-bottom: 0.8rem !important; }
+  .hh1s { font-size: 1.3rem !important; margin-bottom: 1.8rem !important; }
+  .hdes { font-size: 0.9rem !important; line-height: 1.6 !important; margin-bottom: 2.2rem !important; max-width: 320px !important; }
+  .hact { flex-direction: row !important; flex-wrap: wrap; gap: 1.2rem !important; }
+  .bp { text-align: center; padding: 1.1rem 2rem !important; font-size: 0.8rem !important; }
+  .bg { font-size: 0.8rem !important; }
   
   .hstats { grid-template-columns: 1fr; gap: 1px; }
   .hero-carousel-track { height: 350px; } /* Ajuste altura carrusel movil */
@@ -110,8 +139,8 @@
 
 /* ─── SMALL MOBILE (Max 480px) ─── */
 @media (max-width: 480px) {
-  .hh1 { font-size: 3rem; }
-  .hdes { font-size: 0.95rem; }
+  .hh1 { font-size: 2.8rem !important; }
+  .hdes { font-size: 0.9rem !important; }
   .hero-carousel-track { height: 300px; }
   .st { font-size: 2.4rem; }
   .pq-text { font-size: 1.6rem; }

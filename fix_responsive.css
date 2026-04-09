@@ -1,0 +1,30 @@
+
+/* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
+/* FIX RESPONSIVE: Marcos finos en vez de barras grises */
+
+@media (max-width: 768px) {
+  /* Contenedores generales */
+  section { padding: 40px 15px !important; }
+  
+  /* Arreglo de la Carta, Equipo y Servicios */
+  .cc, .rv, .carta-item, .sw-n section, .vis-inner {
+    background: #fbfaf5 !important; /* El color crema de tu captura */
+    margin: 0 !important;
+    padding: 30px 20px !important;
+    border: 1px solid rgba(15,35,55,0.08) !important; /* Línea muy fina del marco */
+    border-radius: 2px;
+  }
+
+  /* Quitar los fondos grises que sobran */
+  body, .sw-v, .sw-n, .sw-d, .sw-g {
+    background: #f1f1f1 !important; /* El gris suave de fondo que se ve detrás del marco */
+  }
+
+  /* Ajuste de márgenes para que no se peguen */
+  .eq-grid, .carta-grid, .vis-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    padding: 0 !important;
+  }
+}
