@@ -4723,24 +4723,22 @@
       .cbi { color: rgba(237,232,213,0.85) !important; display: block !important; margin-bottom: 2rem !important; }
       .ctg { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; }
 
-      /* CARTA PRICES & DESTAQUE - Classic Bistro Layout */
+      /* CARTA PRICES & DESTAQUE - Everything Left, Price Right */
       .mi { 
         display: grid !important; 
         grid-template-columns: 1fr auto !important;
         grid-template-areas: "name price" "desc desc" "tags tags" !important;
         padding: 1.25rem 0 !important; 
-        border: none !important;
         border-bottom: 1px solid rgba(27, 58, 92, 0.08) !important;
         background: transparent !important;
-        gap: 0.25rem 1rem !important;
+        gap: 0.2rem 1.5rem !important;
         transition: transform 0.2s ease !important;
       }
-      .mi-name { grid-area: name !important; font-size: 1rem !important; font-weight: 500 !important; color: var(--navy-dark) !important; }
-      .mi-price { grid-area: price !important; font-family: var(--fc) !important; font-size: 1.1rem !important; color: var(--navy-dark) !important; text-align: right !important; }
-      .mi-desc { grid-area: desc !important; font-size: 0.85rem !important; color: rgba(27, 58, 92, 0.6) !important; line-height: 1.4 !important; max-width: 90% !important; }
-      .mi-tags { grid-area: tags !important; display: flex !important; flex-wrap: wrap !important; gap: 0.4rem !important; margin-top: 0.4rem !important; opacity: 0.8 !important; }
-      .mi:active, .destaque-item:active { transform: scale(0.98) !important; }
-
+      .mi-name { grid-area: name !important; font-size: 1rem !important; font-weight: 500 !important; color: var(--navy-dark) !important; text-align: left !important; }
+      .mi-price { grid-area: price !important; font-family: var(--fc) !important; font-size: 1.1rem !important; color: var(--navy-dark) !important; text-align: right !important; align-self: flex-start !important; }
+      .mi-desc { grid-area: desc !important; font-size: 0.85rem !important; color: rgba(27, 58, 92, 0.6) !important; text-align: left !important; line-height: 1.4 !important; }
+      .mi-tags { grid-area: tags !important; display: flex !important; flex-wrap: wrap !important; gap: 0.4rem !important; margin-top: 0.4rem !important; justify-content: flex-start !important; }
+      
       .destaque-item { 
         display: grid !important; 
         grid-template-columns: 1fr auto !important;
@@ -4750,18 +4748,18 @@
         border-radius: 8px !important;
         background: rgba(27, 58, 92, 0.02) !important;
         margin-bottom: 1.5rem !important;
-        gap: 0.4rem 1rem !important;
+        gap: 0.3rem 1rem !important;
         box-sizing: border-box !important;
-        transition: transform 0.2s ease !important;
+        text-align: left !important;
       }
-      .di-label { grid-area: label !important; margin-bottom: 0.2rem !important; }
-      .di-name { grid-area: name !important; font-family: var(--fd) !important; font-size: 1.2rem !important; }
-      .di-price { grid-area: price !important; font-size: 1.1rem !important; text-align: right !important; color: var(--navy-dark) !important; }
-      .di-desc { grid-area: desc !important; font-size: 0.9rem !important; opacity: 0.7 !important; }
+      .di-label { grid-area: label !important; text-align: left !important; margin-bottom: 0.4rem !important; }
+      .di-name { grid-area: name !important; text-align: left !important; font-family: var(--fd) !important; font-size: 1.2rem !important; }
+      .di-price { grid-area: price !important; text-align: right !important; align-self: flex-start !important; color: var(--navy-dark) !important; font-size: 1.1rem !important; }
+      .di-desc { grid-area: desc !important; text-align: left !important; font-size: 0.9rem !important; opacity: 0.7 !important; }
 
+      .mi:active, .destaque-item:active { transform: scale(0.98) !important; }
       .destaque-grid { background: transparent !important; gap: 0 !important; }
       .destaque-item::before { display: none !important; }
-      .di-label { margin-bottom: 0.5rem !important; }
     }
   </style>
 </html>
