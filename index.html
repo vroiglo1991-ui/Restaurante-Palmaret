@@ -4723,18 +4723,21 @@
       .cbi { color: rgba(237,232,213,0.85) !important; display: block !important; margin-bottom: 2rem !important; }
       .ctg { display: flex !important; flex-wrap: wrap !important; justify-content: center !important; }
 
-      /* CARTA PRICES */
-      .mi { 
+      /* CARTA PRICES & DESTAQUE */
+      .mi, .destaque-item { 
         display: block !important; 
         padding: 1.5rem !important; 
         text-align: left !important; 
         border: 1px solid rgba(27, 58, 92, 0.15) !important; 
         border-radius: 6px !important;
         background: transparent !important;
-        margin-bottom: 1rem !important;
+        margin-bottom: 1.25rem !important;
         box-sizing: border-box !important;
       }
-      .mi-price { position: static !important; margin-top: 1rem !important; display: block !important; font-size: 1.25rem !important; }
+      .destaque-grid { background: transparent !important; gap: 0 !important; }
+      .destaque-item::before { display: none !important; } /* Remove the side line */
+      .mi-price, .di-price { position: static !important; margin-top: 1rem !important; display: block !important; font-size: 1.25rem !important; }
+      .di-label { margin-bottom: 0.5rem !important; }
     }
   </style>
 </html>
