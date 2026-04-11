@@ -36,6 +36,7 @@
 </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="assets/img/paellajpg.webp" fetchpriority="high">
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap"
     rel="stylesheet">
@@ -221,7 +222,7 @@
     .hbg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(rgba(10,20,40,0.7), rgba(10,20,40,0.7)), url('assets/img/paellajpg.jpg') center/cover no-repeat;
+      background: linear-gradient(rgba(10,20,40,0.7), rgba(10,20,40,0.7)), url('assets/img/paellajpg.webp') center/cover no-repeat;
     }
 
     .hgrain {
@@ -2333,7 +2334,7 @@
     <div class="hcont" style="justify-content:center;text-align:center;">
       <div style="max-width:900px; margin:0 auto;">
         <div class="hey">Restaurante del Club · Valencia</div>
-        <h1 class="hh1">El mejor <em>tercer tiempo</em><br>de Valencia.<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
+        <h1 class="hh1">Restaurante Palmaret · El mejor <em>tercer tiempo</em> <br>de Valencia.<span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);"> | Restaurante en Valencia especialista en Arroces, Brasas y Tapeo Deportivo</span></h1>
         <div class="hh1s">con alma deportiva</div>
         <p class="hdes" style="margin-left:auto; margin-right:auto;">Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.</p>
         <div class="hact" style="justify-content:center;">
@@ -2448,7 +2449,7 @@
       <div class="g-header rv">
         <div class="g-header-left">
           <div class="g-eyebrow">Galería gastronómica</div>
-          <h2 class="g-title">Imágenes que<br><em>saben a algo</em></h2>
+          <h2 class="g-title">Imágenes que <br><em>saben a algo</em></h2>
         </div>
         <div class="g-nav">
           <button class="g-nav-btn" id="gPrev">&larr;</button>
@@ -2459,7 +2460,7 @@
         <div class="g-track" id="gTrack">
           <!-- Imagen 1: Carne -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/carnejpg.jpg" alt="Carne a la brasa" class="g-item-img">
+            <img loading="lazy" src="assets/img/carnejpg.webp" alt="Carne a la brasa" class="g-item-img">
             <div class="g-item-num">01</div>
             <div class="g-item-label">
               <span class="g-item-cat">La Brasa</span>
@@ -2468,7 +2469,7 @@
           </div>
           <!-- Imagen 2: Croquetas -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/croquetasjpg.jpg" alt="Croquetas caseras" class="g-item-img">
+            <img loading="lazy" src="assets/img/croquetasjpg.webp" alt="Croquetas caseras" class="g-item-img">
             <div class="g-item-num">02</div>
             <div class="g-item-label">
               <span class="g-item-cat">Entrantes</span>
@@ -2477,7 +2478,7 @@
           </div>
           <!-- Imagen 3: Paella leña -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/paellaleñajpg.png" alt="Paella a leña" class="g-item-img">
+            <img loading="lazy" src="assets/img/paellaleñajpg.webp" alt="Paella a leña" class="g-item-img">
             <div class="g-item-num">03</div>
             <div class="g-item-label">
               <span class="g-item-cat">Arroces</span>
@@ -2486,7 +2487,7 @@
           </div>
           <!-- Imagen 4: Postre -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/postrejpg.jpg" alt="Postre casero" class="g-item-img">
+            <img loading="lazy" src="assets/img/postrejpg.webp" alt="Postre casero" class="g-item-img">
             <div class="g-item-num">04</div>
             <div class="g-item-label">
               <span class="g-item-cat">Dulces</span>
@@ -2495,7 +2496,7 @@
           </div>
           <!-- Imagen 5: Sepia -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/sepiajpg.png" alt="Sepia fresca" class="g-item-img">
+            <img loading="lazy" src="assets/img/sepiajpg.webp" alt="Sepia fresca" class="g-item-img">
             <div class="g-item-num">05</div>
             <div class="g-item-label">
               <span class="g-item-cat">Mar</span>
@@ -2504,7 +2505,7 @@
           </div>
           <!-- Imagen 6: Tapas especiales -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/tapasespecialjpg.png" alt="Tapas especiales" class="g-item-img">
+            <img loading="lazy" src="assets/img/tapasespecialjpg.webp" alt="Tapas especiales" class="g-item-img">
             <div class="g-item-num">06</div>
             <div class="g-item-label">
               <span class="g-item-cat">Autor</span>
@@ -2513,7 +2514,7 @@
           </div>
           <!-- Imagen 7: Coctel -->
           <div class="g-item">
-            <img loading="lazy" src="assets/img/cocteljpg.png" alt="Coctelería" class="g-item-img">
+            <img loading="lazy" src="assets/img/cocteljpg.webp" alt="Coctelería" class="g-item-img">
             <div class="g-item-num">07</div>
             <div class="g-item-label">
               <span class="g-item-cat">Bar</span>
@@ -2540,7 +2541,7 @@
       <div class="eg">
         <div class="et rl-left">
           <div class="ey">Nuestra experiencia</div>
-          <h2 class="st">Más que un restaurante,<br><em>un punto de encuentro</em></h2>
+          <h2 class="st">Más que un restaurante, <br><em>un punto de encuentro</em></h2>
           <p>En El Palmaret, la tradición valenciana se encuentra con la técnica de vanguardia. Nuestra cocina se basa
             en el respeto al producto de proximidad y el compromiso con el sabor auténtico.</p>
           <div class="eq">
@@ -2633,7 +2634,7 @@
       <div class="srv-header rv">
         <div>
           <div class="ey">Servicio 360°</div>
-          <h2 class="st">Del café del amanecer<br>a la <em>cena de celebración</em></h2>
+          <h2 class="st">Del café del amanecer <br>a la <em>cena de celebración</em></h2>
         </div>
         <p>Tu energía, nuestro compromiso. Desde el primer café que enciende la mañana hasta el brindis relajado tras un gran esfuerzo, mimamos cada instante para que te sientas como en casa.</p>
       </div>
@@ -2711,7 +2712,7 @@
       <div class="carta-hero-inner">
         <div class="rv">
           <div class="ey">Nuestra carta</div>
-          <h2 class="carta-hero h2">Tradición valenciana<br><em>con técnica de vanguardia</em></h2>
+          <h2 class="carta-hero h2">Tradición valenciana <br><em>con técnica de vanguardia</em></h2>
         </div>
         <p class="rv d1">Platos diseñados para compartir. Producto de proximidad, respeto por la temporada y el toque
           técnico de nuestro equipo. Los precios incluyen IVA.</p>
@@ -3488,7 +3489,7 @@
     <div style="max-width:1100px;margin:0 auto;padding:4rem 4rem 5rem;border-top:1px solid rgba(27,58,92,.08)">
       <div class="rv" style="text-align:center;margin-bottom:3.5rem" id="algSec">
         <div class="ey alg-info" style="justify-content:center;color:var(--gold)">Información obligatoria</div>
-        <h2 class="st alg-title" style="margin-bottom:.5rem">Leyenda de <em>Alérgenos</em></h2>
+        <h4 class="st alg-title" style="margin-bottom:.5rem">Leyenda de <em>Alérgenos</em></h4>
         <p class="alg-desc"
           style="font-size:.82rem;font-weight:300;color:rgba(27,58,92,.45);max-width:500px;margin:0 auto;line-height:1.75">
           Conforme al Reglamento (UE) 1169/2011. Si tiene alguna alergia o intolerancia, consulte con nuestro equipo.
@@ -3769,12 +3770,12 @@
     <section>
       <div class="rv">
         <div class="ey">Nuestro equipo</div>
-        <h2 class="st">La apuesta que<br><em>lo hace posible</em></h2>
+        <h2 class="st">La apuesta que <br><em>lo hace posible</em></h2>
       </div>
       <div class="eq-grid">
         <div class="cc rv"> <!-- Max-width handled in CSS for better consistency -->
           <div class="cph">
-            <img src="assets/img/chefjpg.png" alt="Chef Esteve Benlloch" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="assets/img/chefjpg.webp" alt="Chef Esteve Benlloch" style="width:100%;height:100%;object-fit:cover;display:block;">
           </div>
           <div>
             <div class="crl">Chef Ejecutivo</div>
@@ -3802,7 +3803,7 @@
     <section>
       <div class="rg">
         <div class="rl rv">
-          <h2>Reserva tu<br><em>experiencia</em></h2>
+          <h2>Reserva tu <br><em>experiencia</em></h2>
           <p>Acompáñanos a la mesa. Tanto si vienes a comer con el equipo como a celebrar la victoria, en El Palmaret
             siempre hay un lugar para ti.</p>
           <div class="il">
@@ -3845,7 +3846,7 @@
     <section style="max-width:100%;padding:0">
       <div class="rv" style="text-align:center;padding:4rem 2rem 3rem">
         <div class="ey" style="justify-content:center">¿Cómo llegar?</div>
-        <h2 class="st map-title">Club Valenciano de <em>Natación</em></h2>
+        <h4 class="st map-title">Club Valenciano de <em>Natación</em></h4>
         <p class="map-sub" style="font-size:.9rem;opacity:.6;margin-top:.5rem">Camino Viejo de Carpesa a Moncada, s/n,
           46025 Valencia</p>
       </div>
