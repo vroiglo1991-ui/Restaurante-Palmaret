@@ -12,8 +12,8 @@ footer {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr repeat(4, 1fr);
-  gap: 4rem;
+  grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: 2rem;
 }
 
 /* Logo */
