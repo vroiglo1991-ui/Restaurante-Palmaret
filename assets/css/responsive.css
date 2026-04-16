@@ -151,3 +151,21 @@
   .g-title { font-size: 2.4rem; }
   .carta-hero h2 { font-size: 2.4rem; }
 }
+
+/* ─── REFINAMIENTOS MOBILE · Abril 2026 ─── */
+
+/* Footer links: deshabilitar efecto slide en táctil */
+@media (max-width: 768px) {
+  .fli a:hover { padding-left: 0; }
+  .fct {
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,.1);
+    padding-bottom: .5rem;
+  }
+}
+
+/* Cookie consent en móviles muy pequeños */
+@media (max-width: 380px) {
+  #cookieConsent { padding: 1.2rem 1rem; }
+  .cc-btn { padding: 0.7rem 1.2rem; font-size: 0.7rem; }
+}
