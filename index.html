@@ -2447,6 +2447,111 @@
       .cc-btns { width: 100%; justify-content: center; }
     }
 
+    /* ══════════════════════════════════════
+   MEJORAS VISUALES PREMIUM · Abril 2026
+══════════════════════════════════════ */
+
+    /* ── Scroll Reveal: añadir translateY inicial para que la animación sea visible ── */
+    .rv    { opacity: 0; transform: translateY(28px); }
+    .rl-left  { opacity: 0; transform: translateX(-28px); }
+    .rl-right { opacity: 0; transform: translateX(28px); }
+    .rs    { opacity: 0; transform: scale(0.97); }
+
+    /* ── Botón primario (bp): pulso sutil en hover ── */
+    .bp {
+      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0);
+      transition: background var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid);
+    }
+    .bp:hover {
+      box-shadow: 0 6px 24px rgba(201, 168, 76, 0.28);
+    }
+
+    /* ── Botón submit formulario: mismo tratamiento ── */
+    .bfm {
+      transition: background var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid);
+    }
+    .bfm:hover {
+      box-shadow: 0 6px 20px rgba(201, 168, 76, 0.25);
+    }
+
+    /* ── Inputs del formulario: glow dorado en focus ── */
+    .fg input:focus,
+    .fg select:focus,
+    .fg textarea:focus {
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.10);
+    }
+
+    /* ── Tarjetas de servicio: sombra al hover ── */
+    .sc2 {
+      transition: background var(--t-mid), box-shadow var(--t-mid);
+    }
+    .sc2:hover {
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ── Destaque items: glow dorado sutil en hover ── */
+    .destaque-item {
+      transition: background var(--t-mid), box-shadow var(--t-mid);
+    }
+    .destaque-item:hover {
+      box-shadow: inset 0 0 0 1px rgba(201, 168, 76, 0.18), var(--shadow-card);
+    }
+
+    /* ── Cards de equipo: transición más expresiva ── */
+    .cc {
+      transition: border-color var(--t-mid), box-shadow var(--t-mid);
+    }
+    .cc:hover {
+      box-shadow: var(--shadow-card);
+    }
+
+    /* ── Imagen de equipo: escala contenida (el hover anterior era demasiado grande) ── */
+    .cph:hover {
+      transform: scale(1.04);
+    }
+
+    /* ── Navegación: línea de subrayado más elegante ── */
+    nav ul a::after {
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s;
+    }
+
+    /* ── Botones de galería: transición más suave ── */
+    .g-nav-btn {
+      transition: background var(--t-mid), border-color var(--t-mid), transform var(--t-fast);
+    }
+    .g-nav-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* ── Cookie consent: sombra de profundidad ── */
+    #cookieConsent {
+      box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    /* ── Mejora de accesibilidad: foco visible en botones ── */
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    /* ── Precio de destaque: acentuar el color gold en platos estrella ── */
+    .di-price {
+      color: var(--navy);
+      transition: color var(--t-fast);
+    }
+    .destaque-item:hover .di-price {
+      color: var(--navy-dark);
+    }
+
+    /* ── Animación de fade para el ticker (más premium) ── */
+    .tkw {
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
   </style>
 </head>
 
