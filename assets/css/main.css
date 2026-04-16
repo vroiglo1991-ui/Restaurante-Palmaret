@@ -395,6 +395,7 @@
       width: 100%;
       height: 100%;
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -697,6 +698,7 @@
     .g-item {
       flex-shrink: 0;
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
       cursor: pointer;
     }
@@ -1060,6 +1062,7 @@
       width: 100%;
       height: 100%;
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
     }
 
@@ -1148,6 +1151,7 @@
       width: 110px;
       height: 110px;
       background: var(--gold);
+      border-radius: 50%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1211,6 +1215,7 @@
       background: var(--navy);
       padding: 2.5rem 2rem;
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
       transition: background .3s;
       cursor: default;
@@ -1461,6 +1466,7 @@
       background: var(--navy-dark);
       color: var(--gold);
       padding: .3rem .7rem;
+      border-radius: var(--r-sm);
       margin-left: auto;
       flex-shrink: 0;
     }
@@ -1574,6 +1580,7 @@
       background: var(--cream-light);
       padding: 2rem;
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
       transition: background .25s;
     }
@@ -1658,7 +1665,7 @@
       flex-direction: column;
       align-items: center;
       border: 1px solid rgba(201, 168, 76, 0.15);
-      border-radius: 4px;
+      border-radius: var(--r-lg);
       overflow: hidden;
       box-shadow: 0 40px 100px rgba(0,0,0,0.4);
     }
@@ -1753,6 +1760,7 @@
       background: rgba(201, 168, 76, 0.08);
       border: 1px solid rgba(201, 168, 76, 0.3);
       padding: 1.5rem 3rem;
+      border-radius: var(--r-md);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1928,6 +1936,7 @@
       max-width: 900px;
       margin: 0 auto; /* Extra safety for centering */
       position: relative;
+      border-radius: var(--r-md);
       overflow: hidden;
       transition: border-color .3s;
     }
@@ -1954,7 +1963,7 @@
     .cph {
       width: 220px; /* Even larger for impact */
       height: 280px; /* Rectangular for more 'executive' feel */
-      border-radius: 2px;
+      border-radius: var(--r-md);
       overflow: hidden;
       border: 2px solid rgba(201, 168, 76, .25);
       flex-shrink: 0;
@@ -2091,6 +2100,7 @@
       background: rgba(10, 24, 40, .65);
       border: 1px solid rgba(201, 168, 76, .15);
       padding: 3rem;
+      border-radius: var(--r-lg);
     }
 
     .rft {
@@ -2141,6 +2151,7 @@
       font-size: .875rem;
       font-weight: 300;
       color: var(--cream);
+      border-radius: var(--r-sm);
       outline: none;
       transition: border-color .2s;
       -webkit-appearance: none;
@@ -2168,6 +2179,7 @@
       color: var(--navy-dark);
       border: none;
       padding: 1rem;
+      border-radius: var(--r-sm);
       font-family: var(--fc);
       font-size: .75rem;
       font-weight: 700;
