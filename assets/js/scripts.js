@@ -163,8 +163,8 @@
         mapSub: 'Club Valenciano de Natación · Valencia',
         formTitle: 'Hacer una reserva',
         formSubtitle: 'El arroz no espera a nadie (y tu mesa tampoco). Reserva ahora',
-        labelName: 'Nombre', labelPhone: 'Teléfono', labelDate: 'Fecha', labelTime: 'Hora', labelGuests: 'Comensales',
-        phName: 'Tu nombre', phPhone: '+34 000 000 000', phGuests: 'Ej. 4',
+        labelName: 'Nombre', labelPhone: 'Teléfono', labelEmail: 'Email', labelDate: 'Fecha', labelTime: 'Hora', labelGuests: 'Comensales',
+        phName: 'Tu nombre', phPhone: '+34 000 000 000', phEmail: 'tu@email.com', phGuests: 'Ej. 4',
         submit: 'Solicitar reserva',
         footerTag: 'Sabor mediterráneo<br>con alma deportiva.',
         footerAddr: 'Complejo Deportivo · Valencia<br>restaurante@elpalmaret.com',
@@ -239,8 +239,8 @@
         mapSub: 'Club Valenciano de Natacion · Valencia',
         formTitle: 'Make a reservation',
         formSubtitle: 'We confirm within 24 hours',
-        labelName: 'Name', labelPhone: 'Phone', labelDate: 'Date', labelTime: 'Time', labelGuests: 'Guests',
-        phName: 'Your name', phPhone: '+34 000 000 000', phGuests: 'E.g. 4',
+        labelName: 'Name', labelPhone: 'Phone', labelEmail: 'Email', labelDate: 'Date', labelTime: 'Time', labelGuests: 'Guests',
+        phName: 'Your name', phPhone: '+34 000 000 000', phEmail: 'your@email.com', phGuests: 'E.g. 4',
         submit: 'Request booking',
         footerTag: 'Mediterranean flavor<br>with a sporting soul.',
         footerAddr: 'Sports Complex · Valencia<br>restaurante@elpalmaret.com',
@@ -315,8 +315,8 @@
         mapSub: 'Club Valencià de Natació · València',
         formTitle: 'Fer una reserva',
         formSubtitle: 'Confirmem en menys de 24 hores',
-        labelName: 'Nom', labelPhone: 'Telèfon', labelDate: 'Data', labelTime: 'Hora', labelGuests: 'Comensals',
-        phName: 'El teu nom', phPhone: '+34 000 000 000', phGuests: 'Ex. 4',
+        labelName: 'Nom', labelPhone: 'Telèfon', labelEmail: 'Email', labelDate: 'Data', labelTime: 'Hora', labelGuests: 'Comensals',
+        phName: 'El teu nom', phPhone: '+34 000 000 000', phEmail: 'el_teu@email.com', phGuests: 'Ex. 4',
         submit: 'Sol·licitar reserva',
         footerTag: 'Sabor mediterrani<br>amb ànima esportiva.',
         footerAddr: 'Complex Esportiu · València<br>restaurante@elpalmaret.com',
@@ -639,21 +639,25 @@
 
       const inputName = document.querySelector('input[name="Nombre"]');
       const inputPhone = document.querySelector('input[name="Telefono"]');
+      const inputEmail = document.querySelector('input[name="Email"]');
       const inputDate = document.querySelector('input[name="Fecha"]');
       const inputTime = document.querySelector('input[name="Hora"]');
       const inputGuests = document.querySelector('input[name="Comensales"]');
       const labelName = inputName ? inputName.closest('.fg').querySelector('label') : null;
       const labelPhone = inputPhone ? inputPhone.closest('.fg').querySelector('label') : null;
+      const labelEmail = inputEmail ? inputEmail.closest('.fg').querySelector('label') : null;
       const labelDate = inputDate ? inputDate.closest('.fg').querySelector('label') : null;
       const labelTime = inputTime ? inputTime.closest('.fg').querySelector('label') : null;
       const labelGuests = inputGuests ? inputGuests.closest('.fg').querySelector('label') : null;
       if (labelName) labelName.textContent = t().labelName;
       if (labelPhone) labelPhone.textContent = t().labelPhone;
+      if (labelEmail) labelEmail.textContent = t().labelEmail;
       if (labelDate) labelDate.textContent = t().labelDate;
       if (labelTime) labelTime.textContent = t().labelTime;
       if (labelGuests) labelGuests.textContent = t().labelGuests;
       if (inputName) inputName.placeholder = t().phName;
       if (inputPhone) inputPhone.placeholder = t().phPhone;
+      if (inputEmail) inputEmail.placeholder = t().phEmail;
       if (inputGuests) inputGuests.placeholder = t().phGuests;
 
       setText('.ftag', t().footerTag, true);
@@ -721,7 +725,8 @@
         // Validar campos básicos
         const nombre = formData.get('Nombre');
         const telefono = formData.get('Telefono');
-        if (!nombre || !telefono) return;
+        const email = formData.get('Email');
+        if (!nombre || !telefono || !email) return;
 
         // Feedback de envío
         if (submitBtn) submitBtn.disabled = true;
