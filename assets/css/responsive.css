@@ -108,9 +108,9 @@
   
   .cf-nav-arrows {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 12px;
-    padding: 15px 0 10px;
+    padding: 15px 1.5rem 10px;
     position: relative;
     z-index: 60;
     width: 100%;
