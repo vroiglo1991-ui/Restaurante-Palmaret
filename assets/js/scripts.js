@@ -732,13 +732,16 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: ENVIO A NETLIFY FORMS (Fiable y sin dependencias de terceros)
+    // ──── RESERVA: ENVIO A NETLIFY FORMS ────
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
 
-        // Enviar a Netlify Forms
+    if (reservationForm && reservationMessage) {
+      reservationForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
         const formData = new FormData(reservationForm);
-        formData.append('form-name', 'reservas'); // <--- Dato crítico para Netlify
+        formData.append('form-name', 'reservas'); // Requerido por Netlify para envíos AJAX
 
         const submitBtn = reservationForm.querySelector('button[type="submit"]');
 
@@ -753,7 +756,7 @@
         reservationMessage.textContent = "Enviando reserva...";
         reservationMessage.style.color = 'rgba(237,232,213,.72)';
 
-        // Enviar a Netlify Forms
+        // Enviar a Netlify Forms via fetch
         fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -774,6 +777,7 @@
         });
       });
     }
+
 
 
 /* ── LOGICA PRINCIPAL: Nav, Carruseles, Galeria, Carta, Traductor, Scroll ── */
