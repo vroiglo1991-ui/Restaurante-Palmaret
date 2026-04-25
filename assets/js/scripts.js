@@ -732,31 +732,36 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: ENVIO A NETLIFY FORMS ────
+    // ──── RESERVA: ENVIO DUAL (GOOGLE PARA DISEÑO + NETLIFY PARA BACKUP) ────
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWLno3YFiL20tpCLDF5ubnOEXSG-lr03-0k4MmobekbGBsSHItTeyvjXPtY_C9on5KLQ/exec";
 
     if (reservationForm && reservationMessage) {
       reservationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(reservationForm);
-        formData.append('form-name', 'reservas'); // Requerido por Netlify para envíos AJAX
+        formData.append('form-name', 'reservas'); // Necesario para la copia en Netlify
 
         const submitBtn = reservationForm.querySelector('button[type="submit"]');
 
         // Validar campos básicos
-        const nombre = formData.get('Nombre');
-        const telefono = formData.get('Telefono');
-        const email = formData.get('Email');
-        if (!nombre || !telefono || !email) return;
+        if (!formData.get('Nombre') || !formData.get('Telefono')) return;
 
         // Feedback de envío
         if (submitBtn) submitBtn.disabled = true;
-        reservationMessage.textContent = "Enviando reserva...";
+        reservationMessage.textContent = "Procesando tu reserva...";
         reservationMessage.style.color = 'rgba(237,232,213,.72)';
 
-        // Enviar a Netlify Forms via fetch
+        // 1. Enviar a Google (para el email con iconos)
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams(formData)
+        });
+
+        // 2. Enviar a Netlify (como backup y para el panel)
         fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -768,7 +773,7 @@
           reservationForm.reset();
         })
         .catch(err => {
-          console.error("Error envío Netlify:", err);
+          console.error("Error envío:", err);
           reservationMessage.textContent = "Error al enviar. Inténtalo de nuevo o llámanos.";
           reservationMessage.style.color = '#E8C97A';
         })
@@ -777,6 +782,7 @@
         });
       });
     }
+
 
 
 
