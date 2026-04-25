@@ -1330,6 +1330,8 @@
       z-index: 50;
       border-bottom: 1px solid rgba(201, 168, 76, .12);
     }
+    
+    .cf-nav-arrows { display: none; }
 
     .cf-inner {
       max-width: 1400px;
