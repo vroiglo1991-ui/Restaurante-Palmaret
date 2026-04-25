@@ -214,7 +214,7 @@
         msgMissing: 'Completa todos los campos antes de enviar.',
         msgNoSlots: (remaining, hora) => `No hay disponibilidad para ese horario. Quedan ${remaining} plazas para las ${hora}.`,
         msgSending: 'Enviando reserva...',
-        msgSuccess: 'Reserva enviada correctamente. Te confirmaremos en menos de 24 horas.',
+        msgSuccess: 'Redirigiendo a WhatsApp para finalizar la reserva...',
         msgError: 'No se pudo enviar la reserva ahora mismo. Inténtalo de nuevo en unos minutos.'
       },
       en: {
@@ -290,7 +290,7 @@
         msgMissing: 'Please complete all fields before submitting.',
         msgNoSlots: (remaining, hora) => `No availability for this time slot. ${remaining} seats left for ${hora}.`,
         msgSending: 'Sending booking...',
-        msgSuccess: 'Booking sent successfully. We will confirm within 24 hours.',
+        msgSuccess: 'Redirecting to WhatsApp to finalize your booking...',
         msgError: 'We could not send your booking right now. Please try again in a few minutes.'
       },
       va: {
@@ -366,7 +366,7 @@
         msgMissing: 'Completa tots els camps abans d\'enviar.',
         msgNoSlots: (remaining, hora) => `No hi ha disponibilitat per a eixa hora. Queden ${remaining} places per a les ${hora}.`,
         msgSending: 'Enviant reserva...',
-        msgSuccess: 'Reserva enviada correctament. Et confirmarem en menys de 24 hores.',
+        msgSuccess: 'Redirigint a WhatsApp per a finalitzar la reserva...',
         msgError: 'No hem pogut enviar la reserva ara mateix. Torna-ho a intentar en uns minuts.'
       }
     };
@@ -706,63 +706,55 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: TOPE DE 30 COMENSALES POR FRANJA + ENVIO
-    const MAX_DINERS_PER_SLOT = 30;
+    // ──── RESERVA: ENVIO WHATSAPP (Versión Final)
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
 
     if (reservationForm && reservationMessage) {
-      reservationForm.addEventListener('submit', async (e) => {
+      reservationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(reservationForm);
-        const fecha = (formData.get('Fecha') || '').toString();
-        const hora = (formData.get('Hora') || '').toString();
-        const comensales = Number(formData.get('Comensales'));
+        const nombre = formData.get('Nombre');
+        const telefono = formData.get('Telefono');
+        const fecha = formData.get('Fecha');
+        const hora = formData.get('Hora');
+        const comensales = formData.get('Comensales');
+        const notas = formData.get('Notas');
 
-        if (!fecha || !hora || !comensales || comensales < 1) {
-          reservationMessage.textContent = t().msgMissing;
+        if (!nombre || !telefono || !fecha || !hora || !comensales) {
+          reservationMessage.textContent = "Por favor, rellena todos los campos obligatorios.";
           reservationMessage.style.color = '#E8C97A';
           return;
         }
 
-        const slotKey = `${fecha}|${hora}`;
-        const stored = JSON.parse(localStorage.getItem('palmaretReservations') || '{}');
-        const booked = Number(stored[slotKey] || 0);
+        const phone = "34630589848";
+        // Formateamos el mensaje con saltos de línea claros y emojis
+        const msg = `*NUEVA RESERVA WEB* 🍽️\n\n` +
+                    `👤 *Nombre:* ${nombre}\n` +
+                    `📞 *Teléfono:* ${telefono}\n` +
+                    `📅 *Fecha:* ${fecha}\n` +
+                    `⏰ *Hora:* ${hora}\n` +
+                    `👥 *Comensales:* ${comensales}\n` +
+                    `📝 *Notas:* ${notas || 'Sin notas'}\n\n` +
+                    `_Enviado desde El Palmaret Web_`;
+        
+        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+        
+        reservationMessage.textContent = "Redirigiendo a WhatsApp...";
+        reservationMessage.style.color = '#EDE8D5';
 
-        if (booked + comensales > MAX_DINERS_PER_SLOT) {
-          const remaining = Math.max(0, MAX_DINERS_PER_SLOT - booked);
-          reservationMessage.textContent = t().msgNoSlots(remaining, hora);
-          reservationMessage.style.color = '#E8C97A';
-          return;
+        // Intentar abrir en nueva pestaña, si falla, usar la misma
+        const win = window.open(waUrl, '_blank');
+        if (!win) {
+          window.location.href = waUrl;
         }
 
-        const submitBtn = reservationForm.querySelector('button[type="submit"]');
-        if (submitBtn) submitBtn.disabled = true;
-        reservationMessage.textContent = t().msgSending;
-        reservationMessage.style.color = 'rgba(237,232,213,.72)';
-
-        try {
-          const response = await fetch(reservationForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-          });
-
-          if (!response.ok) throw new Error('submit_failed');
-
-          stored[slotKey] = booked + comensales;
-          localStorage.setItem('palmaretReservations', JSON.stringify(stored));
-
-          reservationMessage.textContent = t().msgSuccess;
-          reservationMessage.style.color = '#EDE8D5';
+        // Limpiar el formulario después de un breve delay
+        setTimeout(() => {
           reservationForm.reset();
-        } catch (err) {
-          reservationMessage.textContent = t().msgError;
-          reservationMessage.style.color = '#E8C97A';
-        } finally {
-          if (submitBtn) submitBtn.disabled = false;
-        }
+          reservationMessage.textContent = "";
+        }, 3000);
       });
     }
 
