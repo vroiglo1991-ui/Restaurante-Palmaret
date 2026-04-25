@@ -129,11 +129,19 @@
       });
     });
 
-    // ──── SMOOTH SCROLL
+    // ──── SMOOTH SCROLL (offset = altura real del nav)
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+        const href = a.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const navEl = document.getElementById('nav');
+          const navHeight = navEl ? navEl.getBoundingClientRect().height : 0;
+          const targetTop = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+          window.scrollTo({ top: targetTop, behavior: 'smooth' });
+        }
       });
     });
 

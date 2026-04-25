@@ -150,6 +150,8 @@
       color: var(--gold);
     }
 
+
+
     nav ul a:hover::after {
       transform: scaleX(1);
     }
@@ -2803,6 +2805,7 @@
         padding-right: 1.25rem !important; 
         margin: 0 !important;
       }
+      .hcont { padding-top: 11rem !important; padding-bottom: 5rem !important; }
       
       /* GRIDS */
       .eg, .srv-header, .sg, .eq-grid, .srv-grid, .carta-grid, .destaque-grid, .frw, .menu-grid, .rg {
