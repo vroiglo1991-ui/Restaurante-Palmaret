@@ -30,8 +30,6 @@
       lcSlides[lcIdx].classList.add('active');
       lcDots[lcIdx].classList.add('active');
     }
-    document.getElementById('lcNext').addEventListener('click', () => lcGo(lcIdx + 1));
-    document.getElementById('lcPrev').addEventListener('click', () => lcGo(lcIdx - 1));
     lcDots.forEach((d, i) => d.addEventListener('click', () => lcGo(i)));
     setInterval(() => lcGo(lcIdx + 1), 5500);
 
