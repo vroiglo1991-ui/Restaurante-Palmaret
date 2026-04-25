@@ -105,6 +105,7 @@
   /* CARTA */
   .carta-hero { padding: 4rem 1.5rem 3rem; }
   .carta-hero h2 { font-size: 3rem; }
+  .carta-filters { scroll-margin-top: 85px; }
   
   .cf-nav-arrows {
     display: flex;
