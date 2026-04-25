@@ -119,8 +119,6 @@
   .cat-title { font-size: 1.8rem; line-height: 1.2; }
 
   /* EQUIPO Y RESERVA */
-  .rg { display: flex !important; flex-direction: column-reverse !important; gap: 3rem; }
-  .rf { order: -1 !important; }
   .cc { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 2rem 1.5rem; }
   .rf { padding: 2.5rem 1.5rem; }
   .pq-inner { padding: 4rem 1.5rem; flex-direction: column; text-align: center; gap: 1.5rem; }
