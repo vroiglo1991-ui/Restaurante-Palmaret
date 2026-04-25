@@ -62,6 +62,7 @@
   gap: 0;
   overflow-x: auto;
 }
+.mobile-scroll-hint { display: none; }
 .cf-inner::-webkit-scrollbar { display: none; }
 
 .cf-btn {

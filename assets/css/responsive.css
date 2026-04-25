@@ -105,6 +105,16 @@
   /* CARTA */
   .carta-hero { padding: 4rem 1.5rem 3rem; }
   .carta-hero h2 { font-size: 3rem; }
+  .mobile-scroll-hint { 
+    display: block; 
+    text-align: right; 
+    font-size: 0.7rem; 
+    color: rgba(237,232,213,0.7); 
+    padding: 0.8rem 1.5rem 0 0; 
+    font-style: italic; 
+    font-family: var(--fb);
+    letter-spacing: 0.05em;
+  }
   .cf-inner { padding: 0 1.5rem; }
   .carta-body { padding: 3rem 1.5rem; }
   
