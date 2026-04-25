@@ -215,7 +215,12 @@
         msgNoSlots: (remaining, hora) => `No hay disponibilidad para ese horario. Quedan ${remaining} plazas para las ${hora}.`,
         msgSending: 'Enviando reserva...',
         msgSuccess: 'Redirigiendo a WhatsApp para finalizar la reserva...',
-        msgError: 'No se pudo enviar la reserva ahora mismo. Inténtalo de nuevo en unos minutos.'
+        msgError: 'No se pudo enviar la reserva ahora mismo. Inténtalo de nuevo en unos minutos.',
+        cookieTitle: 'Configuración de cookies',
+        cookieText: 'Utilizamos cookies para asegurar que tengas la mejor experiencia en nuestra web, analizar el tráfico y personalizar el contenido.',
+        cookieAccept: 'Aceptar todas',
+        cookieReject: 'Rechazar todas',
+        cookieSettings: 'Gestionar preferencias'
       },
       en: {
         navExp: 'Experience', navGal: 'Gallery', navCarta: 'Menu', navEquipo: 'Team', navReservar: 'Book',
@@ -291,7 +296,12 @@
         msgNoSlots: (remaining, hora) => `No availability for this time slot. ${remaining} seats left for ${hora}.`,
         msgSending: 'Sending booking...',
         msgSuccess: 'Redirecting to WhatsApp to finalize your booking...',
-        msgError: 'We could not send your booking right now. Please try again in a few minutes.'
+        msgError: 'We could not send your booking right now. Please try again in a few minutes.',
+        cookieTitle: 'Cookie Settings',
+        cookieText: 'We use cookies to ensure you get the best experience on our website, analyze traffic and personalize content.',
+        cookieAccept: 'Accept all',
+        cookieReject: 'Reject all',
+        cookieSettings: 'Manage preferences'
       },
       va: {
         navExp: 'Experiencia', navGal: 'Galeria', navCarta: 'Carta', navEquipo: 'Equip', navReservar: 'Reservar',
@@ -367,7 +377,12 @@
         msgNoSlots: (remaining, hora) => `No hi ha disponibilitat per a eixa hora. Queden ${remaining} places per a les ${hora}.`,
         msgSending: 'Enviant reserva...',
         msgSuccess: 'Redirigint a WhatsApp per a finalitzar la reserva...',
-        msgError: 'No hem pogut enviar la reserva ara mateix. Torna-ho a intentar en uns minuts.'
+        msgError: 'No hem pogut enviar la reserva ara mateix. Torna-ho a intentar en uns minuts.',
+        cookieTitle: 'Configuració de cookies',
+        cookieText: 'Utilitzem cookies per a assegurar que tingues la millor experiència en la nostra web, analitzar el tràfic i personalitzar el contingut.',
+        cookieAccept: 'Acceptar totes',
+        cookieReject: 'Rebutjar totes',
+        cookieSettings: 'Gestionar preferències'
       }
     };
 
@@ -660,6 +675,13 @@
       if (inputEmail) inputEmail.placeholder = t().phEmail;
       if (inputGuests) inputGuests.placeholder = t().phGuests;
 
+      // Cookie Consent Translation
+      setText('#cookieTitle', t().cookieTitle);
+      setText('#cookieText', t().cookieText);
+      setText('#cookieAccept', t().cookieAccept);
+      setText('#cookieReject', t().cookieReject);
+      setText('#cookieSettings', t().cookieSettings);
+
       setText('.ftag', t().footerTag, true);
       setText('.fadr', t().footerAddr, true);
       setText('.fg2 > div:nth-child(2) .fct', t().fCarta);
@@ -761,6 +783,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const consent = document.getElementById('cookieConsent');
       const acceptBtn = document.getElementById('cookieAccept');
+      const rejectBtn = document.getElementById('cookieReject');
       const settingsBtn = document.getElementById('cookieSettings');
 
       if (!localStorage.getItem('palmaretCookieConsent')) {
@@ -769,14 +792,14 @@
         }, 2000);
       }
 
-      acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('palmaretCookieConsent', 'true');
+      const closeConsent = (val) => {
+        localStorage.setItem('palmaretCookieConsent', val);
         consent.classList.remove('show');
-      });
+      };
 
-      settingsBtn.addEventListener('click', () => {
-        consent.classList.remove('show');
-      });
+      if (acceptBtn) acceptBtn.addEventListener('click', () => closeConsent('true'));
+      if (rejectBtn) rejectBtn.addEventListener('click', () => closeConsent('false'));
+      if (settingsBtn) settingsBtn.addEventListener('click', () => closeConsent('settings'));
     });
 
 
