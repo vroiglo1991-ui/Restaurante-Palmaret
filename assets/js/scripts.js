@@ -736,11 +736,10 @@
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
 
-    if (reservationForm && reservationMessage) {
-      reservationForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
+        // Enviar a Netlify Forms
         const formData = new FormData(reservationForm);
+        formData.append('form-name', 'reservas'); // <--- Dato crítico para Netlify
+
         const submitBtn = reservationForm.querySelector('button[type="submit"]');
 
         // Validar campos básicos
