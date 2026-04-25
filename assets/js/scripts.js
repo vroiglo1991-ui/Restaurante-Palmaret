@@ -732,18 +732,16 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: ENVIO DUAL (GOOGLE PARA DISEÑO + NETLIFY PARA BACKUP) ────
+    // ──── RESERVA: ENVIO A GOOGLE APPS SCRIPT (Versión Premium Final) ────
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWLno3YFiL20tpCLDF5ubnOEXSG-lr03-0k4MmobekbGBsSHItTeyvjXPtY_C9on5KLQ/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeIwy-keAyLNRBzYQK3AfUTjOfakUBbcEFrDQtdo513O8BZgxwvSpfo2j7y3KK011L/exec";
 
     if (reservationForm && reservationMessage) {
       reservationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(reservationForm);
-        formData.append('form-name', 'reservas'); // Necesario para la copia en Netlify
-
         const submitBtn = reservationForm.querySelector('button[type="submit"]');
 
         // Validar campos básicos
@@ -754,18 +752,11 @@
         reservationMessage.textContent = "Procesando tu reserva...";
         reservationMessage.style.color = 'rgba(237,232,213,.72)';
 
-        // 1. Enviar a Google (para el email con iconos)
+        // Enviar a Google Apps Script
         fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
           body: new URLSearchParams(formData)
-        });
-
-        // 2. Enviar a Netlify (como backup y para el panel)
-        fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
         })
         .then(() => {
           reservationMessage.textContent = "¡Reserva recibida! Te confirmaremos pronto por email.";
@@ -782,6 +773,7 @@
         });
       });
     }
+
 
 
 
