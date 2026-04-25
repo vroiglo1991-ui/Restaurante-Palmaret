@@ -706,55 +706,48 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: ENVIO WHATSAPP (Versión Final)
+    // ──── RESERVA: ENVIO A GOOGLE (Versión Final v2.0)
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyEFHfRgmmbJ3DxRv2kNvg28tH5sh9INMmdLz7uOB93jb-SjK3lUZHUJXIxlTscCB8byg/exec";
 
     if (reservationForm && reservationMessage) {
       reservationForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const formData = new FormData(reservationForm);
+        const submitBtn = reservationForm.querySelector('button[type="submit"]');
+        
+        // Validar campos básicos
         const nombre = formData.get('Nombre');
         const telefono = formData.get('Telefono');
-        const fecha = formData.get('Fecha');
-        const hora = formData.get('Hora');
-        const comensales = formData.get('Comensales');
-        const notas = formData.get('Notas');
+        if (!nombre || !telefono) return;
 
-        if (!nombre || !telefono || !fecha || !hora || !comensales) {
-          reservationMessage.textContent = "Por favor, rellena todos los campos obligatorios.";
-          reservationMessage.style.color = '#E8C97A';
-          return;
-        }
+        // Feedback de envío
+        if (submitBtn) submitBtn.disabled = true;
+        reservationMessage.textContent = "Enviando reserva...";
+        reservationMessage.style.color = 'rgba(237,232,213,.72)';
 
-        const phone = "34630589848";
-        // Formateamos el mensaje con saltos de línea claros y emojis
-        const msg = `*NUEVA RESERVA WEB* 🍽️\n\n` +
-                    `👤 *Nombre:* ${nombre}\n` +
-                    `📞 *Teléfono:* ${telefono}\n` +
-                    `📅 *Fecha:* ${fecha}\n` +
-                    `⏰ *Hora:* ${hora}\n` +
-                    `👥 *Comensales:* ${comensales}\n` +
-                    `📝 *Notas:* ${notas || 'Sin notas'}\n\n` +
-                    `_Enviado desde El Palmaret Web_`;
-        
-        const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
-        
-        reservationMessage.textContent = "Redirigiendo a WhatsApp...";
-        reservationMessage.style.color = '#EDE8D5';
-
-        // Intentar abrir en nueva pestaña, si falla, usar la misma
-        const win = window.open(waUrl, '_blank');
-        if (!win) {
-          window.location.href = waUrl;
-        }
-
-        // Limpiar el formulario después de un breve delay
-        setTimeout(() => {
+        // Enviar datos a Google Apps Script
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Necesario para Google Script
+          body: new URLSearchParams(formData)
+        })
+        .then(() => {
+          // Éxito
+          reservationMessage.textContent = "¡Reserva recibida! Te confirmaremos pronto por email.";
+          reservationMessage.style.color = '#EDE8D5';
           reservationForm.reset();
-          reservationMessage.textContent = "";
-        }, 3000);
+        })
+        .catch(err => {
+          console.error("Error envío Google:", err);
+          reservationMessage.textContent = "Error al enviar. Inténtalo de nuevo o llámanos.";
+          reservationMessage.style.color = '#E8C97A';
+        })
+        .finally(() => {
+          if (submitBtn) submitBtn.disabled = false;
+        });
       });
     }
 
