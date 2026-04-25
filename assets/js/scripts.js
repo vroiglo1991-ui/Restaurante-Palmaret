@@ -732,10 +732,9 @@
     });
     applyLanguage(currentLang);
 
-    // ──── RESERVA: ENVIO A GOOGLE (Versión Final v2.0)
+    // ──── RESERVA: ENVIO A NETLIFY FORMS (Fiable y sin dependencias de terceros)
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWLno3YFiL20tpCLDF5ubnOEXSG-lr03-0k4MmobekbGBsSHItTeyvjXPtY_C9on5KLQ/exec";
 
     if (reservationForm && reservationMessage) {
       reservationForm.addEventListener('submit', (e) => {
@@ -743,7 +742,7 @@
 
         const formData = new FormData(reservationForm);
         const submitBtn = reservationForm.querySelector('button[type="submit"]');
-        
+
         // Validar campos básicos
         const nombre = formData.get('Nombre');
         const telefono = formData.get('Telefono');
@@ -755,20 +754,19 @@
         reservationMessage.textContent = "Enviando reserva...";
         reservationMessage.style.color = 'rgba(237,232,213,.72)';
 
-        // Enviar datos a Google Apps Script
-        fetch(GOOGLE_SCRIPT_URL, {
+        // Enviar a Netlify Forms
+        fetch('/', {
           method: 'POST',
-          mode: 'no-cors', // Necesario para Google Script
-          body: new URLSearchParams(formData)
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
         })
         .then(() => {
-          // Éxito
           reservationMessage.textContent = "¡Reserva recibida! Te confirmaremos pronto por email.";
           reservationMessage.style.color = '#EDE8D5';
           reservationForm.reset();
         })
         .catch(err => {
-          console.error("Error envío Google:", err);
+          console.error("Error envío Netlify:", err);
           reservationMessage.textContent = "Error al enviar. Inténtalo de nuevo o llámanos.";
           reservationMessage.style.color = '#E8C97A';
         })
