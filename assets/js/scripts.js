@@ -735,7 +735,7 @@
     // ──── RESERVA: ENVIO A GOOGLE (Versión Final v2.0)
     const reservationForm = document.getElementById('reservationForm');
     const reservationMessage = document.getElementById('reservationMessage');
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwxLIw_-XyeJJbDe70rjL8aXTZPltr2ME_QDqHP2HoXIlBz2DrsoqlPBIdzprUiYV9wXA/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyWLno3YFiL20tpCLDF5ubnOEXSG-lr03-0k4MmobekbGBsSHItTeyvjXPtY_C9on5KLQ/exec";
 
     if (reservationForm && reservationMessage) {
       reservationForm.addEventListener('submit', (e) => {
