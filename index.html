@@ -487,7 +487,11 @@
 
     <!-- FILTROS STICKY -->
     <div class="carta-filters" id="cartaFilters">
-      <div class="cf-inner">
+      <div class="cf-nav-arrows">
+        <button id="cfLeft" class="cf-arr" aria-label="Desplazar a la izquierda">&larr;</button>
+        <button id="cfRight" class="cf-arr" aria-label="Desplazar a la derecha">&rarr;</button>
+      </div>
+      <div class="cf-inner" id="cfInner">
         <button class="cf-btn act" data-cat="all">Toda la carta <span class="cf-count">52</span></button>
         <button class="cf-btn" data-cat="compartir">Para compartir <span class="cf-count">6</span></button>
         <button class="cf-btn" data-cat="ensaladas">Ensaladas <span class="cf-count">4</span></button>

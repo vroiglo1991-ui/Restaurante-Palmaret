@@ -797,6 +797,19 @@
       if (acceptBtn) acceptBtn.addEventListener('click', () => closeConsent('true'));
       if (rejectBtn) rejectBtn.addEventListener('click', () => closeConsent('false'));
       if (settingsBtn) settingsBtn.addEventListener('click', () => closeConsent('settings'));
+
+      // Flechas de navegacion de la carta
+      const cfInner = document.getElementById('cfInner');
+      const cfLeft = document.getElementById('cfLeft');
+      const cfRight = document.getElementById('cfRight');
+      if(cfInner && cfLeft && cfRight) {
+        cfLeft.addEventListener('click', () => {
+          cfInner.scrollBy({ left: -200, behavior: 'smooth' });
+        });
+        cfRight.addEventListener('click', () => {
+          cfInner.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+      }
     });
 
 

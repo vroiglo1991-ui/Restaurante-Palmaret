@@ -105,6 +105,30 @@
   /* CARTA */
   .carta-hero { padding: 4rem 1.5rem 3rem; }
   .carta-hero h2 { font-size: 3rem; }
+  
+  .cf-nav-arrows {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 10px 1.5rem 0;
+    position: absolute;
+    right: 0;
+    top: -45px; /* Las subimos justo por encima del contenedor sticky */
+    z-index: 60;
+  }
+  .cf-arr {
+    background: var(--navy-dark);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
   .cf-inner { 
     padding: 0 1.5rem;
     -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
