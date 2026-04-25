@@ -796,9 +796,41 @@
 
       if (acceptBtn) acceptBtn.addEventListener('click', () => closeConsent('true'));
       if (rejectBtn) rejectBtn.addEventListener('click', () => closeConsent('false'));
-      if (settingsBtn) settingsBtn.addEventListener('click', () => closeConsent('settings'));
 
-      // Flechas de navegacion de la carta
+      // Gestionar preferencias: mostrar panel de toggles
+      const ccMain = document.getElementById('ccMain');
+      const ccPanel = document.getElementById('ccPanel');
+      const ccBack = document.getElementById('ccBack');
+      const ccSave = document.getElementById('ccSave');
+
+      if (settingsBtn && ccMain && ccPanel) {
+        settingsBtn.addEventListener('click', () => {
+          ccMain.style.display = 'none';
+          ccPanel.style.display = 'block';
+        });
+      }
+
+      if (ccBack) {
+        ccBack.addEventListener('click', () => {
+          ccPanel.style.display = 'none';
+          ccMain.style.display = 'block';
+        });
+      }
+
+      if (ccSave) {
+        ccSave.addEventListener('click', () => {
+          const analytics = document.getElementById('toggleAnalytics')?.checked ? 'true' : 'false';
+          const marketing = document.getElementById('toggleMarketing')?.checked ? 'true' : 'false';
+          localStorage.setItem('palmaretCookieConsent', 'custom');
+          localStorage.setItem('palmaretCookieAnalytics', analytics);
+          localStorage.setItem('palmaretCookieMarketing', marketing);
+          consent.classList.remove('show');
+        });
+      }
+    });
+
+    // Flechas de navegacion de la carta
+    document.addEventListener('DOMContentLoaded', () => {
       const cfInner = document.getElementById('cfInner');
       const cfLeft = document.getElementById('cfLeft');
       const cfRight = document.getElementById('cfRight');
@@ -811,5 +843,3 @@
         });
       }
     });
-
-

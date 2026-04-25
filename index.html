@@ -1542,15 +1542,66 @@
   <!-- ──── AVISO DE COOKIES (Pop-up Rediseñado) ──── -->
   <div id="cookieConsent">
     <div class="cc-inner">
-      <h4 id="cookieTitle">Configuración de cookies</h4>
-      <p class="cc-text" id="cookieText">
-        Utilizamos cookies para asegurar que tengas la mejor experiencia en nuestra web, analizar el tráfico y personalizar el contenido.
-      </p>
-      <div class="cc-btns">
-        <button class="cc-btn cc-accept" id="cookieAccept">Aceptar todas</button>
-        <button class="cc-btn cc-reject" id="cookieReject">Rechazar todas</button>
-        <button class="cc-btn cc-settings" id="cookieSettings">Gestionar preferencias</button>
+
+      <!-- Vista principal -->
+      <div id="ccMain">
+        <h4 id="cookieTitle">Configuración de cookies</h4>
+        <p class="cc-text" id="cookieText">
+          Utilizamos cookies para asegurar que tengas la mejor experiencia en nuestra web, analizar el tráfico y personalizar el contenido.
+        </p>
+        <div class="cc-btns">
+          <button class="cc-btn cc-accept" id="cookieAccept">Aceptar todas</button>
+          <button class="cc-btn cc-reject" id="cookieReject">Rechazar todas</button>
+          <button class="cc-btn cc-settings" id="cookieSettings">Gestionar preferencias</button>
+        </div>
       </div>
+
+      <!-- Panel de preferencias (oculto por defecto) -->
+      <div id="ccPanel" style="display:none;">
+        <button class="cc-back" id="ccBack" aria-label="Volver">&#8592; Volver</button>
+        <h4>Mis preferencias</h4>
+        <p class="cc-text">Activa o desactiva cada categoría según tus preferencias.</p>
+
+        <div class="cc-toggle-list">
+
+          <div class="cc-toggle-item">
+            <div class="cc-toggle-info">
+              <strong>Cookies Técnicas</strong>
+              <span>Necesarias para el funcionamiento de la web. No se pueden desactivar.</span>
+            </div>
+            <label class="cc-switch cc-switch--disabled" aria-label="Cookies técnicas siempre activas">
+              <input type="checkbox" checked disabled>
+              <span class="cc-slider"></span>
+            </label>
+          </div>
+
+          <div class="cc-toggle-item">
+            <div class="cc-toggle-info">
+              <strong>Cookies Analíticas</strong>
+              <span>Nos ayudan a entender cómo se usa la web para mejorarla.</span>
+            </div>
+            <label class="cc-switch" aria-label="Activar cookies analíticas">
+              <input type="checkbox" id="toggleAnalytics">
+              <span class="cc-slider"></span>
+            </label>
+          </div>
+
+          <div class="cc-toggle-item">
+            <div class="cc-toggle-info">
+              <strong>Cookies de Marketing</strong>
+              <span>Permiten mostrarte contenido y publicidad relevante.</span>
+            </div>
+            <label class="cc-switch" aria-label="Activar cookies de marketing">
+              <input type="checkbox" id="toggleMarketing">
+              <span class="cc-slider"></span>
+            </label>
+          </div>
+
+        </div>
+
+        <button class="cc-btn cc-accept" id="ccSave" style="margin-top:1.5rem;">Guardar mis preferencias</button>
+      </div>
+
     </div>
   </div>
 
