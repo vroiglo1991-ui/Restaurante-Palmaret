@@ -109,8 +109,13 @@
         const cat = btn.dataset.cat;
         catBlocks.forEach(block => {
           if (cat === 'all') {
-            block.removeAttribute('data-hidden');
-            block.style.display = '';
+            if (block.dataset.category === 'compartir') {
+              block.setAttribute('data-hidden', 'true');
+              block.style.display = 'none';
+            } else {
+              block.removeAttribute('data-hidden');
+              block.style.display = '';
+            }
           } else {
             const cats = (block.dataset.category || '').split(' ');
             if (cats.includes(cat)) {
@@ -203,12 +208,12 @@
         sharingList: ['Tartar de atún rojo y aguacate', 'Ensaladilla rusa de la casa', 'Croquetas de jamón ibérico (2ud)', 'Flor de alcachofa con trufa y sal de jamón', 'Arroz de la temporada', 'Postre casero a elegir'],
         algNames: ['Gluten', 'Crustáceos', 'Huevos', 'Pescado', 'Cacahuetes', 'Soja', 'Lácteos', 'Frutos Cáscara', 'Apio', 'Mostaza', 'Sésamo', 'Sulfitos', 'Altramuces', 'Moluscos'],
         filterLabels: ['Toda la carta', 'Para compartir', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos', 'Arroces', 'Carnes', 'Healthy', 'Postres'],
-        categoryTitles: ['Tapeo de autor', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos & Tostas', 'Arroces & Fideuàs', 'La Brasa del Tercer Tiempo', 'Healthy Performance', 'Postres caseros'],
-        categorySubtitles: ['Platos clásicos valencianos con el toque técnico de Esteve', 'Frescas, de temporada y con producto de proximidad', 'Para empezar bien', 'Del fuego directo a la mesa', 'Para el almuerzo y el take-away deportivo', 'Disponibles sábados y domingos. Previa reserva', 'Carnes y pescados a la leña. El servicio estrella del fin de semana', 'Para el deportista diario. Nutritivo pero gourmet', 'Elaborados cada día con productos de la terra'],
-        categoryBadges: ['Nuestro ADN', 'Fin de semana', 'Deportistas'],
-        featuredLabels: ['Estrella de la casa', 'Imprescindible', 'De siempre', 'La estrella', 'Mar y montaña', 'Icónico', 'De siempre'],
-        featuredNames: ['Tartar de atún rojo y aguacate', 'Flor de alcachofa, sal de jamón y trufa', 'Ensaladilla rusa de la casa', 'Paella valenciana de pollo y conejo', 'Arroz de secreto ibérico, ajos tiernos y boletus', 'Tiramisú de horchata y fartons', 'Torrija con helado de horchata'],
-        featuredDescs: ['Atún del Mediterráneo, aguacate cremoso, ikura, aceite de sésamo y wasabi. Servido frío sobre base de jengibre.', 'Alcachofa de la terreta asada en flor, aceite de trufa negra y sal de jamón ibérico. La elegancia del producto de proximidad.', 'Receta propia de Esteve. Patata, zanahoria, guisantes y mayonesa artesana. La referencia del tapeo valenciano.', 'Receta tradicional. Arroz D.O. Valencia, pollo de corral, conejo, garrofó, bajoqueta y azafrán de la Mancha. A leña.', 'Secreto ibérico de bellota, boletus edulis de temporada, ajos tiernos y aceite de trufa blanca.', 'Nuestra reinterpretación del clásico con horchata de chufa valenciana, mascarpone y fartons tostados.', 'Pan brioche caramelizado, crema inglesa y helado artesano de horchata de Alboraya.'],
+        categoryTitles: ['Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos & Tostas', 'Arroces & Fideuàs', 'La Brasa del Tercer Tiempo', 'Healthy Performance', 'Postres caseros', 'Tapeo de autor'],
+        categorySubtitles: ['Frescas, de temporada y con producto de proximidad', 'Para empezar bien', 'Del fuego directo a la mesa', 'Para el almuerzo y el take-away deportivo', 'Disponibles sábados y domingos. Previa reserva', 'Carnes y pescados a la leña. El servicio estrella del fin de semana', 'Para el deportista diario. Nutritivo pero gourmet', 'Elaborados cada día con productos de la terra', 'Platos clásicos valencianos con el toque técnico de Esteve'],
+        categoryBadges: ['Fin de semana', 'Deportistas', 'Nuestro ADN'],
+        featuredLabels: ['La estrella', 'Mar y montaña', 'Icónico', 'De siempre', 'Estrella de la casa', 'Imprescindible', 'De siempre'],
+        featuredNames: ['Paella valenciana de pollo y conejo', 'Arroz de secreto ibérico, ajos tiernos y boletus', 'Tiramisú de horchata y fartons', 'Torrija con helado de horchata', 'Tartar de atún rojo y aguacate', 'Flor de alcachofa, sal de jamón y trufa', 'Ensaladilla rusa de la casa'],
+        featuredDescs: ['Receta tradicional. Arroz D.O. Valencia, pollo de corral, conejo, garrofó, bajoqueta y azafrán de la Mancha. A leña.', 'Secreto ibérico de bellota, boletus edulis de temporada, ajos tiernos y aceite de trufa blanca.', 'Nuestra reinterpretación del clásico con horchata de chufa valenciana, mascarpone y fartons tostados.', 'Pan brioche caramelizado, crema inglesa y helado artesano de horchata de Alboraya.', 'Atún del Mediterráneo, aguacate cremoso, ikura, aceite de sésamo y wasabi. Servido frío sobre base de jengibre.', 'Alcachofa de la terreta asada en flor, aceite de trufa negra y sal de jamón ibérico. La elegancia del producto de proximidad.', 'Receta propia de Esteve. Patata, zanahoria, guisantes y mayonesa artesana. La referencia del tapeo valenciano.'],
         visionQuote: '"Más que un espacio,<br><em>un futuro.</em>"',
         visionSub: 'Una historia que se cocina a fuego lento',
         visionBtn: 'Sé parte de la historia',
@@ -284,12 +289,12 @@
         sharingList: ['Bluefin tuna and avocado tartare', 'House Russian salad', 'Iberian ham croquettes (2pcs)', 'Artichoke flower with truffle and ham salt', 'Seasonal rice dish', 'Homemade dessert of your choice'],
         algNames: ['Gluten', 'Crustaceans', 'Eggs', 'Fish', 'Peanuts', 'Soy', 'Dairy', 'Nuts', 'Celery', 'Mustard', 'Sesame', 'Sulphites', 'Lupin', 'Molluscs'],
         filterLabels: ['Full menu', 'To share', 'Salads', 'Cold tapas', 'Hot tapas', 'Sandwiches', 'Rice', 'Meat', 'Healthy', 'Desserts'],
-        categoryTitles: ['Signature tapas', 'Salads', 'Cold tapas', 'Hot tapas', 'Sandwiches & Toasts', 'Rice & Fideua', 'The Third Half Grill', 'Healthy Performance', 'Homemade desserts'],
-        categorySubtitles: ['Classic Valencian dishes with Esteve\'s technical touch', 'Fresh, seasonal and local produce', 'A great start', 'From direct fire to the table', 'For lunch and sports take-away', 'Available Saturdays and Sundays. Pre-booking required', 'Wood-fired meats and fish. The weekend star service', 'For everyday athletes. Nutritious but gourmet', 'Made fresh every day with local products'],
-        categoryBadges: ['Our DNA', 'Weekend', 'Athletes'],
-        featuredLabels: ['House signature', 'Must-try', 'Classic', 'The star', 'Sea and mountain', 'Iconic', 'Classic'],
-        featuredNames: ['Bluefin tuna and avocado tartare', 'Artichoke flower, ham salt and truffle', 'House Russian salad', 'Traditional Valencian chicken and rabbit paella', 'Iberian pork rice with garlic shoots and boletus', 'Horchata tiramisu with fartons', 'French toast with horchata ice cream'],
-        featuredDescs: ['Mediterranean tuna, creamy avocado, ikura, sesame oil and wasabi. Served chilled over ginger.', 'Local artichoke roasted as a flower, black truffle oil and Iberian ham salt. Elegant local produce.', 'Esteve\'s own recipe. Potato, carrot, peas and artisan mayo. A Valencian tapas benchmark.', 'Traditional recipe. D.O. Valencia rice, free-range chicken, rabbit, garrofó beans, green beans and saffron. Wood-fired.', 'Acorn-fed Iberian pork, seasonal boletus edulis, garlic shoots and white truffle oil.', 'Our reinterpretation of the classic with Valencian tiger-nut horchata, mascarpone and toasted fartons.', 'Caramelized brioche, anglaise cream and artisan Alboraya horchata ice cream.'],
+        categoryTitles: ['Salads', 'Cold tapas', 'Hot tapas', 'Sandwiches & Toasts', 'Rice & Fideua', 'The Third Half Grill', 'Healthy Performance', 'Homemade desserts', 'Signature tapas'],
+        categorySubtitles: ['Fresh, seasonal and local produce', 'A great start', 'From direct fire to the table', 'For lunch and sports take-away', 'Available Saturdays and Sundays. Pre-booking required', 'Wood-fired meats and fish. The weekend star service', 'For everyday athletes. Nutritious but gourmet', 'Made fresh every day with local products', 'Classic Valencian dishes with Esteve\'s technical touch'],
+        categoryBadges: ['Weekend', 'Athletes', 'Our DNA'],
+        featuredLabels: ['The star', 'Sea and mountain', 'Iconic', 'Classic', 'House signature', 'Must-try', 'Classic'],
+        featuredNames: ['Traditional Valencian chicken and rabbit paella', 'Iberian pork rice with garlic shoots and boletus', 'Horchata tiramisu with fartons', 'French toast with horchata ice cream', 'Bluefin tuna and avocado tartare', 'Artichoke flower, ham salt and truffle', 'House Russian salad'],
+        featuredDescs: ['Traditional recipe. D.O. Valencia rice, free-range chicken, rabbit, garrofó beans, green beans and saffron. Wood-fired.', 'Acorn-fed Iberian pork, seasonal boletus edulis, garlic shoots and white truffle oil.', 'Our reinterpretation of the classic with Valencian tiger-nut horchata, mascarpone and toasted fartons.', 'Caramelized brioche, anglaise cream and artisan Alboraya horchata ice cream.', 'Mediterranean tuna, creamy avocado, ikura, sesame oil and wasabi. Served chilled over ginger.', 'Local artichoke roasted as a flower, black truffle oil and Iberian ham salt. Elegant local produce.', 'Esteve\'s own recipe. Potato, carrot, peas and artisan mayo. A Valencian tapas benchmark.'],
         visionQuote: '"More than a place,<br><em>a future.</em>"',
         visionSub: 'A story cooked slowly',
         visionBtn: 'Be part of the story',
@@ -365,12 +370,12 @@
         sharingList: ['Tàrtar de tonyina roja i alvocat', 'Ensaladilla russa de la casa', 'Croquetes de pernil ibèric (2ud)', 'Flor de carxofa amb tòfona i sal de pernil', 'Arròs de la temporada', 'Postre casolà a elegir'],
         algNames: ['Gluten', 'Crustacis', 'Ous', 'Peix', 'Cacauets', 'Soja', 'Lactis', 'Frutos Càscara', 'Api', 'Mostassa', 'Sésam', 'Sulfits', 'Altramuces', 'Mol·luscs'],
         filterLabels: ['Tota la carta', 'Per a compartir', 'Amanides', 'Tapes fredes', 'Tapes calentes', 'Entrepans', 'Arrossos', 'Carns', 'Healthy', 'Postres'],
-        categoryTitles: ['Tapeig d\'autor', 'Amanides', 'Tapes fredes', 'Tapes calentes', 'Entrepans & Tostes', 'Arrossos & Fideuàs', 'La Brasa del Tercer Temps', 'Healthy Performance', 'Postres casolans'],
-        categorySubtitles: ['Plats clàssics valencians amb el toc tècnic d\'Esteve', 'Fresques, de temporada i amb producte de proximitat', 'Per a començar bé', 'Del foc directe a taula', 'Per a l\'esmorzar i el take-away esportiu', 'Disponibles dissabtes i diumenges. Amb reserva prèvia', 'Carns i peixos a la llenya. El servei estrela del cap de setmana', 'Per a l\'esportista diari. Nutritiu però gourmet', 'Elaborats cada dia amb productes de la terra'],
-        categoryBadges: ['El nostre ADN', 'Cap de setmana', 'Esportistes'],
-        featuredLabels: ['Estrela de la casa', 'Imprescindible', 'De sempre', 'L\'estrela', 'Mar i muntanya', 'Icònic', 'De sempre'],
-        featuredNames: ['Tàrtar de tonyina roja i alvocat', 'Flor de carxofa, sal de pernil i tòfona', 'Ensaladilla russa de la casa', 'Paella valenciana de pollastre i conill', 'Arròs de secret ibèric, alls tendres i boletus', 'Tiramisú d\'orxata i fartons', 'Torrija amb gelat d\'orxata'],
-        featuredDescs: ['Tonyina del Mediterrani, alvocat cremós, ikura, oli de sèsam i wasabi. Servit fred sobre base de gingebre.', 'Carxofa de la terreta rostida en flor, oli de tòfona negra i sal de pernil ibèric. L\'elegància del producte de proximitat.', 'Recepta pròpia d\'Esteve. Creïlla, carlota, pésols i maionesa artesana. La referència del tapeig valencià.', 'Recepta tradicional. Arròs D.O. València, pollastre de corral, conill, garrofó, bajoqueta i safrà de la Manxa. A llenya.', 'Secret ibèric de gla, boletus edulis de temporada, alls tendres i oli de tòfona blanca.', 'La nostra reinterpretació del clàssic amb orxata de xufa valenciana, mascarpone i fartons torrats.', 'Pa brioix caramel·litzat, crema anglesa i gelat artesà d\'orxata d\'Alboraia.'],
+        categoryTitles: ['Amanides', 'Tapes fredes', 'Tapes calentes', 'Entrepans & Tostes', 'Arrossos & Fideuàs', 'La Brasa del Tercer Temps', 'Healthy Performance', 'Postres casolans', 'Tapeig d\'autor'],
+        categorySubtitles: ['Fresques, de temporada i amb producte de proximitat', 'Per a començar bé', 'Del foc directe a taula', 'Per a l\'esmorzar i el take-away esportiu', 'Disponibles dissabtes i diumenges. Amb reserva prèvia', 'Carns i peixos a la llenya. El servei estrela del cap de setmana', 'Per a l\'esportista diari. Nutritiu però gourmet', 'Elaborats cada dia amb productes de la terra', 'Plats clàssics valencians amb el toc tècnic d\'Esteve'],
+        categoryBadges: ['Cap de setmana', 'Esportistes', 'El nostre ADN'],
+        featuredLabels: ['L\'estrela', 'Mar i muntanya', 'Icònic', 'De sempre', 'Estrela de la casa', 'Imprescindible', 'De sempre'],
+        featuredNames: ['Paella valenciana de pollastre i conill', 'Arròs de secret ibèric, alls tendres i boletus', 'Tiramisú d\'orxata i fartons', 'Torrija amb gelat d\'orxata', 'Tàrtar de tonyina roja i alvocat', 'Flor de carxofa, sal de pernil i tòfona', 'Ensaladilla russa de la casa'],
+        featuredDescs: ['Recepta tradicional. Arròs D.O. València, pollastre de corral, conill, garrofó, bajoqueta i safrà de la Manxa. A llenya.', 'Secret ibèric de gla, boletus edulis de temporada, alls tendres i oli de tòfona blanca.', 'La nostra reinterpretació del clàssic amb orxata de xufa valenciana, mascarpone i fartons torrats.', 'Pa brioix caramel·litzat, crema anglesa i gelat artesà d\'orxata d\'Alboraia.', 'Tonyina del Mediterrani, alvocat cremós, ikura, oli de sèsam i wasabi. Servit fred sobre base de gingebre.', 'Carxofa de la terreta rostida en flor, oli de tòfona negra i sal de pernil ibèric. L\'elegància del producte de proximitat.', 'Recepta pròpia d\'Esteve. Creïlla, carlota, pésols i maionesa artesana. La referència del tapeig valencià.'],
         visionQuote: '"Més que un espai,<br><em>un futur.</em>"',
         visionSub: 'Una història que es cuina a foc lent',
         visionBtn: 'Sigues part de la història',
@@ -848,6 +853,48 @@
         });
         cfRight.addEventListener('click', () => {
           cfInner.scrollBy({ left: 200, behavior: 'smooth' });
+        });
+      }
+    });
+
+    // POPUP INAUGURACION
+    document.addEventListener('DOMContentLoaded', () => {
+      const popup = document.getElementById('inauguracionPopup');
+      const closeBtn = document.getElementById('closePopup');
+      
+      if (popup && closeBtn) {
+        const showPopup = () => {
+          if (!sessionStorage.getItem('inauguracionSeen')) {
+            popup.classList.add('active');
+            sessionStorage.setItem('inauguracionSeen', 'true');
+          }
+        };
+
+        // Mostrar tras 3 segundos o tras scroll de 400px
+        let scrollTriggered = false;
+        window.addEventListener('scroll', () => {
+          if (!scrollTriggered && window.scrollY > 400) {
+            scrollTriggered = true;
+            showPopup();
+          }
+        });
+
+        // Opcional: timeout de seguridad por si no scrollean
+        setTimeout(() => {
+          if (!scrollTriggered) {
+            scrollTriggered = true;
+            showPopup();
+          }
+        }, 5000);
+
+        closeBtn.addEventListener('click', () => {
+          popup.classList.remove('active');
+        });
+
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) {
+            popup.classList.remove('active');
+          }
         });
       }
     });
