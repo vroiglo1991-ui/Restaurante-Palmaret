@@ -14,24 +14,15 @@ footer {
   display: grid;
   grid-template-columns: 1.8fr repeat(4, 1fr);
   gap: 3rem;
+  align-items: start;
 }
 
 /* Logo */
 .flogo {
-  font-family: var(--fd);
-  font-size: 2rem;
-  font-weight: 300;
-  color: var(--cream);
-  letter-spacing: .05em;
-  margin-bottom: .4rem;
+  margin-top: -24px;
+  margin-bottom: 1rem;
   display: flex;
-  align-items: baseline;
-  gap: .12em;
-}
-.flogo span {
-  font-size: .6em;
-  font-style: italic;
-  color: var(--gold);
+  justify-content: flex-start;
 }
 
 /* Tagline */

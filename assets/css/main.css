@@ -1405,7 +1405,7 @@
     }
 
     .cat-block {
-      margin-bottom: 5rem;
+      margin-bottom: 9rem;
     }
 
     .cat-block.vis {
@@ -1444,6 +1444,8 @@
       stroke-width: 1.5;
       stroke-linecap: round;
       stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .cat-title {
@@ -1480,6 +1482,34 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 0;
+    }
+
+    .mi-group-title {
+      grid-column: 1 / -1;
+      font-family: var(--fc);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy-dark);
+      padding: 1.2rem 1.5rem;
+      border-left: 4px solid var(--gold);
+      background: rgba(201, 168, 76, 0.1);
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .mi-group-title.sin-alcohol {
+      color: #1b5e20;
+      border-left-color: #2e7d32;
+      background: rgba(46, 125, 50, 0.1);
+    }
+
+    .mi-group-title.con-alcohol {
+      color: #b71c1c;
+      border-left-color: #c62828;
+      background: rgba(198, 40, 40, 0.1);
     }
 
     .mi {
@@ -1553,6 +1583,13 @@
       color: var(--gold);
       font-size: .5rem;
       padding: 1px 4px;
+    }
+
+    .mi-tag.u {
+      background: var(--navy);
+      color: var(--gold);
+      border-color: var(--gold);
+      font-weight: 700;
     }
 
     .mi-price {
