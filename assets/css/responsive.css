@@ -65,13 +65,20 @@
   .price-row { justify-content: center; }
   .sb-right ul { align-items: center; }
   .il { align-items: center; }
-  .ir { justify-content: center; }
-  
   /* FOOTER TABLET */
-  .fg2 { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
-  .flogo { justify-content: center; margin-top: 0; }
-  .fli { align-items: center; justify-content: center; }
-  .f-social { display: inline-flex !important; align-items: center; justify-content: center; width: 100%; }
+  .fg2 { grid-template-columns: 1fr !important; text-align: center !important; gap: 3.5rem !important; }
+  .fg2 > div { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .flogo { justify-content: center !important; margin-top: 0 !important; width: 100% !important; }
+  .fct { text-align: center !important; width: 100% !important; }
+  .fli { align-items: center !important; justify-content: center !important; width: 100% !important; list-style: none !important; padding: 0 !important; }
+  .f-social { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: auto !important; margin: 10px auto !important; }
+  .ftag, .fadr { text-align: center !important; margin: 0 auto 1.5rem !important; width: 100% !important; }
 }
 
 /* ─── MOBILE (Max 768px) ─── */
@@ -169,14 +176,22 @@
   /* TICKER */
   .tki { font-size: 0.6rem; padding: 0 1.5rem; }
 
-  /* FOOTER */
-  footer { padding: 4rem 1.5rem 3rem; }
-  .fg2 { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
-  .fb2 { flex-direction: column; gap: 1.5rem; text-align: center; }
-  .flogo { justify-content: center; margin-top: 0; } /* Reset negative margin on mobile */
-  .f-social { display: inline-flex !important; align-items: center; justify-content: center; width: 100%; margin-left: auto; margin-right: auto; }
-  .ftag, .fadr { margin-left: auto; margin-right: auto; max-width: 100%; }
-  .fli { align-items: center; justify-content: center; }
+  /* FOOTER MOBILE */
+  footer { padding: 4rem 1.5rem 3rem !important; }
+  .fg2 { grid-template-columns: 1fr !important; gap: 3.5rem !important; text-align: center !important; }
+  .fg2 > div { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .fb2 { flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; align-items: center !important; }
+  .flogo { justify-content: center !important; margin-top: 0 !important; } 
+  .f-social { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: auto !important; margin: 10px auto !important; }
+  .ftag, .fadr { text-align: center !important; margin-left: auto !important; margin-right: auto !important; width: 100% !important; }
+  .fli { align-items: center !important; justify-content: center !important; width: 100% !important; }
+  .fct { text-align: center !important; width: 100% !important; margin-bottom: 1rem !important; }
 }
 
 /* ─── SMALL MOBILE (Max 480px) ─── */
