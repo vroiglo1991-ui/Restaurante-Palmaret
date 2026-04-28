@@ -10,20 +10,22 @@
   /* NAV */
   nav { padding: 1.2rem 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
   nav.sc { padding: 1rem 2rem; }
-  .lang-switch { margin: 0; order: 2; margin-left: auto; margin-right: 1.5rem; }
-  .hamburger { display: block; order: 3; }
+  .lang-switch { margin: 0; order: 2; margin-left: auto; margin-right: 1.5rem; position: relative; z-index: 210; }
+  .hamburger { display: block; order: 3; position: relative; z-index: 210; }
+  .nl { position: relative; z-index: 210; }
   
   nav ul { 
     display: none; 
-    position: absolute;
-    top: 100%; left: 0; right: 0;
-    width: 100%; margin: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%; height: 100vh; margin: 0;
     flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; 
     text-align: center; 
-    padding: 2.5rem 2rem; background: rgba(10,24,40,0.98); backdrop-filter: blur(10px); 
-    border-top: 1px solid rgba(201,168,76,.15);
+    padding: 2.5rem 2rem; background: rgba(10,24,40,0.99); backdrop-filter: blur(15px); 
+    border-top: none;
     border-bottom: 1px solid rgba(201,168,76,.15);
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 200;
   }
   nav ul.active { display: flex; animation: fu 0.3s ease forwards; }
   .ncta { 
