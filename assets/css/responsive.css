@@ -141,7 +141,7 @@
     justify-content: center;
     font-size: 1rem;
     cursor: pointer;
-    transition: background .2s, border-color .2s;
+    transition: background .2s, border-color .2s, opacity .3s, pointer-events .3s;
   }
   .cf-arr:active {
     background: rgba(201, 168, 76, .1);

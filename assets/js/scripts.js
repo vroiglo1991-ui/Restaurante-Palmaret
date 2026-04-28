@@ -207,9 +207,9 @@
         sharingPrice2: 'con bebida / p',
         sharingList: ['Tartar de atún rojo y aguacate', 'Ensaladilla rusa de la casa', 'Croquetas de jamón ibérico (2ud)', 'Flor de alcachofa con trufa y sal de jamón', 'Arroz de la temporada', 'Postre casero a elegir'],
         algNames: ['Gluten', 'Crustáceos', 'Huevos', 'Pescado', 'Cacahuetes', 'Soja', 'Lácteos', 'Frutos Cáscara', 'Apio', 'Mostaza', 'Sésamo', 'Sulfitos', 'Altramuces', 'Moluscos'],
-        filterLabels: ['Toda la carta', 'Desayunos', 'Almuerzos', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos', 'Arroces', 'Carnes', 'Bebidas', 'Cafés'],
-        categoryTitles: ['Desayunos', 'Almuerzo Popular', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos & Tostas', 'Arroces & Fideuàs', 'Nuestras Carnes', 'Bebidas', 'Cafés e infusiones'],
-        categorySubtitles: ['Empieza el día con energía', 'El ritual valenciano de media mañana', 'Frescas y de temporada', 'Para empezar bien', 'Del fuego a la mesa', 'Nuestros clásicos en pan artesano', 'Por encargo · Mínimo 2 personas', 'Cortes premium a la brasa', 'Refrescos y cervezas', 'El toque final'],
+        filterLabels: ['Toda la carta', 'Desayunos', 'Almuerzos', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos', 'Arroces', 'Carnes', 'Postres', 'Bebidas', 'Cafés'],
+        categoryTitles: ['Desayunos', 'Almuerzo Popular', 'Ensaladas', 'Tapas frías', 'Tapas calientes', 'Bocadillos & Tostas', 'Arroces & Fideuàs', 'Nuestras Carnes', 'Postres caseros', 'Bebidas', 'Cafés e infusiones'],
+        categorySubtitles: ['Empieza el día con energía', 'El ritual valenciano de media mañana', 'Frescas y de temporada', 'Para empezar bien', 'Del fuego a la mesa', 'Nuestros clásicos en pan artesano', 'Por encargo · Mínimo 2 personas', 'Cortes premium a la brasa', 'El toque dulce de nuestra cocina', 'Refrescos y cervezas', 'El toque final'],
         categoryBadges: ['Hasta las 12h', 'De 9:00 a 11:30', 'ADN Valenciano'],
         featuredLabels: ['La estrella', 'Productos de la tierra', 'Icónico', 'De siempre', 'Estrella de la casa', 'Imprescindible', 'De siempre'],
         featuredNames: ['Paella de pollo y conejo', 'Arroz de secreto, boletus y ajos tiernos', 'Tiramisú de horchata y fartons', 'Torrija con helado de horchata', 'Tartar de atún rojo y aguacate', 'Flor de alcachofa, sal de jamón y trufa', 'Ensaladilla rusa de la casa'],
@@ -288,9 +288,9 @@
         sharingPrice2: 'with drinks / p',
         sharingList: ['Bluefin tuna and avocado tartare', 'House Russian salad', 'Iberian ham croquettes (2pcs)', 'Artichoke flower with truffle and ham salt', 'Seasonal rice dish', 'Homemade dessert of your choice'],
         algNames: ['Gluten', 'Crustaceans', 'Eggs', 'Fish', 'Peanuts', 'Soy', 'Dairy', 'Nuts', 'Celery', 'Mustard', 'Sesame', 'Sulphites', 'Lupin', 'Molluscs'],
-        filterLabels: ['Full menu', 'Breakfast', 'Brunch', 'Salads', 'Cold tapas', 'Hot tapas', 'Sandwiches', 'Rice', 'Meat', 'Drinks', 'Coffee'],
-        categoryTitles: ['Breakfast', 'Popular Brunch', 'Salads', 'Cold Tapas', 'Hot Tapas', 'Sandwiches & Toasts', 'Rice & Fideua', 'Our Meats', 'Drinks', 'Coffee & Infusions'],
-        categorySubtitles: ['Start your day with energy', 'The Valencian mid-morning ritual', 'Fresh and seasonal', 'A great start', 'From the fire to the table', 'Our classics on artisan bread', 'Our specialty on wood fire', 'Premium grilled cuts', 'Sodas and beers', 'The final touch'],
+        filterLabels: ['Full menu', 'Breakfast', 'Brunch', 'Salads', 'Cold tapas', 'Hot tapas', 'Sandwiches', 'Rice', 'Meat', 'Desserts', 'Drinks', 'Coffee'],
+        categoryTitles: ['Breakfast', 'Popular Brunch', 'Salads', 'Cold Tapas', 'Hot Tapas', 'Sandwiches & Toasts', 'Rice & Fideua', 'Our Meats', 'Homemade Desserts', 'Drinks', 'Coffee & Infusions'],
+        categorySubtitles: ['Start your day with energy', 'The Valencian mid-morning ritual', 'Fresh and seasonal', 'A great start', 'From the fire to the table', 'Our classics on artisan bread', 'Our specialty on wood fire', 'Premium grilled cuts', 'The sweet touch of our kitchen', 'Sodas and beers', 'The final touch'],
         categoryBadges: ['Until 12:00', '9:00 to 11:30', 'Valencian ADN'],
         featuredLabels: ['The star', 'Sea and mountain', 'Iconic', 'Classic', 'House signature', 'Must-try', 'Classic'],
         featuredNames: ['Traditional Valencian chicken and rabbit paella', 'Iberian pork rice with garlic shoots and boletus', 'Horchata tiramisu with fartons', 'French toast with horchata ice cream', 'Bluefin tuna and avocado tartare', 'Artichoke flower, ham salt and truffle', 'House Russian salad'],
@@ -369,9 +369,9 @@
         sharingPrice2: 'amb beguda / p',
         sharingList: ['Tàrtar de tonyina roja i alvocat', 'Ensaladilla russa de la casa', 'Croquetes de pernil ibèric (2ud)', 'Flor de carxofa amb tòfona i sal de pernil', 'Arròs de la temporada', 'Postre casolà a elegir'],
         algNames: ['Gluten', 'Crustacis', 'Ous', 'Peix', 'Cacauets', 'Soja', 'Lactis', 'Frutos Càscara', 'Api', 'Mostassa', 'Sésam', 'Sulfits', 'Altramuces', 'Mol·luscs'],
-        filterLabels: ['Tota la carta', 'Desdejunis', 'Esmorzars', 'Amanides', 'Tapes fredes', 'Tapes calentes', 'Entrepans', 'Arrossos', 'Carns', 'Begudes', 'Cafés'],
-        categoryTitles: ['Desdejunis', 'Esmorzar Popular', 'Amanides', 'Tapes Fredes', 'Tapes Calentes', 'Entrepans & Tostes', 'Arrossos & Fideuàs', 'La Brasa del Tercer Temps', 'Begudes', 'Begudes Alcohòliques', 'Cafés i Infusions'],
-        categorySubtitles: ['Comença el dia amb energia', 'El ritual valencià de mig matí', 'Fresques i de temporada', 'Per començar bé', 'Del foc a la taula', 'Els nostres clàssics en pa artesà', 'Per encàrrec · Mínim 2 persones', 'Carns seleccionades a la brasa', 'Refrescos i aigües', 'Cerveses, vins i combinats', 'El toc final'],
+        filterLabels: ['Tota la carta', 'Desdejunis', 'Esmorzars', 'Amanides', 'Tapes fredes', 'Tapes calentes', 'Entrepans', 'Arrossos', 'Carns', 'Postres', 'Begudes', 'Cafés'],
+        categoryTitles: ['Desdejunis', 'Esmorzar Popular', 'Amanides', 'Tapes Fredes', 'Tapes Calentes', 'Entrepans & Tostes', 'Arrossos & Fideuàs', 'La Brasa del Tercer Temps', 'Postres casolans', 'Begudes', 'Begudes Alcohòliques', 'Cafés i Infusions'],
+        categorySubtitles: ['Comença el dia amb energia', 'El ritual valencià de mig matí', 'Fresques i de temporada', 'Per començar bé', 'Del foc a la taula', 'Els nostres clàssics en pa artesà', 'Per encàrrec · Mínim 2 persones', 'Carns seleccionades a la brasa', 'El toque dolç de la nostra cuina', 'Refrescos i aigües', 'Cerveses, vins i combinats', 'El toc final'],
         categoryBadges: ['Fins les 12h', 'De 9:00 a 11:30', 'ADN Valencià'],
         featuredLabels: ['L\'estrela', 'Productes de la terra', 'Icònic', 'De sempre', 'Estrela de la casa', 'Imprescindible', 'De siempre'],
         featuredNames: ['Paella de pollastre i conill', 'Arròs de secret, boletus i alls tendres', 'Tiramisú d\'orxata i fartons', 'Torrija amb gelat d\'orxata', 'Tàrtar de tonyina roja i alvocat', 'Flor de carxofa, sal de pernil i tòfona', 'Ensaladilla russa de la casa'],
@@ -450,6 +450,26 @@
         ['con aceitunas y salsa Mery', 'with olives and Mery sauce'],
         ['Tabla jamón ibérico y queso manchego curado', 'Iberian ham and cured Manchego cheese board'],
         ['con picos', 'with breadsticks'],
+        ['Anchoas del cantábrico', 'Cantabrian anchovies'],
+        ['Titaina con huevo', 'Titaina with egg'],
+        ['Postres caseros', 'Homemade desserts'],
+        ['El toque dulce de nuestra cocina', 'The sweet touch of our kitchen'],
+        ['Tiramisú de horchata y fartons', 'Horchata tiramisu with fartons'],
+        ['Nuestra reinterpretación del clásico con horchata de chufa valenciana, mascarpone y fartons tostados', 'Our reinterpretation of the classic with Valencian tiger-nut horchata, mascarpone and toasted fartons'],
+        ['Torrija con helado de horchata', 'French toast with horchata ice cream'],
+        ['Pan brioche caramelizado, crema inglesa y helado artesano de horchata de Alboraya', 'Caramelized brioche, anglaise cream and artisan Alboraya horchata ice cream'],
+        ['Corona de Alboraia', 'Corona de Alboraia'],
+        ['Bizcocho de horchata con nata de chufa y granizado de limón', 'Horchata sponge cake with tiger-nut cream and lemon slush'],
+        ['Crema de naranja', 'Orange cream'],
+        ['Crema catalana perfumada con naranja valenciana y caramelo crujiente', 'Crema catalana scented with Valencian orange and crispy caramel'],
+        ['Tarta de queso', 'Cheesecake'],
+        ['Al horno, cremosa, con coulis de frutos rojos del bosque', 'Oven-baked, creamy, with forest red berry coulis'],
+        ['Coca de llanda con naranja y helado', 'Coca de llanda with orange and ice cream'],
+        ['Coca esponjosa valenciana, reducción de naranja de Vinaròs y helado de vainilla', 'Spongy Valencian cake, Vinaròs orange reduction and vanilla ice cream'],
+        ['Brownie con helado', 'Brownie with ice cream'],
+        ['Brownie de chocolate 70%, nueces y helado de vainilla de Madagascar', '70% chocolate brownie, walnuts and Madagascar vanilla ice cream'],
+        ['Copa de yogur griego con frutas del bosque', 'Greek yogurt cup with forest fruits'],
+        ['Yogur griego, frutas frescas de temporada y granola artesana', 'Greek yogurt, fresh seasonal fruits and artisan granola'],
         ['Tartar de atún', 'Tuna tartare'],
         ['atún rojo, wakame, aguacate y salsa de soja', 'bluefin tuna, wakame, avocado and soy sauce'],
         ['Tartar de vaca', 'Beef tartare'],
@@ -569,6 +589,26 @@
         ['con aceitunas y salsa Mery', 'amb olives i salsa Mery'],
         ['Tabla jamón ibérico y queso manchego curado', 'Taula de pernil ibèric i formatge manxec curat'],
         ['con picos', 'amb picos'],
+        ['Anchoas del cantábrico', 'Anxoves del cantàbric'],
+        ['Titaina con huevo', 'Titaina amb ou'],
+        ['Postres caseros', 'Postres casolans'],
+        ['El toque dulce de nuestra cocina', 'El toque dolç de la nostra cuina'],
+        ['Tiramisú de horchata y fartons', "Tiramisú d'orxata i fartons"],
+        ['Nuestra reinterpretación del clásico con horchata de chufa valenciana, mascarpone y fartons tostados', 'La nostra reinterpretació del clàssic amb orxata de xufa valenciana, mascarpone i fartons torrats'],
+        ['Torrija con helado de horchata', "Torrija amb gelat d'orxata"],
+        ['Pan brioche caramelizado, crema inglesa y helado artesano de horchata de Alboraya', "Pa brioix caramel·litzat, crema anglesa i gelat artesà d'orxata d'Alboraia"],
+        ['Corona de Alboraia', 'Corona de Alboraia'],
+        ['Bizcocho de horchata con nata de chufa y granizado de limón', "Pa de pessic d'orxata amb nata de xufa i granissat de llimona"],
+        ['Crema de naranja', 'Crema de taronja'],
+        ['Crema catalana perfumada con naranja valenciana y caramelo crujiente', 'Crema catalana perfumada amb taronja valenciana i caramel cruixent'],
+        ['Tarta de queso', 'Pastís de formatge'],
+        ['Al horno, cremosa, con coulis de frutos rojos del bosque', 'Al forn, cremosa, amb coulis de fruits rojos del bosc'],
+        ['Coca de llanda con naranja y helado', 'Coca de llanda amb taronja i gelat'],
+        ['Coca esponjosa valenciana, reducción de naranja de Vinaròs y helado de vainilla', 'Coca esponjosa valenciana, reducció de taronja de Vinaròs i gelat de vainilla'],
+        ['Brownie con helado', 'Brownie amb gelat'],
+        ['Brownie de chocolate 70%, nueces y helado de vainilla de Madagascar', 'Brownie de xocolata 70%, nous i gelat de vainilla de Madagascar'],
+        ['Copa de yogur griego con frutas del bosque', 'Copa de iogurt grec amb fruits del bosc'],
+        ['Yogur griego, frutas frescas de temporada y granola artesana', 'Iogurt grec, fruites fresques de temporada i granola artesana'],
         ['Tartar de atún', 'Tàrtar de tonyina'],
         ['atún rojo, wakame, aguacate y salsa de soja', 'tonyina roja, wakame, alvocat i salsa de soja'],
         ['Tartar de vaca', 'Tàrtar de vaca'],
@@ -941,13 +981,32 @@
       const cfInner = document.getElementById('cfInner');
       const cfLeft = document.getElementById('cfLeft');
       const cfRight = document.getElementById('cfRight');
+
       if(cfInner && cfLeft && cfRight) {
+        const updateArrows = () => {
+          const scrollLeft = cfInner.scrollLeft;
+          const maxScroll = cfInner.scrollWidth - cfInner.clientWidth;
+          
+          // Usamos un margen de 2px por errores de redondeo en navegadores
+          cfLeft.style.opacity = scrollLeft <= 2 ? '0' : '1';
+          cfLeft.style.pointerEvents = scrollLeft <= 2 ? 'none' : 'auto';
+          
+          cfRight.style.opacity = scrollLeft >= maxScroll - 2 ? '0' : '1';
+          cfRight.style.pointerEvents = scrollLeft >= maxScroll - 2 ? 'none' : 'auto';
+        };
+
         cfLeft.addEventListener('click', () => {
           cfInner.scrollBy({ left: -200, behavior: 'smooth' });
         });
         cfRight.addEventListener('click', () => {
           cfInner.scrollBy({ left: 200, behavior: 'smooth' });
         });
+
+        cfInner.addEventListener('scroll', updateArrows);
+        window.addEventListener('resize', updateArrows);
+        
+        // Inicializar
+        setTimeout(updateArrows, 500);
       }
     });
 
