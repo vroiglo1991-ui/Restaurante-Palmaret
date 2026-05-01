@@ -1010,44 +1010,4 @@
       }
     });
 
-    // POPUP INAUGURACION
-    document.addEventListener('DOMContentLoaded', () => {
-      const popup = document.getElementById('inauguracionPopup');
-      const closeBtn = document.getElementById('closePopup');
-      
-      if (popup && closeBtn) {
-        const showPopup = () => {
-          if (!sessionStorage.getItem('inauguracionSeen')) {
-            popup.classList.add('active');
-            sessionStorage.setItem('inauguracionSeen', 'true');
-          }
-        };
 
-        // Mostrar tras 3 segundos o tras scroll de 400px
-        let scrollTriggered = false;
-        window.addEventListener('scroll', () => {
-          if (!scrollTriggered && window.scrollY > 400) {
-            scrollTriggered = true;
-            showPopup();
-          }
-        });
-
-        // Opcional: timeout de seguridad por si no scrollean
-        setTimeout(() => {
-          if (!scrollTriggered) {
-            scrollTriggered = true;
-            showPopup();
-          }
-        }, 5000);
-
-        closeBtn.addEventListener('click', () => {
-          popup.classList.remove('active');
-        });
-
-        popup.addEventListener('click', (e) => {
-          if (e.target === popup) {
-            popup.classList.remove('active');
-          }
-        });
-      }
-    });
