@@ -172,11 +172,11 @@
         algWarning: 'Todos nuestros platos pueden contener trazas de los alérgenos indicados. Si tiene alguna alergia o intolerancia alimentaria, informe a nuestro personal. Su seguridad es nuestra prioridad.',
         mapTitle: '¿Cómo llegar?',
         mapSub: 'El Palmaret | Restaurante · Valencia',
-        formTitle: 'Hacer una reserva',
-        formSubtitle: 'El arroz no espera a nadie (y tu mesa tampoco). Reserva ahora',
-        labelName: 'Nombre', labelPhone: 'Teléfono', labelEmail: 'Email', labelDate: 'Fecha', labelTime: 'Hora', labelGuests: 'Comensales',
-        phName: 'Tu nombre', phPhone: '+34 000 000 000', phEmail: 'tu@email.com', phGuests: 'Ej. 4',
-        submit: 'Solicitar reserva',
+        formTitle: 'Hablemos',
+        formSubtitle: 'Gestionamos cada reserva de forma personal para que tu experiencia empiece desde el primer contacto.',
+        btnWhatsapp: 'Escribir ahora',
+        btnPhone: 'Llamar ahora',
+        labelConfirmation: 'La reserva queda supeditada a la confirmación por WhatsApp o teléfono.',
         footerTag: 'Sabor mediterráneo<br>con alma deportiva.',
         footerAddr: 'Complejo Deportivo · Valencia<br>restaurante@elpalmaret.com',
         fCarta: 'Carta', fServicios: 'Servicios', fReservas: 'Reservas',
@@ -253,11 +253,11 @@
         algWarning: 'All our dishes may contain traces of the indicated allergens. If you have any food allergy or intolerance, please inform our staff. Your safety is our priority.',
         mapTitle: 'How to find us?',
         mapSub: 'El Palmaret | Restaurant · Valencia',
-        formTitle: 'Make a reservation',
-        formSubtitle: 'We confirm within 24 hours',
-        labelName: 'Name', labelPhone: 'Phone', labelEmail: 'Email', labelDate: 'Date', labelTime: 'Time', labelGuests: 'Guests',
-        phName: 'Your name', phPhone: '+34 000 000 000', phEmail: 'your@email.com', phGuests: 'E.g. 4',
-        submit: 'Request booking',
+        formTitle: 'Let\'s talk',
+        formSubtitle: 'We manage every reservation personally so your experience starts with the very first message.',
+        btnWhatsapp: 'Write now',
+        btnPhone: 'Call now',
+        labelConfirmation: 'Reservations are subject to confirmation via WhatsApp or phone.',
         footerTag: 'Mediterranean flavor<br>with a sporting soul.',
         footerAddr: 'Sports Complex · Valencia<br>restaurante@elpalmaret.com',
         fCarta: 'Menu', fServicios: 'Services', fReservas: 'Bookings',
@@ -323,8 +323,8 @@
         heroBtnReserve: 'Reservar taula', heroBtnMenu: 'Veure carta →',
         teamTitle: 'El nostre equip',
         reserveTitle: 'Reserva la teua<br><em>experiència</em>',
-        reserveDesc: 'Acompanya\'ns a taula. Tant si vens a dinar amb l\'equip com a celebrar la victòria, en El Palmaret sempre hi ha un lloc per a tu.',
-        infoSchedule: 'Horari', infoScheduleVal: 'Mér–Dis: 8:00–00:00 | Diu: 8:00–16:00',
+        reserveDesc: 'Acompanya\'ns a la taula. Tant si vens a dinar amb l\'equip com a celebrar la victòria, en El Palmaret sempre hi ha un lloc per a tu.',
+        infoSchedule: 'Horari', infoScheduleVal: 'Mie–Dis: 8:00–00:00 | Diu: 8:00–16:00',
         infoRice: 'Arrossos', infoRiceVal: 'Per encàrrec · Mínim 2 persones',
         infoGroups: 'Grups', infoGroupsVal: 'Sopars d\'equip i esdeveniments a mida',
         infoContact: 'Contacte',
@@ -334,11 +334,11 @@
         algWarning: 'Tots els nostres plats poden contindre traces dels al·lergògens indicats. Si teniu alguna al·lèrgia o intolerància alimentària, informeu al nostre personal. La vostra seguretat és la nostra prioritat.',
         mapTitle: 'Com arribar?',
         mapSub: 'El Palmaret | Restaurant · València',
-        formTitle: 'Fer una reserva',
-        formSubtitle: 'Confirmem en menys de 24 hores',
-        labelName: 'Nom', labelPhone: 'Telèfon', labelEmail: 'Email', labelDate: 'Data', labelTime: 'Hora', labelGuests: 'Comensals',
-        phName: 'El teu nom', phPhone: '+34 000 000 000', phEmail: 'el_teu@email.com', phGuests: 'Ex. 4',
-        submit: 'Sol·licitar reserva',
+        formTitle: 'Parlem',
+        formSubtitle: 'Gestionem cada reserva de forma personal perquè la teua experiència comence des del primer contacte.',
+        btnWhatsapp: 'Escriure ara',
+        btnPhone: 'Trucar ara',
+        labelConfirmation: 'La reserva queda supeditada a la confirmació per WhatsApp o telèfon.',
         footerTag: 'Sabor mediterrani<br>amb ànima esportiva.',
         footerAddr: 'Complex Esportiu · València<br>restaurante@elpalmaret.com',
         fCarta: 'Carta', fServicios: 'Serveis', fReservas: 'Reserves',
@@ -439,7 +439,7 @@
         ['Chipirones a la plancha', 'Grilled baby squid'],
         ['Pulpo a la brasa', 'Grilled octopus'],
         ['Huevos rotos con jamón ibérico', 'Broken eggs with Iberian ham'],
-        ['Revuelto de morcilla de burgos, setas y ajos tiernos', 'Black pudding scramble with mushrooms and spring garlic'],
+        ['Revuelto de morcilla, setas y ajos tiernos', 'Black pudding scramble with mushrooms and spring garlic'],
         ['Ensaladilla rusa', 'Russian salad'],
         ['patata, zanahoria, atún, aceitunas, guisantes, huevo y mayonesa', 'potato, carrot, tuna, olives, peas, egg and mayo'],
         ['Ensaladilla de marisco', 'Seafood salad'],
@@ -578,7 +578,7 @@
         ['Chipirones a la plancha', 'Xipirons a la planxa'],
         ['Pulpo a la brasa', 'Polp a la brasa'],
         ['Huevos rotos con jamón ibérico', 'Ous trencats amb pernil ibèric'],
-        ['Revuelto de morcilla de burgos, setas y ajos tiernos', 'Remenat de botifarra de Burgos, bolets i alls tendres'],
+        ['Revuelto de morcilla, setas y ajos tiernos', 'Remenat de botifarra, bolets i alls tendres'],
         ['Ensaladilla rusa', 'Ensaladilla russa'],
         ['patata, zanahoria, atún, aceitunas, guisantes, huevo y mayonesa', 'creilla, carlota, tonyina, olives, pésols, ou i maionesa'],
         ['Ensaladilla de marisco', 'Ensaladilla de marisc'],
@@ -793,32 +793,11 @@
       setText('#reserva .il .ir:nth-child(3) strong', t().infoGroups);
       setText('#reserva .il .ir:nth-child(3) span', t().infoGroupsVal);
       setText('#reserva .il .ir:nth-child(4) strong', t().infoContact);
-      setText('#reservationForm .rft', t().formTitle);
-      setText('#reservationForm .rfs', t().formSubtitle);
-      setText('#reservationForm .bfm', t().submit);
-
-      const inputName = document.querySelector('input[name="Nombre"]');
-      const inputPhone = document.querySelector('input[name="Telefono"]');
-      const inputEmail = document.querySelector('input[name="Email"]');
-      const inputDate = document.querySelector('input[name="Fecha"]');
-      const inputTime = document.querySelector('input[name="Hora"]');
-      const inputGuests = document.querySelector('input[name="Comensales"]');
-      const labelName = inputName ? inputName.closest('.fg').querySelector('label') : null;
-      const labelPhone = inputPhone ? inputPhone.closest('.fg').querySelector('label') : null;
-      const labelEmail = inputEmail ? inputEmail.closest('.fg').querySelector('label') : null;
-      const labelDate = inputDate ? inputDate.closest('.fg').querySelector('label') : null;
-      const labelTime = inputTime ? inputTime.closest('.fg').querySelector('label') : null;
-      const labelGuests = inputGuests ? inputGuests.closest('.fg').querySelector('label') : null;
-      if (labelName) labelName.textContent = t().labelName;
-      if (labelPhone) labelPhone.textContent = t().labelPhone;
-      if (labelEmail) labelEmail.textContent = t().labelEmail;
-      if (labelDate) labelDate.textContent = t().labelDate;
-      if (labelTime) labelTime.textContent = t().labelTime;
-      if (labelGuests) labelGuests.textContent = t().labelGuests;
-      if (inputName) inputName.placeholder = t().phName;
-      if (inputPhone) inputPhone.placeholder = t().phPhone;
-      if (inputEmail) inputEmail.placeholder = t().phEmail;
-      if (inputGuests) inputGuests.placeholder = t().phGuests;
+      setText('#reservationSection .rft', t().formTitle);
+      setText('#reservationSection .rfs', t().formSubtitle);
+      setText('#btnWhatsappReserva .rs-row-title', t().btnWhatsapp);
+      setText('#btnPhoneReserva .rs-row-cta span', t().btnPhone);
+      setText('#reservationSection .r-note', t().labelConfirmation);
 
       // Cookie Consent Translation
       setText('#cookieTitle', t().cookieTitle);
@@ -876,50 +855,6 @@
       btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
     });
     applyLanguage(currentLang);
-
-    // ──── RESERVA: ENVIO A GOOGLE APPS SCRIPT (Versión Premium Final) ────
-    const reservationForm = document.getElementById('reservationForm');
-    const reservationMessage = document.getElementById('reservationMessage');
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeIwy-keAyLNRBzYQK3AfUTjOfakUBbcEFrDQtdo513O8BZgxwvSpfo2j7y3KK011L/exec";
-
-    if (reservationForm && reservationMessage) {
-      reservationForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(reservationForm);
-        const submitBtn = reservationForm.querySelector('button[type="submit"]');
-
-        // Validar campos básicos
-        if (!formData.get('Nombre') || !formData.get('Telefono')) return;
-
-        // Feedback de envío
-        if (submitBtn) submitBtn.disabled = true;
-        reservationMessage.textContent = "Procesando tu reserva...";
-        reservationMessage.style.color = 'rgba(237,232,213,.72)';
-
-        // Enviar a Google Apps Script
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          body: new URLSearchParams(formData)
-        })
-        .then(() => {
-          reservationMessage.textContent = "¡Reserva recibida! Te confirmaremos pronto por email.";
-          reservationMessage.style.color = '#EDE8D5';
-          reservationForm.reset();
-        })
-        .catch(err => {
-          console.error("Error envío:", err);
-          reservationMessage.textContent = "Error al enviar. Inténtalo de nuevo o llámanos.";
-          reservationMessage.style.color = '#E8C97A';
-        })
-        .finally(() => {
-          if (submitBtn) submitBtn.disabled = false;
-        });
-      });
-    }
-
-
 
 
 
