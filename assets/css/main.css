@@ -2978,3 +2978,69 @@
       .ptag { padding: 1.2rem 1.5rem !important; min-width: 130px !important; }
       .ptag strong { font-size: 2rem !important; }
     }
+
+/* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  INTERACCIONES PREMIUM ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
+
+/* LOADER - imagen del logo */
+.loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--navy-dark);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.loader.hide { transform: translateY(-100%); }
+.loader-logo { 
+  width: 160px; height: auto;
+  opacity: 0; animation: fadeLogo 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+  filter: drop-shadow(0 0 24px rgba(201,168,76,0.35));
+}
+@keyframes fadeLogo { 
+  0%   { opacity: 0; transform: scale(0.9); filter: drop-shadow(0 0 0px rgba(201,168,76,0)); } 
+  50%  { opacity: 1; transform: scale(1);   filter: drop-shadow(0 0 28px rgba(201,168,76,0.5)); } 
+  100% { opacity: 0; transform: scale(1.06);filter: drop-shadow(0 0 0px rgba(201,168,76,0)); } 
+}
+
+/* LENIS */
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+/* CURSOR & MAGNETIC */
+@media (pointer: fine) {
+  body { cursor: none; }
+  a, button, .mi, .g-item, .cf-btn, input, textarea { cursor: none !important; }
+  .cursor-dot { 
+    position: fixed; top: 0; left: 0; width: 6px; height: 6px; background: var(--gold); 
+    border-radius: 50%; pointer-events: none; z-index: 10000; 
+    transform: translate(-50%, -50%); transition: opacity 0.2s, transform 0.1s, background 0.2s; 
+  }
+  .cursor-ring { 
+    position: fixed; top: 0; left: 0; width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.5); 
+    border-radius: 50%; pointer-events: none; z-index: 9999; 
+    transform: translate(-50%, -50%); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.15s ease-out, background 0.3s; 
+  }
+  .cursor-dot.hover { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+  .cursor-ring.hover { width: 60px; height: 60px; background: rgba(201,168,76,0.05); border-color: var(--gold); }
+}
+
+/* ── MICRO-INTERACCIÓN CARTA: borde dorado izquierdo + elevación ── */
+@media (hover: hover) {
+  .menu-grid .mi {
+    transition: background 0.3s ease, border-left-color 0.3s ease, padding-left 0.3s ease, box-shadow 0.3s ease !important;
+    border-left: 3px solid transparent;
+    padding-left: 0.75rem !important;
+    margin: 0 !important;
+  }
+  .menu-grid .mi:hover {
+    border-left-color: var(--gold) !important;
+    background: rgba(201,168,76,0.04) !important;
+    box-shadow: inset 0 0 0 1px rgba(201,168,76,0.06);
+    padding-left: 1.1rem !important;
+  }
+  /* Aseguramos que precio nunca solapa */
+  .menu-grid .mi .mi-price {
+    flex-shrink: 0;
+    min-width: 60px;
+    text-align: right;
+    padding-left: 1rem !important;
+  }
+}

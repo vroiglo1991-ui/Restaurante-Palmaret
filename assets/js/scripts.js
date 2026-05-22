@@ -1,4 +1,4 @@
-/* ══════════════════════════════════════
+﻿/* ══════════════════════════════════════
    scripts.js - El Palmaret
    Extraido de index.html - Abril 2026
    Incluye: Nav, Carruseles, Galeria,
@@ -153,13 +153,13 @@
     // ──── IDIOMAS (ES / EN / VA)
     const I18N = {
       es: {
-        navExp: 'Experiencia', navGal: 'Galería', navCarta: 'Carta', navEquipo: 'Equipo', navReservar: 'Reservar',
+        navExp: 'Experiencia', navGal: 'Galería', navCarta: 'Carta', navEquipo: 'Chef', navReservar: 'Reservar',
         heroEyebrow: 'El Palmaret | Restaurante · Valencia',
         heroTitle: 'El mejor <em>tercer tiempo</em> <br> de Valencia.',
         heroSub: 'con alma deportiva',
         heroDesc: 'Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.',
         heroBtnReserve: 'Reservar mesa', heroBtnMenu: 'Ver carta →',
-        teamTitle: 'Nuestro equipo',
+        teamTitle: 'Nuestro chef',
         reserveTitle: 'Reserva tu <br> <em>experiencia</em>',
         reserveDesc: 'Acompáñanos a la mesa. Tanto si vienes a comer con el equipo como a celebrar la victoria, en El Palmaret siempre hay un lugar para ti.',
         infoSchedule: 'Horario', infoScheduleVal: 'Lun–Sáb: 8:00–00:00 | Dom: 8:00–16:00',
@@ -182,7 +182,7 @@
         fCarta: 'Carta', fServicios: 'Servicios', fReservas: 'Reservas',
         fMenu1: 'Tapeo de autor', fMenu2: 'Arroces y brasas', fMenu3: 'La brasa', fMenu4: 'Healthy performance', fMenu5: 'Postres caseros',
         fServ1: 'Desayunos', fServ2: 'Menú ejecutivo', fServ3: 'Menú deportistas', fServ4: 'Cenas de equipo', fServ5: 'Eventos a medida',
-        fRes1: 'Reservar mesa', fRes2: 'Grupos', fRes3: 'Nuestro equipo', fRes4: 'Galería',
+        fRes1: 'Reservar mesa', fRes2: 'Grupos', fRes3: 'Nuestro chef', fRes4: 'Galería',
         copy: '© 2026 El Palmaret — Todos los derechos reservados',
         slogan: 'Una historia que se cocina a fuego lento',
         galleryEyebrow: 'Galería gastronómica',
@@ -234,13 +234,13 @@
         cookieSettings: 'Gestionar preferencias'
       },
       en: {
-        navExp: 'Experience', navGal: 'Gallery', navCarta: 'Menu', navEquipo: 'Team', navReservar: 'Book',
+        navExp: 'Experience', navGal: 'Gallery', navCarta: 'Menu', navEquipo: 'Chef', navReservar: 'Book',
         heroEyebrow: 'Club Restaurant · Valencia',
         heroTitle: 'The best <em>third time</em> <br> in Valencia.',
         heroSub: 'with a sporting soul',
         heroDesc: 'We blend the club\'s rhythm with the calm of Mediterranean after-dinner talk. The meeting point where every moment is celebrated with flavor.',
         heroBtnReserve: 'Book a table', heroBtnMenu: 'See menu →',
-        teamTitle: 'Our team',
+        teamTitle: 'Our chef',
         reserveTitle: 'Book your <br> <em>experience</em>',
         reserveDesc: 'Join us at the table. Whether you come for a team lunch or a victory dinner, there is always a place for you at El Palmaret.',
         infoSchedule: 'Schedule', infoScheduleVal: 'Mon–Sat: 8:00–00:00 | Sun: 8:00–16:00',
@@ -263,7 +263,7 @@
         fCarta: 'Menu', fServicios: 'Services', fReservas: 'Bookings',
         fMenu1: 'Signature tapas', fMenu2: 'Rice & grill', fMenu3: 'The grill', fMenu4: 'Healthy performance', fMenu5: 'Homemade desserts',
         fServ1: 'Breakfast', fServ2: 'Executive menu', fServ3: 'Athlete menu', fServ4: 'Team dinners', fServ5: 'Custom events',
-        fRes1: 'Book a table', fRes2: 'Groups', fRes3: 'Our team', fRes4: 'Gallery',
+        fRes1: 'Book a table', fRes2: 'Groups', fRes3: 'Our chef', fRes4: 'Gallery',
         copy: '© 2026 El Palmaret — All rights reserved',
         slogan: 'A story cooked slowly',
         galleryEyebrow: 'Gastronomic gallery',
@@ -315,13 +315,13 @@
         cookieSettings: 'Manage preferences'
       },
       va: {
-        navExp: 'Experiencia', navGal: 'Galeria', navCarta: 'Carta', navEquipo: 'Equip', navReservar: 'Reservar',
+        navExp: 'Experiencia', navGal: 'Galeria', navCarta: 'Carta', navEquipo: 'Xef', navReservar: 'Reservar',
         heroEyebrow: 'El Palmaret | Restaurant · València',
         heroTitle: 'El millor <em>tercer temps</em> <br> de València.',
         heroSub: 'amb ànima esportiva',
         heroDesc: 'Unim el ritme del club amb la calma de la sobretaula mediterrània. El punt de trobada on cada moment es celebra amb sabor.',
         heroBtnReserve: 'Reservar taula', heroBtnMenu: 'Veure carta →',
-        teamTitle: 'El nostre equip',
+        teamTitle: 'El nostre xef',
         reserveTitle: 'Reserva la teua <br> <em>experiència</em>',
         reserveDesc: 'Acompanya\'ns a la taula. Tant si vens a dinar amb l\'equip com a celebrar la victòria, en El Palmaret sempre hi ha un lloc per a tu.',
         infoSchedule: 'Horari', infoScheduleVal: 'Dill–Dis: 8:00–00:00 | Diu: 8:00–16:00',
@@ -344,7 +344,7 @@
         fCarta: 'Carta', fServicios: 'Serveis', fReservas: 'Reserves',
         fMenu1: 'Tapeig d\'autor', fMenu2: 'Arrossos i brases', fMenu3: 'La brasa', fMenu4: 'Healthy performance', fMenu5: 'Postres casolans',
         fServ1: 'Desdejunis', fServ2: 'Menú executiu', fServ3: 'Menú esportistes', fServ4: 'Sopars d\'equip', fServ5: 'Esdeveniments a mida',
-        fRes1: 'Reservar taula', fRes2: 'Grups', fRes3: 'El nostre equip', fRes4: 'Galeria',
+        fRes1: 'Reservar taula', fRes2: 'Grups', fRes3: 'El nostre xef', fRes4: 'Galeria',
         copy: '© 2026 El Palmaret — Tots els drets reservats',
         slogan: 'Una història que se cocina a fuego lento',
         galleryEyebrow: 'Galeria gastronòmica',
@@ -839,12 +839,19 @@
 
     const hamburgerBtn = document.getElementById('hamburger');
     const navMenuEl = document.getElementById('navMenu');
+    const navEl2 = document.getElementById('nav');
     if (hamburgerBtn && navMenuEl) {
       hamburgerBtn.addEventListener('click', () => {
-        navMenuEl.classList.toggle('active');
+        const isOpen = navMenuEl.classList.toggle('active');
+        if (navEl2) navEl2.classList.toggle('menu-open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
       });
       navMenuEl.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => navMenuEl.classList.remove('active'));
+        link.addEventListener('click', () => {
+          navMenuEl.classList.remove('active');
+          if (navEl2) navEl2.classList.remove('menu-open');
+          document.body.style.overflow = '';
+        });
       });
     }
     langButtons.forEach(btn => {
@@ -940,5 +947,65 @@
         setTimeout(updateArrows, 500);
       }
     });
+
+// ──── LOADER 
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    if(loader) loader.classList.add('hide');
+  }, 1200);
+});
+
+// ──── LENIS SMOOTH SCROLL
+if (typeof Lenis !== 'undefined') {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+}
+
+// ──── CURSOR CUSTOM
+const cDot = document.querySelector('.cursor-dot');
+const cRing = document.querySelector('.cursor-ring');
+if (cDot && cRing) {
+  window.addEventListener('mousemove', e => {
+    cDot.style.left = e.clientX + 'px';
+    cDot.style.top = e.clientY + 'px';
+    cRing.style.left = e.clientX + 'px';
+    cRing.style.top = e.clientY + 'px';
+  });
+  
+  const addHover = () => { cDot.classList.add('hover'); cRing.classList.add('hover'); };
+  const remHover = () => { cDot.classList.remove('hover'); cRing.classList.remove('hover'); };
+  
+  // Apply to links, buttons, and menu items
+  document.querySelectorAll('a, button, .mi, .g-item, .cf-btn').forEach(el => {
+    el.addEventListener('mouseenter', addHover);
+    el.addEventListener('mouseleave', remHover);
+  });
+}
+
+// ──── BOTONES MAGNÉTICOS
+document.querySelectorAll('.bp, .ncta').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = `translate(0px, 0px)`;
+  });
+});
+
+
 
 
