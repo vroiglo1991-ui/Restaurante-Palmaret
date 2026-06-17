@@ -105,6 +105,7 @@
   <link rel="stylesheet" href="assets/css/footer.css?v=1.1">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="stylesheet" href="assets/css/carta-viewer.css?v=1.0">
   <link rel="stylesheet" href="assets/css/reserva.css?v=3.1">
   <script src="https://unpkg.com/lenis@1.1.9/dist/lenis.min.js"></script>
 
@@ -135,7 +136,7 @@
     <ul id="navMenu">
       <li><a href="#experiencia">Experiencia</a></li>
       <li><a href="#galeria">Galería</a></li>
-      <li><a href="#cartaFilters">Carta</a></li>
+      <li><a href="#carta">Carta</a></li>
       <li><a href="#equipo">Chef</a></li>
       <li><a href="#reserva" class="ncta">Reservar</a></li>
       <li class="mobile-languages" style="margin-top: 30px; border-top: 1px solid rgba(237,232,213,0.1); padding-top: 20px;">
@@ -167,7 +168,7 @@
         <p class="hdes" style="margin-left:auto; margin-right:auto;">Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.</p>
         <div class="hact" style="justify-content:center;">
           <a href="#reservationSection" class="bp">Reservar mesa</a>
-          <a href="#cartaFilters" class="bg">Ver carta →</a>
+          <a href="#carta" class="bg" id="heroCartaBtn">Ver carta →</a>
         </div>
       </div>
     </div>
@@ -529,1039 +530,85 @@
     </section>
   </div>
 
-  <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  CARTA COMPLETA ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
-  <div class="carta-page" id="carta">
-    <div class="carta-hero">
-      <div class="carta-hero-inner">
-        <div class="rv">
-          <div class="ey">Nuestra carta</div>
-          <h2 class="carta-hero h2">Tradición valenciana <br> <em>con técnica de vanguardia</em></h2>
+  <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  CARTA PREMIUM (VISOR PDF) ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
+  <div class="carta-premium" id="carta">
+    <div class="carta-premium-glow"></div>
+    <div class="carta-premium-inner">
+      <div class="rv">
+        <div class="ey" style="justify-content:center">Nuestra carta</div>
+        <h2 class="st">Tradición valenciana <br> <em>con técnica de vanguardia</em></h2>
+      </div>
+      <p class="carta-premium-desc rv d1">Platos diseñados para compartir. Producto de proximidad, respeto por la temporada y el toque técnico de nuestro equipo. Nuestra carta se renueva cada semana para ofrecerte lo mejor de la temporada.</p>
+
+      <div class="carta-premium-divider rv">
+        <span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+          <path d="M7 2v20"/>
+          <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+        </svg>
+        <span></span>
+      </div>
+
+      <button class="carta-premium-cta rv" id="openCartaPdf" aria-label="Ver carta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <span class="pdf-btn-text">Ver carta</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Visor PDF -->
+  <div class="pdf-modal-overlay" id="pdfModalOverlay">
+    <div class="pdf-modal-backdrop" id="pdfModalBackdrop"></div>
+    <div class="pdf-modal" role="dialog" aria-modal="true" aria-label="Carta El Palmaret">
+      <div class="pdf-modal-header">
+        <div class="pdf-modal-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span>Carta El Palmaret</span>
         </div>
-        <p class="rv d1">Platos diseñados para compartir. Producto de proximidad, respeto por la temporada y el toque
-          técnico de nuestro equipo. Los precios incluyen IVA.</p>
+        <button class="pdf-modal-close" id="pdfModalClose" aria-label="Cerrar carta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <div class="pdf-modal-body">
+        <div class="pdf-modal-loading" id="pdfLoading">
+          <div class="pdf-loader-spinner"></div>
+          <span>Cargando carta...</span>
+        </div>
+        <iframe id="pdfFrame" title="Carta El Palmaret PDF" allowfullscreen></iframe>
+      </div>
+      <div class="pdf-modal-footer">
+        <a href="https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/view" target="_blank" rel="noopener" class="pdf-modal-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Descargar PDF</span>
+        </a>
+        <a href="https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/view" target="_blank" rel="noopener" class="pdf-modal-fullscreen">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <polyline points="15 3 21 3 21 9"/>
+            <polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/>
+            <line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          <span>Abrir en Drive</span>
+        </a>
       </div>
     </div>
-
-    <!-- FILTROS STICKY -->
-    <div class="carta-filters" id="cartaFilters">
-      <div class="cf-nav-arrows">
-        <button id="cfLeft" class="cf-arr" aria-label="Desplazar a la izquierda">&larr;</button>
-        <button id="cfRight" class="cf-arr" aria-label="Desplazar a la derecha">&rarr;</button>
-      </div>
-      <div class="cf-inner" id="cfInner">
-        <button class="cf-btn act" data-cat="all">Toda la carta <span class="cf-count">94</span></button>
-        <button class="cf-btn" data-cat="desayunos">Desayunos <span class="cf-count">2</span></button>
-        <button class="cf-btn" data-cat="almuerzos">Almuerzos <span class="cf-count">4</span></button>
-        <button class="cf-btn" data-cat="ensaladas">Ensaladas <span class="cf-count">4</span></button>
-        <button class="cf-btn" data-cat="tapas-frias">Tapas frías <span class="cf-count">8</span></button>
-        <button class="cf-btn" data-cat="tapas-calientes">Tapas calientes <span class="cf-count">12</span></button>
-        <button class="cf-btn" data-cat="bocadillos">Bocadillos <span class="cf-count">13</span></button>
-        <button class="cf-btn" data-cat="arroces">Arroces <span class="cf-count">8</span></button>
-        <button class="cf-btn" data-cat="carnes">Carnes <span class="cf-count">8</span></button>
-        <button class="cf-btn" data-cat="postres">Postres <span class="cf-count">8</span></button>
-        <button class="cf-btn" data-cat="bebidas">Bebidas <span class="cf-count">28</span></button>
-        <button class="cf-btn" data-cat="cafes">Cafés <span class="cf-count">8</span></button>
-      </div>
-    </div>
-
-    <div class="carta-body">
-
-      <!-- DESAYUNOS -->
-      <div class="cat-block" data-category="desayunos">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Desayunos</div>
-            <div class="cat-subtitle">Empieza el día con energía</div>
-          </div>
-          <span class="cat-badge">Hasta las 12h</span>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tostada / Croissant + bebida + café</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7</span></div>
-              <div class="mi-desc">Tomate, mantequilla y mermelada, huevo revuelto, queso crema</div>
-            </div>
-            <div class="mi-price">3<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Extras (jamón, aguacate, salmón, atún, bacon)</div>
-              <div class="mi-tags"><span class="mi-tag alg">4</span></div>
-            </div>
-            <div class="mi-price">+1<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">zumo de naranja natural</div>
-            </div>
-            <div class="mi-price">+1<small>,50€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ALMUERZO POPULAR -->
-      <div class="cat-block" data-category="almuerzos">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="m3 11 18-5v12L3 13z" />
-              <path d="M8 11v4" />
-              <path d="M13 10v4" />
-              <path d="M18 9v4" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Almuerzo Popular</div>
-            <div class="cat-subtitle">El ritual valenciano de media mañana</div>
-          </div>
-          <span class="cat-badge">De 9:00 a 11:30</span>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Almuerzo entero</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Medio almuerzo</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">7<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Cremaet</div>
-            </div>
-            <div class="mi-price">+1<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ternera o potro</div>
-            </div>
-            <div class="mi-price">+2<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ENSALADAS -->
-      <div class="cat-block" data-category="ensaladas">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="3" />
-              <path
-                d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Ensaladas</div>
-            <div class="cat-subtitle">Frescas y de temporada</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ensalada de la casa</div>
-              <div class="mi-desc">lechuga romana, tomate, zanahoria, remolacha, pepino, huevo, aceitunas y atún</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 4</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ensalada tomate rosa</div>
-              <div class="mi-desc">tomate rosa, olivas negras, piparras y ventresca</div>
-              <div class="mi-tags"><span class="mi-tag alg">4</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ensalada Cesar</div>
-              <div class="mi-desc">lechuga romana, cherrys, parmesano, tiras de pollo empanado, picatostes y salsa cesar</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 4, 7, 10</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Poke de pollo katsu o de salmón ahumado</div>
-              <div class="mi-desc">arroz jazmin, cebolla morada, edamame, aguacate, salsa soja, mayonesa japonesa y sésamo</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 4, 6, 11</span></div>
-            </div>
-            <div class="mi-price">15<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAPAS FRÍAS -->
-      <div class="cat-block" data-category="tapas-frias">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M2 12c0 5.52 4.48 10 10 10s10-4.48 10-10H2z" />
-              <path d="M7 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-              <path d="M12 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-              <path d="M17 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Tapas frías</div>
-            <div class="cat-subtitle">Para empezar bien</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ensaladilla rusa</div>
-              <div class="mi-desc">patata, zanahoria, atún, aceitunas, guisantes, huevo y mayonesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 4</span></div>
-            </div>
-            <div class="mi-price">8<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Ensaladilla de marisco</div>
-              <div class="mi-desc">patata, atún, huevo, sepia, surimi y mayonesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 2, 3, 4, 14</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Hummus de garbanzo</div>
-              <div class="mi-desc">con crudites y picos</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 11</span></div>
-            </div>
-            <div class="mi-price">10<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Boquerones en vinagre</div>
-              <div class="mi-desc">con aceitunas y salsa Mery</div>
-              <div class="mi-tags"><span class="mi-tag u">6unid</span><span class="mi-tag alg">4</span></div>
-            </div>
-            <div class="mi-price">6<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Anchoas del cantábrico</div>
-              <div class="mi-tags"><span class="mi-tag u">ud</span><span class="mi-tag alg">4</span></div>
-            </div>
-            <div class="mi-price">3<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tabla jamón ibérico y queso manchego curado</div>
-              <div class="mi-desc">con picos</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7</span></div>
-            </div>
-            <div class="mi-price">19<small>,90€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tartar de atún</div>
-              <div class="mi-desc">atún rojo, wakame, aguacate y salsa de soja</div>
-              <div class="mi-tags"><span class="mi-tag alg">4, 6, 11</span></div>
-            </div>
-            <div class="mi-price">15<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tartar de vaca</div>
-              <div class="mi-desc">steak tartar, pepinillos, chalota, mostaza dijon, salsa perrins</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 10, 12</span></div>
-            </div>
-            <div class="mi-price">18<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- TAPAS CALIENTES -->
-      <div class="cat-block" data-category="tapas-calientes">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path
-                d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 01-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Tapas calientes</div>
-            <div class="cat-subtitle">Del fuego a la mesa</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Patatas bravas</div>
-              <div class="mi-desc">patatas, alioli y salsa brava de la casa</div>
-              <div class="mi-tags"><span class="mi-tag alg">3</span></div>
-            </div>
-            <div class="mi-price">7<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Torrezno de Soria</div>
-            </div>
-            <div class="mi-price">8<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Pincho de tortilla</div>
-              <div class="mi-tags"><span class="mi-tag alg">3</span></div>
-            </div>
-            <div class="mi-price">4<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Croquetas de la casa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">2<small>,50€/ud</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Flor de alcachofa con sal de jamón y aceite de trufa</div>
-            </div>
-            <div class="mi-price">4<small>,50€/ud</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Verduras a la plancha</div>
-              <div class="mi-desc">calabacín, berenjena, cebolla, tomate, champiñones y salsa Mery</div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Coca de titaina (fuera de carta)</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 4</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tiras de pollo</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Chipirones a la plancha</div>
-              <div class="mi-tags"><span class="mi-tag alg">14</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Pulpo a la brasa</div>
-              <div class="mi-tags"><span class="mi-tag alg">14</span></div>
-            </div>
-            <div class="mi-price">19<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Huevos rotos con jamón ibérico</div>
-              <div class="mi-tags"><span class="mi-tag alg">3</span></div>
-            </div>
-            <div class="mi-price">13<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Revuelto de morcilla, setas y ajos tiernos</div>
-              <div class="mi-tags"><span class="mi-tag alg">3</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BOCADILLOS -->
-      <div class="cat-block" data-category="bocadillos">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path
-                d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Bocadillos & Tostas</div>
-            <div class="cat-subtitle">Nuestros clásicos en pan artesano</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Chivito</div>
-              <div class="mi-desc">lomo, bacon, queso, lechuga, tomate huevo y mayonesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Brascada</div>
-              <div class="mi-desc">ternera, jamón y cebolla pochada</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Almussafes</div>
-              <div class="mi-desc">sobrasada, queso brie, cebolla pochada</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7</span></div>
-            </div>
-            <div class="mi-price">7<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Potro con ajos tiernos</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tortilla de patata</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3</span></div>
-            </div>
-            <div class="mi-price">5<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Embutido con habas</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Chorizo criollo</div>
-              <div class="mi-desc">con queso brie y salsa gaucha</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Hamburguesa de la casa</div>
-              <div class="mi-desc">carne de Angus, bacon, queso, lechuga, tomate, cebolla morada y mayonesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7, 11</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Hamburguesa vegana</div>
-              <div class="mi-desc">heura, queso vegano, lechuga, tomate, cebolla morada y mayonesa vegana</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 6, 11</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tosta figatell</div>
-              <div class="mi-desc">pan de tosta, figatell, queso de cabra y salsa teriyaki</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 6, 7</span></div>
-            </div>
-            <div class="mi-price">12<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Sándwich mixto con patatas fritas</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7</span></div>
-            </div>
-            <div class="mi-price">4<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Titaina con huevo</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 4</span></div>
-            </div>
-            <div class="mi-price">9<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- ARROCES -->
-      <div class="cat-block" data-category="arroces">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Arroces & Fideuàs</div>
-            <div class="cat-subtitle">Por encargo · Mínimo 2 personas</div>
-          </div>
-        </div>
-        <div class="destaque-grid" style="grid-template-columns:1fr 1fr;margin-bottom:1.5rem">
-          <div class="destaque-item">
-            <div class="di-label">La estrella</div>
-            <div class="di-name">Paella de pollo y conejo</div>
-            <div class="di-desc">Receta tradicional valenciana cocinada con leña de naranjo.</div>
-            <div class="mi-tags"><span class="mi-tag alg">9</span></div>
-            <div class="di-price"><sup>€</sup>15<span style="font-size:.7em;color:rgba(27,58,92,.4)">,00 / p</span>
-            </div>
-          </div>
-          <div class="destaque-item">
-            <div class="di-label">Productos de la tierra</div>
-            <div class="di-name">Arroz de secreto, boletus y ajos tiernos</div>
-            <div class="mi-tags"><span class="mi-tag alg">9</span></div>
-            <div class="di-price"><sup>€</sup>17<span style="font-size:.7em;color:rgba(27,58,92,.4)">,00 / p</span>
-            </div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Arroz negro</div>
-              <div class="mi-desc">Con sepia y gambas, servido con ali-oli</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 4, 9, 14</span></div>
-            </div>
-            <div class="mi-price">15<small>€/p</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Arroz a banda</div>
-              <div class="mi-desc">El clásico marinero con todo el sabor del Mediterráneo</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 4, 9, 14</span></div>
-            </div>
-            <div class="mi-price">15<small>€/p</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Arroz de verduras</div>
-              <div class="mi-desc">Con verduras frescas de la huerta valenciana</div>
-              <div class="mi-tags"><span class="mi-tag v">Vegetariano</span><span class="mi-tag alg">9</span></div>
-            </div>
-            <div class="mi-price">13<small>€/p</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Fideuà de marisco</div>
-              <div class="mi-desc">Fideo fino con gambón y calamar</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 4, 9, 14</span></div>
-            </div>
-            <div class="mi-price">15<small>€/p</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Fideuà de secreto, boletus y ajos tiernos</div>
-              <div class="mi-desc">Nuestra especialidad de montaña en versión fideuà</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 9</span></div>
-            </div>
-            <div class="mi-price">16<small>€/p</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CARNES -->
-      <div class="cat-block" data-category="carnes">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-              <path d="M7 2v20" />
-              <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Nuestras Carnes</div>
-            <div class="cat-subtitle">Cortes premium a la brasa</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Contramuslo de pollo</div>
-            </div>
-            <div class="mi-price">12<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Milanesa de ternera napolitana</div>
-              <div class="mi-desc">con puré de patata</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">18<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Entrecot</div>
-            </div>
-            <div class="mi-price">18<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Entrecot (madurado)</div>
-            </div>
-            <div class="mi-price">23<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Solomillo</div>
-            </div>
-            <div class="mi-price">20<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Chuletas de cordero</div>
-            </div>
-            <div class="mi-price">18<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Secreto</div>
-            </div>
-            <div class="mi-price">16<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Parillada</div>
-            </div>
-            <div class="mi-price">25<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- POSTRES -->
-      <div class="cat-block" data-category="postres">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></div>
-          <div>
-            <div class="cat-title">Postres caseros</div>
-            <div class="cat-subtitle">El toque dulce de nuestra cocina</div>
-          </div>
-          <span class="cat-badge">ADN Valenciano</span>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tiramisú de horchata y fartons</div>
-              <div class="mi-desc">Nuestra reinterpretación del clásico con horchata de chufa valenciana, mascarpone y fartons tostados</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Torrija con helado de horchata</div>
-              <div class="mi-desc">Pan brioche caramelizado, crema inglesa y helado artesano de horchata de Carpesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Corona de Carpesa</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Crema de naranja</div>
-              <div class="mi-desc">Crema catalana perfumada con naranja valenciana y caramelo crujiente</div>
-              <div class="mi-tags"><span class="mi-tag alg">3, 7</span></div>
-            </div>
-            <div class="mi-price">7<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tarta de queso</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Coca de llanda con naranja y helado</div>
-              <div class="mi-desc">Coca esponjosa valenciana, reducción de naranja de Rascanya y helado de vainilla</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7</span></div>
-            </div>
-            <div class="mi-price">7<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Brownie con helado</div>
-              <div class="mi-desc">Brownie de chocolate 70%, nueces y helado de vainilla de Madagascar</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 3, 7, 8</span></div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Copa de yogur griego con frutas del bosque</div>
-              <div class="mi-desc">Yogur griego, frutas frescas de temporada y granola artesana</div>
-              <div class="mi-tags"><span class="mi-tag alg">1, 7, 8</span></div>
-            </div>
-            <div class="mi-price">7<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BEBIDAS -->
-      <div class="cat-block" data-category="bebidas">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M8 2h8a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z" />
-              <path d="M6 8h12" />
-              <path d="M6 12h12" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Bebidas</div>
-            <div class="cat-subtitle">Refrescos y cervezas</div>
-          </div>
-        </div>
-
-        <div class="mi-group-title sin-alcohol">Sin alcohol</div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Agua Cabreiroa 50 cl</div>
-            </div>
-            <div class="mi-price">1<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Agua Cabreiroa 150cl</div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Agua con gas</div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Pepsi / Pepsi Max</div>
-            </div>
-            <div class="mi-price">2<small>,20€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Kas naranja o limón</div>
-            </div>
-            <div class="mi-price">2<small>,20€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tonica</div>
-            </div>
-            <div class="mi-price">2<small>,20€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">7 up / Bitter Kas / Lipton</div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Zumo de melocotón o piña</div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Zumo naranja natural</div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Cacaolat</div>
-              <div class="mi-tags"><span class="mi-tag alg">7</span></div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-        </div>
-
-        <div class="mi-group-title con-alcohol">Bebidas alcohólicas</div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Estrella Galicia doble o tercio</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">2<small>,60€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Estrella Galicia caña</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">1<small>,80€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Estrella Galicia 0’0% / tostada</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">2<small>,60€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">1906 doble</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">3<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">1906 caña</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">2<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tyris / Tyris Marzen</div>
-              <div class="mi-tags"><span class="mi-tag alg">1</span></div>
-            </div>
-            <div class="mi-price">3<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Tinto de verano</div>
-              <div class="mi-tags"><span class="mi-tag alg">12</span></div>
-            </div>
-            <div class="mi-price">3<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Sangria copa</div>
-              <div class="mi-tags"><span class="mi-tag alg">12</span></div>
-            </div>
-            <div class="mi-price">4<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Sangria jarra</div>
-              <div class="mi-tags"><span class="mi-tag alg">12</span></div>
-            </div>
-            <div class="mi-price">15<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Chupito</div>
-            </div>
-            <div class="mi-price">2<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Copa</div>
-            </div>
-            <div class="mi-price">3<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Combinado</div>
-            </div>
-            <div class="mi-price">6<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Combinado primeras marcas</div>
-            </div>
-            <div class="mi-price">8<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CAFÉS -->
-      <div class="cat-block" data-category="cafes">
-        <div class="cat-header">
-          <div class="cat-icon"><svg viewBox="0 0 24 24">
-              <path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z" />
-            </svg></div>
-          <div>
-            <div class="cat-title">Cafés e infusiones</div>
-            <div class="cat-subtitle">El toque final</div>
-          </div>
-        </div>
-        <div class="menu-grid">
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Café</div>
-            </div>
-            <div class="mi-price">1<small>,40€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Cortado</div>
-              <div class="mi-tags"><span class="mi-tag alg">7</span></div>
-            </div>
-            <div class="mi-price">1<small>,60€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Café con leche</div>
-              <div class="mi-tags"><span class="mi-tag alg">7</span></div>
-            </div>
-            <div class="mi-price">2<small>€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Bombón</div>
-              <div class="mi-tags"><span class="mi-tag alg">7</span></div>
-            </div>
-            <div class="mi-price">1<small>,80€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Americano</div>
-            </div>
-            <div class="mi-price">1<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Cremaet</div>
-            </div>
-            <div class="mi-price">3<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Infusiones</div>
-            </div>
-            <div class="mi-price">1<small>,50€</small></div>
-          </div>
-          <div class="mi">
-            <div class="mi-left">
-              <div class="mi-name">Colacao</div>
-              <div class="mi-tags"><span class="mi-tag alg">7</span></div>
-            </div>
-            <div class="mi-price">2<small>€</small></div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-    </div>
-
-    <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  ALÃ‰RGENOS ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
-    <div style="max-width:1100px;margin:0 auto;padding:4rem 4rem 5rem;border-top:1px solid rgba(27,58,92,.08)">
-      <div class="rv" style="text-align:center;margin-bottom:3.5rem" id="algSec">
-        <div class="ey alg-info" style="justify-content:center;color:var(--gold)">Información obligatoria</div>
-        <h4 class="st alg-title" style="margin-bottom:.5rem">Leyenda de <em>Alérgenos</em></h4>
-        <p class="alg-desc"
-          style="font-size:.82rem;font-weight:300;color:rgba(27,58,92,.45);max-width:500px;margin:0 auto;line-height:1.75">
-          Conforme al Reglamento (UE) 1169/2011. Si tiene alguna alergia o intolerancia, consulte con nuestro equipo.
-          Todos nuestros platos pueden contener trazas.
-        </p>
-      </div>
-
-      <div class="allergen-grid rv">
-        <div class="alg-card">
-          <div class="alg-num">1</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M7 22l0-14M17 22l0-14M12 22l0-12M6 8l1-4h10l1 4M10 4l0-2M14 4l0-2" />
-            </svg></div><span class="alg-name">Gluten</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">2</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M2 13h4M18 13h4M6 13c0-4 3-7 6-7s6 3 6 7M4 17l2-2M20 17l-2-2" />
-            </svg></div><span class="alg-name">Crustáceos</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">3</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <ellipse cx="12" cy="12" rx="6" ry="8" />
-            </svg></div><span class="alg-name">Huevos</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">4</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M2 12s4.5-6 10-6 10 6 10 6-4.5 6-10 6S2 12 2 12z" />
-            </svg></div><span class="alg-name">Pescado</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">5</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <ellipse cx="9" cy="9" rx="4" ry="5" transform="rotate(-15 9 9)" />
-              <ellipse cx="15" cy="15" rx="4" ry="5" transform="rotate(-15 15 15)" />
-            </svg></div><span class="alg-name">Cacahuetes</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">6</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M12 22V10M12 10c0-2.2 1.8-4 4-4M12 10c0-2.2-1.8-4-4-4" />
-            </svg></div><span class="alg-name">Soja</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">7</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M20 22L18 5c0-1.7-1.3-3-3-3H9C7.3 2 6 3.3 6 5l-2 17h16z" />
-            </svg></div><span class="alg-name">Lácteos</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">8</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round">
-              <path d="M12 2C8 2 8 12 12 22C16 12 16 2 12 2Z" />
-            </svg></div><span class="alg-name">Frutos Cáscara</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">9</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M12 22V9M12 3v3" />
-            </svg></div><span class="alg-name">Apio</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">10</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M16 22l1-9H7l1 9h8z" />
-            </svg></div><span class="alg-name">Mostaza</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">11</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round">
-              <circle cx="12" cy="12" r="9" />
-              <circle cx="12" cy="12" r="3.5" fill="currentColor" />
-            </svg></div><span class="alg-name">Sésamo</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">12</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <circle cx="12" cy="12" r="10" />
-            </svg></div><span class="alg-name">Sulfitos</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">13</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M12 22V10" />
-            </svg></div><span class="alg-name">Altramuces</span>
-        </div>
-        <div class="alg-card">
-          <div class="alg-num">14</div>
-          <div class="alg-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
-              stroke-linecap="round">
-              <path d="M4 12c0-6 3.6-10 8-10s8 4 8 10" />
-            </svg></div><span class="alg-name">Moluscos</span>
-        </div>
-      </div>
-    </div>
-
   </div>
 
   <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  VISION ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
@@ -1693,11 +740,11 @@
       <div>
         <div class="fct">Carta</div>
         <ul class="fli">
-          <li><a href="#cartaFilters">Tapeo de autor</a></li>
-          <li><a href="#cartaFilters">Arroces y brasas</a></li>
-          <li><a href="#cartaFilters">La brasa</a></li>
-          <li><a href="#cartaFilters">Healthy performance</a></li>
-          <li><a href="#cartaFilters">Postres caseros</a></li>
+          <li><a href="#carta">Tapeo de autor</a></li>
+          <li><a href="#carta">Arroces y brasas</a></li>
+          <li><a href="#carta">La brasa</a></li>
+          <li><a href="#carta">Healthy performance</a></li>
+          <li><a href="#carta">Postres caseros</a></li>
         </ul>
       </div>
       <div>

@@ -1,4 +1,4 @@
-﻿/* ══════════════════════════════════════
+/* ══════════════════════════════════════
    scripts.js - El Palmaret
    Extraido de index.html - Abril 2026
    Incluye: Nav, Carruseles, Galeria,
@@ -200,7 +200,12 @@
         serviceCardDescs: ['Pan de payés con todos los acompañamientos. El ritual matutino valenciano, como debe ser.', 'Cocina de mercado, producto fresco y rotación diaria para el socio que vive en el club.', 'Paellas, arroces a leña, carnes y pescados a la brasa. Disponibles por encargo.', 'Menú especial para deportistas. Platos nutritivos pero gourmet para los que entrenan a diario.', 'Menús grupales, celebraciones y eventos a medida. Organizamos la victoria contigo.', 'Cocina de calidad para llevar. Tecnología y agilidad al servicio del deportista en movimiento.'],
         menuEyebrow: 'Nuestra carta',
         menuTitle: 'Tradición valenciana <br> <em>con técnica de vanguardia</em>',
-        menuDesc: 'Platos diseñados para compartir. Producto de proximidad, respeto por la temporada y el toque técnico de nuestro equipo. Los precios incluyen IVA.',
+        menuDesc: 'Platos diseñados para compartir. Producto de proximidad, respeto por la temporada y el toque técnico de nuestro equipo. Nuestra carta se renueva cada semana para ofrecerte lo mejor de la temporada.',
+        pdfBtn: 'Ver carta',
+        pdfModalTitle: 'Carta El Palmaret',
+        pdfLoading: 'Cargando carta...',
+        pdfDownload: 'Descargar PDF',
+        pdfViewDrive: 'Abrir en Drive',
         sharingTitle: 'Menú para compartir',
         sharingDesc: 'La experiencia completa de El Palmaret. Platos diseñados para disfrutar entre todos en la mesa. Mesa completa.',
         sharingPrice1: 'sin bebida / p',
@@ -281,7 +286,12 @@
         serviceCardDescs: ['Country bread with all accompaniments. The Valencian morning ritual, as it should be.', 'Market cuisine, fresh produce and daily rotation for members who live around the club.', 'Paellas, wood-fired rice, grilled meats and fish. Available by order.', 'Special menu for athletes. Nutritious yet gourmet dishes for daily training.', 'Group menus, celebrations and tailor-made events. We help you celebrate the win.', 'Quality food to go. Technology and agility for athletes on the move.'],
         menuEyebrow: 'Our menu',
         menuTitle: 'Valencian tradition <br> <em>with avant-garde technique</em>',
-        menuDesc: 'Dishes designed for sharing. Local produce, seasonal respect and our team\'s technical touch. Prices include VAT.',
+        menuDesc: 'Dishes designed for sharing. Local produce, seasonal respect and our team\'s technical touch. Our menu is renewed weekly to offer you the best of the season.',
+        pdfBtn: 'See menu',
+        pdfModalTitle: 'El Palmaret Menu',
+        pdfLoading: 'Loading menu...',
+        pdfDownload: 'Download PDF',
+        pdfViewDrive: 'Open in Drive',
         sharingTitle: 'Sharing Menu',
         sharingDesc: 'The complete El Palmaret experience. Dishes designed to be enjoyed by everyone at the table. Full table only.',
         sharingPrice1: 'without drinks / p',
@@ -362,7 +372,12 @@
         serviceCardDescs: ['Pa de pagés amb tots els acompanyaments. El ritual matinal valencià, com toca.', 'Cuina de mercat, producte fresc i rotació diària per al soci que viu el club.', 'Paelles, arrossos a llenya, carns i peixos a la brasa. Disponibles per encàrrec.', 'Menú especial per a esportistes. Plats nutritius però gourmet per als qui entrenen cada dia.', 'Menús de grup, celebracions i esdeveniments a mida. Organitzem la victòria amb tu.', 'Cuina de qualitat per a emportar. Tecnologia i agilitat al servei de l\'esportista en moviment.'],
         menuEyebrow: 'La nostra carta',
         menuTitle: 'Tradició valenciana <br> <em>amb tècnica d\'avantguarda</em>',
-        menuDesc: 'Plats dissenyats per a compartir. Producte de proximitat, respecte per la temporada i el toque tècnic del nostre equip. Els preus inclouen IVA.',
+        menuDesc: 'Plats dissenyats per a compartir. Producte de proximitat, respecte per la temporada i el toc tècnic del nostre equip. La nostra carta es renova cada setmana per a oferir-te el millor de la temporada.',
+        pdfBtn: 'Veure carta',
+        pdfModalTitle: 'Carta El Palmaret',
+        pdfLoading: 'Carregant carta...',
+        pdfDownload: 'Descarregar PDF',
+        pdfViewDrive: 'Obrir en Drive',
         sharingTitle: 'Menú per a compartir',
         sharingDesc: "L'experiència completa d'El Palmaret. Plats dissenyats per a disfrutar entre tots a la taula. Taula completa.",
         sharingPrice1: 'sense beguda / p',
@@ -375,7 +390,7 @@
         categoryBadges: ['Fins les 12h', 'De 9:00 a 11:30', 'ADN Valencià'],
         featuredLabels: ['L\'estrela', 'Productes de la terra', 'Icònic', 'De sempre', 'Estrela de la casa', 'Imprescindible', 'De siempre'],
         featuredNames: ['Paella de pollastre i conill', 'Arròs de secret, boletus i alls tendres', 'Tiramisú d\'orxata i fartons', 'Torrija amb gelat d\'orxata', 'Tàrtar de tonyina roja i alvocat', 'Flor de carxofa, sal de pernil i tòfona', 'Ensaladilla russa de la casa'],
-        featuredDescs: ['Recepta tradicional valenciana cuinada amb llenya de taronger.', '', 'La nostra reinterpretació del clàssic amb orxata de xufa valenciana, mascarpone i fartons torrats.', 'Pa brioix caramel·litzat, crema anglesa i gelat artesà d\'orxata d\'Carpesa.', 'Tonyina del Mediterrani, alvocat cremós, ikura, oli de sèsam i wasabi. Servit fred sobre base de gingebre.', 'Carxofa de la terreta rostida en flor, oli de tòfona negra i sal de pernil ibèric. L\'elegància del producte de proximitat.', 'Recepta pròpia d\'Esteve. Creïlla, carlota, pésols i maionesa artesana. La referència del tapeig valencià.'],
+        featuredDescs: ['Recepta tradicional valenciana cuinada amb llenya de taronger.', '', 'La nostra reinterpretació del clàssic amb orxata de xufa valenciana, mascarpone i fartons torrats.', 'Pa brioix caramel·litzat, crema anglesa i gelat artesà d\'orxata d\'Carpesa.', 'Tonyina del Mediterrani, alvocat cremós, ikura, oli de sèsam i wasabi. Servit fred sobre base de gingebre.', 'Carxofa de la terreta rostida en flor, oli de tòfona negra i sal de pernil ibèric. L\'elegància del producte de proximidad.', 'Recepta pròpia d\'Esteve. Creïlla, carlota, pésols i maionesa artesana. La referència del tapeig valencià.'],
         visionQuote: '"Més que un espai,<br><em>un futur.</em>"',
         visionSub: 'Una historia que se cocina a fuego lento',
         visionBtn: 'Sigues part de la història',
@@ -754,8 +769,13 @@
       setTextList('#servicio .sc2 h3', t().serviceCardTitles);
       setTextList('#servicio .sc2 p', t().serviceCardDescs);
       setText('#carta .ey', t().menuEyebrow);
-      setText('#carta .carta-hero h2', t().menuTitle, true);
-      setText('#carta .carta-hero p', t().menuDesc);
+      setText('#carta h2.st', t().menuTitle, true);
+      setText('#carta .carta-premium-desc', t().menuDesc);
+      setText('#openCartaPdf .pdf-btn-text', t().pdfBtn);
+      setText('.pdf-modal .pdf-modal-title span', t().pdfModalTitle);
+      setText('#pdfLoading span', t().pdfLoading);
+      setText('.pdf-modal-download span', t().pdfDownload);
+      setText('.pdf-modal-fullscreen span', t().pdfViewDrive);
 
       // Sharing Menu
       setText('.sb-left h3', t().sharingTitle);
@@ -1006,6 +1026,42 @@ document.querySelectorAll('.bp, .ncta').forEach(btn => {
   });
 });
 
+// ──── VISOR PDF CARTA PREMIUM
+(function() {
+  const PDF_URL = 'https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/preview';
+  const overlay = document.getElementById('pdfModalOverlay');
+  const backdrop = document.getElementById('pdfModalBackdrop');
+  const closeBtn = document.getElementById('pdfModalClose');
+  const openBtn = document.getElementById('openCartaPdf');
+  const pdfFrame = document.getElementById('pdfFrame');
+  const pdfLoading = document.getElementById('pdfLoading');
 
+  if (!overlay || !openBtn) return;
 
+  function openModal() {
+    if (!pdfFrame.src || pdfFrame.src === 'about:blank' || pdfFrame.src === '') {
+      pdfFrame.src = PDF_URL;
+      pdfFrame.addEventListener('load', function onLoad() {
+        if (pdfLoading) pdfLoading.classList.add('hidden');
+        pdfFrame.removeEventListener('load', onLoad);
+      });
+    }
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+})();
