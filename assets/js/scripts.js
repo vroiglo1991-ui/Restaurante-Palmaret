@@ -135,7 +135,7 @@
     });
 
     // ──── SMOOTH SCROLL (offset = altura real del nav)
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
+    document.querySelectorAll('a[href^="#"]:not(#heroCartaBtn):not(#navCartaBtn)').forEach(a => {
       a.addEventListener('click', e => {
         const href = a.getAttribute('href');
         if (href === '#') return;
@@ -1056,6 +1056,23 @@ document.querySelectorAll('.bp, .ncta').forEach(btn => {
   }
 
   openBtn.addEventListener('click', openModal);
+
+  // Abrir modal directamente desde el botón del hero o del menú de navegación
+  const heroBtn = document.getElementById('heroCartaBtn');
+  const navBtn = document.getElementById('navCartaBtn');
+  if (heroBtn) {
+    heroBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+  if (navBtn) {
+    navBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      openModal();
+    });
+  }
+
   if (backdrop) backdrop.addEventListener('click', closeModal);
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
