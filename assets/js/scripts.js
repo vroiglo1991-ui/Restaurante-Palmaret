@@ -174,15 +174,18 @@
         mapSub: 'El Palmaret | Restaurante · Valencia',
         formTitle: 'Hablemos',
         formSubtitle: 'Gestionamos cada reserva de forma personal para que tu experiencia empiece desde el primer contacto.',
-        btnWhatsapp: 'Escribir ahora',
-        btnPhone: 'Llamar ahora',
-        labelConfirmation: 'La reserva queda supeditada a la confirmación por WhatsApp o teléfono.',
+        btnWhatsapp: 'Escríbenos',
+        btnWhatsappHint: 'vía WhatsApp',
+        btnWeb: 'Reserva online',
+        btnWebHint: 'reserva instantánea',
+        labelConfirmation: 'La reserva queda supeditada a la confirmación vía WhatsApp o web.',
+        phoneNote: '¿Prefieres llamarnos? <a href="tel:+34633960373">633 960 373</a> <span>(contestador 24h)</span>',
         footerTag: 'Sabor mediterráneo<br>con alma deportiva.',
-        footerAddr: 'Complejo Deportivo · Valencia<br>restaurante@elpalmaret.com',
+        footerAddr: 'Complejo Deportivo · Valencia<br><a href="tel:+34633960373" style="color:inherit; text-decoration:none;">633 960 373</a>',
         fCarta: 'Carta', fServicios: 'Servicios', fReservas: 'Reservas',
         fMenu1: 'Tapeo de autor', fMenu2: 'Arroces y brasas', fMenu3: 'La brasa', fMenu4: 'Healthy performance', fMenu5: 'Postres caseros',
         fServ1: 'Desayunos', fServ2: 'Menú ejecutivo', fServ3: 'Menú deportistas', fServ4: 'Cenas de equipo', fServ5: 'Eventos a medida',
-        fRes1: 'Reservar mesa', fRes2: 'Grupos', fRes3: 'Nuestro chef', fRes4: 'Galería',
+        fRes1: 'Reservar mesa', fRes2: 'Grupos', fRes3: 'Ubicación', fRes4: 'Galería',
         copy: '© 2026 El Palmaret — Todos los derechos reservados',
         slogan: 'Una historia que se cocina a fuego lento',
         galleryEyebrow: 'Galería gastronómica',
@@ -260,15 +263,18 @@
         mapSub: 'El Palmaret | Restaurant · Valencia',
         formTitle: 'Let\'s talk',
         formSubtitle: 'We manage every reservation personally so your experience starts with the very first message.',
-        btnWhatsapp: 'Write now',
-        btnPhone: 'Call now',
-        labelConfirmation: 'Reservations are subject to confirmation via WhatsApp or phone.',
+        btnWhatsapp: 'Write to us',
+        btnWhatsappHint: 'via WhatsApp',
+        btnWeb: 'Book online',
+        btnWebHint: 'instant booking',
+        labelConfirmation: 'Reservations are subject to confirmation via WhatsApp or web.',
+        phoneNote: 'Prefer to call? <a href="tel:+34633960373">633 960 373</a> <span>(24h answering machine)</span>',
         footerTag: 'Mediterranean flavor<br>with a sporting soul.',
-        footerAddr: 'Sports Complex · Valencia<br>restaurante@elpalmaret.com',
+        footerAddr: 'Sports Complex · Valencia<br><a href="tel:+34633960373" style="color:inherit; text-decoration:none;">633 960 373</a>',
         fCarta: 'Menu', fServicios: 'Services', fReservas: 'Bookings',
         fMenu1: 'Signature tapas', fMenu2: 'Rice & grill', fMenu3: 'The grill', fMenu4: 'Healthy performance', fMenu5: 'Homemade desserts',
         fServ1: 'Breakfast', fServ2: 'Executive menu', fServ3: 'Athlete menu', fServ4: 'Team dinners', fServ5: 'Custom events',
-        fRes1: 'Book a table', fRes2: 'Groups', fRes3: 'Our chef', fRes4: 'Gallery',
+        fRes1: 'Book a table', fRes2: 'Groups', fRes3: 'Location', fRes4: 'Gallery',
         copy: '© 2026 El Palmaret — All rights reserved',
         slogan: 'A story cooked slowly',
         galleryEyebrow: 'Gastronomic gallery',
@@ -346,15 +352,18 @@
         mapSub: 'El Palmaret | Restaurant · València',
         formTitle: 'Parlem',
         formSubtitle: 'Gestionem cada reserva de forma personal perquè la teua experiència comence des del primer contacte.',
-        btnWhatsapp: 'Escriure ara',
-        btnPhone: 'Trucar ara',
-        labelConfirmation: 'La reserva queda supeditada a la confirmació per WhatsApp o telèfon.',
+        btnWhatsapp: 'Escriu-nos',
+        btnWhatsappHint: 'via WhatsApp',
+        btnWeb: 'Reserva online',
+        btnWebHint: 'reserva instantània',
+        labelConfirmation: 'La reserva queda supeditada a la confirmació via WhatsApp o web.',
+        phoneNote: 'Prefereixes trucar? <a href="tel:+34633960373">633 960 373</a> <span>(contestador 24h)</span>',
         footerTag: 'Sabor mediterrani<br>amb ànima esportiva.',
-        footerAddr: 'Complex Esportiu · València<br>restaurante@elpalmaret.com',
+        footerAddr: 'Complex Esportiu · València<br><a href="tel:+34633960373" style="color:inherit; text-decoration:none;">633 960 373</a>',
         fCarta: 'Carta', fServicios: 'Serveis', fReservas: 'Reserves',
         fMenu1: 'Tapeig d\'autor', fMenu2: 'Arrossos i brases', fMenu3: 'La brasa', fMenu4: 'Healthy performance', fMenu5: 'Postres casolans',
         fServ1: 'Desdejunis', fServ2: 'Menú executiu', fServ3: 'Menú esportistes', fServ4: 'Sopars d\'equip', fServ5: 'Esdeveniments a mida',
-        fRes1: 'Reservar taula', fRes2: 'Grups', fRes3: 'El nostre xef', fRes4: 'Galeria',
+        fRes1: 'Reservar taula', fRes2: 'Grups', fRes3: 'Ubicació', fRes4: 'Galeria',
         copy: '© 2026 El Palmaret — Tots els drets reservats',
         slogan: 'Una història que se cocina a fuego lento',
         galleryEyebrow: 'Galeria gastronòmica',
@@ -747,8 +756,7 @@
       setText('nav ul li:nth-child(1) a', t().navExp);
       setText('nav ul li:nth-child(2) a', t().navGal);
       setText('nav ul li:nth-child(3) a', t().navCarta);
-      setText('nav ul li:nth-child(4) a', t().navEquipo);
-      setText('nav ul li:nth-child(5) a', t().navReservar);
+      setText('nav ul li:nth-child(4) a', t().navReservar);
       setText('.hey', t().heroEyebrow);
       setText('.hh1', t().heroTitle, true);
       setText('.hh1s', t().heroSub);
@@ -794,12 +802,6 @@
       setText('.vis-q', t().visionQuote, true);
       setText('.vis-sub', t().visionSub);
       setText('.vis-inner .bp', t().visionBtn);
-      setText('#equipo .ey', t().teamTitle);
-      setText('#equipo .st', t().teamMainTitle, true);
-      setText('#equipo .cc:nth-child(1) .crl', t().teamRole1);
-      setText('#equipo .cc:nth-child(1) .cbi', t().teamBio1);
-      setText('#equipo .cc:nth-child(2) .crl', t().teamRole2);
-      setText('#equipo .cc:nth-child(2) .cbi', t().teamBio2);
       setText('#reserva .rl h2', t().reserveTitle, true);
       setText('#reserva .rl p', t().reserveDesc);
       setText('#reserva .il .ir:nth-child(1) strong', t().infoSchedule);
@@ -808,11 +810,10 @@
       setText('#reserva .il .ir:nth-child(2) span', t().infoRiceVal);
       setText('#reserva .il .ir:nth-child(3) strong', t().infoGroups);
       setText('#reserva .il .ir:nth-child(3) span', t().infoGroupsVal);
-      setText('#reserva .il .ir:nth-child(4) strong', t().infoContact);
       setText('#reservationSection .rft', t().formTitle);
       setText('#reservationSection .rfs', t().formSubtitle);
-      setText('#btnWhatsappReserva .rs-row-title', t().btnWhatsapp);
-      setText('#btnPhoneReserva .rs-row-cta span', t().btnPhone);
+      setText('#btnWhatsappReserva .rs-ch-name', t().btnWhatsapp);
+      setText('#btnWebReserva .rs-ch-name', t().btnWeb);
       setText('#reservationSection .r-note', t().labelConfirmation);
 
       // Cookie Consent Translation
