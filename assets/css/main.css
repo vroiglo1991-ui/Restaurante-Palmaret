@@ -293,19 +293,23 @@ nav ul a:hover::after {
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8rem 2rem 5rem;
   overflow: hidden;
+  background-color: var(--navy-dark);
 }
 
 .hbg {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(to bottom, rgba(15, 37, 64, 0.75), rgba(10, 24, 40, 0.95)), url('../img/paellajpg.webp');
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(10, 24, 40, 0.65) 0%, rgba(15, 37, 64, 0.55) 40%, rgba(10, 24, 40, 0.90) 100%),
+              url('../img/paellajpg.webp') center center / cover no-repeat;
   z-index: 1;
   transform: scale(1.02);
   transition: transform 1.2s ease-out;
@@ -314,6 +318,8 @@ nav ul a:hover::after {
 .hgrain {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   background-image: radial-gradient(rgba(201, 168, 76, 0.04) 1px, transparent 1px);
   background-size: 32px 32px;
   z-index: 2;
@@ -323,12 +329,14 @@ nav ul a:hover::after {
 .htex, .hglow {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
   pointer-events: none;
 }
 
 .hglow {
-  background: radial-gradient(circle at 50% 40%, rgba(201, 168, 76, 0.12) 0%, transparent 65%);
+  background: radial-gradient(circle at 50% 45%, rgba(201, 168, 76, 0.12) 0%, transparent 65%);
 }
 
 .hcont {
@@ -337,9 +345,14 @@ nav ul a:hover::after {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.hey {
+.hero .hey {
   font-family: var(--fc);
   font-size: 0.85rem;
   font-weight: 700;
@@ -347,6 +360,22 @@ nav ul a:hover::after {
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+}
+
+.hero .hey::before,
+.hero .hey::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+  opacity: 0.7;
+  flex-shrink: 0;
 }
 
 .hh1 {
@@ -1121,7 +1150,8 @@ nav ul a:hover::after {
 }
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  UBICACIÓN ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
-#ubicacion {
+#ubicacion,
+.ubicacion-section {
   background: var(--navy-dark);
   padding: 0;
   margin: 0;
@@ -1130,14 +1160,72 @@ nav ul a:hover::after {
   overflow: hidden;
 }
 
-#ubicacion .map-header {
+#ubicacion .map-header,
+.ubicacion-section .map-header {
   padding: 6rem 2rem 3rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   max-width: 900px;
   margin: 0 auto;
 }
 
-#ubicacion .map-frame {
+#ubicacion .ey,
+.ubicacion-section .ey {
+  font-family: var(--fc);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  text-align: center;
+  width: auto;
+}
+
+#ubicacion .ey::before,
+#ubicacion .ey::after,
+.ubicacion-section .ey::before,
+.ubicacion-section .ey::after {
+  content: '';
+  width: 28px;
+  height: 1px;
+  background: var(--gold);
+  display: inline-block;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+#ubicacion .map-title,
+#ubicacion h2.st,
+.ubicacion-section .map-title,
+.ubicacion-section h2.st {
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0.75rem;
+}
+
+#ubicacion .map-sub,
+.ubicacion-section .map-sub {
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.95rem;
+  color: rgba(237, 232, 213, 0.7);
+  line-height: 1.6;
+}
+
+#ubicacion .map-frame,
+.ubicacion-section .map-frame {
   width: 100%;
   height: 460px;
   filter: grayscale(0.12) contrast(1.08);
