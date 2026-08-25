@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Mesa no encontrada | El Palmaret</title>
+  <meta name="description" content="Esta página no existe. Vuelve a El Palmaret y reserva tu experiencia gastronómica en Valencia.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/img/logojpg.png">
+  <style>
+    :root {
+      --navy-dark: #0f2540;
+      --cream: #EDE8D5;
+      --gold: #C9A84C;
+      --fd: 'Cormorant Garamond', Georgia, serif;
+      --fb: 'Barlow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --fc: 'Barlow Condensed', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    body {
+      font-family: var(--fb);
+      background: var(--navy-dark);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* ── Ambient glow ── */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: .5; transform: translate(-50%,-50%) scale(1); }
+      50%      { opacity: 1;  transform: translate(-50%,-50%) scale(1.06); }
+    }
+
+    /* ── Content ── */
+    .page-404 {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 2rem 4rem;
+      width: 100%;
+      max-width: 640px;
+      flex: 1;
+      animation: fadeUp .9s cubic-bezier(.25,.46,.45,.94) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo */
+    .logo-404 {
+      width: 72px; height: auto;
+      margin-bottom: 2rem;
+      opacity: .85;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Number */
+    .num-404 {
+      font-family: var(--fd);
+      font-size: clamp(6rem, 16vw, 11rem);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -.03em;
+      color: transparent;
+      background: linear-gradient(180deg, rgba(201,168,76,.4) 0%, rgba(201,168,76,.06) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      user-select: none;
+      margin-bottom: .5rem;
+    }
+
+    /* Divider */
+    .div-404 {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1rem; margin-bottom: 1.8rem;
+    }
+    .div-404 span {
+      width: 45px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .35;
+    }
+    .div-404 svg { color: var(--gold); opacity: .45; width: 16px; height: 16px; }
+
+    /* Title */
+    .t-404 {
+      font-family: var(--fd);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 400; line-height: 1.25;
+      margin-bottom: .8rem;
+    }
+    .t-404 em { color: var(--gold); font-style: italic; }
+
+    /* Subtitle */
+    .s-404 {
+      font-size: 1rem; font-weight: 300; line-height: 1.75;
+      color: rgba(237,232,213,.5);
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Buttons */
+    .btns-404 {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+
+    .bp4 {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .8rem 1.8rem;
+      font-family: var(--fc); font-size: .76rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+      color: var(--navy-dark); background: var(--gold); border: 1px solid var(--gold);
+      cursor: pointer; transition: all .25s ease;
+    }
+    .bp4:hover {
+      background: #d4b355; border-color: #d4b355;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,.22);
+    }
+
+    .bs4 {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .8rem 1.8rem;
+      font-family: var(--fc); font-size: .76rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase; text-decoration: none;
+      color: var(--cream); background: transparent;
+      border: 1px solid rgba(201,168,76,.28);
+      cursor: pointer; transition: all .25s ease;
+    }
+    .bs4:hover {
+      border-color: var(--gold); color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* Bottom */
+    .bot-404 {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem 2rem;
+      display: flex; align-items: center; gap: .6rem;
+      font-family: var(--fc); font-size: .65rem; font-weight: 600;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(237,232,213,.18);
+    }
+    .bot-404 a {
+      color: rgba(201,168,76,.3); text-decoration: none; transition: color .3s;
+    }
+    .bot-404 a:hover { color: var(--gold); }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      .btns-404 { flex-direction: column; align-items: center; }
+      .bp4, .bs4 { width: 100%; max-width: 260px; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-404">
+    <img src="assets/img/logojpg.png" alt="El Palmaret" class="logo-404" width="72" height="72">
+    <div class="num-404" aria-hidden="true">404</div>
+    <div class="div-404">
+      <span></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/>
+        <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/>
+      </svg>
+      <span></span>
+    </div>
+    <h1 class="t-404">Esta mesa no está <em>reservada</em></h1>
+    <p class="s-404">Parece que la página que buscas se ha evaporado como el socarrat de una buena paella. Pero no te preocupes, tu mesa te espera en otra parte.</p>
+    <div class="btns-404">
+      <a href="/" class="bp4">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        Volver al inicio
+      </a>
+      <a href="/#reserva" class="bs4">Reservar mesa →</a>
+    </div>
+  </div>
+  <div class="bot-404">
+    <span>El Palmaret</span><span>·</span>
+    <a href="tel:+34633960373">633 960 373</a>
+    <span>·</span><span>Valencia</span>
+  </div>
+</body>
+
+</html>

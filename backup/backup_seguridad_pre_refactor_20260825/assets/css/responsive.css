@@ -1,0 +1,262 @@
+/* ══════════════════════════════════════
+   RESPONSIVE (TABLETS Y MÓVILES)
+══════════════════════════════════════ */
+.hamburger { display: none; background: transparent; border: none; color: var(--gold); cursor: pointer; padding: 0.2rem; width: 34px; height: 34px; }
+
+/* ── SCROLL MARGIN: evita que el menú fijo tape las secciones al navegar ── */
+#experiencia, #galeria, #servicio, #carta, #cartaFilters,
+#equipo, #reserva, #reservationSection, #ubicacion {
+  scroll-margin-top: 90px;
+}
+@media (max-width: 992px) {
+  #experiencia, #galeria, #servicio, #carta, #cartaFilters,
+  #equipo, #reserva, #reservationSection, #ubicacion {
+    scroll-margin-top: 75px;
+  }
+}
+
+
+/* ─── TABLET (Max 992px) ─── */
+@media (max-width: 992px) {
+  section { padding: 5rem 2rem; }
+  
+  /* NAV */
+  nav { padding: 1.2rem 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+  nav.sc { padding: 1rem 2rem; }
+  .lang-switch { margin: 0; order: 2; margin-left: auto; margin-right: 1.5rem; position: relative; z-index: 210; }
+  .hamburger { display: block; order: 3; position: relative; z-index: 210; }
+  .nl { position: relative; z-index: 210; }
+  
+  nav ul { 
+    display: none; 
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100vw; height: 100vh; height: 100dvh; margin: 0;
+    flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; 
+    text-align: center; 
+    padding: 2.5rem 2rem;
+    background: #0f2540;
+    border: none;
+    box-shadow: none;
+    z-index: 200;
+    overflow: hidden;
+  }
+  nav ul.active { display: flex; animation: fu 0.35s ease forwards; }
+
+  /* Cuando el menú está abierto: nav padre también sólido */
+  nav.menu-open {
+    background: #0f2540 !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+  }
+  /* Doble seguro: pseudo-elemento que cubre el area detrás del nav bar */
+  nav ul.active::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 80px;
+    background: #0f2540;
+    z-index: -1;
+  }
+
+  .ncta { 
+    background: #FFFFFF !important; 
+    color: var(--navy-dark) !important; 
+    border: 1px solid #FFFFFF !important;
+    padding: .8rem 2.2rem !important; 
+    border-radius: 4px;
+    font-weight: 700 !important;
+  }
+  .ncta:hover { transform: translateY(-1px) !important; background: #F5F5F5 !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+  .hcont { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+    padding: 6.5rem 1.5rem 2rem !important; /* Added top padding to prevent nav overlap */
+    text-align: center; 
+    gap: 2.5rem !important; /* Looser gap */
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+  }
+  .hey { justify-content: center; gap: 1.2rem !important; margin-bottom: 1.2rem !important; }
+  .hey::before, .hey::after { display: block !important; width: 1.8rem !important; }
+  .hdes { margin: 0 auto 2.5rem !important; line-height: 1.7 !important; font-size: 0.95rem !important; }
+  .hact { justify-content: center; gap: 1.5rem !important; margin-top: 1rem; }
+  .hright { display: none; }
+  
+  /* OTHER SECTIONS */
+  .eg, .srv-header, .carta-hero-inner, .sharing-block, .rg { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+  .eq { border-left: none; border-top: 2px solid var(--gold); padding-left: 0; padding-top: 1.5rem; }
+  .cf-inner { padding: 0 2rem; }
+  .carta-body, .vis-inner { padding: 4rem 2rem; }
+  .price-row { justify-content: center; }
+  .sb-right ul { align-items: center; }
+  .il { align-items: center; }
+  /* FOOTER TABLET */
+  .fg2 { grid-template-columns: 1fr !important; text-align: center !important; gap: 3.5rem !important; }
+  .fg2 > div { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .flogo { justify-content: center !important; margin-top: 0 !important; width: 100% !important; }
+  .fct { text-align: center !important; width: 100% !important; }
+  .fli { align-items: center !important; justify-content: center !important; width: 100% !important; list-style: none !important; padding: 0 !important; }
+  .f-social { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: auto !important; margin: 10px auto !important; }
+  .ftag, .fadr { text-align: center !important; margin: 0 auto 1.5rem !important; width: 100% !important; }
+}
+
+/* ─── MOBILE (Max 768px) ─── */
+@media (max-width: 768px) {
+  section { padding: 4rem 1.5rem; }
+  
+  /* NAV */
+  nav, nav.sc { padding: 1.2rem 1.5rem; }
+  .nl { font-size: 1.4rem; }
+  .lang-switch { margin-right: 1rem; }
+  .lang-btn { padding: .3rem .4rem; }
+
+  /* HERO MOBILE */
+  .hero {
+    min-height: 100dvh !important;
+  }
+  .hcont { 
+    padding: 7.5rem 1.5rem 3rem !important; /* Pushes the hero content down to give breathing room under fixed navbar */
+    gap: 1.8rem !important; /* Airy but fitting */
+  }
+  .hh1 { font-size: clamp(2.8rem, 10vw, 3.8rem) !important; line-height: 1.1 !important; margin-bottom: 0.8rem !important; }
+  .hh1s { font-size: 1.3rem !important; margin-bottom: 1.8rem !important; }
+  .hdes { font-size: 0.9rem !important; line-height: 1.6 !important; margin-bottom: 2.2rem !important; max-width: 320px !important; }
+  .hact { flex-direction: row !important; flex-wrap: wrap; gap: 1.2rem !important; }
+  .bp { text-align: center; padding: 1.1rem 2rem !important; font-size: 0.8rem !important; }
+  .bg { font-size: 0.8rem !important; }
+  
+  .hstats { grid-template-columns: 1fr; gap: 1px; }
+  .hero-carousel-track { height: 350px; } /* Ajuste altura carrusel movil */
+
+  /* GALERIA */
+  .gw { padding: 4rem 0; }
+  .gi { padding: 0 1.5rem; }
+  .g-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .g-title { font-size: 2.8rem; }
+  
+  /* CARTA */
+  .carta-hero { padding: 4rem 1.5rem 3rem; }
+  .carta-hero h2 { font-size: 3rem; }
+  .carta-filters { scroll-margin-top: 85px; }
+  
+  .cf-nav-arrows {
+    display: flex;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 15px 1.5rem 10px;
+    position: relative;
+    z-index: 60;
+    width: 100%;
+  }
+  .cf-arr {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: 1px solid rgba(201, 168, 76, .25);
+    color: var(--gold);
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background .2s, border-color .2s, opacity .3s, pointer-events .3s;
+  }
+  .cf-arr:active {
+    background: rgba(201, 168, 76, .1);
+    border-color: rgba(201, 168, 76, .5);
+  }
+  .cf-inner { 
+    padding: 0 1.5rem;
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    padding-right: 3rem; /* Espacio extra para asegurar que el último item se pueda leer a pesar del fade */
+  }
+  .carta-body { padding: 3rem 1.5rem; }
+  
+  /* CARTA GRID */
+  .menu-grid, .destaque-grid, .sg, .eq-grid, .frw { grid-template-columns: 1fr; }
+  
+  .mi { grid-template-columns: 1fr; text-align: center; gap: .8rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(27,58,92,.08); }
+  .mi-tags { justify-content: center; }
+  .mi-price { margin-top: .5rem; font-size: 1.5rem; }
+  .cat-header { flex-direction: column; text-align: center; gap: 1rem; border-bottom: none; margin-bottom: 1.5rem; }
+  .cat-badge { margin: 0 auto; }
+  .cat-title { font-size: 1.8rem; line-height: 1.2; }
+
+  /* EQUIPO Y RESERVA */
+  .cc { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 2rem 1.5rem; }
+  .rf { padding: 2.5rem 1.5rem; }
+  .pq-inner { padding: 4rem 1.5rem; flex-direction: column; text-align: center; gap: 1.5rem; }
+  .pq-line { width: 60px; height: 3px; }
+  .pq-text { font-size: min(1.8rem, 7vw); }
+  .st { font-size: min(2.8rem, 10vw); }
+  
+  /* TICKER */
+  .tki { font-size: 0.6rem; padding: 0 1.5rem; }
+
+  /* FOOTER MOBILE */
+  footer { padding: 4rem 1.5rem 3rem !important; }
+  .fg2 { grid-template-columns: 1fr !important; gap: 3.5rem !important; text-align: center !important; }
+  .fg2 > div { 
+    display: flex !important; 
+    flex-direction: column !important; 
+    align-items: center !important; 
+    text-align: center !important;
+    width: 100% !important;
+  }
+  .fb2 { flex-direction: column !important; gap: 1.5rem !important; text-align: center !important; align-items: center !important; }
+  .flogo { justify-content: center !important; margin-top: 0 !important; } 
+  .f-social { display: inline-flex !important; align-items: center !important; justify-content: center !important; width: auto !important; margin: 10px auto !important; }
+  .ftag, .fadr { text-align: center !important; margin-left: auto !important; margin-right: auto !important; width: 100% !important; }
+  .fli { align-items: center !important; justify-content: center !important; width: 100% !important; }
+  .fct { text-align: center !important; width: 100% !important; margin-bottom: 1rem !important; }
+}
+
+/* ─── SMALL MOBILE (Max 480px) ─── */
+@media (max-width: 480px) {
+  .hh1 { font-size: 2.8rem !important; }
+  .hdes { font-size: 0.9rem !important; }
+  .hero-carousel-track { height: 300px; }
+  .st { font-size: 2.4rem; }
+  .pq-text { font-size: 1.6rem; }
+  .sb-left h3 { font-size: 1.8rem; }
+  .destaque-item { padding: 1.5rem; }
+  .di-price { font-size: 1.4rem; }
+  .rl h2 { font-size: 2.5rem; }
+  .g-title { font-size: 2.4rem; }
+  .carta-hero h2 { font-size: 2.4rem; }
+}
+
+/* ─── REFINAMIENTOS MOBILE · Abril 2026 ─── */
+
+/* Footer links: deshabilitar efecto slide en táctil */
+@media (max-width: 768px) {
+  .fli a:hover { padding-left: 0; }
+  .fct {
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,.1);
+    padding-bottom: .5rem;
+  }
+}
+
+/* Cookie consent en móviles muy pequeños */
+@media (max-width: 380px) {
+  #cookieConsent { padding: 1.2rem 1rem; }
+  .cc-btn { padding: 0.7rem 1.2rem; font-size: 0.7rem; }
+}

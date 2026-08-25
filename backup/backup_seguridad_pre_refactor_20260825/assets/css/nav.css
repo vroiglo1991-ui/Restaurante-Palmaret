@@ -1,0 +1,104 @@
+/* ══════════════════════════════════════
+   NAV
+══════════════════════════════════════ */
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 4rem;
+  transition: background .5s, padding .4s, box-shadow .5s;
+}
+
+nav.sc {
+  background: rgba(10,24,40,0.97);
+  padding: 0.85rem 4rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(201,168,76,0.18);
+}
+
+/* Logo */
+.nl {
+  font-family: var(--fd);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: .05em;
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: .12em;
+}
+.nl span {
+  font-size: .62em;
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 300;
+}
+
+/* Links */
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+}
+nav ul a {
+  font-family: var(--fc);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(237,232,213,.65);
+  text-decoration: none;
+  transition: color .2s;
+  position: relative;
+}
+nav ul a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform .25s;
+}
+nav ul a:hover { color: var(--gold); }
+nav ul a:hover::after { transform: scaleX(1); }
+
+/* CTA reservar */
+.ncta {
+  color: var(--navy-dark) !important;
+  background: var(--gold);
+  padding: .6rem 1.4rem;
+  transition: background .2s, transform .2s !important;
+}
+.ncta::after { display: none !important; }
+.ncta:hover {
+  background: var(--gold-light) !important;
+  transform: translateY(-1px);
+}
+
+/* Hamburguesa — oculto en desktop */
+.nav-burger { display: none; }
+
+.nav-burger {
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 210;
+  padding: .3rem;
+}
+.nav-burger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--cream);
+  transition: transform .3s, opacity .3s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }

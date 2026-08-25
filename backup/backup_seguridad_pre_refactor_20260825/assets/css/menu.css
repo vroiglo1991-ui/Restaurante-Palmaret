@@ -1,0 +1,41 @@
+/* ══════════════════════════════════════
+   CARTA — Filtros por categoría
+══════════════════════════════════════ */
+
+const cfBtns    = document.querySelectorAll('.cf-btn');
+const catBlocks = document.querySelectorAll('.cat-block');
+
+// Reutilizamos el observer definido en nav.js
+// para revelar bloques al hacerse visibles tras filtrar
+
+cfBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+
+    // Actualiza botón activo
+    cfBtns.forEach(b => b.classList.remove('act'));
+    btn.classList.add('act');
+
+    const cat = btn.dataset.cat;
+
+    catBlocks.forEach(block => {
+      if (cat === 'all') {
+        block.removeAttribute('data-hidden');
+        block.style.display = '';
+      } else {
+        const cats = (block.dataset.category || '').split(' ');
+        if (cats.includes(cat)) {
+          block.removeAttribute('data-hidden');
+          block.style.display = '';
+        } else {
+          block.setAttribute('data-hidden', 'true');
+          block.style.display = 'none';
+        }
+      }
+    });
+
+    // Re-observa los bloques visibles que aún no se han revelado
+    document.querySelectorAll('.cat-block:not([data-hidden])').forEach(el => {
+      if (!el.classList.contains('vis')) obs.observe(el);
+    });
+  });
+});
