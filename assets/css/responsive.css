@@ -210,6 +210,14 @@
     gap: 0.75rem;
     text-align: center;
   }
+
+  #ubicacion .map-header {
+    padding: 4.5rem 1.5rem 2.5rem;
+  }
+
+  #ubicacion .map-frame {
+    height: 400px;
+  }
 }
 
 /* ─── MÓVIL (Max 600px) ─── */
@@ -283,6 +291,14 @@
 
   .rs-ch-name {
     font-size: 1.35rem;
+  }
+
+  #ubicacion .map-header {
+    padding: 3.5rem 1.25rem 2rem;
+  }
+
+  #ubicacion .map-frame {
+    height: 340px;
   }
 
   #cookieConsent {

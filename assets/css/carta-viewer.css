@@ -6,7 +6,7 @@
 
 /* ── SECCIÓN CARTA PREMIUM ── */
 .carta-premium {
-  background: var(--navy);
+  background: linear-gradient(180deg, #0d2038 0%, var(--navy-dark) 100%);
   position: relative;
   overflow: hidden;
 }
