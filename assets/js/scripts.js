@@ -24,15 +24,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleMenu = (open) => {
       const isOpen = typeof open === 'boolean' ? open : !navMenuEl.classList.contains('active');
       navMenuEl.classList.toggle('active', isOpen);
+      hamburgerBtn.classList.toggle('active', isOpen);
       if (nav) nav.classList.toggle('menu-open', isOpen);
       hamburgerBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      hamburgerBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
       document.body.style.overflow = isOpen ? 'hidden' : '';
     };
 
-    hamburgerBtn.addEventListener('click', () => toggleMenu());
+    hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
 
     navMenuEl.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    const logoLink = document.getElementById('navLogoLink');
+    if (logoLink) {
+      logoLink.addEventListener('click', () => toggleMenu(false));
+    }
+
+    // Cerrar al presionar tecla Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenuEl.classList.contains('active')) {
+        toggleMenu(false);
+      }
     });
   }
 
@@ -244,13 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ──── 6. SISTEMA I18N (ES / EN / VA) ──── */
   const I18N = {
     es: {
+      navHome: 'Inicio',
       navExp: 'Experiencia',
       navGal: 'Galería',
       navCarta: 'Carta',
       navReservar: 'Reservar',
       heroEyebrow: 'Restaurante del Club · Valencia',
-      heroTitle: 'El mejor <em>tercer tiempo</em> <br> de Valencia.<span class="sr-only"> — Restaurante y la mejor arrocería a leña de Valencia</span>',
-      heroSub: 'con alma deportiva',
+      heroTitle: 'El mejor <em>tercer tiempo</em> <br> y arroces a leña en Valencia',
+      heroSub: 'Restaurante · Arrocería · Gastronomía con alma deportiva',
       heroDesc: 'Unimos el ritmo del club con la calma de la sobremesa mediterránea. El punto de encuentro donde cada momento se celebra con sabor.',
       heroBtnReserve: 'Reservar mesa',
       heroBtnMenu: 'Ver carta →',
@@ -314,13 +332,14 @@ document.addEventListener('DOMContentLoaded', () => {
       cookieText: 'Utilizamos cookies para asegurar que tengas la mejor experiencia en nuestra web, analizar el tráfico y personalizar el contenido.'
     },
     en: {
+      navHome: 'Home',
       navExp: 'Experience',
       navGal: 'Gallery',
       navCarta: 'Menu',
       navReservar: 'Book',
       heroEyebrow: 'Club Restaurant · Valencia',
-      heroTitle: 'The best <em>third time</em> <br> in Valencia.<span class="sr-only"> — Restaurant and the best wood-fired paella rice house in Valencia</span>',
-      heroSub: 'with a sporting soul',
+      heroTitle: 'The best <em>third time</em> <br> and wood-fired rice in Valencia',
+      heroSub: 'Restaurant · Rice House · Gastronomy with a sporting soul',
       heroDesc: 'We blend the club\'s rhythm with the calm of Mediterranean after-dinner talk. The meeting point where every moment is celebrated with flavor.',
       heroBtnReserve: 'Book a table',
       heroBtnMenu: 'See menu →',
@@ -384,13 +403,14 @@ document.addEventListener('DOMContentLoaded', () => {
       cookieText: 'We use cookies to ensure you get the best experience on our website, analyze traffic and personalize content.'
     },
     va: {
+      navHome: 'Inici',
       navExp: 'Experiència',
       navGal: 'Galeria',
       navCarta: 'Carta',
       navReservar: 'Reservar',
       heroEyebrow: 'Restaurant del Club · València',
-      heroTitle: 'El millor <em>tercer temps</em> <br> de València.<span class="sr-only"> — Restaurant i la millor arroseria a llenya de València</span>',
-      heroSub: 'amb ànima esportiva',
+      heroTitle: 'El millor <em>tercer temps</em> <br> i arrossos a llenya a València',
+      heroSub: 'Restaurant · Arrosseria · Gastronomia amb ànima esportiva',
       heroDesc: 'Unim el ritme del club amb la calma de la sobretaula mediterrània. El punt de trobada on cada moment es celebra amb sabor.',
       heroBtnReserve: 'Reservar taula',
       heroBtnMenu: 'Veure carta →',
@@ -486,10 +506,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const dict = I18N[lang];
-    setElText('#navMenu li:nth-child(1) a', dict.navExp);
-    setElText('#navMenu li:nth-child(2) a', dict.navGal);
-    setElText('#navMenu li:nth-child(3) a', dict.navCarta);
-    setElText('#navMenu li:nth-child(4) a', dict.navReservar);
+    setElText('#navHomeLink', dict.navHome);
+    setElText('#navExpLink', dict.navExp);
+    setElText('#navGalLink', dict.navGal);
+    setElText('#navCartaBtn', dict.navCarta);
+    setElText('#navReservaLink', dict.navReservar);
 
     setElText('.hey', dict.heroEyebrow);
     setElText('.hh1', dict.heroTitle, true);

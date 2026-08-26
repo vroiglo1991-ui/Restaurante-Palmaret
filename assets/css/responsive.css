@@ -19,15 +19,25 @@
 @media (max-width: 992px) {
   nav {
     padding: 1rem 1.5rem;
+    z-index: 200;
   }
 
   nav.sc {
     padding: 0.8rem 1.5rem;
   }
 
+  .nl {
+    position: relative;
+    z-index: 220;
+  }
+
   .hamburger {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     order: 3;
+    position: relative;
+    z-index: 220;
   }
 
   .lang-switch {
@@ -39,7 +49,7 @@
   }
 
   nav ul {
-    display: none;
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -48,21 +58,36 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background: var(--navy-dark);
+    background: rgba(15, 37, 64, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.8rem;
-    padding: 3rem 2rem;
-    z-index: 200;
+    gap: 1.6rem;
+    padding: 6rem 2rem 3rem;
+    z-index: 210;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   nav ul.active {
-    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  nav ul a {
+    font-size: 1.25rem;
+    letter-spacing: 0.14em;
+    padding: 0.5rem 1rem;
   }
 
   nav.menu-open {
-    background: var(--navy-dark) !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
   .hero {

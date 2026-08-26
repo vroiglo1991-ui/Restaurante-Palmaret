@@ -181,6 +181,8 @@ nav.sc {
   display: flex;
   align-items: center;
   text-decoration: none;
+  position: relative;
+  z-index: 220;
 }
 
 .hamburger {
@@ -190,12 +192,42 @@ nav.sc {
   cursor: pointer;
   padding: 0.5rem;
   color: var(--gold);
+  position: relative;
+  z-index: 220;
+  border-radius: var(--r-sm);
+  transition: transform var(--t-fast), opacity var(--t-fast);
+}
+
+.hamburger:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
 }
 
 .hamburger svg {
   width: 28px;
   height: 28px;
   display: block;
+}
+
+.hamburger .icon-close {
+  display: none;
+}
+
+.hamburger.active .icon-hamburger,
+nav.menu-open .hamburger .icon-hamburger {
+  display: none;
+}
+
+.hamburger.active .icon-close,
+nav.menu-open .hamburger .icon-close {
+  display: block;
+  color: var(--gold);
+}
+
+@media (min-width: 993px) {
+  .nav-mobile-home {
+    display: none !important;
+  }
 }
 
 nav ul {
@@ -1266,7 +1298,8 @@ nav ul a:hover::after {
   opacity: 1;
 }
 
-#cookieConsent h4 {
+#cookieConsent h4,
+#cookieConsent .cc-heading {
   font-family: var(--fd);
   font-size: 1.4rem;
   color: var(--gold);
