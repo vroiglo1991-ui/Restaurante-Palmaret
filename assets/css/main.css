@@ -1193,7 +1193,8 @@ nav ul a:hover::after {
 }
 
 #ubicacion .map-header,
-.ubicacion-section .map-header {
+.ubicacion-section .map-header,
+.map-header {
   padding: 6rem 2rem 3rem;
   text-align: center;
   display: flex;
@@ -1202,29 +1203,38 @@ nav ul a:hover::after {
   justify-content: center;
   max-width: 900px;
   margin: 0 auto;
+  width: 100%;
 }
 
 #ubicacion .ey,
-.ubicacion-section .ey {
+.ubicacion-section .ey,
+.map-header .ey,
+.ey.ey-center,
+.ey-center {
   font-family: var(--fc);
   font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 1.2rem;
   text-align: center;
   width: auto;
+  align-self: center;
 }
 
 #ubicacion .ey::before,
 #ubicacion .ey::after,
 .ubicacion-section .ey::before,
-.ubicacion-section .ey::after {
+.ubicacion-section .ey::after,
+.map-header .ey::before,
+.map-header .ey::after,
+.ey.ey-center::before,
+.ey.ey-center::after {
   content: '';
   width: 28px;
   height: 1px;
