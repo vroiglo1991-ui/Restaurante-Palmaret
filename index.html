@@ -1092,18 +1092,28 @@
 
     /* ── POP-UP ── */
     function renderPopup(popup) {
-      if (!popup || !popup.active) return;
-      if (isPopupExpired(popup)) return;
+      const overlay = document.getElementById('cms-popup-overlay');
+      if (!overlay) return;
+
+      if (!popup || popup.active !== true || !popup.title || !popup.title.trim()) {
+        overlay.classList.remove('visible');
+        overlay.style.display = 'none';
+        return;
+      }
+
+      if (isPopupExpired(popup)) {
+        overlay.classList.remove('visible');
+        overlay.style.display = 'none';
+        return;
+      }
 
       const seenKey = POPUP_SEEN + '_' + (popup.savedAt || '');
       if (sessionStorage.getItem(seenKey)) return;
 
-      const overlay = document.getElementById('cms-popup-overlay');
       const closeBtn = document.getElementById('cms-popup-close');
       const skipBtn  = document.getElementById('cms-popup-skip');
       const btn      = document.getElementById('cms-popup-btn');
       const iconWrap = document.getElementById('cms-popup-icon-wrap');
-      if (!overlay) return;
 
       // Icono vectorial minimalista
       if (iconWrap) {
@@ -1128,16 +1138,20 @@
         }
       };
 
+      overlay.style.display = 'flex';
       setTimeout(() => {
-        overlay.classList.add('visible');
-        overlay.removeAttribute('aria-hidden');
-        overlay.focus();
+        if (popup && popup.active === true) {
+          overlay.classList.add('visible');
+          overlay.removeAttribute('aria-hidden');
+          overlay.focus();
+        }
       }, 1800);
 
       function closePopup() {
         sessionStorage.setItem(seenKey, '1');
         overlay.classList.remove('visible');
         overlay.setAttribute('aria-hidden', 'true');
+        overlay.style.display = 'none';
       }
 
       closeBtn.addEventListener('click', closePopup);
@@ -1210,7 +1224,7 @@
       const section = document.getElementById('cms-plato-dia-section');
       if (!section) return;
 
-      if (!plato || !plato.active || !plato.title) {
+      if (!plato || plato.active !== true || !plato.title || !plato.title.trim()) {
         section.style.display = 'none';
         return;
       }
