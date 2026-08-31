@@ -1006,7 +1006,12 @@
         const stored = localStorage.getItem(DATA_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          return { ...DEFAULT_DATA, ...parsed };
+          return {
+            ...DEFAULT_DATA,
+            ...parsed,
+            popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : DEFAULT_DATA.popup,
+            platoDia: parsed.platoDia ? { ...DEFAULT_DATA.platoDia, ...parsed.platoDia } : DEFAULT_DATA.platoDia
+          };
         }
         return DEFAULT_DATA;
       } catch { return DEFAULT_DATA; }

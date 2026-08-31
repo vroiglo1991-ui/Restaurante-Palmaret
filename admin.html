@@ -903,7 +903,49 @@
       document.getElementById(`panel-${name}`).classList.add('active');
     }
 
-    function getData() { try { return JSON.parse(localStorage.getItem(CONFIG.DATA_KEY)||'{}'); } catch { return {}; } }
+    const DEFAULT_DATA = {
+      popup: {
+        active: true,
+        icon: 'vino',
+        title: 'Cata de Vinos Uterra Wines',
+        badge: 'Sábado 31 de Agosto',
+        desc: 'Disfruta de una selección exclusiva de vinos con maridaje por 15 euros.',
+        btnText: 'RESERVAR PLAZA (15 EUR)',
+        link: 'https://tally.so/r/jaVPW1',
+        endDate: '',
+        savedAt: '2026-08-31T00:00:00.000Z'
+      },
+      platoDia: {
+        active: true,
+        title: 'Arroz meloso de pato y setas a leña',
+        desc: 'Elaborado con fondo de pescado de lonja y arroz bomba D.O. Valencia a fuego vivo.',
+        price: '18,50€',
+        tag: 'A la Leña · Raciones Limitadas',
+        nota: 'Disponible en servicio de mediodía',
+        igLink: '',
+        fecha: '',
+        autoExpire: false,
+        savedAt: '2026-08-31T00:00:00.000Z'
+      }
+    };
+
+    function getData() {
+      try {
+        const stored = localStorage.getItem(CONFIG.DATA_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          return {
+            ...DEFAULT_DATA,
+            ...parsed,
+            popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : DEFAULT_DATA.popup,
+            platoDia: parsed.platoDia ? { ...DEFAULT_DATA.platoDia, ...parsed.platoDia } : DEFAULT_DATA.platoDia
+          };
+        }
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      } catch {
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      }
+    }
 
     function setData(key, value) {
       const data = getData();
