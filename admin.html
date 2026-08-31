@@ -736,6 +736,7 @@
       SESSION_KEY: 'palmaret_session',
       API_KEY_KEY: 'palmaret_api_key',
       BIN_ID_KEY:  'palmaret_bin_id',
+      CLOUD_URL:   'https://api.restful-api.dev/objects/ff808181a058d43f01a058dd45a70046',
       DEFAULT_PIN: '11111*',
       SESSION_TTL: 8 * 60 * 60 * 1000
     };
@@ -842,11 +843,24 @@
       showToast('Sesión cerrada correctamente.', 'info');
     }
 
-    function initApp() {
+    async function initApp() {
       buildIconPicker();
       startClock();
       loadData();
       document.getElementById('adminUrl').value = window.location.href;
+
+      // Carga en background los datos más recientes de la nube
+      try {
+        const res = await fetch(CONFIG.CLOUD_URL, { cache: 'no-store' });
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.data) {
+            localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(json.data));
+            loadData();
+            updateStats();
+          }
+        }
+      } catch (e) {}
     }
 
     function startClock() {
@@ -1151,10 +1165,29 @@
     }
 
     async function syncToCloud(data) {
+      // 1. Sincronización Universal en la Nube (Tiempo Real para todos los dispositivos)
+      try {
+        await fetch(CONFIG.CLOUD_URL, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: 'palmaret_cms_live_store', data: data })
+        });
+      } catch (err) {
+        console.warn('Cloud sync background error:', err);
+      }
+
+      // 2. Custom JSONBin opcional si el usuario lo configuró
       const key = localStorage.getItem(CONFIG.API_KEY_KEY);
       const id  = localStorage.getItem(CONFIG.BIN_ID_KEY);
-      if (!key||!id) return;
-      try { await fetch(`https://api.jsonbin.io/v3/b/${id}`, { method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':key}, body:JSON.stringify(data) }); } catch {}
+      if (key && id) {
+        try {
+          await fetch(`https://api.jsonbin.io/v3/b/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'X-Master-Key': key },
+            body: JSON.stringify(data)
+          });
+        } catch {}
+      }
     }
 
     function copyAdminUrl() {
