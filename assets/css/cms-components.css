@@ -153,10 +153,24 @@ body.cms-banner-on nav { top: 40px !important; }
 }
 
 @media (max-width: 600px) {
-  #cms-popup { padding: 2rem 1.25rem 1.5rem; }
-  .cms-popup-title { font-size: 1.4rem; }
-  #cms-popup-overlay { align-items: flex-end; padding: 0; }
-  #cms-popup { border-radius: 20px 20px 0 0; max-width: 100%; }
+  #cms-popup-overlay {
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+  #cms-popup {
+    width: 100%;
+    max-width: 360px;
+    padding: 2.2rem 1.5rem 1.75rem;
+    border-radius: 20px;
+    margin: auto;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.8), 0 0 30px rgba(201,168,76,0.15);
+  }
+  .cms-popup-title { font-size: 1.45rem; line-height: 1.2; }
+  .cms-popup-desc { font-size: 0.88rem; margin-bottom: 1.35rem; }
+  .cms-popup-icon-wrap { width: 58px; height: 58px; margin-bottom: 1rem; }
+  .cms-popup-icon-wrap svg { width: 28px; height: 28px; }
+  .cms-popup-btn { width: 100%; box-sizing: border-box; padding: 0.8rem 1.5rem; }
   #cms-horario { margin: 0 1rem 1.5rem; }
 }
 
