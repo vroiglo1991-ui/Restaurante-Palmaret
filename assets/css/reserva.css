@@ -2,11 +2,26 @@
    RESERVA — Premium Contact Panel
 ══════════════════════════════════════ */
 
+#reserva {
+  scroll-margin-top: 100px;
+  min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 4.5rem 4rem;
+  position: relative;
+  background: var(--navy-dark, #081224);
+}
+
 .rg {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  gap: 5rem;
   align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .rl h2 {
@@ -275,13 +290,22 @@
 
 /* ── Responsive ── */
 @media (max-width: 992px) {
+  #reserva {
+    scroll-margin-top: 80px;
+    min-height: auto;
+    padding: 4rem 2rem;
+    display: block;
+  }
   .rg {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
+  #reserva {
+    padding: 3rem 1.25rem;
+  }
   .rs-ch { padding: 2rem 1.2rem; }
   .rs-ch-icon { width: 62px; height: 62px; }
 }

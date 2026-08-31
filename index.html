@@ -262,7 +262,7 @@
           <div class="hh1s">Gastronomía mediterránea · Arrocería · Almuerzos</div>
           <p class="hdes" style="margin-left:auto; margin-right:auto;">El punto de encuentro donde cada momento se celebra con sabor.</p>
           <div class="hact" style="justify-content:center;">
-            <a href="#reservationSection" class="bp">Reservar mesa</a>
+            <a href="#reserva" class="bp">Reservar mesa</a>
             <a href="#carta" class="bg" id="heroCartaBtn">Ver carta →</a>
           </div>
         </div>
@@ -341,7 +341,7 @@
             <div class="cms-plato-side">
               <div class="cms-plato-price" id="cms-plato-price" style="display:none;"></div>
               <div class="cms-plato-actions">
-                <a href="#reservationSection" class="bp">Reservar mesa</a>
+                <a href="#reserva" class="bp">Reservar mesa</a>
                 <a href="#" class="cms-plato-ig-btn" id="cms-plato-ig-btn" target="_blank" rel="noopener" style="display:none;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   <span>Ver en Instagram</span>
@@ -742,7 +742,7 @@
         </div>
         <div class="vis-q">"Más que un espacio,<br><em>un futuro.</em>"</div>
         <p class="vis-sub">Una historia que se cocina a fuego lento</p>
-        <a href="#reservationSection" class="bp">Sé parte de la historia</a>
+        <a href="#reserva" class="bp">Sé parte de la historia</a>
       </div>
     </section>
 
@@ -1258,7 +1258,32 @@
           if (platoChanged)   renderPlatoDia(cloudData.platoDia);
           // El popup sólo se muestra una vez por sesión, no se re-renderiza
         }
-      }
+      // Smooth scrolling con compensación exacta de cabecera
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const targetId = this.getAttribute('href');
+          if (!targetId || targetId === '#' || targetId.length < 2) return;
+          const targetEl = document.querySelector(targetId);
+          if (targetEl) {
+            e.preventDefault();
+            const navEl = document.getElementById('nav');
+            const navHeight = navEl ? navEl.offsetHeight : 80;
+            const elementPosition = targetEl.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - (navHeight + 10);
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+            const navMenu = document.getElementById('navMenu');
+            const hamburger = document.getElementById('hamburger');
+            if (navMenu && navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+              hamburger?.classList.remove('active');
+              hamburger?.setAttribute('aria-expanded', 'false');
+            }
+          }
+        });
+      });
     });
   })();
   </script>
