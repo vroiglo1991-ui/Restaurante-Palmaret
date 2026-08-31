@@ -1159,10 +1159,12 @@
         return;
       }
 
-      // Validación de auto-expiración por fecha
-      if (plato.fecha) {
-        const todayStr = new Date().toISOString().split('T')[0];
-        if (plato.autoExpire && plato.fecha !== todayStr && plato.fecha < todayStr) {
+      // Validación de auto-expiración por fecha (solo si autoExpire está activo y es día pasado)
+      if (plato.fecha && plato.autoExpire) {
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        const pDate = new Date(plato.fecha + 'T00:00:00');
+        if (pDate < today) {
           section.style.display = 'none';
           return;
         }
@@ -1170,10 +1172,12 @@
 
       // Formatear texto de cabecera: "EL PLATO DEL DÍA · [Fecha de hoy]"
       let fechaTexto = 'HOY';
-      try {
-        const dateObj = plato.fecha ? new Date(plato.fecha + 'T12:00:00') : new Date();
-        fechaTexto = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
-      } catch (e) {}
+      if (plato.fecha) {
+        try {
+          const dateObj = new Date(plato.fecha + 'T12:00:00');
+          fechaTexto = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+        } catch (e) {}
+      }
 
       const eyebrowEl = document.getElementById('cms-plato-eyebrow');
       if (eyebrowEl) eyebrowEl.textContent = `EL PLATO DEL DÍA · ${fechaTexto.toUpperCase()}`;
@@ -1232,11 +1236,20 @@
 
     /* ── Init ── */
     function init(data) {
+      if (!data) return;
       renderBanner(data.banner);
       renderHorario(data.horario);
       renderPlatoDia(data.platoDia);
       renderPopup(data.popup);
     }
+
+    // Escucha en tiempo real cambios desde la pestaña de admin
+    window.addEventListener('storage', (e) => {
+      if (e.key === DATA_KEY) {
+        const freshData = getData();
+        init(freshData);
+      }
+    });
 
     // Carga inmediata desde local y luego refresca desde nube si hay API
     document.addEventListener('DOMContentLoaded', async () => {
@@ -1244,20 +1257,21 @@
       init(localData);
 
       // Intento de sincronización en background (no bloquea la UI)
-      const cloudData = await fetchCloudData();
-      if (cloudData && cloudData._lastSave !== localData._lastSave) {
-        // Hay datos más recientes en la nube — re-renderiza si cambia el estado
-        const popupChanged   = JSON.stringify(cloudData.popup)    !== JSON.stringify(localData.popup);
-        const bannerChanged  = JSON.stringify(cloudData.banner)   !== JSON.stringify(localData.banner);
-        const horarioChanged = JSON.stringify(cloudData.horario)  !== JSON.stringify(localData.horario);
-        const platoChanged   = JSON.stringify(cloudData.platoDia) !== JSON.stringify(localData.platoDia);
-        if (popupChanged || bannerChanged || horarioChanged || platoChanged) {
-          // Solo actualiza los componentes que cambiaron (sin recargar página)
-          if (bannerChanged)  renderBanner(cloudData.banner);
-          if (horarioChanged) renderHorario(cloudData.horario);
-          if (platoChanged)   renderPlatoDia(cloudData.platoDia);
-          // El popup sólo se muestra una vez por sesión, no se re-renderiza
+      try {
+        const cloudData = await fetchCloudData();
+        if (cloudData && cloudData._lastSave !== localData._lastSave) {
+          const popupChanged   = JSON.stringify(cloudData.popup)    !== JSON.stringify(localData.popup);
+          const bannerChanged  = JSON.stringify(cloudData.banner)   !== JSON.stringify(localData.banner);
+          const horarioChanged = JSON.stringify(cloudData.horario)  !== JSON.stringify(localData.horario);
+          const platoChanged   = JSON.stringify(cloudData.platoDia) !== JSON.stringify(localData.platoDia);
+          if (popupChanged || bannerChanged || horarioChanged || platoChanged) {
+            if (bannerChanged)  renderBanner(cloudData.banner);
+            if (horarioChanged) renderHorario(cloudData.horario);
+            if (platoChanged)   renderPlatoDia(cloudData.platoDia);
+          }
         }
+      } catch(e) {}
+
       // Smooth scrolling con compensación exacta de cabecera
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
