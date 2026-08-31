@@ -319,11 +319,35 @@ body.cms-banner-on nav { top: 40px !important; }
   transform: translateY(-2px);
 }
 
+.cms-plato-desc:empty { display: none; }
+.cms-plato-meta:empty { display: none; }
+
 @media (max-width: 768px) {
-  .cms-plato-card { padding: 1.6rem 1.4rem; }
-  .cms-plato-title { font-size: 1.7rem; }
-  .cms-plato-content { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-  .cms-plato-side { align-items: flex-start; width: 100%; }
-  .cms-plato-actions { width: 100%; }
-  .cms-plato-actions .bp, .cms-plato-actions .cms-plato-ig-btn { flex: 1; text-align: center; justify-content: center; }
+  .cms-plato-section { padding: 1.5rem 1rem; }
+  .cms-plato-card { padding: 1.4rem 1.25rem 1.25rem; border-radius: 16px; }
+  .cms-plato-header { margin-bottom: 0.9rem; padding-bottom: 0.75rem; }
+  .cms-plato-badge { font-size: 0.72rem; padding: 4px 10px; }
+  .cms-plato-tag { font-size: 0.75rem; }
+  .cms-plato-title { font-size: 1.5rem; margin: 0 0 0.35rem 0; line-height: 1.25; }
+  .cms-plato-desc { font-size: 0.88rem; line-height: 1.45; margin: 0 0 0.4rem 0; }
+  .cms-plato-meta { font-size: 0.8rem; margin: 0 0 0.2rem 0; }
+  .cms-plato-content { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .cms-plato-main { flex: 1 1 auto; width: 100%; }
+  .cms-plato-side {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.85rem;
+    margin-top: 0.4rem;
+    border-top: 1px solid rgba(201, 168, 76, 0.15);
+    gap: 0.75rem;
+    min-width: 0;
+  }
+  .cms-plato-price { font-size: 1.8rem; line-height: 1; }
+  .cms-plato-price small { font-size: 0.75rem; }
+  .cms-plato-actions { width: auto; flex: 0 0 auto; gap: 6px; }
+  .cms-plato-actions .bp { padding: 9px 16px; font-size: 0.75rem; white-space: nowrap; }
+  .cms-plato-ig-btn { padding: 8px 12px; font-size: 0.72rem; }
 }

@@ -1179,7 +1179,16 @@
       if (eyebrowEl) eyebrowEl.textContent = `EL PLATO DEL DÍA · ${fechaTexto.toUpperCase()}`;
 
       document.getElementById('cms-plato-title').textContent = plato.title || '';
-      document.getElementById('cms-plato-desc').textContent = plato.desc || '';
+      const descEl = document.getElementById('cms-plato-desc');
+      if (descEl) {
+        if (plato.desc && plato.desc.trim()) {
+          descEl.textContent = plato.desc.trim();
+          descEl.style.display = 'block';
+        } else {
+          descEl.textContent = '';
+          descEl.style.display = 'none';
+        }
+      }
       
       const tagEl = document.getElementById('cms-plato-tag');
       if (tagEl) {
