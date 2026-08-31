@@ -843,24 +843,11 @@
       showToast('Sesión cerrada correctamente.', 'info');
     }
 
-    async function initApp() {
+    function initApp() {
       buildIconPicker();
       startClock();
       loadData();
       document.getElementById('adminUrl').value = window.location.href;
-
-      // Carga en background los datos más recientes de la nube
-      try {
-        const res = await fetch(CONFIG.CLOUD_URL, { cache: 'no-store' });
-        if (res.ok) {
-          const json = await res.json();
-          if (json && json.data) {
-            localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(json.data));
-            loadData();
-            updateStats();
-          }
-        }
-      } catch (e) {}
     }
 
     function startClock() {
