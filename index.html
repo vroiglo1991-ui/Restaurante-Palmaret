@@ -1267,20 +1267,34 @@
       renderPopup(data.popup);
     }
 
-    // Escucha en tiempo real cambios desde la pestaña de admin
-    window.addEventListener('storage', (e) => {
-      if (e.key === DATA_KEY) {
-        // Limpiamos sessionStorage para que el popup se pueda volver a mostrar
-        Object.keys(sessionStorage).forEach(k => {
-          if (k.startsWith(POPUP_SEEN)) sessionStorage.removeItem(k);
-        });
-        init(getData());
-      }
-    });
-
-    // Carga desde local y escucha cambios en tiempo real
+    // Carga desde local y escucha cambios en tiempo real (polling + storage event)
     document.addEventListener('DOMContentLoaded', () => {
       init(getData());
+
+      // POLLING: comprueba cada 1.5s si hay cambios guardados desde el panel de admin
+      let lastSaveStamp = localStorage.getItem(DATA_KEY) || '';
+      setInterval(() => {
+        const current = localStorage.getItem(DATA_KEY) || '';
+        if (current !== lastSaveStamp) {
+          lastSaveStamp = current;
+          // Limpiamos sessionStorage para que el popup se pueda volver a mostrar
+          Object.keys(sessionStorage).forEach(k => {
+            if (k.startsWith(POPUP_SEEN)) sessionStorage.removeItem(k);
+          });
+          init(getData());
+        }
+      }, 1500);
+
+      // Backup: storage event (funciona entre pestañas del mismo navegador)
+      window.addEventListener('storage', (e) => {
+        if (e.key === DATA_KEY) {
+          lastSaveStamp = localStorage.getItem(DATA_KEY) || '';
+          Object.keys(sessionStorage).forEach(k => {
+            if (k.startsWith(POPUP_SEEN)) sessionStorage.removeItem(k);
+          });
+          init(getData());
+        }
+      });
 
       // Smooth scrolling con compensación exacta de cabecera
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
