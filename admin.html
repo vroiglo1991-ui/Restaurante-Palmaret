@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>El Palmaret · Panel de Gestión</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy:       #1B3A5C;
+      --navy-dark:  #0f2540;
+      --navy-mid:   #16304e;
+      --navy-glass: rgba(15, 37, 64, 0.75);
+      --navy-card:  rgba(22, 48, 78, 0.60);
+      --cream:      #EDE8D5;
+      --cream-dim:  rgba(237, 232, 213, 0.65);
+      --cream-low:  rgba(237, 232, 213, 0.12);
+      --gold:       #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dim:   rgba(201, 168, 76, 0.15);
+      --gold-glow:  rgba(201, 168, 76, 0.35);
+      --green:      #4CAF7D;
+      --green-dim:  rgba(76, 175, 125, 0.18);
+      --red:        #E57373;
+      --red-dim:    rgba(229, 115, 115, 0.18);
+      --orange:     #F0A25A;
+      --orange-dim: rgba(240, 162, 90, 0.18);
+
+      --fd: 'Cormorant Garamond', Georgia, serif;
+      --fb: 'Barlow', system-ui, sans-serif;
+      --fc: 'Barlow Condensed', sans-serif;
+
+      --t-fast: 0.18s ease;
+      --t-mid:  0.30s ease;
+      --t-slow: 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --r-sm: 6px;
+      --r-md: 12px;
+      --r-lg: 20px;
+      --r-xl: 28px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      background: var(--navy-dark);
+      background-image:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 80%, rgba(27,58,92,0.6) 0%, transparent 60%);
+      color: var(--cream);
+      font-family: var(--fb);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
+    #login-screen {
+      position: fixed; inset: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--navy-dark);
+      background-image: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(201,168,76,0.15) 0%, transparent 60%);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #login-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    .login-card {
+      width: 100%; max-width: 400px; padding: 3rem 2.5rem;
+      background: var(--navy-card);
+      border: 1px solid rgba(201, 168, 76, 0.25);
+      border-radius: var(--r-xl);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,168,76,0.1);
+      text-align: center;
+      animation: loginIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    @keyframes loginIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .login-logo { height: 60px; width: auto; margin: 0 auto 1.5rem; display: block; filter: drop-shadow(0 4px 16px rgba(201,168,76,0.4)); }
+    .login-sub { font-size: 0.75rem; font-family: var(--fc); letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.2rem; }
+    .pin-label { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 1.2rem; display: block; }
+
+    .pin-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 1.5rem; }
+    .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid rgba(201,168,76,0.4); transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast); }
+    .pin-dot.filled { background: var(--gold); border-color: var(--gold); transform: scale(1.15); }
+
+    .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 260px; margin: 0 auto 1.5rem; }
+    .pin-key {
+      aspect-ratio: 1; border: 1px solid rgba(201,168,76,0.2); border-radius: var(--r-md);
+      background: var(--cream-low); color: var(--cream);
+      font-family: var(--fb); font-size: 1.3rem; font-weight: 500;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background var(--t-fast), border-color var(--t-fast), transform var(--t-fast), box-shadow var(--t-fast);
+      user-select: none;
+    }
+    .pin-key:hover { background: var(--gold-dim); border-color: var(--gold); box-shadow: 0 0 0 1px rgba(201,168,76,0.2); }
+    .pin-key:active { transform: scale(0.92); }
+    .pin-key.sym  { color: var(--gold); font-size: 1.4rem; }
+    .pin-key.del  { font-size: 1.1rem; color: var(--gold); }
+
+    .pin-error { color: var(--red); font-size: 0.8rem; letter-spacing: 0.08em; min-height: 1.2em; margin-bottom: 0.5rem; }
+    .pin-error.shake { animation: shake 0.4s ease; }
+    @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+    #app { display: none; min-height: 100vh; }
+    #app.visible { display: flex; flex-direction: column; animation: fadeIn 0.5s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 68px;
+      background: rgba(10, 20, 40, 0.90);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .topbar-brand { display: flex; align-items: center; gap: 14px; }
+    .topbar-logo { height: 44px; width: auto; display: block; filter: drop-shadow(0 2px 8px rgba(201,168,76,0.3)); }
+    .topbar-badge { font-family: var(--fc); font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.35); border-radius: 999px; padding: 3px 12px; }
+    .topbar-actions { display: flex; align-items: center; gap: 14px; }
+
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(76,175,125,0.6); animation: pulse-green 2s infinite; }
+    @keyframes pulse-green { 0%,100% { box-shadow: 0 0 6px rgba(76,175,125,0.4); } 50% { box-shadow: 0 0 14px rgba(76,175,125,0.8); } }
+
+    .topbar-time { font-family: var(--fc); font-size: 0.82rem; color: var(--cream-dim); letter-spacing: 0.1em; }
+    .btn-logout { border: 1px solid rgba(201,168,76,0.3); background: transparent; color: var(--cream-dim); padding: 6px 14px; border-radius: var(--r-sm); font-family: var(--fc); font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: var(--t-fast); }
+    .btn-logout:hover { background: var(--cream-low); color: var(--cream); border-color: rgba(201,168,76,0.5); }
+
+    .main { flex: 1; padding: 2rem; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+    .page-header { margin-bottom: 2.2rem; }
+    .page-eyebrow { font-family: var(--fc); font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .page-title { font-family: var(--fd); font-size: 2.2rem; font-weight: 600; color: var(--cream); line-height: 1.2; }
+    .page-title em { font-style: italic; color: var(--gold-light); }
+
+    .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+    .card {
+      background: var(--navy-card); border: 1px solid rgba(201,168,76,0.12);
+      border-radius: var(--r-lg); padding: 1.75rem;
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: border-color var(--t-mid), box-shadow var(--t-mid);
+      position: relative; overflow: hidden;
+    }
+    .card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(201,168,76,0.04) 0%, transparent 60%); pointer-events: none; }
+    .card:hover { border-color: rgba(201,168,76,0.28); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+
+    .card-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem; }
+    .card-icon {
+      width: 36px; height: 36px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.25);
+      flex-shrink: 0;
+    }
+    .card-icon svg { width: 18px; height: 18px; display: block; }
+    .card-title { font-family: var(--fc); font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cream); font-weight: 600; }
+
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; background: var(--cream-low); border-radius: var(--r-md); margin-bottom: 1.5rem; border: 1px solid transparent; transition: border-color var(--t-fast), background var(--t-fast); }
+    .toggle-row.active-row { background: var(--green-dim); border-color: rgba(76,175,125,0.3); }
+    .toggle-label-group { display: flex; flex-direction: column; gap: 2px; }
+    .toggle-label { font-weight: 500; font-size: 0.95rem; color: var(--cream); }
+    .toggle-sub { font-size: 0.78rem; color: var(--cream-dim); }
+
+    .switch { position: relative; display: inline-block; width: 52px; height: 28px; flex-shrink: 0; }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider { position: absolute; inset: 0; background: rgba(237,232,213,0.12); border-radius: 999px; cursor: pointer; transition: background var(--t-mid); border: 1px solid rgba(201,168,76,0.2); }
+    .slider::before { content: ''; position: absolute; left: 3px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; background: var(--cream-dim); transition: transform var(--t-mid), background var(--t-mid); }
+    .switch input:checked + .slider { background: rgba(76,175,125,0.4); border-color: rgba(76,175,125,0.5); }
+    .switch input:checked + .slider::before { transform: translate(24px, -50%); background: var(--green); }
+
+    .field-group { margin-bottom: 1.2rem; }
+    .field-label { display: block; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .field-input, .field-textarea, .field-select {
+      width: 100%; background: rgba(15,37,64,0.6); border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--r-sm); color: var(--cream); font-family: var(--fb); font-size: 0.9rem;
+      padding: 0.75rem 1rem; transition: border-color var(--t-fast), box-shadow var(--t-fast);
+      appearance: none; -webkit-appearance: none;
+    }
+    .field-input:focus, .field-textarea:focus, .field-select:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .field-input::placeholder, .field-textarea::placeholder { color: rgba(237,232,213,0.35); }
+    .field-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+    .field-select option { background: var(--navy-dark); color: var(--cream); }
+    .field-hint { font-size: 0.72rem; color: var(--cream-dim); margin-top: 0.4rem; opacity: 0.7; }
+
+    .color-row { display: flex; align-items: center; gap: 12px; }
+    .color-swatch { width: 42px; height: 42px; border-radius: var(--r-sm); border: 2px solid rgba(201,168,76,0.3); padding: 2px; background: transparent; cursor: pointer; }
+
+    .icon-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 0.5rem;
+    }
+    .icon-btn {
+      padding: 10px 6px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: var(--r-sm);
+      background: var(--cream-low);
+      color: var(--cream-dim);
+      cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      transition: border-color var(--t-fast), background var(--t-fast), color var(--t-fast), transform var(--t-fast);
+    }
+    .icon-btn svg { width: 22px; height: 22px; }
+    .icon-btn span { font-size: 0.68rem; font-family: var(--fc); letter-spacing: 0.08em; text-transform: uppercase; }
+    .icon-btn:hover { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); transform: translateY(-2px); }
+    .icon-btn.selected { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); box-shadow: 0 0 0 2px rgba(201,168,76,0.35); font-weight: 600; }
+
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 0.75rem 1.6rem;
+      border-radius: var(--r-sm); font-family: var(--fc); font-size: 0.82rem;
+      letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+      cursor: pointer; border: none; transition: var(--t-fast); position: relative; overflow: hidden;
+    }
+    .btn svg { width: 15px; height: 15px; }
+    .btn::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.07); opacity: 0; transition: opacity var(--t-fast); }
+    .btn:hover::after { opacity: 1; }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary { background: var(--gold); color: var(--navy-dark); }
+    .btn-primary:hover { background: var(--gold-light); box-shadow: 0 4px 20px rgba(201,168,76,0.35); }
+    .btn-ghost { background: var(--cream-low); color: var(--cream-dim); border: 1px solid rgba(237,232,213,0.15); }
+    .btn-ghost:hover { background: rgba(237,232,213,0.15); color: var(--cream); }
+    .btn-danger { background: var(--red-dim); color: var(--red); border: 1px solid rgba(229,115,115,0.3); }
+    .btn-danger:hover { background: rgba(229,115,115,0.28); }
+    .btn-success { background: var(--green-dim); color: var(--green); border: 1px solid rgba(76,175,125,0.3); }
+    .btn-success:hover { background: rgba(76,175,125,0.28); }
+
+    #toast-container { position: fixed; bottom: 2rem; right: 2rem; z-index: 9999; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+    .toast { display: flex; align-items: center; gap: 10px; padding: 1rem 1.5rem; border-radius: var(--r-md); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid transparent; font-size: 0.875rem; font-weight: 500; pointer-events: auto; animation: toastIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; max-width: 340px; }
+    .toast.out { animation: toastOut 0.3s ease forwards; }
+    @keyframes toastIn { from { opacity: 0; transform: translateX(30px) scale(0.9); } to { opacity: 1; transform: translateX(0) scale(1); } }
+    @keyframes toastOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(30px); } }
+    .toast-success { background: rgba(10,30,20,0.9); border-color: rgba(76,175,125,0.5); color: var(--green); }
+    .toast-error   { background: rgba(30,10,10,0.9); border-color: rgba(229,115,115,0.5); color: var(--red); }
+    .toast-info    { background: rgba(15,37,64,0.95); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+    .preview-card { background: var(--navy-dark); border: 1px solid rgba(201,168,76,0.15); border-radius: var(--r-md); padding: 1.25rem; position: relative; overflow: hidden; }
+    .preview-label { font-family: var(--fc); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .preview-label::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px rgba(76,175,125,0.6); animation: pulse-green 2s infinite; }
+
+    .popup-preview { background: linear-gradient(155deg, #183758 0%, #0d2238 100%); border: 1px solid rgba(201,168,76,0.35); border-radius: var(--r-md); padding: 1.75rem 1.5rem; text-align: center; }
+    .popup-preview-badge { display: inline-block; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.4); color: var(--gold); font-family: var(--fc); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 3px 12px; border-radius: 999px; margin-bottom: 1rem; }
+    
+    .popup-preview-icon-wrap {
+      width: 54px; height: 54px; margin: 0 auto 1rem; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.2) 0%, rgba(201,168,76,0.04) 70%);
+      border: 1px solid rgba(201,168,76,0.35); display: flex; align-items: center; justify-content: center;
+      color: var(--gold); box-shadow: 0 0 20px rgba(201,168,76,0.2);
+    }
+    .popup-preview-icon-wrap svg { width: 26px; height: 26px; display: block; }
+    
+    .popup-preview-title { font-family: var(--fd); font-size: 1.5rem; color: var(--gold-light); margin-bottom: 0.5rem; }
+    .popup-preview-desc { font-size: 0.85rem; color: var(--cream-dim); line-height: 1.6; margin-bottom: 1.2rem; }
+    .popup-preview-btn { display: inline-block; background: var(--gold); color: var(--navy-dark); padding: 8px 22px; border-radius: var(--r-sm); font-family: var(--fc); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; text-decoration: none; }
+
+    .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-item { background: var(--navy-card); border: 1px solid rgba(201,168,76,0.1); border-radius: var(--r-md); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 14px; transition: border-color var(--t-fast); }
+    .stat-item:hover { border-color: rgba(201,168,76,0.25); }
+    .stat-icon {
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      display: flex; align-items: center; justify-content: center;
+      background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.2);
+      flex-shrink: 0;
+    }
+    .stat-icon svg { width: 20px; height: 20px; }
+    .stat-value { font-family: var(--fd); font-size: 1.6rem; color: var(--gold-light); line-height: 1; margin-bottom: 2px; }
+    .stat-name { font-size: 0.72rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent); margin: 1.5rem 0; }
+
+    .tabs { display: flex; gap: 6px; background: rgba(15,37,64,0.5); padding: 5px; border-radius: var(--r-md); margin-bottom: 1.5rem; border: 1px solid rgba(201,168,76,0.1); flex-wrap: wrap; }
+    .tab {
+      flex: 1; padding: 0.7rem 1rem; border-radius: var(--r-sm); border: 1px solid transparent;
+      background: transparent; color: var(--cream-dim); font-family: var(--fc);
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: var(--t-fast); white-space: nowrap;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .tab svg { width: 16px; height: 16px; }
+    .tab.active { background: var(--gold-dim); color: var(--gold); border-color: rgba(201,168,76,0.35); font-weight: 600; }
+    .tab:hover:not(.active) { background: var(--cream-low); color: var(--cream); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fadeIn 0.25s ease; }
+
+    .help-tip { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--cream-low); border: 1px solid rgba(237,232,213,0.2); font-size: 0.65rem; color: var(--cream-dim); cursor: help; position: relative; }
+    .help-tip:hover::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--navy-dark); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--r-sm); padding: 0.5rem 0.75rem; font-size: 0.72rem; color: var(--cream); white-space: nowrap; pointer-events: none; z-index: 100; box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+    .saving-ripple { position: absolute; inset: 0; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); animation: ripple 0.6s ease forwards; pointer-events: none; }
+    @keyframes ripple { from { opacity: 1; transform: scale(0.8); } to { opacity: 0; transform: scale(1.2); } }
+
+    @media (max-width: 768px) { .topbar { padding: 0 1rem; } .main { padding: 1rem; } .stats-bar { grid-template-columns: 1fr 1fr; } .icon-selector-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .login-card { margin: 1rem; padding: 2rem 1.5rem; } .stats-bar { grid-template-columns: 1fr; } .btn-row { flex-direction: column; } .btn { justify-content: center; } }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" role="main" aria-label="Acceso al panel de gestión">
+    <div class="login-card">
+      <img src="assets/img/logopng.png" alt="Logo El Palmaret" class="login-logo" onerror="this.style.display='none'">
+      <p class="login-sub">Panel de Gestión</p>
+      <span class="pin-label">Introduce tu PIN de acceso</span>
+      <div class="pin-dots" id="pinDots" aria-label="PIN introducido">
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+        <div class="pin-dot"></div>
+      </div>
+      <p class="pin-error" id="pinError" aria-live="polite"></p>
+      <div class="pin-keypad" aria-label="Teclado numérico">
+        <button class="pin-key" onclick="pressKey('1')" aria-label="1">1</button>
+        <button class="pin-key" onclick="pressKey('2')" aria-label="2">2</button>
+        <button class="pin-key" onclick="pressKey('3')" aria-label="3">3</button>
+        <button class="pin-key" onclick="pressKey('4')" aria-label="4">4</button>
+        <button class="pin-key" onclick="pressKey('5')" aria-label="5">5</button>
+        <button class="pin-key" onclick="pressKey('6')" aria-label="6">6</button>
+        <button class="pin-key" onclick="pressKey('7')" aria-label="7">7</button>
+        <button class="pin-key" onclick="pressKey('8')" aria-label="8">8</button>
+        <button class="pin-key" onclick="pressKey('9')" aria-label="9">9</button>
+        <button class="pin-key sym" aria-label="Asterisco" style="cursor:default;opacity:0.6;">∗</button>
+        <button class="pin-key" onclick="pressKey('0')" aria-label="0">0</button>
+        <button class="pin-key del" onclick="deleteKey()" aria-label="Borrar">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN APP -->
+  <div id="app" aria-label="Panel de administración El Palmaret">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <img src="assets/img/logopng.png" alt="El Palmaret" class="topbar-logo" onerror="this.style.display='none'">
+        <span class="topbar-badge">ADMIN</span>
+      </div>
+      <div class="topbar-actions">
+        <div class="status-dot" title="Sesión activa"></div>
+        <span class="topbar-time" id="liveTime" aria-live="polite"></span>
+        <button class="btn-logout" onclick="logout()" id="btnLogout">Salir</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="page-header">
+        <p class="page-eyebrow">Panel de Control</p>
+        <h2 class="page-title">Gestión del <em>Restaurante</em></h2>
+      </div>
+
+      <!-- STATS BAR CON ICONOS SVG MONOCROMÁTICOS -->
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="statPopup">—</div>
+            <div class="stat-name">Pop-up activo</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="statPlato">—</div>
+            <div class="stat-name">Plato de hoy</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="statBanner">—</div>
+            <div class="stat-name">Banner aviso</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="statLastSave">—</div>
+            <div class="stat-name">Último guardado</div>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          </div>
+          <div>
+            <div class="stat-value" id="statMode">Local</div>
+            <div class="stat-name">Modo sync</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS CON ICONOS SVG MONOCROMÁTICOS -->
+      <div class="tabs" role="tablist">
+        <button class="tab active" onclick="switchTab('popup')" id="tab-popup" role="tab" aria-selected="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Eventos
+        </button>
+        <button class="tab" onclick="switchTab('plato')" id="tab-plato" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          Plato del Día
+        </button>
+        <button class="tab" onclick="switchTab('banner')" id="tab-banner" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Banner
+        </button>
+        <button class="tab" onclick="switchTab('horario')" id="tab-horario" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Horario
+        </button>
+        <button class="tab" onclick="switchTab('config')" id="tab-config" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          Config
+        </button>
+      </div>
+
+      <!-- TAB: POPUP -->
+      <div class="tab-panel active" id="panel-popup">
+        <div class="grid">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <span class="card-title">Pop-up de Evento</span>
+              </div>
+              <div class="toggle-row" id="popupToggleRow">
+                <div class="toggle-label-group"><span class="toggle-label">Activar Pop-up</span><span class="toggle-sub">Aparece en la web cuando está activo</span></div>
+                <label class="switch"><input type="checkbox" id="popupActive" onchange="updatePreview(); updateToggleRow('popupToggleRow', this.checked)"><span class="slider"></span></label>
+              </div>
+
+              <!-- SELECTOR DE ICONOS VECTORIALES -->
+              <div class="field-group">
+                <label class="field-label">Ícono del evento</label>
+                <div class="icon-selector-grid" id="iconPicker"></div>
+              </div>
+
+              <div class="divider"></div>
+              <div class="field-group">
+                <label class="field-label" for="popupTitle">Título del evento</label>
+                <input class="field-input" type="text" id="popupTitle" placeholder="Ej: Cata de Vinos &amp; Maridaje" oninput="updatePreview()" maxlength="60">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="popupBadge">Etiqueta del evento</label>
+                <input class="field-input" type="text" id="popupBadge" placeholder="Ej: Sábado 14 Sep · 20:00h" oninput="updatePreview()" maxlength="40">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="popupDesc">Descripción</label>
+                <textarea class="field-textarea" id="popupDesc" placeholder="Detalla el evento: menú especial, precio, aforo, etc." oninput="updatePreview()" maxlength="200"></textarea>
+                <p class="field-hint"><span id="popupDescCount">0</span>/200 caracteres</p>
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="popupBtnText">Texto del botón</label>
+                <input class="field-input" type="text" id="popupBtnText" placeholder="Ej: Reservar plaza" oninput="updatePreview()" maxlength="30">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="popupLink">Enlace del formulario / reserva</label>
+                <input class="field-input" type="url" id="popupLink" placeholder="https://tally.so/r/...">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="popupEndDate">Auto-desactivar el <span class="help-tip" data-tip="El pop-up se apagará automáticamente en esta fecha">?</span></label>
+                <input class="field-input" type="date" id="popupEndDate">
+                <p class="field-hint">Deja en blanco si no quieres que expire automáticamente</p>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" onclick="savePopup()" id="btnSavePopup">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Guardar cambios
+                </button>
+                <button class="btn btn-danger" onclick="clearPopup()" id="btnClearPopup">Limpiar</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <span class="card-title">Vista previa en tiempo real</span>
+              </div>
+              <div class="preview-card">
+                <p class="preview-label">CÓMO SE VERÁ EN LA WEB</p>
+                <div class="popup-preview" id="popupPreview">
+                  <div class="popup-preview-badge" id="prevBadge">Evento especial</div>
+                  <div class="popup-preview-icon-wrap" id="prevIconWrap"></div>
+                  <div class="popup-preview-title" id="prevTitle">Título del evento</div>
+                  <div class="popup-preview-desc" id="prevDesc">Descripción del evento aparecerá aquí...</div>
+                  <a class="popup-preview-btn" id="prevBtn" href="#" target="_blank" rel="noopener">Más información</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: BANNER -->
+      <div class="tab-panel" id="panel-banner">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+            </div>
+            <span class="card-title">Banner Superior de Aviso</span>
+          </div>
+          <p style="font-size:0.85rem;color:var(--cream-dim);margin-bottom:1.5rem;">Muestra una franja de aviso en la parte superior de la web. Ideal para cierres, eventos del día o noticias de última hora.</p>
+          <div class="toggle-row" id="bannerToggleRow">
+            <div class="toggle-label-group"><span class="toggle-label">Activar Banner</span><span class="toggle-sub">Franja visible en la parte superior de la web</span></div>
+            <label class="switch"><input type="checkbox" id="bannerActive" onchange="updateToggleRow('bannerToggleRow', this.checked)"><span class="slider"></span></label>
+          </div>
+          <div class="field-group"><label class="field-label" for="bannerText">Mensaje del banner</label><input class="field-input" type="text" id="bannerText" placeholder="Ej: Esta noche tenemos música en vivo · ¡Ven a disfrutarlo!" maxlength="120"></div>
+          <div class="field-group">
+            <label class="field-label">Color del banner</label>
+            <div class="color-row"><input type="color" class="color-swatch" id="bannerColor" value="#C9A84C"><input class="field-input" type="text" id="bannerColorText" value="#C9A84C" style="max-width:140px;" oninput="document.getElementById('bannerColor').value=this.value"></div>
+          </div>
+          <div class="field-group"><label class="field-label" for="bannerLink">Enlace (opcional)</label><input class="field-input" type="url" id="bannerLink" placeholder="https://..."></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="saveBanner()" id="btnSaveBanner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Guardar Banner
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: HORARIO -->
+      <div class="tab-panel" id="panel-horario">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <span class="card-title">Aviso de Horario Especial</span>
+          </div>
+          <p style="font-size:0.85rem;color:var(--cream-dim);margin-bottom:1.5rem;">Activa este aviso para informar de cierres temporales, vacaciones o cambios de horario puntuales.</p>
+          <div class="toggle-row" id="horarioToggleRow">
+            <div class="toggle-label-group"><span class="toggle-label">Mostrar aviso de horario</span><span class="toggle-sub">Aparecerá en la sección de información</span></div>
+            <label class="switch"><input type="checkbox" id="horarioActive" onchange="updateToggleRow('horarioToggleRow', this.checked)"><span class="slider"></span></label>
+          </div>
+          <div class="field-group"><label class="field-label" for="horarioType">Tipo de aviso</label><select class="field-select" id="horarioType"><option value="cierre">Cierre temporal</option><option value="vacaciones">Vacaciones</option><option value="horario">Cambio de horario</option><option value="reforma">Reformas</option><option value="fiesta">Festivo especial</option></select></div>
+          <div class="field-group"><label class="field-label" for="horarioMsg">Mensaje personalizado</label><textarea class="field-textarea" id="horarioMsg" placeholder="Ej: Cerramos del 14 al 22 de agosto por vacaciones. ¡Volvemos con las pilas cargadas!" maxlength="200"></textarea></div>
+          <div class="field-group"><label class="field-label" for="horarioDesde">Desde</label><input class="field-input" type="date" id="horarioDesde"></div>
+          <div class="field-group"><label class="field-label" for="horarioHasta">Hasta</label><input class="field-input" type="date" id="horarioHasta"></div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="saveHorario()" id="btnSaveHorario">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Guardar Horario
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: PLATO DEL DÍA -->
+      <div class="tab-panel" id="panel-plato">
+        <div class="grid">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+                </div>
+                <span class="card-title">El Plato del Día / Sugerencias de Hoy</span>
+              </div>
+
+              <div class="toggle-row" id="platoToggleRow">
+                <div class="toggle-label-group"><span class="toggle-label">Mostrar Plato del Día en la web</span><span class="toggle-sub">Aparece destacado en la página principal con la fecha de hoy</span></div>
+                <label class="switch"><input type="checkbox" id="platoActive" onchange="updatePlatoPreview(); updateToggleRow('platoToggleRow', this.checked)"><span class="slider"></span></label>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="platoTitle">Plato Principal / Especialidad</label>
+                <input class="field-input" type="text" id="platoTitle" placeholder="Ej: Arroz meloso de pato, setas de temporada y foie a leña" maxlength="90">
+                <p class="field-hint">El nombre del arroz, carne, pescado o plato estrella recién cocinado.</p>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="platoDesc">Descripción / Menú completo de hoy</label>
+                <textarea class="field-textarea" id="platoDesc" placeholder="Ej: Elaborado con arroz bomba D.O. Valencia a la leña de naranjo. Acompañado de aperitivo de la casa y pan artesano." rows="3" maxlength="260"></textarea>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="platoPrice">Precio de la ración</label>
+                  <input class="field-input" type="text" id="platoPrice" placeholder="Ej: 14,50€" maxlength="20">
+                </div>
+                <div class="field-group">
+                  <label class="field-label" for="platoTag">Etiqueta de cocina</label>
+                  <input class="field-input" type="text" id="platoTag" placeholder="Ej: A la leña · Raciones limitadas" maxlength="40">
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="platoNota">Guarnición o recomendación</label>
+                <input class="field-input" type="text" id="platoNota" placeholder="Ej: Disponible en servicio de mediodía hasta fin de existencias" maxlength="90">
+              </div>
+
+              <div class="field-group">
+                <label class="field-label" for="platoIg">Enlace a Instagram / Story (Opcional)</label>
+                <input class="field-input" type="url" id="platoIg" placeholder="https://instagram.com/p/...">
+                <p class="field-hint">Si habéis subido la foto o vídeo a Instagram, pegad el enlace aquí.</p>
+              </div>
+
+              <div class="field-row">
+                <div class="field-group">
+                  <label class="field-label" for="platoFecha">Fecha del plato</label>
+                  <input class="field-input" type="date" id="platoFecha">
+                </div>
+                <div class="field-group" style="display:flex;align-items:center;padding-top:1.4rem;">
+                  <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--cream);cursor:pointer;">
+                    <input type="checkbox" id="platoAutoExpire" checked>
+                    <span>Auto-desactivar a medianoche</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn btn-primary" onclick="savePlato()" id="btnSavePlato">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Guardar Plato del Día
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- PREVIEW PLATO DEL DÍA -->
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <span class="card-title">Vista previa en la web</span>
+              </div>
+              <p style="font-size:0.82rem;color:var(--cream-dim);margin-bottom:1rem;">Así se mostrará la tarjeta gastronómica en la portada:</p>
+
+              <div style="background:linear-gradient(135deg, rgba(15,37,64,0.92) 0%, rgba(8,18,36,0.96) 100%);border:1px solid rgba(201,168,76,0.32);border-radius:14px;padding:1.4rem;box-shadow:0 12px 30px rgba(0,0,0,0.4);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(201,168,76,0.15);">
+                  <span style="font-family:var(--fc);font-size:0.75rem;font-weight:700;color:var(--gold-light);letter-spacing:0.18em;" id="prevPlatoEyebrow">EL PLATO DEL DÍA · HOY</span>
+                  <span style="font-size:0.75rem;color:var(--cream-dim);" id="prevPlatoTag">A la leña</span>
+                </div>
+                <h4 style="font-family:var(--fd);font-size:1.4rem;color:var(--cream);margin:0 0 0.5rem 0;" id="prevPlatoTitle">Arroz meloso de pato y setas a leña</h4>
+                <p style="font-size:0.86rem;color:var(--cream-dim);line-height:1.5;margin:0 0 0.6rem 0;" id="prevPlatoDesc">Elaborado con arroz bomba D.O. Valencia y leña de naranjo.</p>
+                <div style="font-size:0.78rem;color:var(--gold);font-style:italic;margin-bottom:0.8rem;" id="prevPlatoNota">Disponible en servicio de mediodía</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding-top:0.6rem;border-top:1px solid rgba(201,168,76,0.1);">
+                  <span style="font-family:var(--fd);font-size:1.5rem;color:var(--gold);" id="prevPlatoPrice">14,50€ <small style="font-size:0.75rem;color:var(--cream-dim);">/ ración</small></span>
+                  <span style="background:var(--gold);color:var(--navy-dark);font-family:var(--fc);font-size:0.75rem;font-weight:700;padding:5px 12px;border-radius:4px;letter-spacing:0.08em;text-transform:uppercase;">Reservar mesa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CONFIG -->
+      <div class="tab-panel" id="panel-config">
+        <div class="grid">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              </div>
+              <span class="card-title">Configuración del sistema</span>
+            </div>
+            <div class="field-group"><label class="field-label">Cambiar PIN de acceso</label><input class="field-input" type="password" id="newPin1" placeholder="PIN nuevo (6 dígitos)" maxlength="6"></div>
+            <div class="field-group"><input class="field-input" type="password" id="newPin2" placeholder="Confirmar PIN nuevo" maxlength="6"></div>
+            <div class="btn-row"><button class="btn btn-ghost" onclick="changePin()" id="btnChangePin">Cambiar PIN</button></div>
+            <div class="divider"></div>
+            <div class="field-group">
+              <label class="field-label">JSONBin.io API Key <span class="help-tip" data-tip="Opcional: configura tu API key de JSONBin para sincronizar en la nube">?</span></label>
+              <input class="field-input" type="password" id="jsonbinKey" placeholder="$2a$10b$...">
+              <p class="field-hint">Crea cuenta gratuita en <strong>jsonbin.io</strong> → API Keys</p>
+            </div>
+            <div class="field-group"><label class="field-label">JSONBin Bin ID</label><input class="field-input" type="text" id="jsonbinId" placeholder="64abc1234567890..."></div>
+            <div class="btn-row">
+              <button class="btn btn-success" onclick="saveApiConfig()" id="btnSaveApi">Guardar API</button>
+              <button class="btn btn-ghost" onclick="testConnection()" id="btnTestApi">Probar conexión</button>
+            </div>
+            <div class="divider"></div>
+            <div class="field-group"><label class="field-label">Enlace directo al panel</label><input class="field-input" type="text" id="adminUrl" readonly><p class="field-hint">Guárdalo en favoritos del móvil</p></div>
+            <div class="btn-row">
+              <button class="btn btn-ghost" onclick="copyAdminUrl()" id="btnCopyUrl">Copiar enlace</button>
+              <button class="btn btn-danger" onclick="exportData()" id="btnExport">Exportar datos</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="card-title">Acceso rápido desde móvil</span>
+            </div>
+            <p style="font-size:0.85rem;color:var(--cream-dim);margin-bottom:1.5rem;">Guarda el enlace del panel en la pantalla de inicio de tu móvil para tener acceso directo como si fuera una app.</p>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="padding:12px;background:rgba(15,37,64,0.5);border-radius:8px;border:1px solid rgba(201,168,76,0.15);">
+                <strong style="color:var(--gold-light);font-size:0.8rem;display:block;margin-bottom:4px;">iPhone (Safari):</strong>
+                <span style="font-size:0.78rem;color:var(--cream-dim);">Botón Compartir (cuadrado con flecha) → <strong>"Añadir a pantalla de inicio"</strong></span>
+              </div>
+              <div style="padding:12px;background:rgba(15,37,64,0.5);border-radius:8px;border:1px solid rgba(201,168,76,0.15);">
+                <strong style="color:var(--gold-light);font-size:0.8rem;display:block;margin-bottom:4px;">Android (Chrome):</strong>
+                <span style="font-size:0.78rem;color:var(--cream-dim);">Menú ⋮ (tres puntos) → <strong>"Instalar aplicación" o "Añadir a pantalla de inicio"</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" aria-live="polite"></div>
+
+  <script>
+    const CONFIG = {
+      PIN_KEY:     'palmaret_pin_hash',
+      DATA_KEY:    'palmaret_cms_data',
+      SESSION_KEY: 'palmaret_session',
+      API_KEY_KEY: 'palmaret_api_key',
+      BIN_ID_KEY:  'palmaret_bin_id',
+      DEFAULT_PIN: '246810',
+      SESSION_TTL: 8 * 60 * 60 * 1000
+    };
+
+    const ICONS = {
+      vino: {
+        label: 'Cata Vinos',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M12 15v7M5 3h14c0 4.418-3.134 8-7 8s-7-3.582-7-8z"/></svg>'
+      },
+      gastronomia: {
+        label: 'Gourmet',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2v20M21 15V2a3 3 0 00-3 3M6 2v20M3 2v6a3 3 0 003 3v11M6 2a3 3 0 013 3v3a3 3 0 01-3 3"/></svg>'
+      },
+      fuego: {
+        label: 'Brasa / Arroz',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>'
+      },
+      musica: {
+        label: 'Música / Tardeo',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13M9 18a3 3 0 11-6 0 3 3 0 016 0zM21 16a3 3 0 11-6 0 3 3 0 016 0z"/></svg>'
+      },
+      copas: {
+        label: 'Coctelería',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M12 11v11M20 4L12 11 4 4zM4 4h16"/></svg>'
+      },
+      estrella: {
+        label: 'VIP / Especial',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+      },
+      calendario: {
+        label: 'Fecha Reserva',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>'
+      },
+      trofeo: {
+        label: 'Tercer Tiempo',
+        svg: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 01-2-2V5a2 2 0 012-2h2M18 9h2a2 2 0 002-2V5a2 2 0 00-2-2h-2M6 3h12v7a6 6 0 01-12 0V3zM9 21h6M12 16v5"/></svg>'
+      }
+    };
+
+    let selectedIconKey = 'vino';
+
+    function simpleHash(str) {
+      let h = 0x811c9dc5;
+      for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+      return h.toString(16);
+    }
+
+    function getPin()         { return localStorage.getItem(CONFIG.PIN_KEY) || simpleHash(CONFIG.DEFAULT_PIN); }
+    function verifyPin(input) { return simpleHash(input) === getPin(); }
+    function isSessionActive(){ const ts = parseInt(localStorage.getItem(CONFIG.SESSION_KEY)||'0',10); return Date.now()-ts < CONFIG.SESSION_TTL; }
+    function startSession()   { localStorage.setItem(CONFIG.SESSION_KEY, Date.now().toString()); }
+    function clearSession()   { localStorage.removeItem(CONFIG.SESSION_KEY); }
+
+    let currentPin = '';
+
+    function pressKey(digit) {
+      if (currentPin.length >= 6) return;
+      currentPin += digit;
+      updatePinDots();
+      if (currentPin.length === 6) setTimeout(checkPin, 100);
+    }
+
+    function deleteKey() {
+      currentPin = currentPin.slice(0, -1);
+      updatePinDots();
+      document.getElementById('pinError').textContent = '';
+    }
+
+    function updatePinDots() {
+      document.querySelectorAll('.pin-dot').forEach((d,i) => d.classList.toggle('filled', i < currentPin.length));
+    }
+
+    function checkPin() {
+      if (verifyPin(currentPin)) {
+        startSession();
+        unlockApp();
+      } else {
+        const err = document.getElementById('pinError');
+        err.textContent = 'PIN incorrecto. Inténtalo de nuevo.';
+        err.classList.remove('shake');
+        void err.offsetHeight;
+        err.classList.add('shake');
+        currentPin = '';
+        updatePinDots();
+      }
+    }
+
+    function unlockApp() {
+      document.getElementById('login-screen').classList.add('hidden');
+      document.getElementById('app').classList.add('visible');
+      initApp();
+    }
+
+    function logout() {
+      clearSession();
+      document.getElementById('app').classList.remove('visible');
+      document.getElementById('login-screen').classList.remove('hidden');
+      currentPin = '';
+      updatePinDots();
+      document.getElementById('pinError').textContent = '';
+      showToast('Sesión cerrada correctamente.', 'info');
+    }
+
+    function initApp() {
+      buildIconPicker();
+      startClock();
+      loadData();
+      document.getElementById('adminUrl').value = window.location.href;
+    }
+
+    function startClock() {
+      function tick() { document.getElementById('liveTime').textContent = new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
+      tick();
+      setInterval(tick, 1000);
+    }
+
+    function buildIconPicker() {
+      const grid = document.getElementById('iconPicker');
+      grid.innerHTML = '';
+      Object.keys(ICONS).forEach(key => {
+        const item = ICONS[key];
+        const btn = document.createElement('button');
+        btn.className = 'icon-btn' + (key === selectedIconKey ? ' selected' : '');
+        btn.type = 'button';
+        btn.innerHTML = `${item.svg}<span>${item.label}</span>`;
+        btn.onclick = () => {
+          selectedIconKey = key;
+          document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          updatePreview();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function updatePreview() {
+      const title = document.getElementById('popupTitle').value || 'Título del evento';
+      const badge = document.getElementById('popupBadge').value || 'Evento especial';
+      const desc  = document.getElementById('popupDesc').value  || 'Descripción del evento aparecerá aquí...';
+      const btn   = document.getElementById('popupBtnText').value || 'Más información';
+      const link  = document.getElementById('popupLink').value || '#';
+
+      const iconItem = ICONS[selectedIconKey] || ICONS.vino;
+      document.getElementById('prevIconWrap').innerHTML = iconItem.svg;
+      document.getElementById('prevTitle').textContent = title;
+      document.getElementById('prevBadge').textContent = badge;
+      document.getElementById('prevDesc').textContent  = desc;
+      document.getElementById('prevBtn').textContent   = btn;
+      document.getElementById('prevBtn').href          = link;
+      document.getElementById('popupDescCount').textContent = document.getElementById('popupDesc').value.length;
+    }
+
+    function updateToggleRow(rowId, active) {
+      document.getElementById(rowId).classList.toggle('active-row', active);
+    }
+
+    function switchTab(name) {
+      document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById(`tab-${name}`).classList.add('active');
+      document.getElementById(`tab-${name}`).setAttribute('aria-selected','true');
+      document.getElementById(`panel-${name}`).classList.add('active');
+    }
+
+    function getData() { try { return JSON.parse(localStorage.getItem(CONFIG.DATA_KEY)||'{}'); } catch { return {}; } }
+
+    function setData(key, value) {
+      const data = getData();
+      data[key] = value;
+      data._lastSave = new Date().toISOString();
+      localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(data));
+      updateStats();
+      syncToCloud(data);
+      return data;
+    }
+
+    function loadData() {
+      const data = getData();
+      if (data.popup) {
+        document.getElementById('popupActive').checked  = !!data.popup.active;
+        document.getElementById('popupTitle').value     = data.popup.title   || '';
+        document.getElementById('popupBadge').value     = data.popup.badge   || '';
+        document.getElementById('popupDesc').value      = data.popup.desc    || '';
+        document.getElementById('popupBtnText').value   = data.popup.btnText || '';
+        document.getElementById('popupLink').value      = data.popup.link    || '';
+        document.getElementById('popupEndDate').value   = data.popup.endDate || '';
+        selectedIconKey = data.popup.icon || 'vino';
+        buildIconPicker();
+        updateToggleRow('popupToggleRow', !!data.popup.active);
+      }
+      if (data.banner) {
+        document.getElementById('bannerActive').checked  = !!data.banner.active;
+        document.getElementById('bannerText').value      = data.banner.text  || '';
+        document.getElementById('bannerColor').value     = data.banner.color || '#C9A84C';
+        document.getElementById('bannerColorText').value = data.banner.color || '#C9A84C';
+        document.getElementById('bannerLink').value      = data.banner.link  || '';
+        updateToggleRow('bannerToggleRow', !!data.banner.active);
+      }
+      if (data.horario) {
+        document.getElementById('horarioActive').checked = !!data.horario.active;
+        document.getElementById('horarioType').value     = data.horario.type  || 'cierre';
+        document.getElementById('horarioMsg').value      = data.horario.msg   || '';
+        document.getElementById('horarioDesde').value    = data.horario.desde || '';
+        document.getElementById('horarioHasta').value    = data.horario.hasta || '';
+        updateToggleRow('horarioToggleRow', !!data.horario.active);
+      }
+      if (data.platoDia) {
+        document.getElementById('platoActive').checked     = !!data.platoDia.active;
+        document.getElementById('platoTitle').value        = data.platoDia.title || '';
+        document.getElementById('platoDesc').value         = data.platoDia.desc  || '';
+        document.getElementById('platoPrice').value        = data.platoDia.price || '';
+        document.getElementById('platoTag').value          = data.platoDia.tag   || '';
+        document.getElementById('platoNota').value         = data.platoDia.nota  || '';
+        document.getElementById('platoIg').value           = data.platoDia.igLink|| '';
+        document.getElementById('platoFecha').value        = data.platoDia.fecha || new Date().toISOString().split('T')[0];
+        document.getElementById('platoAutoExpire').checked = data.platoDia.autoExpire !== false;
+        updateToggleRow('platoToggleRow', !!data.platoDia.active);
+      } else {
+        document.getElementById('platoFecha').value = new Date().toISOString().split('T')[0];
+      }
+      const apiKey = localStorage.getItem(CONFIG.API_KEY_KEY) || '';
+      const binId  = localStorage.getItem(CONFIG.BIN_ID_KEY)  || '';
+      if (apiKey) document.getElementById('jsonbinKey').value = apiKey;
+      if (binId)  document.getElementById('jsonbinId').value  = binId;
+      updatePreview();
+      updateStats();
+    }
+
+    function updateStats() {
+      const data = getData();
+      const popupActive  = data.popup?.active;
+      const bannerActive = data.banner?.active;
+      const platoActive  = data.platoDia?.active;
+      document.getElementById('statPopup').textContent  = popupActive  ? 'Activo' : 'Inactivo';
+      document.getElementById('statPopup').style.color  = popupActive  ? 'var(--green)' : 'var(--cream-dim)';
+      const statPlatoEl = document.getElementById('statPlato');
+      if (statPlatoEl) {
+        statPlatoEl.textContent = platoActive ? 'Activo' : 'Inactivo';
+        statPlatoEl.style.color = platoActive ? 'var(--green)' : 'var(--cream-dim)';
+      }
+      document.getElementById('statBanner').textContent = bannerActive ? 'Activo' : 'Inactivo';
+      document.getElementById('statBanner').style.color = bannerActive ? 'var(--green)' : 'var(--cream-dim)';
+      if (data._lastSave) { const d = new Date(data._lastSave); document.getElementById('statLastSave').textContent = d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); }
+      document.getElementById('statMode').textContent = localStorage.getItem(CONFIG.API_KEY_KEY) ? 'Nube' : 'Local';
+    }
+
+    function savePopup() {
+      setData('popup', {
+        active:  document.getElementById('popupActive').checked,
+        icon:    selectedIconKey,
+        title:   document.getElementById('popupTitle').value.trim(),
+        badge:   document.getElementById('popupBadge').value.trim(),
+        desc:    document.getElementById('popupDesc').value.trim(),
+        btnText: document.getElementById('popupBtnText').value.trim() || 'Más información',
+        link:    document.getElementById('popupLink').value.trim(),
+        endDate: document.getElementById('popupEndDate').value,
+        savedAt: new Date().toISOString()
+      });
+      rippleEffect('btnSavePopup');
+      showToast('Pop-up guardado correctamente', 'success');
+    }
+
+    function clearPopup() {
+      if (!confirm('¿Seguro que quieres limpiar el pop-up?')) return;
+      ['popupTitle','popupBadge','popupDesc','popupBtnText','popupLink','popupEndDate'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('popupActive').checked = false;
+      selectedIconKey = 'vino'; buildIconPicker();
+      updateToggleRow('popupToggleRow', false); updatePreview(); savePopup();
+      showToast('Pop-up limpiado', 'info');
+    }
+
+    function saveBanner() {
+      setData('banner', {
+        active: document.getElementById('bannerActive').checked,
+        text:   document.getElementById('bannerText').value.trim(),
+        color:  document.getElementById('bannerColor').value,
+        link:   document.getElementById('bannerLink').value.trim()
+      });
+      rippleEffect('btnSaveBanner');
+      showToast('Banner guardado correctamente', 'success');
+    }
+
+    
+    function updatePlatoPreview() {
+      const title = document.getElementById('platoTitle').value || 'Arroz meloso de pato y setas a leña';
+      const desc  = document.getElementById('platoDesc').value  || 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.';
+      const price = document.getElementById('platoPrice').value || '14,50€';
+      const tag   = document.getElementById('platoTag').value   || 'Especialidad de la casa';
+      const nota  = document.getElementById('platoNota').value  || 'Disponible hoy en mediodía';
+      const fecha = document.getElementById('platoFecha').value;
+
+      let fechaTxt = 'HOY';
+      if (fecha) {
+        try {
+          const d = new Date(fecha + 'T12:00:00');
+          fechaTxt = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+        } catch(e) {}
+      }
+
+      document.getElementById('prevPlatoEyebrow').textContent = 'EL PLATO DEL DÍA · ' + fechaTxt.toUpperCase();
+      document.getElementById('prevPlatoTitle').textContent   = title;
+      document.getElementById('prevPlatoDesc').textContent    = desc;
+      document.getElementById('prevPlatoTag').textContent     = tag;
+      document.getElementById('prevPlatoNota').textContent    = nota;
+      document.getElementById('prevPlatoPrice').innerHTML    = price + ' <small style="font-size:0.75rem;color:var(--cream-dim);">/ ración</small>';
+    }
+
+    function savePlato() {
+      setData('platoDia', {
+        active:     document.getElementById('platoActive').checked,
+        title:      document.getElementById('platoTitle').value.trim(),
+        desc:       document.getElementById('platoDesc').value.trim(),
+        price:      document.getElementById('platoPrice').value.trim(),
+        tag:        document.getElementById('platoTag').value.trim(),
+        nota:       document.getElementById('platoNota').value.trim(),
+        igLink:     document.getElementById('platoIg').value.trim(),
+        fecha:      document.getElementById('platoFecha').value,
+        autoExpire: document.getElementById('platoAutoExpire').checked,
+        savedAt:    new Date().toISOString()
+      });
+      rippleEffect('btnSavePlato');
+      showToast('Plato del Día guardado correctamente', 'success');
+    }
+
+    function saveHorario() {
+      setData('horario', {
+        active: document.getElementById('horarioActive').checked,
+        type:   document.getElementById('horarioType').value,
+        msg:    document.getElementById('horarioMsg').value.trim(),
+        desde:  document.getElementById('horarioDesde').value,
+        hasta:  document.getElementById('horarioHasta').value
+      });
+      rippleEffect('btnSaveHorario');
+      showToast('Horario especial guardado', 'success');
+    }
+
+    function changePin() {
+      const p1 = document.getElementById('newPin1').value;
+      const p2 = document.getElementById('newPin2').value;
+      if (!p1||!p2)            return showToast('Introduce el PIN en ambos campos.', 'error');
+      if (p1 !== p2)           return showToast('Los PINs no coinciden.', 'error');
+      if (!/^\d{6}$/.test(p1)) return showToast('El PIN debe tener exactamente 6 dígitos.', 'error');
+      localStorage.setItem(CONFIG.PIN_KEY, simpleHash(p1));
+      document.getElementById('newPin1').value = '';
+      document.getElementById('newPin2').value = '';
+      showToast('PIN actualizado correctamente', 'success');
+    }
+
+    function saveApiConfig() {
+      const key = document.getElementById('jsonbinKey').value.trim();
+      const id  = document.getElementById('jsonbinId').value.trim();
+      if (key) localStorage.setItem(CONFIG.API_KEY_KEY, key);
+      if (id)  localStorage.setItem(CONFIG.BIN_ID_KEY, id);
+      updateStats();
+      showToast('Configuración API guardada', 'success');
+    }
+
+    async function testConnection() {
+      const key = localStorage.getItem(CONFIG.API_KEY_KEY);
+      const id  = localStorage.getItem(CONFIG.BIN_ID_KEY);
+      if (!key||!id) return showToast('Configura primero la API Key y el Bin ID.', 'error');
+      showToast('Probando conexión...', 'info');
+      try {
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${id}/latest`, { headers: {'X-Master-Key': key} });
+        if (res.ok) showToast('Conexión con JSONBin.io exitosa', 'success');
+        else showToast(`Error ${res.status}: verifica API Key o Bin ID`, 'error');
+      } catch { showToast('Sin conexión. Revisa tu red.', 'error'); }
+    }
+
+    async function syncToCloud(data) {
+      const key = localStorage.getItem(CONFIG.API_KEY_KEY);
+      const id  = localStorage.getItem(CONFIG.BIN_ID_KEY);
+      if (!key||!id) return;
+      try { await fetch(`https://api.jsonbin.io/v3/b/${id}`, { method:'PUT', headers:{'Content-Type':'application/json','X-Master-Key':key}, body:JSON.stringify(data) }); } catch {}
+    }
+
+    function copyAdminUrl() {
+      navigator.clipboard.writeText(window.location.href)
+        .then(() => showToast('Enlace copiado al portapapeles', 'success'))
+        .catch(() => showToast('No se pudo copiar automáticamente.', 'error'));
+    }
+
+    function exportData() {
+      const blob = new Blob([JSON.stringify(getData(),null,2)], {type:'application/json'});
+      const url  = URL.createObjectURL(blob);
+      const a = Object.assign(document.createElement('a'), {href:url, download:`palmaret-cms-${new Date().toISOString().slice(0,10)}.json`});
+      a.click(); URL.revokeObjectURL(url);
+      showToast('Datos exportados correctamente', 'success');
+    }
+
+    function rippleEffect(btnId) {
+      const btn = document.getElementById(btnId);
+      const ripple = Object.assign(document.createElement('div'), {className:'saving-ripple'});
+      btn.style.position = 'relative'; btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+
+    function showToast(msg, type='info') {
+      const container = document.getElementById('toast-container');
+      const toast = Object.assign(document.createElement('div'), {className:`toast toast-${type}`, textContent:msg});
+      toast.setAttribute('role','status');
+      container.appendChild(toast);
+      setTimeout(() => { toast.classList.add('out'); setTimeout(()=>toast.remove(),300); }, 3500);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('login-screen').classList.contains('hidden')) return;
+      if (e.key>='0'&&e.key<='9') pressKey(e.key);
+      if (e.key==='Backspace') deleteKey();
+    });
+
+    
+    ['platoTitle','platoDesc','platoPrice','platoTag','platoNota','platoFecha','platoIg'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', updatePlatoPreview);
+    });
+    document.getElementById('platoActive')?.addEventListener('change', function() {
+      updateToggleRow('platoToggleRow', this.checked);
+    });
+
+    document.getElementById('bannerColor')?.addEventListener('input', function() {
+      document.getElementById('bannerColorText').value = this.value;
+    });
+
+    if (isSessionActive()) unlockApp();
+  </script>
+</body>
+</html>
