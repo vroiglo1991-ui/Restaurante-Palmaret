@@ -1000,7 +1000,7 @@
       }
     };
 
-    /* ── Carga de datos local directa ── */
+    /* ── Carga de datos directa desde localStorage ── */
     function getData() {
       try {
         const stored = localStorage.getItem(DATA_KEY);
@@ -1008,6 +1008,8 @@
         return DEFAULT_DATA;
       } catch { return DEFAULT_DATA; }
     }
+
+
 
     /* ── Comprueba si el pop-up ya expiró ── */
     function isPopupExpired(popup) {
@@ -1050,27 +1052,24 @@
     /* ── POP-UP ── */
     function renderPopup(popup) {
       const overlay = document.getElementById('cms-popup-overlay');
-      if (!overlay) return;
-
       if (!popup || popup.active !== true || !popup.title || !popup.title.trim()) {
-        overlay.classList.remove('visible');
-        overlay.style.display = 'none';
+        if (overlay) { overlay.classList.remove('visible'); overlay.style.display = 'none'; }
         return;
       }
-
       if (isPopupExpired(popup)) {
-        overlay.classList.remove('visible');
-        overlay.style.display = 'none';
+        if (overlay) { overlay.classList.remove('visible'); overlay.style.display = 'none'; }
         return;
       }
 
       const seenKey = POPUP_SEEN + '_' + (popup.savedAt || '');
       if (sessionStorage.getItem(seenKey)) return;
 
+      const overlay = document.getElementById('cms-popup-overlay');
       const closeBtn = document.getElementById('cms-popup-close');
       const skipBtn  = document.getElementById('cms-popup-skip');
       const btn      = document.getElementById('cms-popup-btn');
       const iconWrap = document.getElementById('cms-popup-icon-wrap');
+      if (!overlay) return;
 
       // Icono vectorial minimalista
       if (iconWrap) {
@@ -1095,20 +1094,16 @@
         }
       };
 
-      overlay.style.display = 'flex';
       setTimeout(() => {
-        if (popup && popup.active === true) {
-          overlay.classList.add('visible');
-          overlay.removeAttribute('aria-hidden');
-          overlay.focus();
-        }
+        overlay.classList.add('visible');
+        overlay.removeAttribute('aria-hidden');
+        overlay.focus();
       }, 1800);
 
       function closePopup() {
         sessionStorage.setItem(seenKey, '1');
         overlay.classList.remove('visible');
         overlay.setAttribute('aria-hidden', 'true');
-        overlay.style.display = 'none';
       }
 
       closeBtn.addEventListener('click', closePopup);
@@ -1181,7 +1176,7 @@
       const section = document.getElementById('cms-plato-dia-section');
       if (!section) return;
 
-      if (!plato || plato.active !== true || !plato.title || !plato.title.trim()) {
+      if (!plato || !plato.active || !plato.title) {
         section.style.display = 'none';
         return;
       }
@@ -1278,10 +1273,9 @@
       }
     });
 
-    // Carga de datos e inicialización
+    // Carga desde local y escucha cambios en tiempo real
     document.addEventListener('DOMContentLoaded', () => {
-      const currentData = getData();
-      init(currentData);
+      init(getData());
 
       // Smooth scrolling con compensación exacta de cabecera
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1295,205 +1289,7 @@
             const navHeight = navEl ? navEl.offsetHeight : 80;
             const elementPosition = targetEl.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - (navHeight + 10);
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
-            const navMenu = document.getElementById('navMenu');
-            const hamburger = document.getElementById('hamburger');
-            if (navMenu && navMenu.classList.contains('active')) {
-        overlay.setAttribute('aria-hidden', 'true');
-        overlay.style.display = 'none';
-      }
-
-      closeBtn.addEventListener('click', closePopup);
-      skipBtn.addEventListener('click', closePopup);
-      skipBtn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') closePopup(); });
-      overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('visible')) closePopup(); });
-    }
-
-    /* ── ABRIR FORMULARIO EN MODAL DIRECTO ── */
-    function openFormModal(url) {
-      const modal   = document.getElementById('cms-form-modal');
-      const iframe  = document.getElementById('cms-form-iframe');
-      const closeBtn= document.getElementById('cms-form-close');
-      if (!modal || !iframe) { window.open(url, '_blank'); return; }
-
-      // Construye la URL de incrustación si es de Tally
-      let embedUrl = url;
-      if (url.includes('tally.so/r/')) {
-        embedUrl = url.replace('tally.so/r/', 'tally.so/embed/') + '?alignLeft=1&hideTitle=1&transparentBackground=1';
-      }
-      iframe.src = embedUrl;
-      modal.classList.add('visible');
-      modal.removeAttribute('aria-hidden');
-
-      function closeForm() {
-        modal.classList.remove('visible');
-        modal.setAttribute('aria-hidden', 'true');
-        iframe.src = 'about:blank';
-      }
-
-      closeBtn.onclick = closeForm;
-      modal.onclick = function(e) { if (e.target === modal) closeForm(); };
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('visible')) closeForm();
-      });
-    }
-
-    /* ── HORARIO ESPECIAL ── */
-    function renderHorario(horario) {
-      if (!horario || !horario.active || !horario.msg) return;
-
-      // Comprueba si las fechas son válidas y actuales
-      if (horario.desde && horario.hasta) {
-        const hoy   = new Date();
-        const desde = new Date(horario.desde);
-        const hasta = new Date(horario.hasta);
-        hasta.setHours(23,59,59); // incluye el día completo de fin
-        if (hoy < desde || hoy > hasta) return;
-      }
-
-      const el = document.getElementById('cms-horario');
-      if (!el) return;
-
-      el.setAttribute('data-type', horario.type || 'cierre');
-      document.getElementById('cms-horario-icon').textContent = HORARIO_ICONS[horario.type] || '⚠️';
-      document.getElementById('cms-horario-msg').textContent  = horario.msg;
-
-      if (horario.desde && horario.hasta) {
-        const fmt = d => new Date(d).toLocaleDateString('es-ES', {day:'numeric', month:'long'});
-        document.getElementById('cms-horario-dates').textContent = `Del ${fmt(horario.desde)} al ${fmt(horario.hasta)}`;
-      }
-
-      el.removeAttribute('hidden');
-      el.classList.add('visible');
-    }
-
-    /* ── EL PLATO DEL DÍA ── */
-    function renderPlatoDia(plato) {
-      const section = document.getElementById('cms-plato-dia-section');
-      if (!section) return;
-
-      if (!plato || plato.active !== true || !plato.title || !plato.title.trim()) {
-        section.style.display = 'none';
-        return;
-      }
-
-      // Validación de auto-expiración por fecha (solo si autoExpire está activo y es día pasado)
-      if (plato.fecha && plato.autoExpire) {
-        const today = new Date();
-        today.setHours(0,0,0,0);
-        const pDate = new Date(plato.fecha + 'T00:00:00');
-        if (pDate < today) {
-          section.style.display = 'none';
-          return;
-        }
-      }
-
-      // Formatear texto de cabecera: "EL PLATO DEL DÍA · [Fecha de hoy]"
-      let fechaTexto = 'HOY';
-      if (plato.fecha) {
-        try {
-          const dateObj = new Date(plato.fecha + 'T12:00:00');
-          fechaTexto = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
-        } catch (e) {}
-      }
-
-      const eyebrowEl = document.getElementById('cms-plato-eyebrow');
-      if (eyebrowEl) eyebrowEl.textContent = `EL PLATO DEL DÍA · ${fechaTexto.toUpperCase()}`;
-
-      document.getElementById('cms-plato-title').textContent = plato.title || '';
-      const descEl = document.getElementById('cms-plato-desc');
-      if (descEl) {
-        if (plato.desc && plato.desc.trim()) {
-          descEl.textContent = plato.desc.trim();
-          descEl.style.display = 'block';
-        } else {
-          descEl.textContent = '';
-          descEl.style.display = 'none';
-        }
-      }
-      
-      const tagEl = document.getElementById('cms-plato-tag');
-      if (tagEl) {
-        tagEl.textContent = plato.tag || 'Sugerencia de cocina';
-        tagEl.style.display = plato.tag ? 'block' : 'none';
-      }
-
-      const metaEl = document.getElementById('cms-plato-meta');
-      if (metaEl) {
-        metaEl.textContent = plato.nota || '';
-        metaEl.style.display = plato.nota ? 'block' : 'none';
-      }
-
-      const priceEl = document.getElementById('cms-plato-price');
-      if (priceEl) {
-        if (plato.price) {
-          priceEl.innerHTML = `${escapeHtml(plato.price)}<small>/ ración</small>`;
-          priceEl.style.display = 'block';
-        } else {
-          priceEl.style.display = 'none';
-        }
-      }
-
-      const igBtn = document.getElementById('cms-plato-ig-btn');
-      if (igBtn) {
-        if (plato.igLink) {
-          igBtn.href = plato.igLink;
-          igBtn.style.display = 'inline-flex';
-        } else {
-          igBtn.style.display = 'none';
-        }
-      }
-
-      section.style.display = 'block';
-    }
-
-    /* ── Utilidad ── */
-    function escapeHtml(str) {
-      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
-
-    /* ── Init ── */
-    function init(data) {
-      if (!data) return;
-      renderBanner(data.banner);
-      renderHorario(data.horario);
-      renderPlatoDia(data.platoDia);
-      renderPopup(data.popup);
-    }
-
-    // Escucha en tiempo real cambios desde la pestaña de admin
-    window.addEventListener('storage', (e) => {
-      if (e.key === DATA_KEY) {
-        const freshData = getData();
-        init(freshData);
-      }
-    });
-
-    // Carga de datos e inicialización
-    document.addEventListener('DOMContentLoaded', () => {
-      const currentData = getData();
-      init(currentData);
-
-      // Smooth scrolling con compensación exacta de cabecera
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const targetId = this.getAttribute('href');
-          if (!targetId || targetId === '#' || targetId.length < 2) return;
-          const targetEl = document.querySelector(targetId);
-          if (targetEl) {
-            e.preventDefault();
-            const navEl = document.getElementById('nav');
-            const navHeight = navEl ? navEl.offsetHeight : 80;
-            const elementPosition = targetEl.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - (navHeight + 10);
-            window.scrollTo({
-              top: offsetPosition,
-              behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             const navMenu = document.getElementById('navMenu');
             const hamburger = document.getElementById('hamburger');
             if (navMenu && navMenu.classList.contains('active')) {
