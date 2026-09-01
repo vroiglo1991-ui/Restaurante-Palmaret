@@ -305,6 +305,46 @@
 
     @media (max-width: 768px) { .topbar { padding: 0 1rem; } .main { padding: 1rem; } .stats-bar { grid-template-columns: 1fr 1fr; } .icon-selector-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 480px) { .login-card { margin: 1rem; padding: 2rem 1.5rem; } .stats-bar { grid-template-columns: 1fr; } .btn-row { flex-direction: column; } .btn { justify-content: center; } }
+
+    /* ── Day Selector Pills (Menú Semanal) ── */
+    .day-selector-pills {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1.25rem;
+      background: rgba(15,37,64,0.65); padding: 6px; border-radius: var(--r-md);
+      border: 1px solid rgba(201,168,76,0.18);
+    }
+    .day-pill {
+      flex: 1 1 65px; padding: 0.55rem 0.4rem; border-radius: var(--r-sm);
+      border: 1px solid transparent; background: transparent;
+      color: var(--cream-dim); font-family: var(--fc); font-size: 0.72rem;
+      letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      transition: all var(--t-fast);
+    }
+    .day-pill:hover { background: var(--cream-low); color: var(--cream); }
+    .day-pill.active {
+      background: var(--gold); color: var(--navy-dark);
+      font-weight: 700; border-color: var(--gold-light);
+      box-shadow: 0 4px 14px rgba(201,168,76,0.3);
+    }
+    .day-pill-badge {
+      font-size: 0.6rem; opacity: 0.85; letter-spacing: 0; text-transform: none; font-family: var(--fb);
+    }
+    .day-pill.is-today:not(.active) .day-pill-badge {
+      background: rgba(76,175,125,0.25); color: #6dd4a2; border: 1px solid rgba(76,175,125,0.4);
+      padding: 1px 6px; border-radius: 999px; font-weight: 600;
+    }
+    .day-pill.active.is-today .day-pill-badge {
+      background: var(--navy-dark); color: var(--gold-light);
+      padding: 1px 6px; border-radius: 999px; font-weight: 700;
+    }
+    .day-pill.has-dish:not(.active) {
+      color: var(--cream);
+    }
+    .auto-notice {
+      display: flex; align-items: center; gap: 8px; font-size: 0.76rem;
+      color: #6dd4a2; background: rgba(76,175,125,0.1); border: 1px solid rgba(76,175,125,0.25);
+      border-radius: var(--r-sm); padding: 8px 12px; margin-bottom: 1.2rem; line-height: 1.4;
+    }
   </style>
 </head>
 <body>
@@ -424,10 +464,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           Banner
         </button>
-        <button class="tab" onclick="switchTab('horario')" id="tab-horario" role="tab" aria-selected="false">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Horario
-        </button>
+
         <button class="tab" onclick="switchTab('config')" id="tab-config" role="tab" aria-selected="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           Config
@@ -544,34 +581,8 @@
         </div>
       </div>
 
-      <!-- TAB: HORARIO -->
-      <div class="tab-panel" id="panel-horario">
-        <div class="card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <span class="card-title">Aviso de Horario Especial</span>
-          </div>
-          <p style="font-size:0.85rem;color:var(--cream-dim);margin-bottom:1.5rem;">Activa este aviso para informar de cierres temporales, vacaciones o cambios de horario puntuales.</p>
-          <div class="toggle-row" id="horarioToggleRow">
-            <div class="toggle-label-group"><span class="toggle-label">Mostrar aviso de horario</span><span class="toggle-sub">Aparecerá en la sección de información</span></div>
-            <label class="switch"><input type="checkbox" id="horarioActive" onchange="updateToggleRow('horarioToggleRow', this.checked)"><span class="slider"></span></label>
-          </div>
-          <div class="field-group"><label class="field-label" for="horarioType">Tipo de aviso</label><select class="field-select" id="horarioType"><option value="cierre">Cierre temporal</option><option value="vacaciones">Vacaciones</option><option value="horario">Cambio de horario</option><option value="reforma">Reformas</option><option value="fiesta">Festivo especial</option></select></div>
-          <div class="field-group"><label class="field-label" for="horarioMsg">Mensaje personalizado</label><textarea class="field-textarea" id="horarioMsg" placeholder="Ej: Cerramos del 14 al 22 de agosto por vacaciones. ¡Volvemos con las pilas cargadas!" maxlength="200"></textarea></div>
-          <div class="field-group"><label class="field-label" for="horarioDesde">Desde</label><input class="field-input" type="date" id="horarioDesde"></div>
-          <div class="field-group"><label class="field-label" for="horarioHasta">Hasta</label><input class="field-input" type="date" id="horarioHasta"></div>
-          <div class="btn-row">
-            <button class="btn btn-primary" onclick="saveHorario()" id="btnSaveHorario">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-              Guardar Horario
-            </button>
-          </div>
-        </div>
-      </div>
 
-      <!-- TAB: PLATO DEL DÍA -->
+      <!-- TAB: PLATO DEL DÍA / MENÚ SEMANAL -->
       <div class="tab-panel" id="panel-plato">
         <div class="grid">
           <div>
@@ -580,64 +591,72 @@
                 <div class="card-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
                 </div>
-                <span class="card-title">El Plato del Día / Sugerencias de Hoy</span>
+                <span class="card-title">Menú Semanal · Plato del Día</span>
               </div>
 
               <div class="toggle-row" id="platoToggleRow">
-                <div class="toggle-label-group"><span class="toggle-label">Mostrar Plato del Día en la web</span><span class="toggle-sub">Aparece destacado en la página principal con la fecha de hoy</span></div>
+                <div class="toggle-label-group"><span class="toggle-label">Mostrar sección en la web</span><span class="toggle-sub">Activa o desactiva la sección de Plato del Día</span></div>
                 <label class="switch"><input type="checkbox" id="platoActive" onchange="updatePlatoPreview(); updateToggleRow('platoToggleRow', this.checked)"><span class="slider"></span></label>
+              </div>
+
+              <div class="auto-notice">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span><strong>Automatización 24/7:</strong> A las 00:00 la web cambia automáticamente al plato del día siguiente sin tocar nada.</span>
+              </div>
+
+              <!-- SELECTOR DE DÍAS DE LA SEMANA -->
+              <label class="field-label">Selecciona el día a editar:</label>
+              <div class="day-selector-pills" id="dayPills">
+                <button type="button" class="day-pill" onclick="selectDay(1)" data-day="1"><span>Lunes</span><span class="day-pill-badge" id="badge-1"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(2)" data-day="2"><span>Martes</span><span class="day-pill-badge" id="badge-2"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(3)" data-day="3"><span>Miércoles</span><span class="day-pill-badge" id="badge-3"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(4)" data-day="4"><span>Jueves</span><span class="day-pill-badge" id="badge-4"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(5)" data-day="5"><span>Viernes</span><span class="day-pill-badge" id="badge-5"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(6)" data-day="6"><span>Sábado</span><span class="day-pill-badge" id="badge-6"></span></button>
+                <button type="button" class="day-pill" onclick="selectDay(0)" data-day="0"><span>Domingo</span><span class="day-pill-badge" id="badge-0"></span></button>
+              </div>
+
+              <div class="toggle-row" id="dayActiveToggleRow" style="margin-bottom:1.25rem;">
+                <div class="toggle-label-group"><span class="toggle-label" id="dayActiveLabel">Activo para este día</span><span class="toggle-sub">Si se desactiva, la web no mostrará plato ese día</span></div>
+                <label class="switch"><input type="checkbox" id="dayActive" onchange="syncCurrentDayFields(); updatePlatoPreview(); updateToggleRow('dayActiveToggleRow', this.checked)"><span class="slider"></span></label>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="platoTitle">Plato Principal / Especialidad</label>
-                <input class="field-input" type="text" id="platoTitle" placeholder="Ej: Arroz meloso de pato, setas de temporada y foie a leña" maxlength="90">
-                <p class="field-hint">El nombre del arroz, carne, pescado o plato estrella recién cocinado.</p>
+                <input class="field-input" type="text" id="platoTitle" placeholder="Ej: Arroz al horno tradicional a leña" maxlength="90" oninput="syncCurrentDayFields(); updatePlatoPreview();">
+                <p class="field-hint">El nombre del arroz, carne, pescado o plato estrella.</p>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="platoDesc">Descripción / Menú completo de hoy</label>
-                <textarea class="field-textarea" id="platoDesc" placeholder="Ej: Elaborado con arroz bomba D.O. Valencia a la leña de naranjo. Acompañado de aperitivo de la casa y pan artesano." rows="3" maxlength="260"></textarea>
+                <label class="field-label" for="platoDesc">Descripción / Menú de este día</label>
+                <textarea class="field-textarea" id="platoDesc" placeholder="Ej: Elaborado con costilla ibérica, morcilla de cebolla y garbanzos a fuego vivo." rows="3" maxlength="260" oninput="syncCurrentDayFields(); updatePlatoPreview();"></textarea>
               </div>
 
               <div class="field-row">
                 <div class="field-group">
                   <label class="field-label" for="platoPrice">Precio de la ración</label>
-                  <input class="field-input" type="text" id="platoPrice" placeholder="Ej: 14,50€" maxlength="20">
+                  <input class="field-input" type="text" id="platoPrice" placeholder="Ej: 14,50€" maxlength="20" oninput="syncCurrentDayFields(); updatePlatoPreview();">
                 </div>
                 <div class="field-group">
                   <label class="field-label" for="platoTag">Etiqueta de cocina</label>
-                  <input class="field-input" type="text" id="platoTag" placeholder="Ej: A la leña · Raciones limitadas" maxlength="40">
+                  <input class="field-input" type="text" id="platoTag" placeholder="Ej: A la leña · Tradición" maxlength="40" oninput="syncCurrentDayFields(); updatePlatoPreview();">
                 </div>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="platoNota">Guarnición o recomendación</label>
-                <input class="field-input" type="text" id="platoNota" placeholder="Ej: Disponible en servicio de mediodía hasta fin de existencias" maxlength="90">
+                <input class="field-input" type="text" id="platoNota" placeholder="Ej: Disponible en servicio de mediodía" maxlength="90" oninput="syncCurrentDayFields(); updatePlatoPreview();">
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="platoIg">Enlace a Instagram / Story (Opcional)</label>
-                <input class="field-input" type="url" id="platoIg" placeholder="https://instagram.com/p/...">
-                <p class="field-hint">Si habéis subido la foto o vídeo a Instagram, pegad el enlace aquí.</p>
-              </div>
-
-              <div class="field-row">
-                <div class="field-group">
-                  <label class="field-label" for="platoFecha">Fecha del plato</label>
-                  <input class="field-input" type="date" id="platoFecha">
-                </div>
-                <div class="field-group" style="display:flex;align-items:center;padding-top:1.4rem;">
-                  <label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;color:var(--cream);cursor:pointer;">
-                    <input type="checkbox" id="platoAutoExpire" checked>
-                    <span>Auto-desactivar a medianoche</span>
-                  </label>
-                </div>
+                <input class="field-input" type="url" id="platoIg" placeholder="https://instagram.com/p/..." oninput="syncCurrentDayFields();">
               </div>
 
               <div class="btn-row">
                 <button class="btn btn-primary" onclick="savePlato()" id="btnSavePlato">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                  Guardar Plato del Día
+                  Guardar Menú Semanal
                 </button>
               </div>
             </div>
@@ -902,6 +921,13 @@
       document.getElementById(`tab-${name}`).classList.add('active');
       document.getElementById(`tab-${name}`).setAttribute('aria-selected','true');
       document.getElementById(`panel-${name}`).classList.add('active');
+      if (name === 'plato') {
+        loadDayToForm(currentEditingDay);
+        updateDayPillsUI();
+        updatePlatoPreview();
+      } else if (name === 'popup') {
+        updatePreview();
+      }
     }
 
     const DEFAULT_DATA = {
@@ -916,31 +942,150 @@
         endDate: '',
         savedAt: ''
       },
-      platoDia: {
+      banner: {
         active: false,
-        title: 'Arroz meloso de pato y setas a leña',
-        desc: 'Elaborado con fondo de pescado de lonja y arroz bomba D.O. Valencia a fuego vivo.',
-        price: '18,50€',
-        tag: 'A la Leña · Raciones Limitadas',
-        nota: 'Disponible en servicio de mediodía',
-        igLink: '',
-        fecha: '',
-        autoExpire: false,
+        text: '',
+        color: '#C9A84C',
+        link: ''
+      },
+      platoDia: {
+        active: true,
+        days: {
+          1: { active: true, title: 'Arroz al horno tradicional a leña', desc: 'Elaborado con costilla ibérica, morcilla de cebolla, panceta y garbanzos.', price: '14,50€', tag: 'A la leña · Tradición', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          2: { active: true, title: 'Arroz meloso de pato y setas a leña', desc: 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.', price: '14,50€', tag: 'A la leña', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          3: { active: true, title: 'Arroz negro con sepia y alcachofas', desc: 'Arroz bomba D.O. Valencia con tinta de calamar, sepia y alcachofas frescas.', price: '15,50€', tag: 'Arroz de autor', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          4: { active: true, title: 'Paella valenciana tradicional a leña', desc: 'Pollo de corral, conejo, bajoqueta, garrofó y romero fresco recién cortado.', price: '16,00€', tag: '100% Leña de naranjo', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          5: { active: true, title: 'Fideuà de marisco con sepia y gambas', desc: 'Fideo fino tostado con caldo concentrado de pescado de lonja y all i oli suave.', price: '15,00€', tag: 'Especialidad de lonja', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          6: { active: true, title: 'Arroz del señoret con marisco pelado', desc: 'Cigala, gambas y calamar listos para comer sin pelar.', price: '17,00€', tag: 'Fin de semana', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          0: { active: true, title: 'Paella especial de domingo a leña', desc: 'Edición limitada de domingo con los mejores ingredientes de la huerta.', price: '17,50€', tag: 'Especial domingo', nota: 'Disponible en servicio de mediodía', igLink: '' }
+        },
         savedAt: ''
       }
     };
+
+    const NOMBRES_DIAS_COMPLETO = {
+      1: 'Lunes', 2: 'Martes', 3: 'Miércoles', 4: 'Jueves', 5: 'Viernes', 6: 'Sábado', 0: 'Domingo'
+    };
+
+    let currentEditingDay = new Date().getDay();
+    if (currentEditingDay === undefined || isNaN(currentEditingDay)) currentEditingDay = 1;
+    let weeklyDaysData = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia.days));
+
+    function selectDay(dayIndex) {
+      syncCurrentDayFields();
+      currentEditingDay = Number(dayIndex);
+      loadDayToForm(currentEditingDay);
+      updateDayPillsUI();
+      updatePlatoPreview();
+    }
+
+    function syncCurrentDayFields() {
+      if (!weeklyDaysData[currentEditingDay]) {
+        weeklyDaysData[currentEditingDay] = { active: true, title: '', desc: '', price: '', tag: '', nota: '', igLink: '' };
+      }
+      weeklyDaysData[currentEditingDay].active = document.getElementById('dayActive').checked;
+      weeklyDaysData[currentEditingDay].title  = document.getElementById('platoTitle').value.trim();
+      weeklyDaysData[currentEditingDay].desc   = document.getElementById('platoDesc').value.trim();
+      weeklyDaysData[currentEditingDay].price  = document.getElementById('platoPrice').value.trim();
+      weeklyDaysData[currentEditingDay].tag    = document.getElementById('platoTag').value.trim();
+      weeklyDaysData[currentEditingDay].nota   = document.getElementById('platoNota').value.trim();
+      weeklyDaysData[currentEditingDay].igLink = document.getElementById('platoIg').value.trim();
+      updateDayPillsUI();
+    }
+
+    function loadDayToForm(dayIndex) {
+      const d = weeklyDaysData[dayIndex] || DEFAULT_DATA.platoDia.days[dayIndex] || { active: true, title: '', desc: '', price: '', tag: '', nota: '', igLink: '' };
+      document.getElementById('dayActive').checked = d.active !== false;
+      document.getElementById('dayActiveLabel').textContent = `Activo para el ${NOMBRES_DIAS_COMPLETO[dayIndex]}`;
+      document.getElementById('platoTitle').value  = d.title || '';
+      document.getElementById('platoDesc').value   = d.desc  || '';
+      document.getElementById('platoPrice').value  = d.price || '';
+      document.getElementById('platoTag').value    = d.tag   || '';
+      document.getElementById('platoNota').value   = d.nota  || '';
+      document.getElementById('platoIg').value     = d.igLink|| '';
+      updateToggleRow('dayActiveToggleRow', d.active !== false);
+    }
+
+    function updateDayPillsUI() {
+      const today = new Date().getDay();
+      document.querySelectorAll('.day-pill').forEach(btn => {
+        const d = Number(btn.getAttribute('data-day'));
+        btn.classList.toggle('active', d === currentEditingDay);
+        btn.classList.toggle('is-today', d === today);
+        const hasDish = weeklyDaysData[d] && weeklyDaysData[d].active !== false && weeklyDaysData[d].title;
+        btn.classList.toggle('has-dish', !!hasDish);
+        const badge = document.getElementById(`badge-${d}`);
+        if (badge) {
+          if (d === today) {
+            badge.textContent = 'HOY';
+          } else if (hasDish) {
+            badge.textContent = '✓';
+          } else {
+            badge.textContent = '';
+          }
+        }
+      });
+    }
+
+    /* ── Función de fusión profunda resistente a fallos ── */
+    function mergeWithDefaults(parsed) {
+      if (!parsed || typeof parsed !== 'object') {
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      }
+      const result = {
+        ...DEFAULT_DATA,
+        ...parsed,
+        popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : JSON.parse(JSON.stringify(DEFAULT_DATA.popup)),
+        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner))
+      };
+
+      let daysMerged = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia.days));
+      if (parsed.platoDia && typeof parsed.platoDia === 'object') {
+        if (parsed.platoDia.days && typeof parsed.platoDia.days === 'object') {
+          Object.keys(DEFAULT_DATA.platoDia.days).forEach(dayKey => {
+            const parsedDay = parsed.platoDia.days[dayKey] || parsed.platoDia.days[Number(dayKey)] || parsed.platoDia.days[String(dayKey)];
+            if (parsedDay) {
+              daysMerged[dayKey] = {
+                ...DEFAULT_DATA.platoDia.days[dayKey],
+                ...parsedDay
+              };
+            }
+          });
+        } else if (parsed.platoDia.title) {
+          const todayIdx = new Date().getDay();
+          daysMerged[todayIdx] = {
+            active: parsed.platoDia.active !== false,
+            title: parsed.platoDia.title,
+            desc: parsed.platoDia.desc || '',
+            price: parsed.platoDia.price || '',
+            tag: parsed.platoDia.tag || '',
+            nota: parsed.platoDia.nota || '',
+            igLink: parsed.platoDia.igLink || ''
+          };
+        }
+
+        const hasExplicitDays = parsed.platoDia.days && typeof parsed.platoDia.days === 'object';
+        const isActive = hasExplicitDays ? (parsed.platoDia.active !== false) : true;
+
+        result.platoDia = {
+          ...DEFAULT_DATA.platoDia,
+          ...parsed.platoDia,
+          active: isActive,
+          days: daysMerged
+        };
+      } else {
+        result.platoDia = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia));
+      }
+
+      return result;
+    }
 
     function getData() {
       try {
         const stored = localStorage.getItem(CONFIG.DATA_KEY);
         if (stored) {
           const parsed = JSON.parse(stored);
-          return {
-            ...DEFAULT_DATA,
-            ...parsed,
-            popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : DEFAULT_DATA.popup,
-            platoDia: parsed.platoDia ? { ...DEFAULT_DATA.platoDia, ...parsed.platoDia } : DEFAULT_DATA.platoDia
-          };
+          return mergeWithDefaults(parsed);
         }
         return JSON.parse(JSON.stringify(DEFAULT_DATA));
       } catch {
@@ -952,7 +1097,11 @@
       const data = getData();
       data[key] = value;
       data._lastSave = new Date().toISOString();
-      localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(data));
+      try {
+        localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(data));
+      } catch(e) {
+        console.warn('Storage error:', e);
+      }
       updateStats();
       syncToCloud(data);
       return data;
@@ -980,27 +1129,25 @@
         document.getElementById('bannerLink').value      = data.banner.link  || '';
         updateToggleRow('bannerToggleRow', !!data.banner.active);
       }
-      if (data.horario) {
-        document.getElementById('horarioActive').checked = !!data.horario.active;
-        document.getElementById('horarioType').value     = data.horario.type  || 'cierre';
-        document.getElementById('horarioMsg').value      = data.horario.msg   || '';
-        document.getElementById('horarioDesde').value    = data.horario.desde || '';
-        document.getElementById('horarioHasta').value    = data.horario.hasta || '';
-        updateToggleRow('horarioToggleRow', !!data.horario.active);
-      }
+
       if (data.platoDia) {
-        document.getElementById('platoActive').checked     = !!data.platoDia.active;
-        document.getElementById('platoTitle').value        = data.platoDia.title || '';
-        document.getElementById('platoDesc').value         = data.platoDia.desc  || '';
-        document.getElementById('platoPrice').value        = data.platoDia.price || '';
-        document.getElementById('platoTag').value          = data.platoDia.tag   || '';
-        document.getElementById('platoNota').value         = data.platoDia.nota  || '';
-        document.getElementById('platoIg').value           = data.platoDia.igLink|| '';
-        document.getElementById('platoFecha').value        = data.platoDia.fecha || new Date().toISOString().split('T')[0];
-        document.getElementById('platoAutoExpire').checked = data.platoDia.autoExpire !== false;
-        updateToggleRow('platoToggleRow', !!data.platoDia.active);
+        document.getElementById('platoActive').checked = data.platoDia.active !== false;
+        updateToggleRow('platoToggleRow', data.platoDia.active !== false);
+        if (data.platoDia.days) {
+          Object.keys(DEFAULT_DATA.platoDia.days).forEach(k => {
+            const parsedDay = data.platoDia.days[k] || data.platoDia.days[Number(k)] || data.platoDia.days[String(k)];
+            if (parsedDay) {
+              weeklyDaysData[k] = { ...DEFAULT_DATA.platoDia.days[k], ...parsedDay };
+            }
+          });
+        }
+        loadDayToForm(currentEditingDay);
+        updateDayPillsUI();
+        updatePlatoPreview();
       } else {
-        document.getElementById('platoFecha').value = new Date().toISOString().split('T')[0];
+        loadDayToForm(currentEditingDay);
+        updateDayPillsUI();
+        updatePlatoPreview();
       }
       const apiKey = localStorage.getItem(CONFIG.API_KEY_KEY) || '';
       const binId  = localStorage.getItem(CONFIG.BIN_ID_KEY)  || '';
@@ -1066,22 +1213,15 @@
 
     
     function updatePlatoPreview() {
-      const title = document.getElementById('platoTitle').value || 'Arroz meloso de pato y setas a leña';
-      const desc  = document.getElementById('platoDesc').value  || 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.';
-      const price = document.getElementById('platoPrice').value || '14,50€';
-      const tag   = document.getElementById('platoTag').value   || 'Especialidad de la casa';
-      const nota  = document.getElementById('platoNota').value  || 'Disponible hoy en mediodía';
-      const fecha = document.getElementById('platoFecha').value;
+      const d = weeklyDaysData[currentEditingDay] || {};
+      const title = document.getElementById('platoTitle').value || d.title || 'Arroz especial a leña';
+      const desc  = document.getElementById('platoDesc').value  || d.desc  || 'Elaborado con arroz bomba D.O. Valencia a fuego vivo.';
+      const price = document.getElementById('platoPrice').value || d.price || '14,50€';
+      const tag   = document.getElementById('platoTag').value   || d.tag   || 'Especialidad de la casa';
+      const nota  = document.getElementById('platoNota').value  || d.nota  || 'Disponible hoy en mediodía';
+      const diaNombre = (NOMBRES_DIAS_COMPLETO[currentEditingDay] || 'HOY').toUpperCase();
 
-      let fechaTxt = 'HOY';
-      if (fecha) {
-        try {
-          const d = new Date(fecha + 'T12:00:00');
-          fechaTxt = d.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
-        } catch(e) {}
-      }
-
-      document.getElementById('prevPlatoEyebrow').textContent = 'EL PLATO DEL DÍA · ' + fechaTxt.toUpperCase();
+      document.getElementById('prevPlatoEyebrow').textContent = `EL PLATO DEL DÍA · ${diaNombre}`;
       document.getElementById('prevPlatoTitle').textContent   = title;
       document.getElementById('prevPlatoDesc').textContent    = desc;
       document.getElementById('prevPlatoTag').textContent     = tag;
@@ -1090,32 +1230,14 @@
     }
 
     function savePlato() {
+      syncCurrentDayFields();
       setData('platoDia', {
-        active:     document.getElementById('platoActive').checked,
-        title:      document.getElementById('platoTitle').value.trim(),
-        desc:       document.getElementById('platoDesc').value.trim(),
-        price:      document.getElementById('platoPrice').value.trim(),
-        tag:        document.getElementById('platoTag').value.trim(),
-        nota:       document.getElementById('platoNota').value.trim(),
-        igLink:     document.getElementById('platoIg').value.trim(),
-        fecha:      document.getElementById('platoFecha').value,
-        autoExpire: document.getElementById('platoAutoExpire').checked,
-        savedAt:    new Date().toISOString()
+        active:  document.getElementById('platoActive').checked,
+        days:    weeklyDaysData,
+        savedAt: new Date().toISOString()
       });
       rippleEffect('btnSavePlato');
-      showToast('Plato del Día guardado correctamente', 'success');
-    }
-
-    function saveHorario() {
-      setData('horario', {
-        active: document.getElementById('horarioActive').checked,
-        type:   document.getElementById('horarioType').value,
-        msg:    document.getElementById('horarioMsg').value.trim(),
-        desde:  document.getElementById('horarioDesde').value,
-        hasta:  document.getElementById('horarioHasta').value
-      });
-      rippleEffect('btnSaveHorario');
-      showToast('Horario especial guardado', 'success');
+      showToast('Menú Semanal guardado correctamente', 'success');
     }
 
     function changePin() {

@@ -322,7 +322,7 @@
     </div>
 
     <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  CMS · EL PLATO DEL DÍA ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
-    <section class="cms-plato-section" id="cms-plato-dia-section" style="display:none;" aria-label="El Plato del Día">
+    <section class="cms-plato-section" id="cms-plato-dia-section" aria-label="El Plato del Día">
       <div class="cms-plato-container">
         <div class="cms-plato-card">
           <div class="cms-plato-header">
@@ -330,19 +330,19 @@
               <span class="cms-plato-dot" aria-hidden="true"></span>
               <span id="cms-plato-eyebrow">EL PLATO DEL DÍA · HOY</span>
             </div>
-            <div class="cms-plato-tag" id="cms-plato-tag">Especialidad de la casa</div>
+            <div class="cms-plato-tag" id="cms-plato-tag">A la leña · Tradición</div>
           </div>
           <div class="cms-plato-content">
             <div class="cms-plato-main">
-              <h3 class="cms-plato-title" id="cms-plato-title">Arroz a leña & Tapas</h3>
-              <p class="cms-plato-desc" id="cms-plato-desc"></p>
-              <div class="cms-plato-meta" id="cms-plato-meta"></div>
+              <h2 class="cms-plato-title" id="cms-plato-title">Arroz meloso de pato y setas a leña</h2>
+              <p class="cms-plato-desc" id="cms-plato-desc">Elaborado con arroz bomba D.O. Valencia y leña de naranjo.</p>
+              <div class="cms-plato-meta" id="cms-plato-meta">Disponible en servicio de mediodía</div>
             </div>
             <div class="cms-plato-side">
-              <div class="cms-plato-price" id="cms-plato-price" style="display:none;"></div>
+              <div class="cms-plato-price" id="cms-plato-price">14,50€ <small>/ ración</small></div>
               <div class="cms-plato-actions">
                 <a href="#reserva" class="bp">Reservar mesa</a>
-                <a href="#" class="cms-plato-ig-btn" id="cms-plato-ig-btn" target="_blank" rel="noopener" style="display:none;">
+                <a href="#" class="cms-plato-ig-btn" id="cms-plato-ig-btn" target="_blank" rel="noopener" style="display:none;" aria-label="Ver en Instagram">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                   <span>Ver en Instagram</span>
                 </a>
@@ -788,16 +788,6 @@
       </div>
     </section>
 
-    <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  CMS · AVISO HORARIO ESPECIAL ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
-    <div id="cms-horario" style="margin: 0 2rem 2rem;" aria-live="polite" hidden>
-      <div class="cms-horario-inner">
-        <span class="cms-horario-icon" id="cms-horario-icon"></span>
-        <div>
-          <div class="cms-horario-msg" id="cms-horario-msg"></div>
-          <div class="cms-horario-dates" id="cms-horario-dates"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  UBICACIÓN ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
     <section class="ubicacion-section" id="ubicacion" aria-labelledby="ubicacion-title">
@@ -986,30 +976,93 @@
         endDate: '',
         savedAt: ''
       },
-      platoDia: {
+      banner: {
         active: false,
-        title: '',
-        desc: '',
-        price: '',
-        tag: '',
-        nota: '',
-        igLink: '',
-        fecha: '',
-        autoExpire: false,
+        text: '',
+        color: '#C9A84C',
+        link: ''
+      },
+      platoDia: {
+        active: true,
+        days: {
+          1: { active: true, title: 'Arroz al horno tradicional a leña', desc: 'Elaborado con costilla ibérica, morcilla de cebolla, panceta y garbanzos.', price: '14,50€', tag: 'A la leña · Tradición', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          2: { active: true, title: 'Arroz meloso de pato y setas a leña', desc: 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.', price: '14,50€', tag: 'A la leña', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          3: { active: true, title: 'Arroz negro con sepia y alcachofas', desc: 'Arroz bomba D.O. Valencia con tinta de calamar, sepia y alcachofas frescas.', price: '15,50€', tag: 'Arroz de autor', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          4: { active: true, title: 'Paella valenciana tradicional a leña', desc: 'Pollo de corral, conejo, bajoqueta, garrofó y romero fresco recién cortado.', price: '16,00€', tag: '100% Leña de naranjo', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          5: { active: true, title: 'Fideuà de marisco con sepia y gambas', desc: 'Fideo fino tostado con caldo concentrado de pescado de lonja y all i oli suave.', price: '15,00€', tag: 'Especialidad de lonja', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          6: { active: true, title: 'Arroz del señoret con marisco pelado', desc: 'Cigala, gambas y calamar listos para comer sin pelar.', price: '17,00€', tag: 'Fin de semana', nota: 'Disponible en servicio de mediodía', igLink: '' },
+          0: { active: true, title: 'Paella especial de domingo a leña', desc: 'Edición limitada de domingo con los mejores ingredientes de la huerta.', price: '17,50€', tag: 'Especial domingo', nota: 'Disponible en servicio de mediodía', igLink: '' }
+        },
         savedAt: ''
       }
     };
 
-    /* ── Carga de datos directa desde localStorage ── */
+    /* ── Función de fusión profunda resistente a fallos ── */
+    function mergeWithDefaults(parsed) {
+      if (!parsed || typeof parsed !== 'object') {
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      }
+      const result = {
+        ...DEFAULT_DATA,
+        ...parsed,
+        popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : JSON.parse(JSON.stringify(DEFAULT_DATA.popup)),
+        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner))
+      };
+
+      let daysMerged = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia.days));
+      if (parsed.platoDia && typeof parsed.platoDia === 'object') {
+        if (parsed.platoDia.days && typeof parsed.platoDia.days === 'object') {
+          Object.keys(DEFAULT_DATA.platoDia.days).forEach(dayKey => {
+            const parsedDay = parsed.platoDia.days[dayKey] || parsed.platoDia.days[Number(dayKey)] || parsed.platoDia.days[String(dayKey)];
+            if (parsedDay) {
+              daysMerged[dayKey] = {
+                ...DEFAULT_DATA.platoDia.days[dayKey],
+                ...parsedDay
+              };
+            }
+          });
+        } else if (parsed.platoDia.title) {
+          const todayIdx = new Date().getDay();
+          daysMerged[todayIdx] = {
+            active: parsed.platoDia.active !== false,
+            title: parsed.platoDia.title,
+            desc: parsed.platoDia.desc || '',
+            price: parsed.platoDia.price || '',
+            tag: parsed.platoDia.tag || '',
+            nota: parsed.platoDia.nota || '',
+            igLink: parsed.platoDia.igLink || ''
+          };
+        }
+
+        const hasExplicitDays = parsed.platoDia.days && typeof parsed.platoDia.days === 'object';
+        const isActive = hasExplicitDays ? (parsed.platoDia.active !== false) : true;
+
+        result.platoDia = {
+          ...DEFAULT_DATA.platoDia,
+          ...parsed.platoDia,
+          active: isActive,
+          days: daysMerged
+        };
+      } else {
+        result.platoDia = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia));
+      }
+
+      return result;
+    }
+
+    /* ── Carga de datos directa desde localStorage con fusión segura ── */
     function getData() {
       try {
         const stored = localStorage.getItem(DATA_KEY);
-        if (stored) return JSON.parse(stored);
-        return DEFAULT_DATA;
-      } catch { return DEFAULT_DATA; }
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          return mergeWithDefaults(parsed);
+        }
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      } catch {
+        return JSON.parse(JSON.stringify(DEFAULT_DATA));
+      }
     }
-
-
 
     /* ── Comprueba si el pop-up ya expiró ── */
     function isPopupExpired(popup) {
@@ -1019,11 +1072,16 @@
 
     /* ── BANNER ── */
     function renderBanner(banner) {
-      if (!banner || !banner.active || !banner.text) return;
-      const el    = document.getElementById('cms-banner');
-      const textEl = document.getElementById('cms-banner-text');
+      const el      = document.getElementById('cms-banner');
+      const textEl  = document.getElementById('cms-banner-text');
       const closeEl = document.getElementById('cms-banner-close');
       if (!el) return;
+
+      if (!banner || !banner.active || !banner.text || !banner.text.trim()) {
+        el.classList.remove('visible');
+        document.body.classList.remove('cms-banner-on');
+        return;
+      }
 
       el.style.background = banner.color || '#C9A84C';
       const hex = (banner.color || '#C9A84C').replace('#','');
@@ -1064,7 +1122,6 @@
       const seenKey = POPUP_SEEN + '_' + (popup.savedAt || '');
       if (sessionStorage.getItem(seenKey)) return;
 
-      const overlay = document.getElementById('cms-popup-overlay');
       const closeBtn = document.getElementById('cms-popup-close');
       const skipBtn  = document.getElementById('cms-popup-skip');
       const btn      = document.getElementById('cms-popup-btn');
@@ -1144,73 +1201,54 @@
       });
     }
 
-    /* ── HORARIO ESPECIAL ── */
-    function renderHorario(horario) {
-      if (!horario || !horario.active || !horario.msg) return;
-
-      // Comprueba si las fechas son válidas y actuales
-      if (horario.desde && horario.hasta) {
-        const hoy   = new Date();
-        const desde = new Date(horario.desde);
-        const hasta = new Date(horario.hasta);
-        hasta.setHours(23,59,59); // incluye el día completo de fin
-        if (hoy < desde || hoy > hasta) return;
-      }
-
-      const el = document.getElementById('cms-horario');
-      if (!el) return;
-
-      el.setAttribute('data-type', horario.type || 'cierre');
-      document.getElementById('cms-horario-icon').textContent = HORARIO_ICONS[horario.type] || '⚠️';
-      document.getElementById('cms-horario-msg').textContent  = horario.msg;
-
-      if (horario.desde && horario.hasta) {
-        const fmt = d => new Date(d).toLocaleDateString('es-ES', {day:'numeric', month:'long'});
-        document.getElementById('cms-horario-dates').textContent = `Del ${fmt(horario.desde)} al ${fmt(horario.hasta)}`;
-      }
-
-      el.removeAttribute('hidden');
-      el.classList.add('visible');
-    }
-
-    /* ── EL PLATO DEL DÍA ── */
+    /* ── EL PLATO DEL DÍA (MENÚ SEMANAL AUTOMATIZADO) ── */
     function renderPlatoDia(plato) {
       const section = document.getElementById('cms-plato-dia-section');
       if (!section) return;
 
-      if (!plato || !plato.active || !plato.title) {
+      if (!plato || plato.active === false) {
         section.style.display = 'none';
         return;
       }
 
-      // Validación de auto-expiración por fecha (solo si autoExpire está activo y es día pasado)
-      if (plato.fecha && plato.autoExpire) {
-        const today = new Date();
-        today.setHours(0,0,0,0);
-        const pDate = new Date(plato.fecha + 'T00:00:00');
-        if (pDate < today) {
-          section.style.display = 'none';
-          return;
-        }
+      // Obtener el día actual de la semana (0 = Domingo, 1 = Lunes, ..., 6 = Sábado)
+      const hoyIndex = new Date().getDay();
+      
+      // Obtener datos del día actual con búsqueda resiliente
+      let diaData = null;
+      if (plato.days && (plato.days[hoyIndex] !== undefined || plato.days[String(hoyIndex)] !== undefined)) {
+        diaData = plato.days[hoyIndex] || plato.days[String(hoyIndex)];
+      } else if (DEFAULT_DATA.platoDia.days && DEFAULT_DATA.platoDia.days[hoyIndex]) {
+        diaData = DEFAULT_DATA.platoDia.days[hoyIndex];
+      } else if (plato.title) {
+        diaData = plato; // soporte retrocompatible
       }
 
-      // Formatear texto de cabecera: "EL PLATO DEL DÍA · [Fecha de hoy]"
-      let fechaTexto = 'HOY';
-      if (plato.fecha) {
-        try {
-          const dateObj = new Date(plato.fecha + 'T12:00:00');
-          fechaTexto = dateObj.toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
-        } catch (e) {}
+      if (!diaData || diaData.active === false || !diaData.title || !diaData.title.trim()) {
+        section.style.display = 'none';
+        return;
       }
+
+      const NOMBRES_DIAS = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
+      const diaTexto = NOMBRES_DIAS[hoyIndex] || 'HOY';
+
+      // Formatear texto de cabecera: "EL PLATO DEL DÍA · MARTES · 1 DE SEPTIEMBRE"
+      let fechaTexto = diaTexto;
+      try {
+        const fechaActual = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long' });
+        fechaTexto = `${diaTexto} · ${fechaActual.toUpperCase()}`;
+      } catch (e) {}
 
       const eyebrowEl = document.getElementById('cms-plato-eyebrow');
-      if (eyebrowEl) eyebrowEl.textContent = `EL PLATO DEL DÍA · ${fechaTexto.toUpperCase()}`;
+      if (eyebrowEl) eyebrowEl.textContent = `EL PLATO DEL DÍA · ${fechaTexto}`;
 
-      document.getElementById('cms-plato-title').textContent = plato.title || '';
+      const titleEl = document.getElementById('cms-plato-title');
+      if (titleEl) titleEl.textContent = diaData.title || '';
+
       const descEl = document.getElementById('cms-plato-desc');
       if (descEl) {
-        if (plato.desc && plato.desc.trim()) {
-          descEl.textContent = plato.desc.trim();
+        if (diaData.desc && diaData.desc.trim()) {
+          descEl.textContent = diaData.desc.trim();
           descEl.style.display = 'block';
         } else {
           descEl.textContent = '';
@@ -1220,20 +1258,30 @@
       
       const tagEl = document.getElementById('cms-plato-tag');
       if (tagEl) {
-        tagEl.textContent = plato.tag || 'Sugerencia de cocina';
-        tagEl.style.display = plato.tag ? 'block' : 'none';
+        if (diaData.tag && diaData.tag.trim()) {
+          tagEl.textContent = diaData.tag.trim();
+          tagEl.style.display = 'block';
+        } else {
+          tagEl.textContent = 'Especialidad de la casa';
+          tagEl.style.display = 'block';
+        }
       }
 
       const metaEl = document.getElementById('cms-plato-meta');
       if (metaEl) {
-        metaEl.textContent = plato.nota || '';
-        metaEl.style.display = plato.nota ? 'block' : 'none';
+        if (diaData.nota && diaData.nota.trim()) {
+          metaEl.textContent = diaData.nota.trim();
+          metaEl.style.display = 'block';
+        } else {
+          metaEl.textContent = '';
+          metaEl.style.display = 'none';
+        }
       }
 
       const priceEl = document.getElementById('cms-plato-price');
       if (priceEl) {
-        if (plato.price) {
-          priceEl.innerHTML = `${escapeHtml(plato.price)}<small>/ ración</small>`;
+        if (diaData.price && diaData.price.trim()) {
+          priceEl.innerHTML = `${escapeHtml(diaData.price.trim())} <small>/ ración</small>`;
           priceEl.style.display = 'block';
         } else {
           priceEl.style.display = 'none';
@@ -1242,8 +1290,8 @@
 
       const igBtn = document.getElementById('cms-plato-ig-btn');
       if (igBtn) {
-        if (plato.igLink) {
-          igBtn.href = plato.igLink;
+        if (diaData.igLink && diaData.igLink.trim()) {
+          igBtn.href = diaData.igLink.trim();
           igBtn.style.display = 'inline-flex';
         } else {
           igBtn.style.display = 'none';
@@ -1262,7 +1310,6 @@
     function init(data) {
       if (!data) return;
       renderBanner(data.banner);
-      renderHorario(data.horario);
       renderPlatoDia(data.platoDia);
       renderPopup(data.popup);
     }
@@ -1271,7 +1318,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       init(getData());
 
-      // POLLING: comprueba cada 1.5s si hay cambios guardados desde el panel de admin
+      // POLLING: comprueba cada 1.2s si hay cambios guardados desde el panel de admin
       let lastSaveStamp = localStorage.getItem(DATA_KEY) || '';
       setInterval(() => {
         const current = localStorage.getItem(DATA_KEY) || '';
@@ -1283,7 +1330,7 @@
           });
           init(getData());
         }
-      }, 1500);
+      }, 1200);
 
       // Backup: storage event (funciona entre pestañas del mismo navegador)
       window.addEventListener('storage', (e) => {

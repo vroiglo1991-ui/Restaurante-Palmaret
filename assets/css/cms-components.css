@@ -122,11 +122,7 @@ body.cms-banner-on nav { top: 40px !important; }
 .cms-popup-btn:hover {
   background: #E8C97A; box-shadow: 0 6px 24px rgba(201,168,76,0.4); transform: translateY(-1px);
 }
-.cms-popup-skip {
-  display: block; font-size: 0.72rem; color: rgba(237,232,213,0.4);
-  cursor: pointer; letter-spacing: 0.08em; margin-top: 0.5rem;
-  transition: color 0.18s ease;
-}
+.cms-popup-skip { display: block; font-size: 0.72rem; color: rgba(237,232,213,0.4); cursor: pointer; letter-spacing: 0.08em; margin-top: 0.5rem; transition: color 0.18s ease; }
 .cms-popup-skip:hover { color: rgba(237,232,213,0.75); }
 
 /* ── AVISO HORARIO ESPECIAL ── */
