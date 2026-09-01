@@ -1315,17 +1315,40 @@
       renderPopup(data.popup);
     }
 
-    // Carga desde local y escucha cambios en tiempo real (polling + storage event)
+    // Carga desde local y escucha cambios en tiempo real (polling + storage event + Cloud API)
     document.addEventListener('DOMContentLoaded', () => {
       init(getData());
 
-      // POLLING: comprueba cada 1.2s si hay cambios guardados desde el panel de admin
+      // Sincronización en tiempo real desde la nube (Cloudflare Worker API)
+      async function syncFromCloud() {
+        try {
+          const res = await fetch('/api/cms-data', { cache: 'no-store' });
+          if (res.ok) {
+            const cloudData = await res.json();
+            if (cloudData && !cloudData.empty && cloudData._lastSave) {
+              const current = getData();
+              if (cloudData._lastSave !== current._lastSave) {
+                localStorage.setItem(DATA_KEY, JSON.stringify(cloudData));
+                Object.keys(sessionStorage).forEach(k => {
+                  if (k.startsWith(POPUP_SEEN)) sessionStorage.removeItem(k);
+                });
+                init(mergeWithDefaults(cloudData));
+              }
+            }
+          }
+        } catch (e) {}
+      }
+
+      // Consulta la nube inmediatamente y cada 2 segundos
+      syncFromCloud();
+      setInterval(syncFromCloud, 2000);
+
+      // POLLING LOCAL: comprueba cada 1.2s si hay cambios guardados en la misma pestaña
       let lastSaveStamp = localStorage.getItem(DATA_KEY) || '';
       setInterval(() => {
         const current = localStorage.getItem(DATA_KEY) || '';
         if (current !== lastSaveStamp) {
           lastSaveStamp = current;
-          // Limpiamos sessionStorage para que el popup se pueda volver a mostrar
           Object.keys(sessionStorage).forEach(k => {
             if (k.startsWith(POPUP_SEEN)) sessionStorage.removeItem(k);
           });

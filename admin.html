@@ -862,11 +862,26 @@
       showToast('Sesión cerrada correctamente.', 'info');
     }
 
-    function initApp() {
+    async function initApp() {
       buildIconPicker();
       startClock();
       loadData();
       document.getElementById('adminUrl').value = window.location.href;
+
+      // Sincroniza automáticamente los últimos datos de la nube
+      try {
+        const res = await fetch('/api/cms-data', { cache: 'no-store' });
+        if (res.ok) {
+          const cloudData = await res.json();
+          if (cloudData && !cloudData.empty && cloudData._lastSave) {
+            const current = getData();
+            if (cloudData._lastSave !== current._lastSave) {
+              localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(cloudData));
+              loadData();
+            }
+          }
+        }
+      } catch (e) {}
     }
 
     function startClock() {
@@ -1274,15 +1289,15 @@
     }
 
     async function syncToCloud(data) {
-      // 1. Sincronización Universal en la Nube (Tiempo Real para todos los dispositivos)
+      // 1. Sincronización nativa con Cloudflare API (Tiempo Real multidispositivo)
       try {
-        await fetch(CONFIG.CLOUD_URL, {
-          method: 'PUT',
+        await fetch('/api/cms-data', {
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: 'palmaret_cms_live_store', data: data })
+          body: JSON.stringify(data)
         });
       } catch (err) {
-        console.warn('Cloud sync background error:', err);
+        console.warn('Cloud API sync error:', err);
       }
 
       // 2. Custom JSONBin opcional si el usuario lo configuró
