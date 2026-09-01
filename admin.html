@@ -949,11 +949,11 @@
       popup: {
         active: false,
         icon: 'vino',
-        title: 'Cata de Vinos Uterra Wines',
-        badge: 'Sábado 31 de Agosto',
-        desc: 'Disfruta de una selección exclusiva de vinos con maridaje por 15 euros.',
-        btnText: 'RESERVAR PLAZA (15 EUR)',
-        link: 'https://tally.so/r/jaVPW1',
+        title: '',
+        badge: '',
+        desc: '',
+        btnText: '',
+        link: '',
         endDate: '',
         savedAt: ''
       },
@@ -964,7 +964,7 @@
         link: ''
       },
       platoDia: {
-        active: true,
+        active: false,
         days: {
           1: { active: true, title: 'Arroz al horno tradicional a leña', desc: 'Elaborado con costilla ibérica, morcilla de cebolla, panceta y garbanzos.', price: '14,50€', tag: 'A la leña · Tradición', nota: 'Disponible en servicio de mediodía', igLink: '' },
           2: { active: true, title: 'Arroz meloso de pato y setas a leña', desc: 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.', price: '14,50€', tag: 'A la leña', nota: 'Disponible en servicio de mediodía', igLink: '' },
@@ -1069,7 +1069,7 @@
         } else if (parsed.platoDia.title) {
           const todayIdx = new Date().getDay();
           daysMerged[todayIdx] = {
-            active: parsed.platoDia.active !== false,
+            active: parsed.platoDia.active === true,
             title: parsed.platoDia.title,
             desc: parsed.platoDia.desc || '',
             price: parsed.platoDia.price || '',
@@ -1079,8 +1079,7 @@
           };
         }
 
-        const hasExplicitDays = parsed.platoDia.days && typeof parsed.platoDia.days === 'object';
-        const isActive = hasExplicitDays ? (parsed.platoDia.active !== false) : true;
+        const isActive = parsed.platoDia.active === true;
 
         result.platoDia = {
           ...DEFAULT_DATA.platoDia,
@@ -1146,8 +1145,8 @@
       }
 
       if (data.platoDia) {
-        document.getElementById('platoActive').checked = data.platoDia.active !== false;
-        updateToggleRow('platoToggleRow', data.platoDia.active !== false);
+        document.getElementById('platoActive').checked = data.platoDia.active === true;
+        updateToggleRow('platoToggleRow', data.platoDia.active === true);
         if (data.platoDia.days) {
           Object.keys(DEFAULT_DATA.platoDia.days).forEach(k => {
             const parsedDay = data.platoDia.days[k] || data.platoDia.days[Number(k)] || data.platoDia.days[String(k)];

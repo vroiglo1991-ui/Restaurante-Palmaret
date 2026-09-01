@@ -1025,7 +1025,7 @@
         } else if (parsed.platoDia.title) {
           const todayIdx = new Date().getDay();
           daysMerged[todayIdx] = {
-            active: parsed.platoDia.active !== false,
+            active: parsed.platoDia.active === true,
             title: parsed.platoDia.title,
             desc: parsed.platoDia.desc || '',
             price: parsed.platoDia.price || '',
@@ -1035,9 +1035,7 @@
           };
         }
 
-        const isProdDomain = window.location.hostname.includes('elpalmaret.com');
-        const hasExplicitDays = parsed.platoDia.days && typeof parsed.platoDia.days === 'object';
-        const isActive = isProdDomain ? (parsed.platoDia.active === true) : (hasExplicitDays ? (parsed.platoDia.active !== false) : true);
+        const isActive = parsed.platoDia.active === true;
 
         result.platoDia = {
           ...DEFAULT_DATA.platoDia,
@@ -1208,7 +1206,7 @@
       const section = document.getElementById('cms-plato-dia-section');
       if (!section) return;
 
-      if (!plato || plato.active === false) {
+      if (!plato || plato.active !== true) {
         section.style.display = 'none';
         return;
       }
