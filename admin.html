@@ -755,7 +755,7 @@
       SESSION_KEY: 'palmaret_session',
       API_KEY_KEY: 'palmaret_api_key',
       BIN_ID_KEY:  'palmaret_bin_id',
-      CLOUD_URL:   'https://api.restful-api.dev/objects/ff808181a058d43f01a058dd45a70046',
+      CLOUD_URL:   'https://extendsclass.com/api/json-storage/bin/acffbfe',
       DEFAULT_PIN: '11111*',
       SESSION_TTL: 8 * 60 * 60 * 1000
     };
@@ -870,10 +870,10 @@
 
       // Sincroniza automáticamente los últimos datos de la nube
       try {
-        const res = await fetch('/api/cms-data', { cache: 'no-store' });
+        const res = await fetch(CONFIG.CLOUD_URL, { cache: 'no-store' });
         if (res.ok) {
           const cloudData = await res.json();
-          if (cloudData && !cloudData.empty && cloudData._lastSave) {
+          if (cloudData && cloudData._lastSave) {
             const current = getData();
             if (cloudData._lastSave !== current._lastSave) {
               localStorage.setItem(CONFIG.DATA_KEY, JSON.stringify(cloudData));
@@ -1289,10 +1289,10 @@
     }
 
     async function syncToCloud(data) {
-      // 1. Sincronización nativa con Cloudflare API (Tiempo Real multidispositivo)
+      // 1. Sincronización Universal en la Nube (Tiempo Real multidispositivo)
       try {
-        await fetch('/api/cms-data', {
-          method: 'POST',
+        await fetch(CONFIG.CLOUD_URL, {
+          method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
