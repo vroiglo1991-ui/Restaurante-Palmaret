@@ -322,7 +322,7 @@
     </div>
 
     <!-- ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  CMS · EL PLATO DEL DÍA ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  -->
-    <section class="cms-plato-section" id="cms-plato-dia-section" aria-label="El Plato del Día">
+    <section class="cms-plato-section" id="cms-plato-dia-section" style="display:none;" aria-label="El Plato del Día">
       <div class="cms-plato-container">
         <div class="cms-plato-card">
           <div class="cms-plato-header">
@@ -983,7 +983,7 @@
         link: ''
       },
       platoDia: {
-        active: true,
+        active: false,
         days: {
           1: { active: true, title: 'Arroz al horno tradicional a leña', desc: 'Elaborado con costilla ibérica, morcilla de cebolla, panceta y garbanzos.', price: '14,50€', tag: 'A la leña · Tradición', nota: 'Disponible en servicio de mediodía', igLink: '' },
           2: { active: true, title: 'Arroz meloso de pato y setas a leña', desc: 'Elaborado con arroz bomba D.O. Valencia y leña de naranjo.', price: '14,50€', tag: 'A la leña', nota: 'Disponible en servicio de mediodía', igLink: '' },
@@ -1034,8 +1034,9 @@
           };
         }
 
+        const isProdDomain = window.location.hostname.includes('elpalmaret.com');
         const hasExplicitDays = parsed.platoDia.days && typeof parsed.platoDia.days === 'object';
-        const isActive = hasExplicitDays ? (parsed.platoDia.active !== false) : true;
+        const isActive = isProdDomain ? (parsed.platoDia.active === true) : (hasExplicitDays ? (parsed.platoDia.active !== false) : true);
 
         result.platoDia = {
           ...DEFAULT_DATA.platoDia,
