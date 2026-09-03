@@ -9,7 +9,7 @@
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0;
-  z-index: 300;
+  z-index: 10010;
   padding: 10px 48px 10px 20px;
   font-family: 'Barlow', system-ui, sans-serif;
   font-size: 0.875rem;
@@ -38,7 +38,7 @@ body.cms-banner-on nav { top: 40px !important; }
 /* ── POP-UP MODAL DE EVENTO ── */
 #cms-popup-overlay {
   display: none;
-  position: fixed; inset: 0; z-index: 500;
+  position: fixed; inset: 0; z-index: 10020;
   background: rgba(8, 18, 36, 0.82);
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   align-items: center; justify-content: center; padding: 1.5rem;
