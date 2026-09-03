@@ -212,7 +212,30 @@ document.addEventListener('DOMContentLoaded', () => {
   gUpdate(0);
 
   /* ──── 5. VISOR PDF MODAL (CARTA) ──── */
-  const PDF_URL = 'https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/preview';
+  const DEFAULT_PDF_PREVIEW = 'https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/preview';
+  const DEFAULT_PDF_VIEW    = 'https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view';
+
+  function getCurrentPdfUrls() {
+    try {
+      const raw = localStorage.getItem('palmaret_cms_data');
+      if (raw) {
+        const data = JSON.parse(raw);
+        if (data && data.cartaPdfUrl && typeof data.cartaPdfUrl === 'string' && data.cartaPdfUrl.trim()) {
+          const rawUrl = data.cartaPdfUrl.trim();
+          const m = rawUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+          if (m && m[1]) {
+            return {
+              preview: `https://drive.google.com/file/d/${m[1]}/preview`,
+              view:    `https://drive.google.com/file/d/${m[1]}/view`
+            };
+          }
+          return { preview: rawUrl, view: rawUrl };
+        }
+      }
+    } catch(e) {}
+    return { preview: DEFAULT_PDF_PREVIEW, view: DEFAULT_PDF_VIEW };
+  }
+
   const pdfOverlay = document.getElementById('pdfModalOverlay');
   const pdfBackdrop = document.getElementById('pdfModalBackdrop');
   const pdfCloseBtn = document.getElementById('pdfModalClose');
@@ -226,8 +249,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e) e.preventDefault();
     if (!pdfOverlay) return;
 
-    if (pdfFrame && (!pdfFrame.src || pdfFrame.src === 'about:blank')) {
-      pdfFrame.src = PDF_URL;
+    const urls = getCurrentPdfUrls();
+
+    // Actualizar botones de descarga y apertura directa
+    const dlBtn = document.querySelector('.pdf-modal-download');
+    if (dlBtn) dlBtn.href = urls.view;
+    const fsBtn = document.querySelector('.pdf-modal-fullscreen');
+    if (fsBtn) fsBtn.href = urls.view;
+
+    if (pdfFrame && (!pdfFrame.src || pdfFrame.src === 'about:blank' || pdfFrame.dataset.currentPdf !== urls.preview)) {
+      pdfFrame.dataset.currentPdf = urls.preview;
+      pdfFrame.src = urls.preview;
+      if (pdfLoading) pdfLoading.classList.remove('hidden');
       pdfFrame.addEventListener('load', function onLoad() {
         if (pdfLoading) pdfLoading.classList.add('hidden');
         pdfFrame.removeEventListener('load', onLoad);

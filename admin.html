@@ -460,6 +460,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
           Plato del Día
         </button>
+        <button class="tab" onclick="switchTab('carta')" id="tab-carta" role="tab" aria-selected="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Carta PDF
+        </button>
         <button class="tab" onclick="switchTab('banner')" id="tab-banner" role="tab" aria-selected="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           Banner
@@ -684,6 +688,67 @@
                 <div style="display:flex;justify-content:space-between;align-items:center;padding-top:0.6rem;border-top:1px solid rgba(201,168,76,0.1);">
                   <span style="font-family:var(--fd);font-size:1.5rem;color:var(--gold);" id="prevPlatoPrice">14,50€ <small style="font-size:0.75rem;color:var(--cream-dim);">/ ración</small></span>
                   <span style="background:var(--gold);color:var(--navy-dark);font-family:var(--fc);font-size:0.75rem;font-weight:700;padding:5px 12px;border-radius:4px;letter-spacing:0.08em;text-transform:uppercase;">Reservar mesa</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: CARTA PDF -->
+      <div class="tab-panel" id="panel-carta">
+        <div class="grid">
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <span class="card-title">Carta del Restaurante (PDF)</span>
+              </div>
+              <p style="font-size:0.85rem;color:var(--cream-dim);margin-bottom:1.5rem;">Controla el PDF de la carta que se abre en el visor modal interactivo de la web y en los enlaces de descarga.</p>
+
+              <div class="field-group">
+                <label class="field-label" for="cartaPdfUrl">Enlace de Google Drive a la Carta PDF</label>
+                <input class="field-input" type="url" id="cartaPdfUrl" placeholder="https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view">
+                <p class="field-hint">Pega aquí el enlace de compartir, ver o descargar del archivo PDF de Drive.</p>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn btn-primary" onclick="saveCartaPdf()" id="btnSaveCarta">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                  Guardar Carta PDF
+                </button>
+                <button class="btn btn-ghost" onclick="openCurrentCartaPdf()" id="btnOpenCarta">Probar PDF</button>
+                <button class="btn btn-ghost" onclick="openDriveFolder()" id="btnOpenFolder">Carpeta Drive</button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                </div>
+                <span class="card-title">¿Cómo actualizar la carta?</span>
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="padding:14px;background:rgba(76,175,125,0.12);border-radius:10px;border:1px solid rgba(76,175,125,0.3);">
+                  <strong style="color:var(--green);font-size:0.82rem;display:block;margin-bottom:6px;">✨ Opción A (Recomendada · 100% Automática):</strong>
+                  <p style="font-size:0.8rem;color:var(--cream);line-height:1.5;margin-bottom:6px;">
+                    En tu carpeta de Google Drive, haz <strong>clic derecho</strong> sobre el PDF existente → selecciona <strong>"Información del archivo"</strong> → <strong>"Gestionar versiones"</strong> → <strong>"Subir nueva versión"</strong>.
+                  </p>
+                  <span style="font-size:0.75rem;color:var(--cream-dim);">De esta manera, Google Drive mantiene exactamente el mismo enlace y la web se actualiza al instante sin tocar nada más.</span>
+                </div>
+
+                <div style="padding:14px;background:rgba(15,37,64,0.6);border-radius:10px;border:1px solid rgba(201,168,76,0.25);">
+                  <strong style="color:var(--gold-light);font-size:0.82rem;display:block;margin-bottom:6px;">⚡ Opción B (Si subes un archivo PDF nuevo):</strong>
+                  <p style="font-size:0.8rem;color:var(--cream-dim);line-height:1.5;margin-bottom:6px;">
+                    Si arrastras un archivo nuevo a la carpeta de Drive, haz clic derecho sobre él → <strong>"Compartir"</strong> → <strong>"Copiar enlace"</strong> (asegúrate de que tenga permisos para que cualquiera con el enlace pueda verlo), pégalo en la casilla de la izquierda y pulsa <strong>"Guardar Carta PDF"</strong>.
+                  </p>
+                  <span style="font-size:0.75rem;color:var(--gold);">¡Se sincronizará en la web automáticamente!</span>
                 </div>
               </div>
             </div>
@@ -963,6 +1028,7 @@
         color: '#C9A84C',
         link: ''
       },
+      cartaPdfUrl: 'https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view',
       platoDia: {
         active: false,
         days: {
@@ -1051,7 +1117,8 @@
         ...DEFAULT_DATA,
         ...parsed,
         popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : JSON.parse(JSON.stringify(DEFAULT_DATA.popup)),
-        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner))
+        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner)),
+        cartaPdfUrl: (parsed.cartaPdfUrl && typeof parsed.cartaPdfUrl === 'string' && parsed.cartaPdfUrl.trim()) ? parsed.cartaPdfUrl.trim() : DEFAULT_DATA.cartaPdfUrl
       };
 
       let daysMerged = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia.days));
@@ -1167,6 +1234,12 @@
       const binId  = localStorage.getItem(CONFIG.BIN_ID_KEY)  || '';
       if (apiKey) document.getElementById('jsonbinKey').value = apiKey;
       if (binId)  document.getElementById('jsonbinId').value  = binId;
+
+      const cartaInput = document.getElementById('cartaPdfUrl');
+      if (cartaInput) {
+        cartaInput.value = data.cartaPdfUrl || DEFAULT_DATA.cartaPdfUrl;
+      }
+
       updatePreview();
       updateStats();
     }
@@ -1187,6 +1260,31 @@
       document.getElementById('statBanner').style.color = bannerActive ? 'var(--green)' : 'var(--cream-dim)';
       if (data._lastSave) { const d = new Date(data._lastSave); document.getElementById('statLastSave').textContent = d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'}); }
       document.getElementById('statMode').textContent = localStorage.getItem(CONFIG.API_KEY_KEY) ? 'Nube' : 'Local';
+    }
+
+    function saveCartaPdf() {
+      const input = document.getElementById('cartaPdfUrl');
+      const val = input ? input.value.trim() : '';
+      if (!val) {
+        return showToast('Por favor, introduce un enlace válido de Drive.', 'error');
+      }
+      if (!val.startsWith('http://') && !val.startsWith('https://')) {
+        return showToast('El enlace debe comenzar por https://', 'error');
+      }
+      setData('cartaPdfUrl', val);
+      rippleEffect('btnSaveCarta');
+      showToast('Carta PDF guardada y sincronizada correctamente', 'success');
+    }
+
+    function openCurrentCartaPdf() {
+      const input = document.getElementById('cartaPdfUrl');
+      const val = input ? input.value.trim() : '';
+      if (val) window.open(val, '_blank');
+      else showToast('No hay enlace configurado', 'info');
+    }
+
+    function openDriveFolder() {
+      window.open('https://drive.google.com/drive/folders/1GI4w-mJ1Es8Z0f7A-aJXADtaq5RITDhh', '_blank');
     }
 
     function savePopup() {

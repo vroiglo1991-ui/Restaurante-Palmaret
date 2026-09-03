@@ -700,7 +700,7 @@
           <iframe id="pdfFrame" title="Carta El Palmaret PDF" allowfullscreen></iframe>
         </div>
         <div class="pdf-modal-footer">
-          <a href="https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/view" target="_blank" rel="noopener" class="pdf-modal-download">
+          <a href="https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view" target="_blank" rel="noopener" class="pdf-modal-download">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="7 10 12 15 17 10"/>
@@ -708,7 +708,7 @@
             </svg>
             <span>Descargar PDF</span>
           </a>
-          <a href="https://drive.google.com/file/d/15DYX6gGKPlC3xOkymJNd6td0AcI-LjIC/view" target="_blank" rel="noopener" class="pdf-modal-fullscreen">
+          <a href="https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view" target="_blank" rel="noopener" class="pdf-modal-fullscreen">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <polyline points="15 3 21 3 21 9"/>
               <polyline points="9 21 3 21 3 15"/>
@@ -983,6 +983,7 @@
         color: '#C9A84C',
         link: ''
       },
+      cartaPdfUrl: 'https://drive.google.com/file/d/1QstsmnHnWevrnNsxWaRBqccFnpfxBM0V/view',
       platoDia: {
         active: false,
         days: {
@@ -1007,7 +1008,8 @@
         ...DEFAULT_DATA,
         ...parsed,
         popup: parsed.popup ? { ...DEFAULT_DATA.popup, ...parsed.popup } : JSON.parse(JSON.stringify(DEFAULT_DATA.popup)),
-        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner))
+        banner: parsed.banner ? { ...DEFAULT_DATA.banner, ...parsed.banner } : JSON.parse(JSON.stringify(DEFAULT_DATA.banner)),
+        cartaPdfUrl: (parsed.cartaPdfUrl && typeof parsed.cartaPdfUrl === 'string' && parsed.cartaPdfUrl.trim()) ? parsed.cartaPdfUrl.trim() : DEFAULT_DATA.cartaPdfUrl
       };
 
       let daysMerged = JSON.parse(JSON.stringify(DEFAULT_DATA.platoDia.days));
@@ -1301,6 +1303,27 @@
       section.style.display = 'block';
     }
 
+    /* ── CARTA PDF ── */
+    function renderCartaPdf(url) {
+      if (!url) return;
+      let viewUrl = url.trim();
+      let previewUrl = viewUrl;
+      const m = viewUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+      if (m && m[1]) {
+        viewUrl = `https://drive.google.com/file/d/${m[1]}/view`;
+        previewUrl = `https://drive.google.com/file/d/${m[1]}/preview`;
+      }
+      const dlBtn = document.querySelector('.pdf-modal-download');
+      if (dlBtn) dlBtn.href = viewUrl;
+      const fsBtn = document.querySelector('.pdf-modal-fullscreen');
+      if (fsBtn) fsBtn.href = viewUrl;
+      const frame = document.getElementById('pdfFrame');
+      if (frame && frame.src && frame.src !== 'about:blank' && frame.dataset.currentPdf !== previewUrl) {
+        frame.dataset.currentPdf = previewUrl;
+        frame.src = previewUrl;
+      }
+    }
+
     /* ── Utilidad ── */
     function escapeHtml(str) {
       return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -1312,6 +1335,7 @@
       renderBanner(data.banner);
       renderPlatoDia(data.platoDia);
       renderPopup(data.popup);
+      renderCartaPdf(data.cartaPdfUrl);
     }
 
     // Carga desde local y escucha cambios en tiempo real (polling + storage event + Cloud API)
