@@ -824,7 +824,7 @@
       SESSION_KEY: 'palmaret_session',
       API_KEY_KEY: 'palmaret_api_key',
       BIN_ID_KEY:  'palmaret_bin_id',
-      CLOUD_URL:   'https://extendsclass.com/api/json-storage/bin/acffbfe',
+      CLOUD_URL:   'https://api.restful-api.dev/objects/ff808181a058d43f01a058dd45a70046',
       DEFAULT_PIN: '11111*',
       SESSION_TTL: 8 * 60 * 60 * 1000
     };
@@ -941,7 +941,8 @@
       try {
         const res = await fetch(CONFIG.CLOUD_URL, { cache: 'no-store' });
         if (res.ok) {
-          const cloudData = await res.json();
+          const json = await res.json();
+          const cloudData = (json && json.data) ? json.data : json;
           if (cloudData && cloudData._lastSave) {
             const current = getData();
             if (cloudData._lastSave !== current._lastSave) {
@@ -1390,12 +1391,15 @@
     }
 
     async function syncToCloud(data) {
-      // 1. Sincronización Universal en la Nube (Tiempo Real multidispositivo)
+      // 1. Sincronización Universal en la Nube (Tiempo Real multidispositivo con soporte CORS total)
       try {
         await fetch(CONFIG.CLOUD_URL, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
+          body: JSON.stringify({
+            name: 'Palmaret CMS Data',
+            data: data
+          })
         });
       } catch (err) {
         console.warn('Cloud API sync error:', err);

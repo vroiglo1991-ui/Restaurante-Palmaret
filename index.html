@@ -941,7 +941,7 @@
   ═══════════════════════════════════════════════════ */
   (function() {
     const DATA_KEY    = 'palmaret_cms_data';
-    const CLOUD_URL   = 'https://extendsclass.com/api/json-storage/bin/acffbfe';
+    const CLOUD_URL   = 'https://api.restful-api.dev/objects/ff808181a058d43f01a058dd45a70046';
     const API_KEY_KEY = 'palmaret_api_key';
     const BIN_ID_KEY  = 'palmaret_bin_id';
     const POPUP_SEEN  = 'palmaret_popup_seen';
@@ -1412,7 +1412,8 @@
         try {
           const res = await fetch(CLOUD_URL, { cache: 'no-store' });
           if (res.ok) {
-            const cloudData = await res.json();
+            const json = await res.json();
+            const cloudData = (json && json.data) ? json.data : json;
             if (cloudData && cloudData._lastSave) {
               const current = getData();
               if (cloudData._lastSave !== current._lastSave) {
