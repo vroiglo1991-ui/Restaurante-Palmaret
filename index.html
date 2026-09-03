@@ -1121,8 +1121,10 @@
         return;
       }
 
-      const seenKey = POPUP_SEEN + '_' + (popup.savedAt || '');
-      if (sessionStorage.getItem(seenKey)) return;
+      if (!sessionStorage.getItem('palmaret_demo_mode')) {
+        const seenKey = POPUP_SEEN + '_' + (popup.savedAt || '');
+        if (sessionStorage.getItem(seenKey)) return;
+      }
 
       const closeBtn = document.getElementById('cms-popup-close');
       const skipBtn  = document.getElementById('cms-popup-skip');
@@ -1329,13 +1331,76 @@
       return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
+    /* ── MODO DEMOSTRACIÓN PRIVADO (?demo=cms) ── */
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('demo')) {
+      if (urlParams.get('demo') === 'off') {
+        sessionStorage.removeItem('palmaret_demo_mode');
+      } else {
+        sessionStorage.setItem('palmaret_demo_mode', 'true');
+      }
+    }
+    const isDemoMode = sessionStorage.getItem('palmaret_demo_mode') === 'true';
+
+    function getEffectiveData(data) {
+      if (!isDemoMode) {
+        // En modo normal de producción: los elementos CMS permanecen fieles a su estado inactivo
+        return data;
+      }
+
+      // En modo demo: si están inactivos, activa ejemplos gastronómicos reales para la venta al cliente
+      const demoData = JSON.parse(JSON.stringify(data));
+
+      if (!demoData.platoDia || !demoData.platoDia.active) {
+        demoData.platoDia = {
+          active: true,
+          days: DEFAULT_DATA.platoDia.days
+        };
+      }
+
+      if (!demoData.popup || !demoData.popup.active || !demoData.popup.title) {
+        demoData.popup = {
+          active: true,
+          icon: 'vino',
+          title: 'Cata Maridaje & Menú de Autor',
+          badge: 'Sábado 14 Sep · 20:30h',
+          desc: 'Menú especial de 5 tiempos maridado con vinos de la tierra. Plazas muy limitadas.',
+          btnText: 'RESERVAR PLAZA',
+          link: '#reserva',
+          endDate: ''
+        };
+      }
+
+      if (!demoData.banner || !demoData.banner.active || !demoData.banner.text) {
+        demoData.banner = {
+          active: true,
+          color: '#C9A84C',
+          text: '✨ Jornadas del Arroz a la Leña este fin de semana · ¡Reserva tu mesa con antelación!',
+          link: '#reserva'
+        };
+      }
+
+      return demoData;
+    }
+
+    function renderDemoBadge() {
+      if (!isDemoMode || document.getElementById('demo-pill-badge')) return;
+      const badge = document.createElement('div');
+      badge.id = 'demo-pill-badge';
+      badge.style.cssText = 'position:fixed;bottom:18px;left:18px;z-index:99999;background:rgba(15,37,64,0.95);border:1px solid #C9A84C;color:#EDE8D5;padding:8px 16px;border-radius:30px;font-family:sans-serif;font-size:12px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,0.6);backdrop-filter:blur(10px);letter-spacing:0.04em;';
+      badge.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:#4CAF7D;box-shadow:0 0 8px #4CAF7D;display:inline-block;"></span><span><strong>Modo Demo Privado</strong></span><a href="?demo=off" style="color:#C9A84C;text-decoration:none;font-weight:700;margin-left:6px;padding:2px 8px;background:rgba(201,168,76,0.18);border-radius:4px;" title="Salir del modo demo">✕ Salir</a>';
+      document.body.appendChild(badge);
+    }
+
     /* ── Init ── */
     function init(data) {
       if (!data) return;
-      renderBanner(data.banner);
-      renderPlatoDia(data.platoDia);
-      renderPopup(data.popup);
-      renderCartaPdf(data.cartaPdfUrl);
+      const effective = getEffectiveData(data);
+      renderBanner(effective.banner);
+      renderPlatoDia(effective.platoDia);
+      renderPopup(effective.popup);
+      renderCartaPdf(effective.cartaPdfUrl);
+      renderDemoBadge();
     }
 
     // Carga desde local y escucha cambios en tiempo real (polling + storage event + Cloud API)
